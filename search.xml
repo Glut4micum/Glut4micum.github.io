@@ -45,9 +45,6 @@
 <p>安装后后续能够使用，但是依旧会有该弹窗</p>
 <h1 id="关于本机"><a href="#关于本机" class="headerlink" title="关于本机"></a>关于本机</h1><p>在系统更新后，可能会无法识别扬声器，导致音量键没有声音，解决办法：<br>打开设备管理器-&gt;系统设备<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723054130113-2f8b78f7-26f2-4376-bda1-893428f7a965.png#averageHue=%23f8f7f6&clientId=ud0e8f844-75a4-4&from=paste&height=572&id=u86b88181&originHeight=858&originWidth=1171&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=258665&status=done&style=none&taskId=ua1473269-ff10-47e6-8a0c-7c35ea57387&title=&width=780.6666666666666" alt="image.png"><br>发现出现感叹号的话右键重装即可恢复音量<br>也有可能是驱动器的问题，NVIDIAA检查一下更新<br>————2024&#x2F;8&#x2F;8</p>
 ]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
       <tags>
         <tag>tools</tag>
       </tags>

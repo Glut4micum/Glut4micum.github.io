@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="掉盘重装系统后记录了web工具的安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具安装">
+<meta property="og:url" content="http://example.com/2024/08/10/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="掉盘重装系统后记录了web工具的安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172909055-a45a8d77-39a6-4e92-ad31-43066b8323fc.png#averageHue=%23f1f1f0&clientId=ufdcf341c-1fad-4&from=paste&height=167&id=u5a5e4551&originHeight=251&originWidth=1026&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=14333&status=done&style=none&taskId=ufba31dfb-df95-417c-80cd-55f902abf24&title=&width=684">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172926502-36850004-cf8d-483c-8659-64e71c5f79cc.png#averageHue=%23eeeded&clientId=ufdcf341c-1fad-4&from=paste&height=182&id=uf4c35a0e&originHeight=273&originWidth=1040&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=18825&status=done&style=none&taskId=ued77a340-fe03-4941-8523-8297263ef58&title=&width=693.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172962775-f3c71d35-d16f-45aa-832d-58c81e6ea7fd.png#averageHue=%23f4f2f1&clientId=ufdcf341c-1fad-4&from=paste&height=531&id=ue29262f6&originHeight=797&originWidth=829&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=60518&status=done&style=none&taskId=u7c1dd4b1-eef8-43a5-9c7c-ac1a1290778&title=&width=552.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722173050618-df84df25-83f5-452d-90e5-ea6ee2264b19.png#averageHue=%23446b94&clientId=ufdcf341c-1fad-4&from=paste&height=121&id=uaee14619&originHeight=181&originWidth=1131&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=307987&status=done&style=none&taskId=ue4739175-59f3-48d9-a8e5-47d8ba96d66&title=&width=754">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176530486-a798a55c-bcd7-43d3-9928-d85f7b2525f1.png#averageHue=%23f5f3f2&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u24b50fae&originHeight=741&originWidth=1182&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=74984&status=done&style=none&taskId=u40738913-4c40-48c3-b06c-0df19e1b970&title=&width=788">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176625673-a7a755dc-7113-49fe-aa5d-c38f8c42876b.png#averageHue=%23f4f2f2&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u941c9e2a&originHeight=741&originWidth=1516&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=105541&status=done&style=none&taskId=u0ebce3ea-8d0c-4b1c-8b7f-8e74940baba&title=&width=1010.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176659530-2569be75-c3c8-400f-bc6f-c0a129111d1e.png#averageHue=%23f7f4f3&clientId=ufdcf341c-1fad-4&from=paste&height=426&id=u921d5d38&originHeight=639&originWidth=748&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=34016&status=done&style=none&taskId=u450b3048-9847-4b7c-8fa0-7d887a6bb7e&title=&width=498.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176741240-306941ee-c5d2-49f5-b27d-7a00bf39fe29.png#averageHue=%23f1ebe9&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u22f98a17&originHeight=741&originWidth=1921&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=223428&status=done&style=none&taskId=u7d53a2fb-4b3e-4494-b99b-f8061649f34&title=&width=1280.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722178785557-f6f0d032-2dd2-47cc-bd34-6eb107819267.png#averageHue=%23f6f5f4&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u7e174a36&originHeight=741&originWidth=1182&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=66165&status=done&style=none&taskId=ua6b3ae46-a406-4a73-b195-10cfe53574e&title=&width=788">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722183008786-0c935dec-afa9-4dea-a0db-d175295757e9.png#averageHue=%23f3f3f3&clientId=ufdcf341c-1fad-4&from=paste&height=115&id=uae6f8473&originHeight=172&originWidth=777&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=23601&status=done&style=none&taskId=u95539ccc-8c2c-4575-a925-2e710052895&title=&width=518">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722182993561-1d50dd17-6742-4cea-a15a-ccfef822791a.png#averageHue=%23fbfafa&clientId=ufdcf341c-1fad-4&from=paste&height=567&id=uc4b259b7&originHeight=850&originWidth=1326&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=69744&status=done&style=none&taskId=u8aa67037-fbec-43c5-bcd6-c84d65d1f2b&title=&width=884">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722183910452-b1b7e2db-fef6-4ad0-96bf-781a85729c93.png#averageHue=%23f7f5f5&clientId=ufdcf341c-1fad-4&from=paste&height=744&id=ubf32be6a&originHeight=1116&originWidth=1872&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=180982&status=done&style=none&taskId=ucbd4544c-2296-4cfd-81f6-3b105002071&title=&width=1248">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722183997124-a5a30a17-915b-4996-befe-3912dbd9c325.png#averageHue=%23f9f7f6&clientId=ufdcf341c-1fad-4&from=paste&height=426&id=u68484908&originHeight=639&originWidth=748&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=24488&status=done&style=none&taskId=ub852394d-f697-47c2-926f-4470b3a9cd0&title=&width=498.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722184141023-a7419cdd-5c67-43b6-a23b-64b4b370bf56.png#averageHue=%23f2f0ef&clientId=ufdcf341c-1fad-4&from=paste&height=566&id=u59c1aecc&originHeight=849&originWidth=925&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=60314&status=done&style=none&taskId=u78aac7e1-295a-4d90-b0d9-7b10c184f17&title=&width=616.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722184209340-e79e1051-8d88-42ed-8d07-84263007e60c.png#averageHue=%23fbfafa&clientId=ufdcf341c-1fad-4&from=paste&height=602&id=u8ed61932&originHeight=903&originWidth=962&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=39973&status=done&style=none&taskId=u0aaa5f6c-ca94-4898-8e24-7fc8e06f23b&title=&width=641.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722242261862-d905646a-99c3-4a7f-82f3-3a1b344dd929.png#averageHue=%23f0edea&clientId=u1558547e-ce6c-4&from=paste&height=394&id=u56db0c19&originHeight=591&originWidth=625&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=63357&status=done&style=none&taskId=ue3ccdcc3-6684-49bc-b7c8-ea87ec5dfe8&title=&width=416.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722242568781-fa9eef8f-768c-47ee-b20f-21982d070e5b.png#averageHue=%231d1d1d&clientId=u1558547e-ce6c-4&from=paste&height=167&id=ue6c3a511&originHeight=251&originWidth=1005&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=24591&status=done&style=none&taskId=u1793df1c-e644-471a-b63f-ed604ff4bd1&title=&width=670">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722243399718-5eea727b-3550-4732-a1ac-11207312164c.png#averageHue=%23f8f7f6&clientId=u1558547e-ce6c-4&from=paste&height=644&id=uc46f0d74&originHeight=966&originWidth=1393&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=187323&status=done&style=none&taskId=ud6812716-bd6d-4692-9249-5d7d06bd005&title=&width=928.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722243503545-6bbd92d5-c2a5-47e3-bf12-8ee2ebf9070c.png#averageHue=%237d8e90&clientId=u1558547e-ce6c-4&from=paste&height=339&id=u9cb07f11&originHeight=508&originWidth=1199&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=645506&status=done&style=none&taskId=u3b5e6552-7331-4395-8f2f-85a58f29812&title=&width=799.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722335695504-9df5ea5e-8a12-4ea0-a96c-8188d680082b.png#averageHue=%231875b7&clientId=ud48b5fac-f207-4&from=paste&height=377&id=udcdabeb6&originHeight=566&originWidth=845&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=728354&status=done&style=none&taskId=u737cb3f3-ce91-45e4-b21b-f2d33600e07&title=&width=563.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723140663525-624b9fd2-7b8b-42da-8666-9610c886389e.png#averageHue=%2340543a&clientId=u2057485a-3e3d-4&from=paste&height=120&id=u80c70ea8&originHeight=180&originWidth=1324&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=353408&status=done&style=none&taskId=u791d8e80-edb4-4db8-8c9e-1d664edef2d&title=&width=882.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723054130113-2f8b78f7-26f2-4376-bda1-893428f7a965.png#averageHue=%23f8f7f6&clientId=ud0e8f844-75a4-4&from=paste&height=572&id=u86b88181&originHeight=858&originWidth=1171&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=258665&status=done&style=none&taskId=ua1473269-ff10-47e6-8a0c-7c35ea57387&title=&width=780.6666666666666">
+<meta property="article:published_time" content="2024-08-09T22:10:39.049Z">
+<meta property="article:modified_time" content="2024-08-11T21:41:49.567Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172909055-a45a8d77-39a6-4e92-ad31-43066b8323fc.png#averageHue=%23f1f1f0&clientId=ufdcf341c-1fad-4&from=paste&height=167&id=u5a5e4551&originHeight=251&originWidth=1026&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=14333&status=done&style=none&taskId=ufba31dfb-df95-417c-80cd-55f902abf24&title=&width=684">
+
+<link rel="canonical" href="http://example.com/2024/08/10/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>工具安装 | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/10/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          工具安装
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-10 06:10:39" itemprop="dateCreated datePublished" datetime="2024-08-10T06:10:39+08:00">2024-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-12 05:41:49" itemprop="dateModified" datetime="2024-08-12T05:41:49+08:00">2024-08-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>掉盘重装系统后记录了web工具的安装</p>
+<span id="more"></span>
+<h1 id="burpsuite"><a href="#burpsuite" class="headerlink" title="burpsuite"></a>burpsuite</h1><h2 id="首先配置JAVA环境"><a href="#首先配置JAVA环境" class="headerlink" title="首先配置JAVA环境"></a>首先配置JAVA环境</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip"><em>https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip</em></a><br>也可以直接到官网下载<br>此电脑右键-&gt;属性-&gt;高级系统设置-&gt;环境变量<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172909055-a45a8d77-39a6-4e92-ad31-43066b8323fc.png#averageHue=%23f1f1f0&clientId=ufdcf341c-1fad-4&from=paste&height=167&id=u5a5e4551&originHeight=251&originWidth=1026&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=14333&status=done&style=none&taskId=ufba31dfb-df95-417c-80cd-55f902abf24&title=&width=684" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172926502-36850004-cf8d-483c-8659-64e71c5f79cc.png#averageHue=%23eeeded&clientId=ufdcf341c-1fad-4&from=paste&height=182&id=uf4c35a0e&originHeight=273&originWidth=1040&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=18825&status=done&style=none&taskId=ued77a340-fe03-4941-8523-8297263ef58&title=&width=693.3333333333334" referrerpolicy="no-referrer" alt="image.png"><br>Path中添加路径<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722172962775-f3c71d35-d16f-45aa-832d-58c81e6ea7fd.png#averageHue=%23f4f2f1&clientId=ufdcf341c-1fad-4&from=paste&height=531&id=ue29262f6&originHeight=797&originWidth=829&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=60518&status=done&style=none&taskId=u7c1dd4b1-eef8-43a5-9c7c-ac1a1290778&title=&width=552.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br>win+cmd，输入java -version，能看到Java版本即配置成功<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722173050618-df84df25-83f5-452d-90e5-ea6ee2264b19.png#averageHue=%23446b94&clientId=ufdcf341c-1fad-4&from=paste&height=121&id=uaee14619&originHeight=181&originWidth=1131&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=307987&status=done&style=none&taskId=ue4739175-59f3-48d9-a8e5-47d8ba96d66&title=&width=754" referrerpolicy="no-referrer" alt="image.png"></p>
+<h2 id="Burpsuite下载"><a href="#Burpsuite下载" class="headerlink" title="Burpsuite下载"></a>Burpsuite下载</h2><p>地址：官网<a target="_blank" rel="noopener" href="https://portswigger.net/burp/releases"><em>https://portswigger.net/burp/releases</em></a></p>
+<p>注册机地址：<br>下载对应版本的注册机，在cmd窗口运行<br><code>java -jar BurpLoaderKeygen.jar</code><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176530486-a798a55c-bcd7-43d3-9928-d85f7b2525f1.png#averageHue=%23f5f3f2&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u24b50fae&originHeight=741&originWidth=1182&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=74984&status=done&style=none&taskId=u40738913-4c40-48c3-b06c-0df19e1b970&title=&width=788" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176625673-a7a755dc-7113-49fe-aa5d-c38f8c42876b.png#averageHue=%23f4f2f2&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u941c9e2a&originHeight=741&originWidth=1516&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=105541&status=done&style=none&taskId=u0ebce3ea-8d0c-4b1c-8b7f-8e74940baba&title=&width=1010.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br>点击下一步<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176659530-2569be75-c3c8-400f-bc6f-c0a129111d1e.png#averageHue=%23f7f4f3&clientId=ufdcf341c-1fad-4&from=paste&height=426&id=u921d5d38&originHeight=639&originWidth=748&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=34016&status=done&style=none&taskId=u450b3048-9847-4b7c-8fa0-7d887a6bb7e&title=&width=498.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>选择手动激活<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722176741240-306941ee-c5d2-49f5-b27d-7a00bf39fe29.png#averageHue=%23f1ebe9&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u22f98a17&originHeight=741&originWidth=1921&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=223428&status=done&style=none&taskId=u7d53a2fb-4b3e-4494-b99b-f8061649f34&title=&width=1280.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>快捷启动：<br>复制<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722178785557-f6f0d032-2dd2-47cc-bd34-6eb107819267.png#averageHue=%23f6f5f4&clientId=ufdcf341c-1fad-4&from=paste&height=494&id=u7e174a36&originHeight=741&originWidth=1182&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=66165&status=done&style=none&taskId=ua6b3ae46-a406-4a73-b195-10cfe53574e&title=&width=788" referrerpolicy="no-referrer" alt="image.png"><br>将内容写入到Java.bat<br>消除CMD运行框</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Set</span> <span class="variable">ws</span> <span class="operator">=</span> CreateObject(<span class="string">&quot;Wscript.Shell&quot;</span>) </span><br><span class="line">ws.run <span class="string">&quot;cmd /c D:\appdownload\BurpSuitePro\java.bat &quot;</span>,vbhide  <span class="comment">//隐藏窗口</span></span><br><span class="line"></span><br><span class="line"><span class="type">Set</span> <span class="variable">ws</span> <span class="operator">=</span> CreateObject(<span class="string">&quot;Wscript.Shell&quot;</span>) </span><br><span class="line">ws.run <span class="string">&quot;java.bat &quot;</span>,<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>写入到start.vds,注意更换目录名<br>谷歌浏览器配置<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722183008786-0c935dec-afa9-4dea-a0db-d175295757e9.png#averageHue=%23f3f3f3&clientId=ufdcf341c-1fad-4&from=paste&height=115&id=uae6f8473&originHeight=172&originWidth=777&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=23601&status=done&style=none&taskId=u95539ccc-8c2c-4575-a925-2e710052895&title=&width=518" referrerpolicy="no-referrer" alt="image.png"><br>扩展下载<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722182993561-1d50dd17-6742-4cea-a15a-ccfef822791a.png#averageHue=%23fbfafa&clientId=ufdcf341c-1fad-4&from=paste&height=567&id=uc4b259b7&originHeight=850&originWidth=1326&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=69744&status=done&style=none&taskId=u8aa67037-fbec-43c5-bcd6-c84d65d1f2b&title=&width=884" referrerpolicy="no-referrer" alt="image.png"><br>从burpsuite中导出证书<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722183910452-b1b7e2db-fef6-4ad0-96bf-781a85729c93.png#averageHue=%23f7f5f5&clientId=ufdcf341c-1fad-4&from=paste&height=744&id=ubf32be6a&originHeight=1116&originWidth=1872&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=180982&status=done&style=none&taskId=ucbd4544c-2296-4cfd-81f6-3b105002071&title=&width=1248" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722183997124-a5a30a17-915b-4996-befe-3912dbd9c325.png#averageHue=%23f9f7f6&clientId=ufdcf341c-1fad-4&from=paste&height=426&id=u68484908&originHeight=639&originWidth=748&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=24488&status=done&style=none&taskId=ub852394d-f697-47c2-926f-4470b3a9cd0&title=&width=498.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>同级目录下即可查看到证书<br>谷歌浏览器-&gt;设置-&gt;隐私与安全-&gt;安全-&gt;管理证书<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722184141023-a7419cdd-5c67-43b6-a23b-64b4b370bf56.png#averageHue=%23f2f0ef&clientId=ufdcf341c-1fad-4&from=paste&height=566&id=u59c1aecc&originHeight=849&originWidth=925&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=60314&status=done&style=none&taskId=u78aac7e1-295a-4d90-b0d9-7b10c184f17&title=&width=616.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722184209340-e79e1051-8d88-42ed-8d07-84263007e60c.png#averageHue=%23fbfafa&clientId=ufdcf341c-1fad-4&from=paste&height=602&id=u8ed61932&originHeight=903&originWidth=962&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=39973&status=done&style=none&taskId=u0aaa5f6c-ca94-4898-8e24-7fc8e06f23b&title=&width=641.3333333333334" referrerpolicy="no-referrer" alt="image.png"><br>一直点下一步就行了</p>
+<h1 id="Termius"><a href="#Termius" class="headerlink" title="Termius"></a>Termius</h1><p>下载地址;<a target="_blank" rel="noopener" href="https://www.douban.com/link2/?url=https://soft.macxf.com/soft/3309.html?id=MjkzNjc%253D&link2key=7ba555221b">Windows下载：Termius中文安装包</a></p>
+<h2 id="SFTP"><a href="#SFTP" class="headerlink" title="SFTP"></a>SFTP</h2><p>可以把本机的文件上传到vps上<br>nano编辑器退出：同时按住y和enter保存并退出</p>
+<h1 id="Node-js-Javascript）"><a href="#Node-js-Javascript）" class="headerlink" title="Node.js(Javascript）"></a>Node.js(Javascript）</h1><p>官网直接下载，自动配置路径<br>地址：<a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js官网</a></p>
+<h1 id="子系统"><a href="#子系统" class="headerlink" title="子系统"></a>子系统</h1><p>搜索框找到启动或挂壁windows功能，按照图示开启功能，然后根据指示重启计算机<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722242261862-d905646a-99c3-4a7f-82f3-3a1b344dd929.png#averageHue=%23f0edea&clientId=u1558547e-ce6c-4&from=paste&height=394&id=u56db0c19&originHeight=591&originWidth=625&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=63357&status=done&style=none&taskId=ue3ccdcc3-6684-49bc-b7c8-ea87ec5dfe8&title=&width=416.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>配置wsl：<a href="https://link.zhihu.com/?target=https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">wsl下载ios</a><br>微软商店下载Ubuntu LST设置好用户名和密码即可<br>win+r进入cmd，输入wsl即进入虚拟机</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722242568781-fa9eef8f-768c-47ee-b20f-21982d070e5b.png#averageHue=%231d1d1d&clientId=u1558547e-ce6c-4&from=paste&height=167&id=ue6c3a511&originHeight=251&originWidth=1005&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=24591&status=done&style=none&taskId=u1793df1c-e644-471a-b63f-ed604ff4bd1&title=&width=670" referrerpolicy="no-referrer" alt="屏幕截图 2024-07-29 162636.png"><br>这种情况就是没有装wsl</p>
+<h2 id="提权为root"><a href="#提权为root" class="headerlink" title="提权为root"></a>提权为root</h2><p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722243399718-5eea727b-3550-4732-a1ac-11207312164c.png#averageHue=%23f8f7f6&clientId=u1558547e-ce6c-4&from=paste&height=644&id=uc46f0d74&originHeight=966&originWidth=1393&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=187323&status=done&style=none&taskId=ud6812716-bd6d-4692-9249-5d7d06bd005&title=&width=928.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br>确认版本名<br>在cmd窗口运行命令行<code>ubuntu2204.exe config --default-user root</code>成功后进入wsl即为root<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722243503545-6bbd92d5-c2a5-47e3-bf12-8ee2ebf9070c.png#averageHue=%237d8e90&clientId=u1558547e-ce6c-4&from=paste&height=339&id=u9cb07f11&originHeight=508&originWidth=1199&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=645506&status=done&style=none&taskId=u3b5e6552-7331-4395-8f2f-85a58f29812&title=&width=799.3333333333334" referrerpolicy="no-referrer" alt="image.png"></p>
+<h1 id="VM"><a href="#VM" class="headerlink" title="VM"></a>VM</h1><p><strong>激活密钥许可证</strong><br><strong>VM17 激活许可证</strong><br>MC60H-DWHD5-H80U9-6V85M-8280D<br>JU090-6039P-08409-8J0QH-2YR7F<br>5Y012-8HL8P-0J8U0-032Q6-93KKF<br><strong>VM16 激活许可证</strong><br>ZF3R0-FHED2-M80TY-8QYGC-NPKYF<br><strong>VM15 激活许可证</strong><br>UY758-0RXEQ-M81WP-8ZM7Z-Y3HDA<br>VF750-4MX5Q-488DQ-9WZE9-ZY2D6<br>UU54R-FVD91-488PP-7NNGC-ZFAX6<br>YC74H-FGF92-081VZ-R5QNG-P6RY4<br>YC34H-6WWDK-085MQ-JYPNX-NZRA2<br><strong>VM14 激活许可证</strong><br>FF31K-AHZD1-H8ETZ-8WWEZ-WUUVA<br>CV7T2-6WY5Q-48EWP-ZXY7X-QGUWD<br><strong>VM12 激活许可证</strong><br>5A02H-AU243-TZJ49-GTC7K-3C61N<br>VF5XA-FNDDJ-085GZ-4NXZ9-N20E6<br>UC5MR-8NE16-H81WY-R7QGV-QG2D8<br>ZG1WH-ATY96-H80QP-X7PEX-Y30V4<br>AA3E0-0VDE1-0893Z-KGZ59-QGAVF<br><strong>VM10 激活许可证</strong><br>1Z0G9-67285-FZG78-ZL3Q2-234JG<br>4C4EK-89KDL-5ZFP9-1LA5P-2A0J0<br>HY086-4T01N-CZ3U0-CV0QM-13DNU</p>
+<h1 id="kali"><a href="#kali" class="headerlink" title="kali"></a>kali</h1><p><a target="_blank" rel="noopener" href="https://old.kali.org/kali-images/kali-2024.2/">https://old.kali.org/kali-images/kali-2024.2/</a><br>镜像源，选择istaller-amd64.ios，找教程一步步来</p>
+<h2 id="kali无法使用键盘输入"><a href="#kali无法使用键盘输入" class="headerlink" title="kali无法使用键盘输入"></a>kali无法使用键盘输入</h2><p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1722335695504-9df5ea5e-8a12-4ea0-a96c-8188d680082b.png#averageHue=%231875b7&clientId=ud48b5fac-f207-4&from=paste&height=377&id=udcdabeb6&originHeight=566&originWidth=845&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=728354&status=done&style=none&taskId=u737cb3f3-ce91-45e4-b21b-f2d33600e07&title=&width=563.3333333333334" referrerpolicy="no-referrer" alt="image.png"><br>重启解决了</p>
+<h1 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h1><p><a target="_blank" rel="noopener" href="https://github.com/shack2/SNETCracker/releases">https://github.com/shack2/SNETCracker/releases</a></p>
+<h1 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h1><p>安装后运行出问题，显示没有找到正确的库<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723140663525-624b9fd2-7b8b-42da-8666-9610c886389e.png#averageHue=%2340543a&clientId=u2057485a-3e3d-4&from=paste&height=120&id=u80c70ea8&originHeight=180&originWidth=1324&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=353408&status=done&style=none&taskId=u791d8e80-edb4-4db8-8c9e-1d664edef2d&title=&width=882.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br>解决办法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install setuptools</span><br></pre></td></tr></table></figure>
+<p>安装后后续能够使用，但是依旧会有该弹窗</p>
+<h1 id="关于本机"><a href="#关于本机" class="headerlink" title="关于本机"></a>关于本机</h1><p>在系统更新后，可能会无法识别扬声器，导致音量键没有声音，解决办法：<br>打开设备管理器-&gt;系统设备<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723054130113-2f8b78f7-26f2-4376-bda1-893428f7a965.png#averageHue=%23f8f7f6&clientId=ud0e8f844-75a4-4&from=paste&height=572&id=u86b88181&originHeight=858&originWidth=1171&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=258665&status=done&style=none&taskId=ua1473269-ff10-47e6-8a0c-7c35ea57387&title=&width=780.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br>发现出现感叹号的话右键重装即可恢复音量<br>也有可能是驱动器的问题，NVIDIAA检查一下更新<br>————2024&#x2F;8&#x2F;8</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/tools/" rel="tag"># tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/31/SQL%E6%B3%A8%E5%85%A5/" rel="prev" title="SQL注入">
+      <i class="fa fa-chevron-left"></i> SQL注入
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#burpsuite"><span class="nav-number">1.</span> <span class="nav-text">burpsuite</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E9%85%8D%E7%BD%AEJAVA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">首先配置JAVA环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Burpsuite%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">Burpsuite下载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Termius"><span class="nav-number">2.</span> <span class="nav-text">Termius</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SFTP"><span class="nav-number">2.1.</span> <span class="nav-text">SFTP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Node-js-Javascript%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Node.js(Javascript）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">子系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E4%B8%BAroot"><span class="nav-number">4.1.</span> <span class="nav-text">提权为root</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VM"><span class="nav-number">5.</span> <span class="nav-text">VM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kali"><span class="nav-number">6.</span> <span class="nav-text">kali</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kali%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">6.1.</span> <span class="nav-text">kali无法使用键盘输入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%88%86%E7%A0%B4"><span class="nav-number">7.</span> <span class="nav-text">爆破</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dirsearch"><span class="nav-number">8.</span> <span class="nav-text">dirsearch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E6%9C%BA"><span class="nav-number">9.</span> <span class="nav-text">关于本机</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

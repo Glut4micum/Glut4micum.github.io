@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="这篇文章什么都没有">
+  <meta name="description" content="SQL基础命令学习以及一些基本的SQL注入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL注入">
 <meta property="og:url" content="http://example.com/2024/03/31/SQL%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="这篇文章什么都没有">
+<meta property="og:description" content="SQL基础命令学习以及一些基本的SQL注入">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674294315668-0d9b9c0a-e317-45eb-bac5-89871ef6bc93.png#averageHue=%23cdc0a4&clientId=u2f371465-feeb-4&from=paste&height=314&id=u78d7e8b3&originHeight=471&originWidth=1503&originalType=binary&ratio=1&rotation=0&showTitle=false&size=232927&status=done&style=none&taskId=ueda2f8f8-2896-45f3-ac15-a08bd2fdde2&title=&width=1002">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/34873733/1674804138075-58e5675c-2a2f-41b9-8931-bc60d4b23b9d.png#averageHue=%23fcfcfb&clientId=u2f371465-feeb-4&from=paste&height=575&id=ue5ce2067&originHeight=862&originWidth=1541&originalType=binary&ratio=1&rotation=0&showTitle=false&size=306752&status=done&style=none&taskId=u50c5a863-b049-4715-b227-cc4a2cc9d97&title=&width=1027.3333333333333">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706445028757-7d54fb3f-a99c-49a0-8f44-f175ccc22592.png#averageHue=%23f9f9f9&clientId=u809d023a-9013-4&from=paste&height=521&id=u4e8098e2&originHeight=782&originWidth=1371&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=65230&status=done&style=none&taskId=uaae8720b-847b-4bfd-ae1a-7fa61247e44&title=&width=914">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1706445410964-032c03e6-ee8b-4bd2-9c26-34b947ce1264.png#averageHue=%23f9f9f9&clientId=u809d023a-9013-4&from=paste&height=475&id=ucc22305a&originHeight=712&originWidth=1802&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=56810&status=done&style=none&taskId=u854ae8fc-4f0f-43cd-bcdf-7847954f94c&title=&width=1201.3333333333333">
 <meta property="article:published_time" content="2024-03-31T13:58:50.484Z">
-<meta property="article:modified_time" content="2024-03-19T15:34:56.191Z">
+<meta property="article:modified_time" content="2024-08-23T20:27:43.076Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
@@ -239,7 +239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-19 23:34:56" itemprop="dateModified" datetime="2024-03-19T23:34:56+08:00">2024-03-19</time>
+                <time title="修改时间：2024-08-24 04:27:43" itemprop="dateModified" datetime="2024-08-24T04:27:43+08:00">2024-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这篇文章什么都没有</p>
+        <p>SQL基础命令学习以及一些基本的SQL注入</p>
 <span id="more"></span>
 
 <p><a name="Fqj1f"></a></p>
@@ -392,10 +392,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2024/03/31/hello-world/" rel="next" title="Hello World">
-      Hello World <i class="fa fa-chevron-right"></i>
+    <a href="/2024/03/31/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/10/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" rel="next" title="工具安装">
+      工具安装 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -471,20 +474,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

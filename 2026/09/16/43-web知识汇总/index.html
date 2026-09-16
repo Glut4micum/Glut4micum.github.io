@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# web知识汇总  # php  urlencode:url编码  &quot;&quot;会解析变量,  ## 函数集锦  ### eval()  获取返回值，代码动态执行，里面可以直接是一个语句，加‘ ； &#39;传入字符串后面必须加 分号；  ### $  表示一个名为str的普通变量，它可以存储字符串、整数、数组、布尔等任何类型的值  ### $$  表示一个可变变量(也可叫做引用变量)，用于存储str的值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web知识汇总">
+<meta property="og:url" content="http://example.com/2026/09/16/43-web%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# web知识汇总  # php  urlencode:url编码  &quot;&quot;会解析变量,  ## 函数集锦  ### eval()  获取返回值，代码动态执行，里面可以直接是一个语句，加‘ ； &#39;传入字符串后面必须加 分号；  ### $  表示一个名为str的普通变量，它可以存储字符串、整数、数组、布尔等任何类型的值  ### $$  表示一个可变变量(也可叫做引用变量)，用于存储str的值。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T14:20:23.000Z">
+<meta property="article:modified_time" content="2026-09-16T14:20:23.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/43-web%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>web知识汇总 | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/43-web%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          web知识汇总
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 22:20:23" itemprop="dateCreated datePublished" datetime="2026-09-16T22:20:23+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# web知识汇总
+
+# php
+
+urlencode:url编码
+
+""会解析变量,
+
+## 函数集锦
+
+### eval()
+
+获取返回值，代码动态执行，里面可以直接是一个语句，加‘ ； '传入字符串后面必须加 分号；
+
+### $
+
+表示一个名为str的普通变量，它可以存储字符串、整数、数组、布尔等任何类型的值
+
+### $$
+
+表示一个可变变量(也可叫做引用变量)，用于存储str的值。
+
+变量覆盖
+
+**可变变量**：指一个变量的变量名可以动态的设置和使用，利用一个普通的变量通过声明来设置。（$this变量也是一个特殊变量，不能被动态引用）使用时注意引用变量的作用域和生存期
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a = &#x27;b&#x27;;</span><br><span class="line">$b = &#x27;c&#x27;;</span><br><span class="line">$c = &#x27;a&#x27;;</span><br><span class="line">echo $a; //输出 ：b</span><br><span class="line">echo $b; //输出 ：c</span><br><span class="line">echo $c; //输出 ：a</span><br><span class="line">echo $$a; //输出 ：c</span><br><span class="line">echo $$$a; //输出 ：a</span><br><span class="line">echo $$$$a; //输出 ：b</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+举个栗子
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/75c191e6-image.png)
+
+### preg_match
+
+被搜索的结果填充，进行正则表达式匹配。并且只匹配一次
+
+### preg_match_all
+
+是用来获取指定数据内容
+
+### isset
+
+### is_numeric
+
+函数用于检测变量是否为数字或者数字字符串。若是则为true，否则为false
+
+### 布尔类型
+
+**值为true 或false**​
+
+被认为是false的一些
+
+1. 布尔值 FALSE 自身
+2. 整型值 0 (零)
+3. 浮点型值 0.0 (零) 空 字符串, 以及 字符串 "0"
+4. 不包括任何元素的数组
+5. 不包括任何成员变量的对象(仅PHP 4.0 适用)
+6. 特殊类型 NULL (包括尚未设定的变量)
+7. 从没有任何标记(tags)的XML文档生成的SimpleXML 对象
+
+## 序列化和反序列化
+
+### 类与对象
+
+创建类,语法
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class 类名&#123;</span><br><span class="line">//属性</span><br><span class="line">public:公共的,在类的内外都可以调用</span><br><span class="line">protected:受保护的,在内部和子类中可以使用</span><br><span class="line">private:私有的,只能在内部调用</span><br><span class="line">var:不需要特定意义</span><br><span class="line">//方法</span><br><span class="line">public function 方法名(类型 参数1,类型 参数n:返回值类型(可以没有</span><br><span class="line">&#123;</span><br><span class="line">相当于一个函数</span><br><span class="line">&#125;</span><br><span class="line">//常量</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">不能用php关键字</span><br><span class="line">类名不区分大小写,类名首字母大写</span><br></pre></td></tr></table></figure>
+
+对象实例化
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Student&#123;</span><br><span class="line">&#125;</span><br><span class="line">//实例化对象</span><br><span class="line">$stu1=new Student();//小括号可以省略,用来传参</span><br><span class="line">$stu2//这就是对象,传递的是地址</span><br></pre></td></tr></table></figure>
+
+对象比较
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var_dump($stu1==$stu2);		比较对象结构</span><br><span class="line">var_dump($stu1===$stu2);	比较是否是同一个对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+### 命名空间
+
+**namespace 名字;
+
+因为我们是开源的,会遇到第三方重名的类
+
+相当于是一个文件夹,用来规避重名的类,在不同的命名空间里面可以重名
+
+### 魔术方法
+
+- __wakeup()
+
+在反序列化时php会调用
+
+- __construct()
+
+在类被初始化的时候触发,当对象被创建时,实例化的时候触发
+
+- __distruct()析构函数
+
+,当对象被销毁时,在整个php代码运行完的时候出发
+
+- __call
+
+当对象访问一个不存在的方法,或者不可访问的方法时候触发
+
+- __get
+
+当访问一个私有属性,不存在属性时触发
+
+- __set
+
+更改对象私有属性值的时候触发
+
+- __toString
+
+在对象被当成字符串调用的时候触发
+
+- __invoke
+
+当一个对象被当成方法调用的时候触发
+
+### 序列化
+
+serialize()
+
+### 反序列化
+
+unserialize()
+
+[board]
+
+# SQL注入
+
+## 数据库
+
+- information_schema
+
+`SCHEMATA`表,当前root中所有数据库的信息,一般用来查到表名
+
+`TABLES`表:记录用户所有数据库名(TABLE_SCHEMA)和表名(TABLE_NAME)
+
+`columns`表:提供表中的列信息
+
+## 命令
+
+### SELECT WHERE
+
+语法
+
+SELECT column_name,column_name（列名称）
+
+FROM table_name（表名称）
+
+WHERE column_name operator value;字段名称，数据满足什么条件类似if语句
+
+（if（。。。。=。。
+
+printf(...)
+
+）
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/15404df9-image.png)
+
+### CREATE DEATABASE语句,创建数据库
+
+在 MySQL 中，可以使用 CREATE DATABASE 语句创建数据库，语法格式如下：
+CREATE DATABASE [IF NOT EXISTS] <数据库名>
+[[DEFAULT] CHARACTER SET <字符集名>] 
+[[DEFAULT] COLLATE <校对规则名>];
+[ ]中的内容是可选的。语法说明如下：
+<数据库名>：创建数据库的名称。MySQL 的数据存储区将以目录方式表示 MySQL 数据库，因此数据库名称必须符合操作系统的文件夹命名规则，不能以数字开头，尽量要有实际意义。注意在 MySQL 中不区分大小写。
+IF NOT EXISTS：在创建数据库之前进行判断，只有该数据库目前尚不存在时才能执行操作。此选项可以用来避免数据库已经存在而重复创建的错误。
+[DEFAULT] CHARACTER SET：指定数据库的字符集。指定字符集的目的是为了避免在数据库中存储的数据出现乱码的情况。如果在创建数据库时不指定字符集，那么就使用系统的默认字符集。
+[DEFAULT] COLLATE：指定字符集的默认校对规则。
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c42870fa-image.png)
+
+创建完后刷新一下侧边栏才能看到
+
+### creat table 创建表
+
+create 表名(
+列名1 定义字段的数据类型 ， 
+列名2 类型，
+列名3 类型）
+
+一个简单的建表格式，其中：
+
+- 字符串类型（char，varchar）需要指定长度；
+- 整型（int，biging，tinyint等）和日期类型（datetime，timestamp等）只需要指定类型，不需要指定长度；
+- decimal类型需要指定精度和小数位数。
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/468d58bc-image.png)
+
+### 数据插入，增
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)</span><br><span class="line">VALUES (value1, value2, value3,...valueN);</span><br><span class="line">//table_name 表名</span><br><span class="line">colimn 字段名</span><br><span class="line">value 字段数据</span><br></pre></td></tr></table></figure>
+
+写明column就会一一对应，没写就会按照顺序依次赋值
+
+注字符要用单引号，否则会报错
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/df503ce7-image.png)
+
+这样就创建成功了使用select*from t1即可查看
+
+### 删delete
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name//表名</span><br><span class="line">WHERE some_column=some_value;//条件</span><br></pre></td></tr></table></figure>
+
+用于删除表中的行
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b2cd9c67-image.png)
+
+### 改，update
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name</span><br><span class="line">SET column1字段名=value1字段数据,column2=value2,...//更改操作</span><br><span class="line">WHERE some_column=some_value;//条件判断</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/95636fcb-image.png)
+
+### and 和or 运算符
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/60dfd252-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/48d2527b-image.png)
+
+or语句，当判断结果为真就会全部查询出来，也就是万能钥匙
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/375dae53-image.png)
+
+### union多表联合查询
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2b1667bd-image.png)
+
+结果直接拼接显示， union可以对同一个表的两次查询联合起来
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/09395a90-image.png)
+
+用来猜测字段
+
+### SQL注入
+
+#### 数字型注入
+
+​
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t1 where id= x</span><br></pre></td></tr></table></figure>
+
+x=1 or 1=1(万能密码）
+
+x=1 union select 1,2,3.....(一个个尝试出字段)
+
+#### 字符型注入
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t1 where name= &#x27;x&#x27;</span><br></pre></td></tr></table></figure>
+
+x=1' or 1=1 #---注释掉后面多出来的单引号
+
+#### 解题步骤
+
+通常情况下，可能存在 Sql 注入漏洞的 Url 是类似这种形式 ：http://xxx.xxx.xxx/abcd.php?id=XX
+
+- 判断注入点(是否存在sql注入,如果存在属于哪种注入)
+- 判断是否存在漏洞( 最为经典的**单引号判断法**：在参数后面加上单引号, 如果页面返回错误，则存在 Sql 注入。
+原因是无论字符型还是整型都会因为单引号个数不匹配而报错。如果未报错，不代表不存在 Sql 注入，因为有可能页面对单引号做了过滤)
+- 判断注入类型
+
+### GROUP_CONCAT()函数
+
+将多个字符串拼接成一个字符串
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/dae2f0cb-image.png)
+
+### 联合查询
+
+`字段数->回显位置->查阅库名->表名->字段名->查阅数据`
+
+- 查库名
+
+SELECT DATABASE();-- 能够知道当前在哪个数据库
+
+select information_schema.``SCHEMATA``
+
+**查询所有库名:**
+
+> ' union select 1,group_concat(schema_name) from information_schema.schemata -- '
+
+> -1' union select 1,database()#
+
+**查表名**
+
+> ' union select 1,group_concat(table_name) from information_schema.tables where table_schema='数据库的名称'#
+
+> 1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() --+
+
+**查字段**
+
+> ' union select 1,group_concat(column_name) from information_schema.columns where table_name='users'
+
+**查获取字段信息**
+
+> ' union select 1,group_concat(password) from dvwa.users -- '
+
+### 空格绕过
+
+/**/
+
+%09
+
+%0a等,详情参考命令执行绕过
+
+### 实操
+
+-- 注释符
+
+#
+
+/**/-- 一般可以用来绕过空格
+
+SHOW DATABASES; -- 显示MySQL所有数据库名称
+
+SHOW TABLES; -- 显示当前数据库中所有表的名称
+
+SHOW TABLES FROM sys; -- 作用同上 from后面加数据库名
+
+-- use 数据库名 如果数据库存在，选择进入该数据库
+
+USE mysql;
+
+#select 查询数据,展示
+
+SELECT DATABASE();-- 能够知道当前在哪个数据库
+
+SELECT VERSION(); -- 查询当前数据库版本，知道存在的漏洞
+
+SELECT USER(); -- 查询用户名
+
+# *代指所有的意思
+
+#SELECT 列名称,列名称 FROM 表名称 – （从表中读取几列）
+
+SELECT *（即所有的列） FROM TABLES;
+
+SELECT TABLE_CATALOG FROM TABLES;
+
+SELECT * FROM SCHEMATA ;-- 当前root中所有数据库的信息
+
+SELECT * FROM COLUMNS -- 能够看到属于哪个表，哪个数据库
+
+​
+
+​
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/vplapeftc5newzk4
+语雀文档ID: 111627859
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/42-%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E5%93%8D%E5%BA%94%E5%A4%B4/" rel="prev" title="请求头和响应头">
+      <i class="fa fa-chevron-left"></i> 请求头和响应头
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/44-XXE%E6%BC%8F%E6%B4%9E/" rel="next" title="XXE漏洞">
+      XXE漏洞 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

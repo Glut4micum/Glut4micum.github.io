@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# HTML和CSS  # HTML  超文本标记语言,文字,图片音频,动画等,都属于超文本语言  使用phpstorm,创建一个html文件  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;0edac6c3-image.png)  只有一个的标签叫自闭合标签  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML和CSS">
+<meta property="og:url" content="http://example.com/2026/09/16/45-HTML%E5%92%8CCSS/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# HTML和CSS  # HTML  超文本标记语言,文字,图片音频,动画等,都属于超文本语言  使用phpstorm,创建一个html文件  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;0edac6c3-image.png)  只有一个的标签叫自闭合标签  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T14:20:37.000Z">
+<meta property="article:modified_time" content="2026-09-16T14:20:37.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/45-HTML%E5%92%8CCSS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>HTML和CSS | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/45-HTML%E5%92%8CCSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML和CSS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 22:20:37" itemprop="dateCreated datePublished" datetime="2026-09-16T22:20:37+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# HTML和CSS
+
+# HTML
+
+超文本标记语言,文字,图片音频,动画等,都属于超文本语言
+
+使用phpstorm,创建一个html文件
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/0edac6c3-image.png)
+
+只有一个的标签叫自闭合标签
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/010edde2-image.png)
+
+# 网页标签
+
+<h1></h1>//数字一到六,对应各级标签
+
+<p></p>//段落标签
+
+<br>//自闭合标签,换行
+
+段落两行间距会比换行大
+
+<hr>//水平线标签
+
+<strong></strong>粗体标签
+
+<em></em>斜体标签
+
+<div> 元素经常与 CSS 一起使用，用来布局网页。
+
+&nbsp;//空格的写法
+
+&copy;//版权所有符
+
+特殊的转义字符,其他的随用随找
+
+![image](/yuque-notes/02-Knowledge Book/assets/98769298-image.png)
+
+## HTML 链接
+
+HTML 链接是通过标签 <a> 来定义的。
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;https://www.runoob.com&quot;</span>&gt;这是一个链接&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/468dfd29-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/fe48a49e-image.png)
+
+还可以嵌套一个文件
+
+target,表示窗口在哪里打开
+
+- _blank,在一个新标签打开
+- _self,在本窗口打开,默认
+
+邮件链接
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;mailto:2589107567@qq.com&quot;</span>&gt;点击联系我&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+## 锚链接
+
+首先a标签创建一个标记,再一个a标签
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;&quot;</span> id=<span class="string">&quot;top&quot;</span>&gt;顶部&lt;/a&gt;<span class="comment">//标签,锚点</span></span><br><span class="line"></span><br><span class="line">&lt;a href=<span class="string">&quot;#top&quot;</span>&gt;回到顶部&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+还可以实现页面间的跳转后定位到信息
+
+## HTML 图像
+
+HTML 图像是通过标签 <img> 来定义的.
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img decoding=<span class="string">&quot;async&quot;</span>src=<span class="string">&quot;/images/logo.png&quot;</span>width=<span class="string">&quot;258&quot;</span>height=<span class="string">&quot;39&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c91c7b4d-image.png)
+
+src:图片地址,相对地址和绝对地址
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/96bd13cc-image.png)
+
+实现效果
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/80a87b6f-image.png)![image.png](/yuque-notes/02-Knowledge Book/assets/02948240-image.png)
+
+# 元素
+
+块元素:无论内容多少,单独一行,段落标签之类
+
+行内元素:内容撑开宽度,左右都是行内元素的都在一行
+
+# 列表
+
+- 无序列表
+- 有序列表
+- 自定义列表
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--有序列表--&gt;</span><br><span class="line">&lt;ol&gt;</span><br><span class="line">    &lt;li&gt;hello&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;你好&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;!--无序列表--&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;哈哈哈&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;好好好&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;!--自定义</span><br><span class="line">dl标签</span><br><span class="line">dt:列表名称</span><br><span class="line">dd:列表内容</span><br><span class="line">--&gt;</span><br><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;学科&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;语文&lt;/dd&gt;</span><br><span class="line">    &lt;dd&gt;英语&lt;/dd&gt;</span><br><span class="line">    &lt;dd&gt;数学&lt;/dd&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dt&gt;成绩&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;<span class="number">98</span>&lt;/dd&gt;</span><br><span class="line">    &lt;dd&gt;<span class="number">100</span>&lt;/dd&gt;</span><br><span class="line">    &lt;dd&gt;<span class="number">92</span>&lt;/dd&gt;</span><br><span class="line">&lt;/dl&gt;</span><br></pre></td></tr></table></figure>
+
+实现效果
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/f70ef460-image.png)
+
+# 表格标签
+
+- 单元格
+- 行列
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;h4&gt;一列:&lt;/h4&gt;</span><br><span class="line">&lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">100</span>&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"> </span><br><span class="line">&lt;h4&gt;一行三列:&lt;/h4&gt;</span><br><span class="line">&lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">100</span>&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">200</span>&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">300</span>&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"> </span><br><span class="line">&lt;h4&gt;两行三列:&lt;/h4&gt;</span><br><span class="line">&lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">100</span>&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">200</span>&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">300</span>&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">400</span>&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">500</span>&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;<span class="number">600</span>&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+border边框属性已被废弃,但是用也还能用,实现效果
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/490321d6-image.png)
+
+<th>表头,会居中处理
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">&lt;!--        colspan跨列--&gt;</span><br><span class="line">        &lt;td colspan=<span class="string">&quot;3&quot;</span>&gt;<span class="number">100</span>&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">&lt;!--       rowspon跨行 --&gt;</span><br><span class="line">        &lt;td rowspan=<span class="string">&quot;3&quot;</span>&gt;<span class="number">400</span>&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;<span class="number">500</span>&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;<span class="number">600</span>&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;<span class="number">700</span>&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;<span class="number">800</span>&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2a847fba-image.png)
+
+# 视频音频
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--视频</span><br><span class="line">controls 控制进度条</span><br><span class="line">autoplay 自动波放,但是现在好型被弃用了</span><br><span class="line">--&gt;</span><br><span class="line">&lt;video src=<span class="string">&quot;../resource/vedio/2.mp4&quot;</span> controls autoplay=<span class="string">&quot;autoplay&quot;</span>&gt;&lt;/video&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--音频</span><br><span class="line"></span><br><span class="line">--&gt;</span><br><span class="line">&lt;audio src=<span class="string">&quot;../resource/audio/新录音%201.m4a&quot;</span> controls&gt;&lt;/audio&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+# 页面结构
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/4f2ef09a-image.png)
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;h2&gt;网页头部&lt;/h2&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;section&gt;&lt;h2&gt;网业主体&lt;/h2&gt;&lt;/section&gt;</span><br><span class="line">&lt;footer&gt;&lt;h2&gt;页脚&lt;/h2&gt;&lt;/footer&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+# iframe内联框架
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">&quot;&quot;</span> name=<span class="string">&quot;hello&quot;</span> width=<span class="string">&quot;1000&quot;</span> height=<span class="string">&quot;800&quot;</span>&gt;&lt;/iframe&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=<span class="string">&quot;https://www.runoob.com&quot;</span> target=<span class="string">&quot;hello&quot;</span>&gt;点我跳转&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+实现效果
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/f3602057-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e1611c3a-image.png)
+
+# 表单语法
+
+from表单
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/4b8a1fd4-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/4c84c218-image.png)
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;注册&lt;/h1&gt;</span><br><span class="line">&lt;!--表单form</span><br><span class="line">action:表单提交位置,请求处理地址,或者网站</span><br><span class="line">method:提交方式</span><br><span class="line">--&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;text.html&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">&lt;!--    文本输入框:--&gt;</span><br><span class="line">    &lt;p&gt;名字: &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span>&gt;&lt;/input&gt; &lt;/p&gt;</span><br><span class="line">&lt;!--    密码框--&gt;</span><br><span class="line">    &lt;p&gt;密码: &lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt;&lt;/p&gt;</span><br><span class="line">&lt;!--提交--&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;reset&quot;</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+实现效果
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c23a521d-image.png)
+
+点击提交查询后,就会跳转到之前创建的text.html页面,并且可以在url上看到username和password的值
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e6282f43-image.png)
+
+name属性就是提交接受的参数
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;注册&lt;/h1&gt;</span><br><span class="line">&lt;!--表单form</span><br><span class="line">action:表单提交位置,请求处理地址,或者网站</span><br><span class="line">method:提交方式</span><br><span class="line">maxlength:限定文本长度</span><br><span class="line">value:初始值</span><br><span class="line">seze:文本框长度设置</span><br><span class="line">--&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;text.html&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">&lt;!--    文本输入框:--&gt;</span><br><span class="line">    &lt;p&gt;名字: &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span>&gt;&lt;/input&gt; &lt;/p&gt;</span><br><span class="line">&lt;!--    密码框--&gt;</span><br><span class="line">    &lt;p&gt;密码: &lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--    单选框</span><br><span class="line">radio</span><br><span class="line">value:单选框的值</span><br><span class="line">name:表示组,在同一组就只能单选,会提交在一个数组</span><br><span class="line">checked:默认选中</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;性别:</span><br><span class="line">        &lt;input type=<span class="string">&quot;radio&quot;</span> value=<span class="string">&quot;boy&quot;</span> name=<span class="string">&quot;sex&quot;</span>&gt;男</span><br><span class="line">        &lt;input type=<span class="string">&quot;radio&quot;</span> value=<span class="string">&quot;girl&quot;</span> name=<span class="string">&quot;sex&quot;</span>&gt;女</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;!--    多选框</span><br><span class="line">checkbox</span><br><span class="line">checked:默认选中</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;爱好:</span><br><span class="line">        &lt;input type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;sleep&quot;</span> name=<span class="string">&quot;hobby&quot;</span>&gt;睡觉</span><br><span class="line">        &lt;input type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;game&quot;</span> name=<span class="string">&quot;hobby&quot;</span>&gt;游戏</span><br><span class="line">        &lt;input type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;citywolk&quot;</span> name=<span class="string">&quot;hobby&quot;</span>&gt;散步</span><br><span class="line">        &lt;input type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;code&quot;</span> name=<span class="string">&quot;hobby&quot;</span>&gt;代码</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--    按钮</span><br><span class="line">image:图片按钮</span><br><span class="line">buttom:普通按钮,没有添加就没有功能</span><br><span class="line">submit:提交按钮</span><br><span class="line">reset:重置按钮</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;按钮</span><br><span class="line">        &lt;input type=<span class="string">&quot;button&quot;</span> name=<span class="string">&quot;btn1&quot;</span> value=<span class="string">&quot;点击提交&quot;</span>&gt;</span><br><span class="line">&lt;!--        &lt;input type=<span class="string">&quot;image&quot;</span> src=<span class="string">&quot;../resource/image/123.jpg&quot;</span>&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--    下拉框,列表框</span><br><span class="line">select:默认值</span><br><span class="line"></span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;国家:</span><br><span class="line">        &lt;select name=<span class="string">&quot;列表名称&quot;</span> id=<span class="string">&quot;&quot;</span>&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;选项的值&quot;</span>&gt;中国&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;选项的值&quot;</span>&gt;美国&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;选项的值&quot;</span>&gt;日本&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;选项的值&quot;</span> select&gt;英国&lt;/option&gt;</span><br><span class="line">        &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--    文本域</span><br><span class="line">可以键入内容</span><br><span class="line">name:一般不推荐中文</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;反馈:</span><br><span class="line">        &lt;textarea name=<span class="string">&quot;text&quot;</span> id=<span class="string">&quot;1&quot;</span> cols=<span class="string">&quot;30&quot;</span> rows=<span class="string">&quot;10&quot;</span>&gt;文本内容&lt;/textarea&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--    文件域--&gt;</span><br><span class="line">    &lt;p&gt;文件</span><br><span class="line">        &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;files&quot;</span>&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;button&quot;</span> value=<span class="string">&quot;上传&quot;</span> name=<span class="string">&quot;upload&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--    邮件验证 验证@符号--&gt;</span><br><span class="line">    &lt;p&gt;邮箱：</span><br><span class="line">        &lt;input type=<span class="string">&quot;email&quot;</span> name=<span class="string">&quot;email&quot;</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;!--    url验证</span><br><span class="line">        number:数字验证</span><br><span class="line">        &lt;input type=<span class="string">&quot;email&quot;</span> name=<span class="string">&quot;email&quot;</span>&gt;</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;数字：</span><br><span class="line">    &lt;input type=<span class="string">&quot;number&quot;</span> name=<span class="string">&quot;num&quot;</span> max=<span class="string">&quot;100&quot;</span> min=<span class="string">&quot;0&quot;</span> step=<span class="string">&quot;10&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--    滑块--&gt;</span><br><span class="line">    &lt;p&gt;音量：</span><br><span class="line">        &lt;input type=<span class="string">&quot;range&quot;</span> name=<span class="string">&quot;voice&quot;</span> min=<span class="string">&quot;0&quot;</span> max=<span class="string">&quot;100&quot;</span> step=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--搜索框--&gt;</span><br><span class="line">    &lt;p&gt;搜索：</span><br><span class="line">        &lt;input type=<span class="string">&quot;search&quot;</span> name=<span class="string">&quot;search&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;!--增强鼠标可用行</span><br><span class="line"></span><br><span class="line">点击文本跳转到位置，例如文本框内</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">    &lt;label <span class="keyword">for</span>=<span class="string">&quot;mark&quot;</span>&gt;点击&lt;/label&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;mark&quot;</span> id=<span class="string">&quot;mark&quot;</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--提交--&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;reset&quot;</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+各种验证以及提交方式
+
+input标签里面加上readonly,选项文本加上disable,就是只读
+
+hidden:属性在但是没有框,用于传递默认值
+
+效果:
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/0b03c789-image.png)
+
+# 表单的初级验证
+
+<input type="text" name="username" placeholder="请输入用户名" required>
+
+placeholder:效果![image.png](/yuque-notes/02-Knowledge Book/assets/872873b3-image.png)
+
+required:不能为空![image.png](/yuque-notes/02-Knowledge Book/assets/d4eed9bc-image.png)
+
+pattern:正则表达式
+
+# CSS
+
+## CSS的ID选择器和class选择器
+
+一、ID选择器和Class选择器的区别
+
+1、一个HTML标签只能应用于一个ID选择器
+
+2、一个HTML标签可以应用多个class选择器
+
+3、ID选择器是以“#”开头，并且只能在单个元素使用
+
+4、Class选择器是以“.”开头，可以多个元素应用，中间用“，”隔开
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>ID选择器(runoob.com)<span class="tag">&lt;/<span class="name">title</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-id">#para1</span></span></span><br><span class="line"><span class="language-css">      &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:red;</span></span><br><span class="line"><span class="language-css">      &#125; </span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;para1&quot;</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>这个段落不受该样式的影响。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/2bb644f7-20210228185025685.png)
+
+就有点类似于一种变量类型,一个是id类型一个是class类型
+
+### 可以特指某个元素使用class，其他元素不受影响
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>class选择器<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-tag">p</span><span class="selector-class">.center</span></span></span><br><span class="line"><span class="language-css">&#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">text-align</span>:center;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;center&quot;</span>&gt;</span>这个标题不受影响<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;center&quot;</span>&gt;</span>这个段落居中对齐。<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+![image](/yuque-notes/02-Knowledge Book/assets/4077c549-20210228185632861.png)
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ls5pe63bpmz9x4zm
+语雀文档ID: 137387760
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/44-XXE%E6%BC%8F%E6%B4%9E/" rel="prev" title="XXE漏洞">
+      <i class="fa fa-chevron-left"></i> XXE漏洞
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/46-JavaScript/" rel="next" title="JavaScript">
+      JavaScript <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

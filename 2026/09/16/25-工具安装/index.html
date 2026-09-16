@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="# 工具安装  # burpsuite  ## 首先配置JAVA环境  下载地址：~~原语雀附件 openjdk-11+28_windows-x64_bin.zip（体积超过 GitHub 100MB 限制，未能迁移）~~，建议直接到 [OpenJDK 官网](https:&#x2F;&#x2F;openjdk.org&#x2F;) 下载  也可以直接到官网下载  此电脑右键-&gt;属性-&gt;高级系统设置-&gt;环境变量  ![ima">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具安装">
+<meta property="og:url" content="http://example.com/2026/09/16/25-%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Glut4micum">
+<meta property="og:description" content="# 工具安装  # burpsuite  ## 首先配置JAVA环境  下载地址：~~原语雀附件 openjdk-11+28_windows-x64_bin.zip（体积超过 GitHub 100MB 限制，未能迁移）~~，建议直接到 [OpenJDK 官网](https:&#x2F;&#x2F;openjdk.org&#x2F;) 下载  也可以直接到官网下载  此电脑右键-&gt;属性-&gt;高级系统设置-&gt;环境变量  ![ima">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-16T14:19:34.000Z">
+<meta property="article:modified_time" content="2026-09-16T14:19:34.000Z">
+<meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/09/16/25-%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>工具安装 | Glut4micum</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Glut4micum</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/16/25-%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+      <meta itemprop="name" content="谷氨酸棒状杆菌">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Glut4micum">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          工具安装
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-16 22:19:34" itemprop="dateCreated datePublished" datetime="2026-09-16T22:19:34+08:00">2026-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">知识笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="本文总阅读两 fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+# 工具安装
+
+# burpsuite
+
+## 首先配置JAVA环境
+
+下载地址：~~原语雀附件 openjdk-11+28_windows-x64_bin.zip（体积超过 GitHub 100MB 限制，未能迁移）~~，建议直接到 [OpenJDK 官网](https://openjdk.org/) 下载
+
+也可以直接到官网下载
+
+此电脑右键->属性->高级系统设置->环境变量
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/e9694be9-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/d2c8a6af-image.png)
+
+Path中添加路径
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/a8908e7c-image.png)
+
+win+cmd，输入java -version，能看到Java版本即配置成功
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/6802fd04-image.png)
+
+## Burpsuite下载
+
+地址：官网[*https://portswigger.net/burp/releases*](https://portswigger.net/burp/releases)
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Burp <span class="number">2024.3</span>，自带JDK21，双击bat即可启动（英文版）</span><br><span class="line">https:<span class="comment">//msb-netdisk.mashibing.com/share/b972f40cb0174fd4ad0d0a574b194d95</span></span><br><span class="line"> </span><br><span class="line">Burp Suite <span class="number">2023.2</span>，自带JDK18，双击bat即可启动（英文版）</span><br><span class="line">https:<span class="comment">//pan.baidu.com/s/10KIHDOURs6uL_nK7ikNNew?pwd=rgvj</span></span><br><span class="line"> </span><br><span class="line">Burp-<span class="number">2021.12</span>，自带JDK11，双击bat即可启动（英文版）</span><br><span class="line">https:<span class="comment">//pan.baidu.com/s/1GLORfQppll57_nZiY39uzg?pwd=8888</span></span><br></pre></td></tr></table></figure>
+
+注册机地址：
+
+下载对应版本的注册机，在cmd窗口运行
+
+`java -jar BurpLoaderKeygen.jar`
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/3630e082-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/2fdae9b8-image.png)
+
+点击下一步
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/f0315346-image.png)
+
+选择手动激活
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c78b08d6-image.png)
+
+快捷启动：
+
+复制
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c1fd9356-image.png)
+
+将内容写入到Java.bat
+
+消除CMD运行框
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Set</span> <span class="variable">ws</span> <span class="operator">=</span> CreateObject(<span class="string">&quot;Wscript.Shell&quot;</span>) </span><br><span class="line">ws.run <span class="string">&quot;cmd /c D:\appdownload\BurpSuitePro\java.bat &quot;</span>,vbhide  <span class="comment">//隐藏窗口</span></span><br><span class="line"></span><br><span class="line"><span class="type">Set</span> <span class="variable">ws</span> <span class="operator">=</span> CreateObject(<span class="string">&quot;Wscript.Shell&quot;</span>) </span><br><span class="line">ws.run <span class="string">&quot;java.bat &quot;</span>,<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+写入到start.vds,注意更换目录名
+
+谷歌浏览器配置
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/265e7ecb-image.png)
+
+扩展下载
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/bce93f11-image.png)
+
+从burpsuite中导出证书
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/459ac1f8-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/fe092b21-image.png)
+
+同级目录下即可查看到证书
+
+谷歌浏览器->设置->隐私与安全->安全->管理证书
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/9e198ed3-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c87a1e08-image.png)
+
+一直点下一步就行了
+
+访问配置的端口可以看到如下页面：
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/7f60de93-image.png)
+
+## 特殊情况处理
+
+360扫过一遍之后burpsuite就出问题了，后来一直每搞好，凑活着用，没回运行注册机都会再次弹出注册机的界面，但是burp也会同时启动，虽然不影响使用，但是很烦
+
+解决办法：打开burp，help->Clean Burp from computer
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/38e0ba37-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/1d9a8a97-image.png)
+
+就可以把我们原本的注册信息删除掉，再次运行注册机重新注册即可。
+
+## 解决不抓包本地IP127.0.0.1问题
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/b7e2b4f7-image.png)
+
+SwitchyOmega配置如图，将不代理列表捏原本的内容删除，增加命令`<-loopback>`强制本地回环即可成功抓包
+
+## 8080被占用
+
+cmd输入netstat -ano|findstr 8080，找到占用端口的进程pid，然后打开任务管理器，搜索进程号，找到程序后右键，打开程序所在位置，关闭即可
+
+# Termius
+
+下载地址;[Windows下载：Termius中文安装包](https://www.douban.com/link2/?url=https%3A%2F%2Fsoft.macxf.com%2Fsoft%2F3309.html%3Fid%3DMjkzNjc%253D&link2key=7ba555221b)
+
+## SFTP
+
+可以把本机的文件上传到vps上
+
+nano编辑器退出：同时按住y和enter保存并退出
+
+# Node.js(Javascript）
+
+官网直接下载，自动配置路径
+
+地址：[Node.js官网](https://nodejs.org/)
+
+​
+
+# 子系统
+
+搜索框找到启动或挂壁windows功能，按照图示开启功能，然后根据指示重启计算机
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/0b8da2e5-image.png)
+
+配置wsl：[wsl下载ios](https://link.zhihu.com/?target=https%3A//wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+
+微软商店下载Ubuntu LST设置好用户名和密码即可
+
+win+r进入cmd，输入wsl即进入虚拟机
+
+​
+
+![屏幕截图 2024-07-29 162636.png](/yuque-notes/02-Knowledge Book/assets/07bb6409-屏幕截图 2024-07-29 162636.png)
+
+这种情况就是没有装wsl
+
+## 提权为root
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/72f1f9eb-image.png)
+
+确认版本名
+
+在cmd窗口运行命令行`ubuntu2204.exe config --default-user root`成功后进入wsl即为root
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/3dc49b9e-image.png)
+
+# VM
+
+**激活密钥许可证**
+
+**VM17 激活许可证**
+
+MC60H-DWHD5-H80U9-6V85M-8280D
+
+JU090-6039P-08409-8J0QH-2YR7F
+
+5Y012-8HL8P-0J8U0-032Q6-93KKF
+
+**VM16 激活许可证**
+
+ZF3R0-FHED2-M80TY-8QYGC-NPKYF
+
+**VM15 激活许可证**
+
+UY758-0RXEQ-M81WP-8ZM7Z-Y3HDA
+
+VF750-4MX5Q-488DQ-9WZE9-ZY2D6
+
+UU54R-FVD91-488PP-7NNGC-ZFAX6
+
+YC74H-FGF92-081VZ-R5QNG-P6RY4
+
+YC34H-6WWDK-085MQ-JYPNX-NZRA2
+
+**VM14 激活许可证**
+
+FF31K-AHZD1-H8ETZ-8WWEZ-WUUVA
+
+CV7T2-6WY5Q-48EWP-ZXY7X-QGUWD
+
+**VM12 激活许可证**
+
+5A02H-AU243-TZJ49-GTC7K-3C61N
+
+VF5XA-FNDDJ-085GZ-4NXZ9-N20E6
+
+UC5MR-8NE16-H81WY-R7QGV-QG2D8
+
+ZG1WH-ATY96-H80QP-X7PEX-Y30V4
+
+AA3E0-0VDE1-0893Z-KGZ59-QGAVF
+
+**VM10 激活许可证**
+
+1Z0G9-67285-FZG78-ZL3Q2-234JG
+
+4C4EK-89KDL-5ZFP9-1LA5P-2A0J0
+
+HY086-4T01N-CZ3U0-CV0QM-13DNU
+
+# kali
+
+[https://old.kali.org/kali-images/kali-2024.2/](https://old.kali.org/kali-images/kali-2024.2/)
+
+镜像源，选择istaller-amd64.ios，找教程一步步来
+
+## kali无法使用键盘输入
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/85d97ba2-image.png)
+
+重启解决了
+
+​
+
+kali寄了，开机出现异常，所以又重新下了，这次学到一个新的东西，一步到位
+
+[https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/5fe491e3-image.png)
+
+将下载好的文件解压到合适的位置
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/0e7e7bd9-image.png)
+
+左上角文件选择扫描虚拟机
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/716f6bf1-image.png)
+
+路径选择刚刚解压的地方
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/9510b85e-image.png)
+
+点击完成即可，我已经扫过了，就借用一下截图
+
+默认用户名和密码kali/kali
+
+点开命令窗口，输入`sudo passwd root`重置root命令即可
+
+参考文章：[https://blog.csdn.net/sdhswddlj/article/details/135394004](https://blog.csdn.net/sdhswddlj/article/details/135394004)
+
+## kali docker
+
+重装后不知道为什么拉不下来，废了我两天，最后参考
+
+[https://zhuanlan.zhihu.com/p/2026817649](https://zhuanlan.zhihu.com/p/2026817649)
+
+​
+
+​
+
+# 爆破
+
+[https://github.com/shack2/SNETCracker/releases](https://github.com/shack2/SNETCracker/releases)
+
+# dirsearch
+
+安装后运行出问题，显示没有找到正确的库
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/67853b53-image.png)
+
+解决办法
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install setuptools</span><br></pre></td></tr></table></figure>
+
+安装后后续能够使用，但是依旧会有该弹窗
+
+## 使用的命令
+
+` gobuster dir-u http://targeturl `
+
+## 创建虚拟环境
+
+python3 -m venv venv_dirsearch
+
+## 激活
+
+source venv_dirsearch/bin/activate
+
+## 安装依赖
+
+pip3 install -r requirements.txt
+
+​
+
+## 使用流程
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/CTF/ctftools/dirsearch</span><br><span class="line">source venv_dirsearch/bin/activate</span><br><span class="line">python3 dirsearch.py -u http:<span class="comment">//xxx</span></span><br><span class="line"># 用完退出虚拟环境</span><br><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+# SQLmap
+
+`sudo apt install sqlmap`
+
+`sqlmap -u "http://target?id=1"`
+
+# IDM
+
+powershell运行
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Check the instructions here on how to use it https://massgrave.dev/idm-activation-script</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">$ErrorActionPreference</span> = <span class="string">&quot;Stop&quot;</span></span><br><span class="line"><span class="comment"># Enable TLSv1.2 for compatibility with older clients</span></span><br><span class="line">[Net.ServicePointManager]::<span class="variable constant_">SecurityProtocol</span> = [Net.ServicePointManager]::<span class="variable constant_">SecurityProtocol</span> -bor [Net.SecurityProtocolType]::<span class="variable constant_">Tls12</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">$DownloadURL</span> = <span class="string">&#x27;https://raw.githubusercontent.com/WindowsAddict/IDM-Activation-Script/main/IAS.cmd&#x27;</span></span><br><span class="line"><span class="variable">$DownloadURL2</span> = <span class="string">&#x27;https://bitbucket.org/WindowsAddict/idm-activation-script/raw/main/IAS.cmd&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">$rand</span> = Get-Random -Maximum <span class="number">99999999</span></span><br><span class="line"><span class="variable">$isAdmin</span> = [<span class="keyword">bool</span>]([Security.Principal.WindowsIdentity]::<span class="title function_ invoke__">GetCurrent</span>().Groups -<span class="keyword">match</span> <span class="string">&#x27;S-1-5-32-544&#x27;</span>)</span><br><span class="line"><span class="variable">$FilePath</span> = <span class="keyword">if</span> (<span class="variable">$isAdmin</span>) &#123; <span class="string">&quot;<span class="subst">$env</span>:SystemRoot\Temp\IAS_<span class="subst">$rand</span>.cmd&quot;</span> &#125; <span class="keyword">else</span> &#123; <span class="string">&quot;<span class="subst">$env</span>:TEMP\IAS_<span class="subst">$rand</span>.cmd&quot;</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="variable">$response</span> = Invoke-WebRequest -Uri <span class="variable">$DownloadURL</span> -UseBasicParsing</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> &#123;</span><br><span class="line">    <span class="variable">$response</span> = Invoke-WebRequest -Uri <span class="variable">$DownloadURL2</span> -UseBasicParsing</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="variable">$ScriptArgs</span> = <span class="string">&quot;<span class="subst">$args</span> &quot;</span></span><br><span class="line"><span class="variable">$prefix</span> = <span class="string">&quot;@REM <span class="subst">$rand</span> `r`n&quot;</span></span><br><span class="line"><span class="variable">$content</span> = <span class="variable">$prefix</span> + <span class="variable">$response</span></span><br><span class="line">Set-Content -Path <span class="variable">$FilePath</span> -Value <span class="variable">$content</span></span><br><span class="line"> </span><br><span class="line">Start-Process <span class="variable">$FilePath</span> <span class="variable">$ScriptArgs</span> -Wait</span><br><span class="line"> </span><br><span class="line"><span class="variable">$FilePaths</span> = @(<span class="string">&quot;<span class="subst">$env</span>:TEMP\IAS*.cmd&quot;</span>, <span class="string">&quot;<span class="subst">$env</span>:SystemRoot\Temp\IAS*.cmd&quot;</span>)</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$FilePath</span> in <span class="variable">$FilePaths</span>) &#123; Get-Item <span class="variable">$FilePath</span> | Remove-Item &#125;</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/3047242f-image.png)
+
+会出现如图的弹窗，选择2
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/84bb1c83-image.png)
+
+稍等，查看即可看到破解成功
+
+# java
+
+安装Java报错`Error: could not open `D:\environment\java\lib\amd64\jvm.cfg'`,
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/07d8f0d2-image.png)
+
+根据该路径找到所在文件夹会发现一个文件夹为javapath，删除即可
+
+## 电脑上无法打开.jar文件解决办法：
+
+按照网上的方法 修改
+`编辑注册表：HKEY_CLASSES_ROOT\Applications\javaw.exe\shell\open\command`
+默认数据值，结果 javaw.exe 目录下根本都没找到分支
+
+打不开jar文件，那么这是关联问题，文件关联不是看这个路径的。
+
+这个路径才是最终的关联路径
+
+HKEY_CLASSES_ROOT\jarfile\shell\open\command
+
+如果不存在，那么可以把以下内容保存为`.reg`后缀名的文件，然后双击导入即可，自行修改里面javaw.exe的路径为电脑上安装的正确路径，注意路径中的斜杆必须为双斜杆
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"> </span><br><span class="line">[HKEY_CLASSES_ROOT\.jar]</span><br><span class="line">@=<span class="string">&quot;jarfile&quot;</span></span><br><span class="line"> </span><br><span class="line">[HKEY_CLASSES_ROOT\jarfile]</span><br><span class="line">@=<span class="string">&quot;可执行 Jar 文件&quot;</span></span><br><span class="line"> </span><br><span class="line">[HKEY_CLASSES_ROOT\jarfile\shell\open\command]</span><br><span class="line">@=<span class="string">&quot;\&quot;D:\\environment\\jre1.8.0_211\\bin\\javaw.exe\&quot; -jar \&quot;%1\&quot; %*&quot;</span></span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/486923d9-image.png)
+
+参考文章：[链接](https://blog.csdn.net/WriteBug001/article/details/130932214)
+
+# MYSQL
+
+安装网址：https://dev.mysql.com/downloads/mysql/
+
+安装好后解压，然后配置环境变量，以管理员身份运行cmd
+
+创建一个ini文件，记得修改路径
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="keyword">default</span>-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line"><span class="comment"># 设置3306端口</span></span><br><span class="line">port = <span class="number">3306</span></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line">basedir = D:\environment\mysql-<span class="number">8.0</span>.<span class="number">39</span>-winx64\mysql-<span class="number">8.0</span>.<span class="number">39</span>-winx64</span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line">datadir = D:\environment\mysql-<span class="number">8.0</span>.<span class="number">39</span>-winx64\mysql-<span class="number">8.0</span>.<span class="number">39</span>-winx64\data</span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line">max_connections=<span class="number">20</span></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为8比特编码的latin1字符集</span></span><br><span class="line">character-set-server=utf8</span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="keyword">default</span>-storage-engine=INNODB</span><br><span class="line"><span class="comment"># 创建模式</span></span><br><span class="line">sql_mode = NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br></pre></td></tr></table></figure>
+
+进入mysql的bin目录下运行
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize --console<span class="comment">//记下密码，会出现一个打他文件夹</span></span><br><span class="line">mysqld --install mysql</span><br><span class="line">net start mysql</span><br><span class="line">mysql -uroot -p<span class="comment">//输入刚刚记录下来的密码就进入了sql</span></span><br><span class="line"></span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;000000&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/33f9845d-image.png)
+
+连接navicat。
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/c3b08f0b-image.png)
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/4739ec0a-image.png)
+
+# navicat
+
+[https://qweree.cn/index.php/130/](https://qweree.cn/index.php/130/)
+
+# Proxifier注册密钥：
+
+L6Z8A-XY2J4-BTZ3P-ZZ7DF-A2Q9C（Portable Edition） 便携版
+
+5EZ8G-C3WL5-B56YG-SCXM9-6QZAP（Standard Edition） 标准版
+
+P427L-9Y552-5433E-8DSR3-58Z68（MAC）
+
+# 关于本机
+
+在系统更新后，可能会无法识别扬声器，导致音量键没有声音，解决办法：
+
+打开设备管理器->系统设备
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/daa7b0f4-image.png)
+
+发现出现感叹号的话右键重装即可恢复音量
+
+也有可能是驱动器的问题，NVIDIAA检查一下更新
+
+————2024/8/8
+
+# 设置开机自启的exe文件
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/91bd3b66-image.png)
+
+重启就设置完成了
+
+# 删除文件
+
+当文件被占用无法删除的时候，打开任务管理器
+
+![image.png](/yuque-notes/02-Knowledge Book/assets/6fd38d79-image.png)找到正在运行的exe文件结束进程再删除即可
+
+---
+
+来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/aqlgqsrn5gmqyu9r
+语雀文档ID: 179831413
+
+
+<blockquote>
+<p>AI生成</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/16/24-AWD%E5%9F%BA%E7%A1%80/" rel="prev" title="AWD基础">
+      <i class="fa fa-chevron-left"></i> AWD基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/16/26-%E7%BA%A2%E5%88%9D/" rel="next" title="红初">
+      红初 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="谷氨酸棒状杆菌"
+      src="https://ice.frostsky.com/2024/03/16/1776051b6463e644bf0eb40aed808727.md.jpeg">
+  <p class="site-author-name" itemprop="name">谷氨酸棒状杆菌</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Glut4micum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Glut4micum" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谷氨酸棒状杆菌</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总访客量 fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="总阅读量 fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

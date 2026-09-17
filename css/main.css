@@ -18,6 +18,34 @@
   --btn-default-hover-color: #fff;
   --btn-default-hover-border-color: #222;
 }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg-color: #282828;
+    --content-bg-color: #333;
+    --card-bg-color: #555;
+    --text-color: #ccc;
+    --blockquote-color: #bbb;
+    --link-color: #ccc;
+    --link-hover-color: #eee;
+    --brand-color: #ddd;
+    --brand-hover-color: #ddd;
+    --table-row-odd-bg-color: #282828;
+    --table-row-hover-bg-color: #363636;
+    --menu-item-bg-color: #555;
+    --btn-default-bg: #222;
+    --btn-default-color: #ccc;
+    --btn-default-border-color: #555;
+    --btn-default-hover-bg: #666;
+    --btn-default-hover-color: #ccc;
+    --btn-default-hover-border-color: #666;
+  }
+  img {
+    opacity: 0.75;
+  }
+  img:hover {
+    opacity: 0.9;
+  }
+}
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -381,6 +409,51 @@ td {
 .toggle.toggle-close .toggle-line-last {
   transform: rotate(45deg);
   top: -5px;
+}
+.highlight-container {
+  position: relative;
+}
+.highlight-container:hover .copy-btn,
+.highlight-container .copy-btn:focus {
+  opacity: 1;
+}
+.copy-btn {
+  color: #333;
+  cursor: pointer;
+  line-height: 1.6;
+  opacity: 0;
+  padding: 2px 6px;
+  position: absolute;
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  color: #fff;
+  font-size: 14px;
+  right: 0;
+  top: 2px;
+}
+.highlight-container {
+  background: #21252b;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.4);
+  padding-top: 30px;
+}
+.highlight-container::before {
+  background: #fc625d;
+  border-radius: 50%;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: ' ';
+  height: 12px;
+  left: 12px;
+  margin-top: -20px;
+  position: absolute;
+  width: 12px;
+}
+.highlight-container .highlight {
+  border-radius: 0 0 5px 5px;
+}
+.highlight-container .highlight .table-container {
+  border-radius: 0 0 5px 5px;
 }
 .highlight,
 pre {
@@ -1175,7 +1248,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #3e9ff6;
+  background: #f45b9d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2679,4 +2752,106 @@ ul.breadcrumb li + li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
+}
+.site-bg-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+}
+.site-bg-carousel .bg-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.6s ease-in-out;
+  will-change: opacity;
+}
+.site-bg-carousel .bg-slide.active {
+  opacity: 1;
+}
+.site-bg-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: rgba(10,14,26,0.62);
+  pointer-events: none;
+}
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.8;
+}
+:root {
+  --body-bg-color: rgba(10,14,26,0.55) !important;
+  --content-bg-color: rgba(18,24,42,0.82) !important;
+  --card-bg-color: rgba(18,24,42,0.82) !important;
+  --text-color: #e6e9f0 !important;
+  --text-color-2: #c9d1dc !important;
+  --text-color-3: #a8b3c4 !important;
+  --link-color: #7db9ff !important;
+  --link-hover-color: #b3d9ff !important;
+  --blockquote-color: #d3dbe6 !important;
+  --blockquote-bg-color: rgba(30,40,66,0.6) !important;
+  --table-row-odd-bg-color: rgba(255,255,255,0.03) !important;
+  --table-row-hover-bg-color: rgba(125,185,255,0.08) !important;
+  --menu-item-bg-color: rgba(30,38,62,0.5) !important;
+  --btn-default-bg: rgba(28,36,58,0.7) !important;
+  --btn-default-color: #dbe4f0 !important;
+  --btn-default-border-color: rgba(125,185,255,0.35) !important;
+  --btn-default-hover-bg: rgba(125,185,255,0.15) !important;
+  --btn-default-hover-color: #fff !important;
+  --btn-default-hover-border-color: rgba(125,185,255,0.7) !important;
+  --brand-color: #e6e9f0 !important;
+  --brand-hover-color: #fff !important;
+}
+body {
+  background: transparent !important;
+  color: var(--text-color);
+}
+.main-inner,
+.content-wrap,
+.post-block,
+.post-header,
+.post-body {
+  background: transparent !important;
+}
+.post-block,
+.sidebar,
+.header-inner,
+.footer-inner,
+.pagination .page-number,
+.posts-expand .post-block {
+  background: rgba(14,19,34,0.66) !important;
+  border-radius: 8px;
+}
+.highlight,
+pre {
+  background: rgba(8,11,20,0.75) !important;
+}
+img {
+  opacity: 0.88;
+}
+img:hover {
+  opacity: 1;
+}
+body {
+  position: relative;
+  z-index: 1;
 }

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="命令执行 1.命令执行的基本绕过 1.*** 空格过滤*** 2.***敏感字符过滤*** 3.***cat过滤***（查看网页源码） 4.***括号绕过*** 5.***分号绕过*** 6.php 2.文件包含 included和require可以直接读txt文件，但是不能直接读php文件* 3.…">
@@ -544,5 +544,121 @@
 
   
 
+<div class="site-bg-carousel" id="siteBgCarousel">
+  <div class="bg-slide active" style="background-image: url('/images/background/bg-1.jpg');"></div>
+  <div class="bg-slide" style="background-image: url('/images/background/bg-2.jpg');"></div>
+  <div class="bg-slide" style="background-image: url('/images/background/bg-3.jpg');"></div>
+</div>
+<div class="site-bg-mask"></div>
+<canvas id="particles-canvas"></canvas>
+
+<script>
+(function () {
+  // ========== 背景轮播 ==========
+  var slides = document.querySelectorAll('#siteBgCarousel .bg-slide');
+  var current = 0;
+  var INTERVAL = 6000; // 6 秒切换
+  if (slides.length > 1) {
+    setInterval(function () {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, INTERVAL);
+  }
+
+  // ========== Canvas 连线粒子 ==========
+  var canvas = document.getElementById('particles-canvas');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var mouse = { x: null, y: null };
+  var COUNT = 70; // 粒子数量
+  var LINK_DIST = 140; // 连线距离
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function random(min, max) { return Math.random() * (max - min) + min; }
+
+  function createParticles() {
+    particles = [];
+    for (var i = 0; i < COUNT; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: random(-0.5, 0.5),
+        vy: random(-0.5, 0.5),
+        r: random(1, 2.5)
+      });
+    }
+  }
+  createParticles();
+
+  window.addEventListener('mousemove', function (e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener('mouseout', function () {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var i, j, dx, dy, dist, alpha;
+    // 连线
+    for (i = 0; i < particles.length; i++) {
+      for (j = i + 1; j < particles.length; j++) {
+        dx = particles[i].x - particles[j].x;
+        dy = particles[i].y - particles[j].y;
+        dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < LINK_DIST) {
+          alpha = 1 - dist / LINK_DIST;
+          ctx.strokeStyle = 'rgba(120, 200, 255, ' + (alpha * 0.5).toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    // 与鼠标连线
+    if (mouse.x !== null) {
+      for (i = 0; i < particles.length; i++) {
+        dx = particles[i].x - mouse.x;
+        dy = particles[i].y - mouse.y;
+        dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < LINK_DIST * 1.2) {
+          alpha = 1 - dist / (LINK_DIST * 1.2);
+          ctx.strokeStyle = 'rgba(255, 255, 255, ' + (alpha * 0.4).toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+    // 粒子
+    for (i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(140, 210, 255, 0.85)';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 </body>
 </html>

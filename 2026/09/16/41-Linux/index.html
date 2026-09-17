@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# Linux  ### Ctrl+d退出子系统  ### cat命令：cat[参数]文件名  ### &#x2F;var储存可变的如日志文件  ### pwd知道当前目录  ### ls本目录下的文件  ### ls -l看到文件具体参数  cat+&gt;创建文件ctrl+d保存  touch 创建文件  mkdir 创建目录(文件夹) mkdir -p file1&#x2F;file2&#x2F;file3 递归创建  cp">
+  <meta name="description" content="Ctrl+d退出子系统 cat命令：cat[参数]文件名 &#x2F;var储存可变的如日志文件 pwd知道当前目录 ls本目录下的文件 ls -l看到文件具体参数 cat+&gt;创建文件ctrl+d保存 touch 创建文件 mkdir 创建目录(文件夹) mkdir -p file1&#x2F;file2&#x2F;file3…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux">
 <meta property="og:url" content="http://example.com/2026/09/16/41-Linux/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# Linux  ### Ctrl+d退出子系统  ### cat命令：cat[参数]文件名  ### &#x2F;var储存可变的如日志文件  ### pwd知道当前目录  ### ls本目录下的文件  ### ls -l看到文件具体参数  cat+&gt;创建文件ctrl+d保存  touch 创建文件  mkdir 创建目录(文件夹) mkdir -p file1&#x2F;file2&#x2F;file3 递归创建  cp">
+<meta property="og:description" content="Ctrl+d退出子系统 cat命令：cat[参数]文件名 &#x2F;var储存可变的如日志文件 pwd知道当前目录 ls本目录下的文件 ls -l看到文件具体参数 cat+&gt;创建文件ctrl+d保存 touch 创建文件 mkdir 创建目录(文件夹) mkdir -p file1&#x2F;file2&#x2F;file3…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/8a703d8e-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/fa45e543-image.png">
 <meta property="article:published_time" content="2026-09-16T14:20:14.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:20:14.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="系统基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/8a703d8e-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/41-Linux/">
 
@@ -235,6 +237,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">Ctrl+d退出子系统 cat命令：cat[参数]文件名 /var储存可变的如日志文件 pwd知道当前目录 ls本目录下的文件 ls -l看到文件具体参数 cat+>创建文件ctrl+d保存 touch 创建文件 mkdir 创建目录(文件夹) mkdir -p file1/file2/file3…</div>
 
         </div>
       </header>
@@ -245,167 +248,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# Linux
-
-### Ctrl+d退出子系统
-
-### cat命令：cat[参数]文件名
-
-### /var储存可变的如日志文件
-
-### pwd知道当前目录
-
-### ls本目录下的文件
-
-### ls -l看到文件具体参数
-
-cat+>创建文件ctrl+d保存
-
-touch 创建文件
-
-mkdir 创建目录(文件夹) mkdir -p file1/file2/file3 递归创建
-
-cp a m/c 复制a的内容到m文件夹中的c中
-
-mv移动/剪切
-
-rm 删除文件
-
-cat tac more less nl作用相同
-
-; 不论之前是否成功执行都继续执行
-
-&& 前一句执行成功后一句才会执行
-
-|| 前面为真只执行前面,为假才考虑后面一句是否为真
-
-\换行符
-
-| 前一个命令的输出作为后一个命令的输入
-
-.后面链接一个字段
-
-grep:起到一个查询匹配的作用
-
-tail 查看日志
-
-ls less more nl cat tac都可以查看文件
-
-sudo 即授权
-
-cd+路径,改变当前工作目录
-
-head[参数] 文件名
-
-file
-
-tee 读取文件的内容
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/8a703d8e-image.png)
-
-proc/self/root=/
-
-​
-
-一般先system('ls /')查看根目录下有什么文件,cat文件要这样 cat /flag
-
-​
-
+        <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h3 id="Ctrl-d退出子系统"><a href="#Ctrl-d退出子系统" class="headerlink" title="Ctrl+d退出子系统"></a>Ctrl+d退出子系统</h3><h3 id="cat命令：cat-参数-文件名"><a href="#cat命令：cat-参数-文件名" class="headerlink" title="cat命令：cat[参数]文件名"></a>cat命令：cat[参数]文件名</h3><h3 id="var储存可变的如日志文件"><a href="#var储存可变的如日志文件" class="headerlink" title="&#x2F;var储存可变的如日志文件"></a>&#x2F;var储存可变的如日志文件</h3><h3 id="pwd知道当前目录"><a href="#pwd知道当前目录" class="headerlink" title="pwd知道当前目录"></a>pwd知道当前目录</h3><h3 id="ls本目录下的文件"><a href="#ls本目录下的文件" class="headerlink" title="ls本目录下的文件"></a>ls本目录下的文件</h3><h3 id="ls-l看到文件具体参数"><a href="#ls-l看到文件具体参数" class="headerlink" title="ls -l看到文件具体参数"></a>ls -l看到文件具体参数</h3><p>cat+&gt;创建文件ctrl+d保存</p>
+<p>touch 创建文件</p>
+<p>mkdir 创建目录(文件夹) mkdir -p file1&#x2F;file2&#x2F;file3 递归创建</p>
+<p>cp a m&#x2F;c 复制a的内容到m文件夹中的c中</p>
+<p>mv移动&#x2F;剪切</p>
+<p>rm 删除文件</p>
+<p>cat tac more less nl作用相同</p>
+<p>; 不论之前是否成功执行都继续执行</p>
+<p>&amp;&amp; 前一句执行成功后一句才会执行</p>
+<p>|| 前面为真只执行前面,为假才考虑后面一句是否为真</p>
+<p>\换行符</p>
+<p>| 前一个命令的输出作为后一个命令的输入</p>
+<p>.后面链接一个字段</p>
+<p>grep:起到一个查询匹配的作用</p>
+<p>tail 查看日志</p>
+<p>ls less more nl cat tac都可以查看文件</p>
+<p>sudo 即授权</p>
+<p>cd+路径,改变当前工作目录</p>
+<p>head[参数] 文件名</p>
+<p>file</p>
+<p>tee 读取文件的内容</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/8a703d8e-image.png" alt="image.png"></p>
+<p>proc&#x2F;self&#x2F;root&#x3D;&#x2F;</p>
+<p>​</p>
+<p>一般先system(‘ls &#x2F;‘)查看根目录下有什么文件,cat文件要这样 cat &#x2F;flag</p>
+<p>​</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$url</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/bash|nc|wget|ping|ls|cat|more|less|phpinfo|base64|echo|php|python|mv|cp|la|\-|\*|\&quot;|\&gt;|\&lt;|\%|\$/i&#x27;</span>,<span class="variable">$url</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry,you can&#x27;t use this.&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Can you see anything?&quot;</span>;</span><br><span class="line">        <span class="title function_ invoke__">exec</span>(<span class="variable">$url</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
-payload:?url=tac l\s / | tee 1.txt #
-
-打开1.txt即可读取到内容,因为exec是无回显的
-
-?url=tac /flllll\aaaaaaggggggg / | tee 1.txt #
-
-# etc/passwd
-
-# /etc/passwd 文件
-
-## 文件
-
-| **项** | **描述** |
-| --- | --- |
-| **/etc/passwd** | 包含基本用户属性。 |
-| [/usr/lib/security/mkuser.default](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/mkuser.default.html#mkuser.default) | 包含新用户的缺省属性。 |
-| [/etc/group](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/group_security.html#group_security) | 包含组的基本属性。 |
-| [/etc/security/group](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/group.html#group) | 包含组的扩展属性。 |
-| [/etc/security/passwd](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/passwd_security.html#passwd_security) | 包含密码信息。 |
-| [/etc/security/user](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/user.html#user) | 包含用户的扩展属性。 |
-| [/etc/security/environ](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/environ.html#environ) | 包含用户的环境属性。 |
-| [/etc/security/limits](https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/limits.html#limits) | 包含用户进程资源限制。 |
-
-​
-
-# 提权
-
-[https://gtfobins.github.io/gtfobins/gzip/](https://gtfobins.github.io/gtfobins/gzip/)
-
-# 写文件
-
-vim+文件名,进入vim
-
-i:进入写作模式
-
-Esc退出编辑
-
-":"+"wq"保存并退出
-
-# 环境变量
-
-env,查看环境变量,有时候flag会放在这里
-
-# CURL命令
-
-就是请求网页
-
-是curl获取网页的回显，把结果保存到本地
-
-# nikto
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/fa45e543-image.png)
-
-漏洞扫描工具
-
-`./nikto.pl -h http://node4.anna.nssctf.cn:28812/`
-
-# /proc/self/cmdline
-
-Linux进程文件
-
-# Linux 系统发行版判断命令
-
-root@iZuf6f99vqolarbstka6zqZ:~# cat /etc/os-release
-
-PRETTY_NAME="Ubuntu 26.04 LTS"
-
-NAME="Ubuntu"//这里就可以看到系统了
-
-VERSION_ID="26.04"
-
-VERSION="26.04 LTS (Resolute Raccoon)"
-
-VERSION_CODENAME=resolute
-
-ID=ubuntu
-
-ID_LIKE=debian
-
-Ubuntu使用apt命令
-
-centOS使用yum
-
-# 进入虚拟的python环境
-
-source venv/bin/activate
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/lo72g2uodoz62i94
-语雀文档ID: 111182441
-
+<p>payload:?url&#x3D;tac l\s &#x2F; | tee 1.txt #</p>
+<p>打开1.txt即可读取到内容,因为exec是无回显的</p>
+<p>?url&#x3D;tac &#x2F;flllll\aaaaaaggggggg &#x2F; | tee 1.txt #</p>
+<h1 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="etc&#x2F;passwd"></a>etc&#x2F;passwd</h1><h1 id="etc-passwd-文件"><a href="#etc-passwd-文件" class="headerlink" title="&#x2F;etc&#x2F;passwd 文件"></a>&#x2F;etc&#x2F;passwd 文件</h1><h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><table>
+<thead>
+<tr>
+<th><strong>项</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>&#x2F;etc&#x2F;passwd</strong></td>
+<td>包含基本用户属性。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/mkuser.default.html#mkuser.default">&#x2F;usr&#x2F;lib&#x2F;security&#x2F;mkuser.default</a></td>
+<td>包含新用户的缺省属性。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/group_security.html#group_security">&#x2F;etc&#x2F;group</a></td>
+<td>包含组的基本属性。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/group.html#group">&#x2F;etc&#x2F;security&#x2F;group</a></td>
+<td>包含组的扩展属性。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/passwd_security.html#passwd_security">&#x2F;etc&#x2F;security&#x2F;passwd</a></td>
+<td>包含密码信息。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/user.html#user">&#x2F;etc&#x2F;security&#x2F;user</a></td>
+<td>包含用户的扩展属性。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/environ.html#environ">&#x2F;etc&#x2F;security&#x2F;environ</a></td>
+<td>包含用户的环境属性。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/zh/ssw_aix_73/filesreference/limits.html#limits">&#x2F;etc&#x2F;security&#x2F;limits</a></td>
+<td>包含用户进程资源限制。</td>
+</tr>
+</tbody></table>
+<p>​</p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/gzip/">https://gtfobins.github.io/gtfobins/gzip/</a></p>
+<h1 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h1><p>vim+文件名,进入vim</p>
+<p>i:进入写作模式</p>
+<p>Esc退出编辑</p>
+<p>“:”+”wq”保存并退出</p>
+<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><p>env,查看环境变量,有时候flag会放在这里</p>
+<h1 id="CURL命令"><a href="#CURL命令" class="headerlink" title="CURL命令"></a>CURL命令</h1><p>就是请求网页</p>
+<p>是curl获取网页的回显，把结果保存到本地</p>
+<h1 id="nikto"><a href="#nikto" class="headerlink" title="nikto"></a>nikto</h1><p><img src="/yuque-notes/02-Knowledge%20Book/assets/fa45e543-image.png" alt="image.png"></p>
+<p>漏洞扫描工具</p>
+<p><code>./nikto.pl -h http://node4.anna.nssctf.cn:28812/</code></p>
+<h1 id="proc-self-cmdline"><a href="#proc-self-cmdline" class="headerlink" title="&#x2F;proc&#x2F;self&#x2F;cmdline"></a>&#x2F;proc&#x2F;self&#x2F;cmdline</h1><p>Linux进程文件</p>
+<h1 id="Linux-系统发行版判断命令"><a href="#Linux-系统发行版判断命令" class="headerlink" title="Linux 系统发行版判断命令"></a>Linux 系统发行版判断命令</h1><p>root@iZuf6f99vqolarbstka6zqZ:~# cat &#x2F;etc&#x2F;os-release</p>
+<p>PRETTY_NAME&#x3D;”Ubuntu 26.04 LTS”</p>
+<p>NAME&#x3D;”Ubuntu”&#x2F;&#x2F;这里就可以看到系统了</p>
+<p>VERSION_ID&#x3D;”26.04”</p>
+<p>VERSION&#x3D;”26.04 LTS (Resolute Raccoon)”</p>
+<p>VERSION_CODENAME&#x3D;resolute</p>
+<p>ID&#x3D;ubuntu</p>
+<p>ID_LIKE&#x3D;debian</p>
+<p>Ubuntu使用apt命令</p>
+<p>centOS使用yum</p>
+<h1 id="进入虚拟的python环境"><a href="#进入虚拟的python环境" class="headerlink" title="进入虚拟的python环境"></a>进入虚拟的python环境</h1><p>source venv&#x2F;bin&#x2F;activate</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/lo72g2uodoz62i94">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/lo72g2uodoz62i94</a><br>语雀文档ID: 111182441</p>
 
     </div>
 
@@ -415,9 +354,8 @@ source venv/bin/activate
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" rel="tag"># 系统基础</a>
           </div>
 
         
@@ -491,6 +429,7 @@ source venv/bin/activate
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ctrl-d%E9%80%80%E5%87%BA%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.0.1.</span> <span class="nav-text">Ctrl+d退出子系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat%E5%91%BD%E4%BB%A4%EF%BC%9Acat-%E5%8F%82%E6%95%B0-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">1.0.2.</span> <span class="nav-text">cat命令：cat[参数]文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var%E5%82%A8%E5%AD%98%E5%8F%AF%E5%8F%98%E7%9A%84%E5%A6%82%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">&#x2F;var储存可变的如日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd%E7%9F%A5%E9%81%93%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95"><span class="nav-number">1.0.4.</span> <span class="nav-text">pwd知道当前目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls%E6%9C%AC%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.5.</span> <span class="nav-text">ls本目录下的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-l%E7%9C%8B%E5%88%B0%E6%96%87%E4%BB%B6%E5%85%B7%E4%BD%93%E5%8F%82%E6%95%B0"><span class="nav-number">1.0.6.</span> <span class="nav-text">ls -l看到文件具体参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-passwd"><span class="nav-number">2.</span> <span class="nav-text">etc&#x2F;passwd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-passwd-%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">&#x2F;etc&#x2F;passwd 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">4.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">写文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">6.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CURL%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">CURL命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nikto"><span class="nav-number">8.</span> <span class="nav-text">nikto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proc-self-cmdline"><span class="nav-number">9.</span> <span class="nav-text">&#x2F;proc&#x2F;self&#x2F;cmdline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E7%B3%BB%E7%BB%9F%E5%8F%91%E8%A1%8C%E7%89%88%E5%88%A4%E6%96%AD%E5%91%BD%E4%BB%A4"><span class="nav-number">10.</span> <span class="nav-text">Linux 系统发行版判断命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E8%99%9A%E6%8B%9F%E7%9A%84python%E7%8E%AF%E5%A2%83"><span class="nav-number">11.</span> <span class="nav-text">进入虚拟的python环境</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -506,7 +445,7 @@ source venv/bin/activate
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -519,7 +458,7 @@ source venv/bin/activate
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

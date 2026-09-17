@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# 出题  cookie篡改  反序列化：多加一些干扰项,循环调用，关键字绕过 $$  套一下unserialize(base64_decode())  ​  setcookie(&#39;cookie_name&#39;, &#39;&#39;, time() - 3600);&#x2F;&#x2F;删除不用的cookie值  WOWO-&gt;destruct()-&gt;NANI-&gt;__Set()-&gt;Soga-&gt;__invoke-&gt;WOW-&gt;__get">
+  <meta name="description" content="cookie篡改 反序列化：多加一些干扰项,循环调用，关键字绕过 $$ 套一下unserialize(base64_decode()) ​ setcookie(&#39;cookie_name&#39;, &#39;&#39;, time() - 3600);&#x2F;&#x2F;删除不用的cookie值 WOWO-&gt;destruct()-&gt;NAN…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="出题">
 <meta property="og:url" content="http://example.com/2026/09/16/22-%E5%87%BA%E9%A2%98/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# 出题  cookie篡改  反序列化：多加一些干扰项,循环调用，关键字绕过 $$  套一下unserialize(base64_decode())  ​  setcookie(&#39;cookie_name&#39;, &#39;&#39;, time() - 3600);&#x2F;&#x2F;删除不用的cookie值  WOWO-&gt;destruct()-&gt;NANI-&gt;__Set()-&gt;Soga-&gt;__invoke-&gt;WOW-&gt;__get">
+<meta property="og:description" content="cookie篡改 反序列化：多加一些干扰项,循环调用，关键字绕过 $$ 套一下unserialize(base64_decode()) ​ setcookie(&#39;cookie_name&#39;, &#39;&#39;, time() - 3600);&#x2F;&#x2F;删除不用的cookie值 WOWO-&gt;destruct()-&gt;NAN…">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-09-16T13:59:23.000Z">
 <meta property="article:modified_time" content="2026-09-16T13:59:23.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
 <meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="反序列化">
+<meta property="article:tag" content="出题思路">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://example.com/2026/09/16/22-%E5%87%BA%E9%A2%98/">
@@ -235,6 +235,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">cookie篡改 反序列化：多加一些干扰项,循环调用，关键字绕过 $$ 套一下unserialize(base64_decode()) ​ setcookie('cookie_name', '', time() - 3600);//删除不用的cookie值 WOWO->destruct()->NAN…</div>
 
         </div>
       </header>
@@ -245,38 +246,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# 出题
-
-cookie篡改
-
-反序列化：多加一些干扰项,循环调用，关键字绕过 $$
-
-套一下unserialize(base64_decode())
-
-​
-
-setcookie('cookie_name', '', time() - 3600);//删除不用的cookie值
-
-WOWO->destruct()->NANI->__Set()->Soga->__invoke->WOW->__get()-->H->_toString
-
-## 绕过正则表达式
-
-(preg_match(’/[oc]:\d+:/i’, $var))
-
-$b=str_replace("O:4","O:+4",$b); #正则绕过
-
+        <h1 id="出题"><a href="#出题" class="headerlink" title="出题"></a>出题</h1><p>cookie篡改</p>
+<p>反序列化：多加一些干扰项,循环调用，关键字绕过 $$</p>
+<p>套一下unserialize(base64_decode())</p>
+<p>​</p>
+<p>setcookie(‘cookie_name’, ‘’, time() - 3600);&#x2F;&#x2F;删除不用的cookie值</p>
+<p>WOWO-&gt;destruct()-&gt;NANI-&gt;__Set()-&gt;Soga-&gt;__invoke-&gt;WOW-&gt;__get()–&gt;H-&gt;_toString</p>
+<h2 id="绕过正则表达式"><a href="#绕过正则表达式" class="headerlink" title="绕过正则表达式"></a>绕过正则表达式</h2><p>(preg_match(’&#x2F;[oc]:\d+:&#x2F;i’, $var))</p>
+<p>$b&#x3D;str_replace(“O:4”,”O:+4”,$b); #正则绕过</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WOWO</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$nano</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$hahaha</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$evn</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;evn-&gt;<span class="keyword">do</span>=<span class="string">&#x27;do you know serialize?&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$a</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;hahaha;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Soga</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$asdj</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$grape</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;asdj-&gt;nano;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span>  <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;grape=<span class="string">&#x27;123&#x27;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;are you sure?&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">H</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span> ;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$b</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$Love</span>=<span class="variable language_">$this</span>-&gt;a;</span><br><span class="line">        <span class="variable">$Love</span>(<span class="string">&#x27;&#x27;</span>,<span class="variable language_">$this</span>-&gt;b);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;it&#x27;s too esay,yet?&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NANI</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$lal</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$so</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span>(<span class="params"><span class="variable">$star</span>,<span class="variable">$bob</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$str</span>=<span class="variable language_">$this</span>-&gt;lal;</span><br><span class="line">        <span class="variable">$str</span>();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dman</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$apple</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$strawberry</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;apple;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$a</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$des</span>=<span class="variable language_">$this</span>-&gt;strawberry;</span><br><span class="line">        <span class="variable">$des</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hnu</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$sun</span>=<span class="string">&#x27;HnuSec is very good&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$setad</span>=<span class="string">&#x27;do you think so?&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;setad=<span class="string">&#x27;yes&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;Thank you,have a fun.&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;Hun&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;Hun&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>, <span class="variable">$cmd</span>))</span><br><span class="line">        <span class="title function_ invoke__">unserialize</span>(<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$cmd</span>));</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;OMG!what&#x27;s the promblem?&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$flag</span> = <span class="string">&quot;flag&#123;this_is_a_fake_flag&#125;&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_COOKIE</span>[<span class="string">&#x27;role&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">setcookie</span>(<span class="string">&#x27;role&#x27;</span>,<span class="string">&#x27;guest&#x27;</span>);</span><br><span class="line">    <span class="variable">$_COOKIE</span>[<span class="string">&#x27;role&#x27;</span>] = <span class="string">&#x27;guest&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_COOKIE</span>[<span class="string">&#x27;role&#x27;</span>] != <span class="string">&#x27;admin&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&#x27;&lt;h1&gt;You are not admin!!!!&lt;/h1&gt;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;/hhhheelllloooo.php&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-​
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/lxcnicnte147pg63
-语雀文档ID: 182096628
-
+<p>​</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/lxcnicnte147pg63">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/lxcnicnte147pg63</a><br>语雀文档ID: 182096628</p>
 
     </div>
 
@@ -286,9 +270,9 @@ $b=str_replace("O:4","O:+4",$b); #正则绕过
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
               <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag"># 反序列化</a>
+              <a href="/tags/%E5%87%BA%E9%A2%98%E6%80%9D%E8%B7%AF/" rel="tag"># 出题思路</a>
           </div>
 
         
@@ -362,6 +346,7 @@ $b=str_replace("O:4","O:+4",$b); #正则绕过
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BA%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">出题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">绕过正则表达式</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -377,7 +362,7 @@ $b=str_replace("O:4","O:+4",$b); #正则绕过
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -390,7 +375,7 @@ $b=str_replace("O:4","O:+4",$b); #正则绕过
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

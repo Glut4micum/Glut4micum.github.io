@@ -574,8 +574,34 @@
 <div class="site-bg-mask"></div>
 <canvas id="particles-canvas"></canvas>
 
+
+<button class="theme-switch-btn" id="themeSwitchBtn" title="切换明暗模式" aria-label="切换明暗模式">
+  <i class="icon-moon fa fa-moon"></i>
+  <i class="icon-sun fa fa-sun"></i>
+</button>
+
 <script>
 (function () {
+  // ========== 明暗模式 ==========
+  var rootEl = document.documentElement;
+  var STORAGE_KEY = 'blog-theme';
+
+  function applyTheme(theme) {
+    rootEl.setAttribute('data-theme', theme);
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
+  }
+
+  // 初始化：默认暗色；若用户之前切换过则用记忆值
+  var saved;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  var initialTheme = saved === 'light' ? 'light' : 'dark';
+  applyTheme(initialTheme);
+
+  document.getElementById('themeSwitchBtn').addEventListener('click', function () {
+    var current = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(current);
+  });
+
   // ========== 背景轮播 ==========
   var slides = document.querySelectorAll('#siteBgCarousel .bg-slide');
   var current = 0;

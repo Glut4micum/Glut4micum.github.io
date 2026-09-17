@@ -34,8 +34,8 @@
 <meta property="article:modified_time" content="2026-09-16T14:21:36.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
 <meta property="article:tag" content="PHP">
-<meta property="article:tag" content="命令执行">
 <meta property="article:tag" content="RCE">
+<meta property="article:tag" content="命令执行">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/yuque-notes/02-Knowledge%20Book/assets/25003085-image.png">
 
@@ -407,8 +407,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/PHP/" rel="tag"># PHP</a>
-              <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag"># 命令执行</a>
               <a href="/tags/RCE/" rel="tag"># RCE</a>
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag"># 命令执行</a>
           </div>
 
         
@@ -637,8 +637,34 @@
 <div class="site-bg-mask"></div>
 <canvas id="particles-canvas"></canvas>
 
+
+<button class="theme-switch-btn" id="themeSwitchBtn" title="切换明暗模式" aria-label="切换明暗模式">
+  <i class="icon-moon fa fa-moon"></i>
+  <i class="icon-sun fa fa-sun"></i>
+</button>
+
 <script>
 (function () {
+  // ========== 明暗模式 ==========
+  var rootEl = document.documentElement;
+  var STORAGE_KEY = 'blog-theme';
+
+  function applyTheme(theme) {
+    rootEl.setAttribute('data-theme', theme);
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
+  }
+
+  // 初始化：默认暗色；若用户之前切换过则用记忆值
+  var saved;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  var initialTheme = saved === 'light' ? 'light' : 'dark';
+  applyTheme(initialTheme);
+
+  document.getElementById('themeSwitchBtn').addEventListener('click', function () {
+    var current = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(current);
+  });
+
   // ========== 背景轮播 ==========
   var slides = document.querySelectorAll('#siteBgCarousel .bg-slide');
   var current = 0;

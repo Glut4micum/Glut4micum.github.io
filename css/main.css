@@ -1248,7 +1248,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #b09513;
+  background: #98ff52;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2766,71 +2766,65 @@ ul.breadcrumb li + li:last-child {
 }
 :root,
 :root[data-theme="dark"] {
-  --body-bg-color: #0d1220 !important;
-  --content-bg-color: rgba(18,24,42,0.92) !important;
-  --card-bg-color: rgba(18,24,42,0.92) !important;
-  --card-solid-bg: rgba(14,19,34,0.72) !important;
-  --text-color: #e6e9f0 !important;
-  --text-color-2: #c9d1dc !important;
-  --text-color-3: #a8b3c4 !important;
-  --link-color: #7db9ff !important;
-  --link-hover-color: #b3d9ff !important;
-  --blockquote-color: #d3dbe6 !important;
-  --blockquote-bg-color: rgba(30,40,66,0.6) !important;
-  --table-row-odd-bg-color: rgba(255,255,255,0.03) !important;
-  --table-row-hover-bg-color: rgba(125,185,255,0.08) !important;
-  --menu-item-bg-color: rgba(30,38,62,0.5) !important;
-  --btn-default-bg: rgba(28,36,58,0.7) !important;
-  --btn-default-color: #dbe4f0 !important;
-  --btn-default-border-color: rgba(125,185,255,0.35) !important;
-  --btn-default-hover-bg: rgba(125,185,255,0.15) !important;
-  --btn-default-hover-color: #fff !important;
-  --btn-default-hover-border-color: rgba(125,185,255,0.7) !important;
-  --brand-color: #e6e9f0 !important;
-  --brand-hover-color: #fff !important;
-  --code-bg: rgba(8,11,20,0.85) !important;
-  --img-opacity: 0.88;
-  --toggle-bg: rgba(28,36,58,0.85);
+  --body-bg-color: #282828 !important;
+  --content-bg-color: #333 !important;
+  --card-bg-color: #555 !important;
+  --text-color: #ccc !important;
+  --text-color-2: #ccc !important;
+  --text-color-3: #bbb !important;
+  --link-color: #ccc !important;
+  --link-hover-color: #eee !important;
+  --blockquote-color: #bbb !important;
+  --blockquote-bg-color: #333 !important;
+  --table-row-odd-bg-color: #282828 !important;
+  --table-row-hover-bg-color: #363636 !important;
+  --menu-item-bg-color: #555 !important;
+  --btn-default-bg: #222 !important;
+  --btn-default-color: #ccc !important;
+  --btn-default-border-color: #555 !important;
+  --btn-default-hover-bg: #666 !important;
+  --btn-default-hover-color: #ccc !important;
+  --btn-default-hover-border-color: #666 !important;
+  --brand-color: #eee !important;
+  --brand-hover-color: #eee !important;
+  --code-bg: #2d2d2d !important;
+  --img-opacity: 0.8;
+  --toggle-bg: rgba(60,60,60,0.85);
   --toggle-color: #ffd76e;
-  --toggle-border: rgba(125,185,255,0.4);
+  --toggle-border: rgba(204,204,204,0.4);
 }
 html[data-theme="light"] {
-  --body-bg-color: #f0f2f5 !important;
-  --content-bg-color: rgba(255,255,255,0.92) !important;
-  --card-bg-color: rgba(255,255,255,0.92) !important;
-  --card-solid-bg: rgba(255,255,255,0.85) !important;
-  --text-color: #2c3340 !important;
-  --text-color-2: #4a5263 !important;
-  --text-color-3: #6b7280 !important;
-  --link-color: #1a6bbd !important;
-  --link-hover-color: #0a4f96 !important;
-  --blockquote-color: #3d4554 !important;
-  --blockquote-bg-color: rgba(30,60,120,0.06) !important;
-  --table-row-odd-bg-color: rgba(0,0,0,0.02) !important;
-  --table-row-hover-bg-color: rgba(26,107,189,0.06) !important;
-  --menu-item-bg-color: rgba(0,0,0,0.03) !important;
-  --btn-default-bg: rgba(255,255,255,0.85) !important;
-  --btn-default-color: #2c3340 !important;
-  --btn-default-border-color: rgba(26,107,189,0.35) !important;
-  --btn-default-hover-bg: rgba(26,107,189,0.08) !important;
-  --btn-default-hover-color: #0a4f96 !important;
-  --btn-default-hover-border-color: rgba(26,107,189,0.6) !important;
-  --brand-color: #2c3340 !important;
-  --brand-hover-color: #1a6bbd !important;
-  --code-bg: rgba(246,248,252,0.92) !important;
+  --body-bg-color: #f5f7f9 !important;
+  --content-bg-color: #fff !important;
+  --card-bg-color: #f5f5f5 !important;
+  --text-color: #555 !important;
+  --text-color-2: #555 !important;
+  --text-color-3: #999 !important;
+  --link-color: #555 !important;
+  --link-hover-color: #222 !important;
+  --blockquote-color: #666 !important;
+  --blockquote-bg-color: #f5f5f5 !important;
+  --table-row-odd-bg-color: #f9f9f9 !important;
+  --table-row-hover-bg-color: #f5f5f5 !important;
+  --menu-item-bg-color: #f5f5f5 !important;
+  --btn-default-bg: #fff !important;
+  --btn-default-color: #555 !important;
+  --btn-default-border-color: #555 !important;
+  --btn-default-hover-bg: #222 !important;
+  --btn-default-hover-color: #fff !important;
+  --btn-default-hover-border-color: #222 !important;
+  --brand-color: #222 !important;
+  --brand-hover-color: #222 !important;
+  --code-bg: #f5f5f5 !important;
   --img-opacity: 1;
   --toggle-bg: rgba(255,255,255,0.9);
   --toggle-color: #f5a623;
-  --toggle-border: rgba(26,107,189,0.3);
+  --toggle-border: rgba(85,85,85,0.3);
 }
 body {
   background: var(--body-bg-color) !important;
   color: var(--text-color);
   transition: background 0.3s ease, color 0.3s ease;
-}
-.main-inner,
-.content-wrap {
-  background: transparent !important;
 }
 .post-block,
 .sidebar,
@@ -2838,8 +2832,7 @@ body {
 .footer-inner,
 .pagination .page-number,
 .posts-expand .post-block {
-  background: var(--card-solid-bg) !important;
-  border-radius: 8px;
+  background: var(--card-bg-color) !important;
   transition: background 0.3s ease;
 }
 .highlight,
@@ -2938,22 +2931,6 @@ html[data-theme="light"] .theme-switch-btn .icon-sun {
 .music-widget .music-btn.playing {
   color: var(--link-color);
   border-color: var(--link-color);
-}
-.music-widget .music-progress {
-  flex: 1;
-  height: 4px;
-  max-width: 80px;
-  background: rgba(128,128,128,0.2);
-  border-radius: 2px;
-  overflow: hidden;
-  cursor: pointer;
-}
-.music-widget .music-progress-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--link-color);
-  border-radius: 2px;
-  transition: width 0.2s linear;
 }
 .music-widget .music-volume {
   width: 50px;

@@ -566,12 +566,6 @@
 
   
 
-<div class="site-bg-carousel" id="siteBgCarousel">
-  <div class="bg-slide active" style="background-image: url('/images/background/bg-1.jpg');"></div>
-  <div class="bg-slide" style="background-image: url('/images/background/bg-2.jpg');"></div>
-  <div class="bg-slide" style="background-image: url('/images/background/bg-3.jpg');"></div>
-</div>
-<div class="site-bg-mask"></div>
 <canvas id="particles-canvas"></canvas>
 
 
@@ -579,6 +573,9 @@
   <i class="icon-moon fa fa-moon"></i>
   <i class="icon-sun fa fa-sun"></i>
 </button>
+
+
+<audio id="bgMusic" preload="none"></audio>
 
 <script>
 (function () {
@@ -591,36 +588,22 @@
     try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
   }
 
-  // 初始化：默认暗色；若用户之前切换过则用记忆值
   var saved;
   try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-  var initialTheme = saved === 'light' ? 'light' : 'dark';
-  applyTheme(initialTheme);
+  applyTheme(saved === 'light' ? 'light' : 'dark');
 
   document.getElementById('themeSwitchBtn').addEventListener('click', function () {
     var current = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(current);
   });
 
-  // ========== 背景轮播 ==========
-  var slides = document.querySelectorAll('#siteBgCarousel .bg-slide');
-  var current = 0;
-  var INTERVAL = 6000; // 6 秒切换
-  if (slides.length > 1) {
-    setInterval(function () {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-    }, INTERVAL);
-  }
-
   // ========== Canvas 连线粒子 ==========
   var canvas = document.getElementById('particles-canvas');
   var ctx = canvas.getContext('2d');
   var particles = [];
   var mouse = { x: null, y: null };
-  var COUNT = 70; // 粒子数量
-  var LINK_DIST = 140; // 连线距离
+  var COUNT = 70;
+  var LINK_DIST = 140;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -657,7 +640,6 @@
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var i, j, dx, dy, dist, alpha;
-    // 连线
     for (i = 0; i < particles.length; i++) {
       for (j = i + 1; j < particles.length; j++) {
         dx = particles[i].x - particles[j].x;
@@ -674,7 +656,6 @@
         }
       }
     }
-    // 与鼠标连线
     if (mouse.x !== null) {
       for (i = 0; i < particles.length; i++) {
         dx = particles[i].x - mouse.x;
@@ -691,7 +672,6 @@
         }
       }
     }
-    // 粒子
     for (i = 0; i < particles.length; i++) {
       var p = particles[i];
       p.x += p.vx;
@@ -706,6 +686,120 @@
     requestAnimationFrame(draw);
   }
   draw();
+
+  // ========== 侧边栏音乐播放器 ==========
+  // 歌单：在此添加或修改歌曲（名称 + 在线链接）
+  var playlist = [
+    { name: '晴天 - 周杰伦', url: 'https://music.163.com/song/media/outer/url?id=186016.mp3' },
+    { name: '起风了 - 买辣椒也用券', url: 'https://music.163.com/song/media/outer/url?id=1330348068.mp3' },
+    { name: '夜曲 - 周杰伦', url: 'https://music.163.com/song/media/outer/url?id=254574.mp3' },
+    { name: '消愁 - 毛不易', url: 'https://music.163.com/song/media/outer/url?id=569213220.mp3' }
+  ];
+
+  var audio = document.getElementById('bgMusic');
+  var currentIdx = 0;
+  var isPlaying = false;
+
+  function buildPlayer() {
+    var sidebar = document.querySelector('.sidebar-inner');
+    if (!sidebar) {
+      setTimeout(buildPlayer, 500);
+      return;
+    }
+
+    // 避免重复插入
+    if (sidebar.querySelector('.music-widget')) return;
+
+    var widget = document.createElement('div');
+    widget.className = 'music-widget';
+    widget.innerHTML =
+      '<div class="music-title" id="musicTitle">点击播放音乐</div>' +
+      '<div class="music-controls">' +
+        '<button class="music-btn" id="musicPrev" title="上一首"><i class="fa fa-step-backward"></i></button>' +
+        '<button class="music-btn" id="musicPlay" title="播放/暂停"><i class="fa fa-play"></i></button>' +
+        '<button class="music-btn" id="musicNext" title="下一首"><i class="fa fa-step-forward"></i></button>' +
+      '</div>' +
+      '<div class="music-controls" style="margin-top:8px;">' +
+        '<i class="fa fa-volume-down" style="font-size:11px;color:var(--text-color-3);"></i>' +
+        '<input type="range" class="music-volume" id="musicVolume" min="0" max="100" value="50">' +
+        '<i class="fa fa-volume-up" style="font-size:11px;color:var(--text-color-3);"></i>' +
+      '</div>';
+    sidebar.appendChild(widget);
+
+    var btnPlay = document.getElementById('musicPlay');
+    var btnPrev = document.getElementById('musicPrev');
+    var btnNext = document.getElementById('musicNext');
+    var volSlider = document.getElementById('musicVolume');
+    var titleEl = document.getElementById('musicTitle');
+
+    audio.volume = 0.5;
+
+    btnPlay.addEventListener('click', function () {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        loadAndPlay(currentIdx);
+      }
+    });
+
+    btnPrev.addEventListener('click', function () {
+      currentIdx = (currentIdx - 1 + playlist.length) % playlist.length;
+      loadAndPlay(currentIdx);
+    });
+
+    btnNext.addEventListener('click', function () {
+      currentIdx = (currentIdx + 1) % playlist.length;
+      loadAndPlay(currentIdx);
+    });
+
+    volSlider.addEventListener('input', function () {
+      audio.volume = this.value / 100;
+    });
+
+    audio.addEventListener('ended', function () {
+      currentIdx = (currentIdx + 1) % playlist.length;
+      loadAndPlay(currentIdx);
+    });
+
+    audio.addEventListener('play', function () {
+      isPlaying = true;
+      btnPlay.classList.add('playing');
+      btnPlay.innerHTML = '<i class="fa fa-pause"></i>';
+    });
+
+    audio.addEventListener('pause', function () {
+      isPlaying = false;
+      btnPlay.classList.remove('playing');
+      btnPlay.innerHTML = '<i class="fa fa-play"></i>';
+    });
+
+    audio.addEventListener('error', function () {
+      titleEl.textContent = '播放失败，尝试下一首...';
+      setTimeout(function () {
+        currentIdx = (currentIdx + 1) % playlist.length;
+        loadAndPlay(currentIdx);
+      }, 1500);
+    });
+  }
+
+  function loadAndPlay(idx) {
+    var titleEl = document.getElementById('musicTitle');
+    if (titleEl) titleEl.textContent = playlist[idx].name;
+    audio.src = playlist[idx].url;
+    audio.load();
+    var p = audio.play();
+    if (p && p.catch) {
+      p.catch(function () {
+        if (titleEl) titleEl.textContent = '点击播放 — ' + playlist[idx].name;
+      });
+    }
+  }
+
+  if (document.readyState === 'complete') {
+    buildPlayer();
+  } else {
+    window.addEventListener('load', buildPlayer);
+  }
 })();
 </script>
 </body>

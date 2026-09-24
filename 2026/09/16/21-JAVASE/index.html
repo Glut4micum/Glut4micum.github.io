@@ -818,13 +818,36 @@
     applyTheme(current);
   });
 
-  // ========== Canvas 连线粒子 ==========
+  // ========== Canvas 连线粒子（主题颜色自适应） ==========
   var canvas = document.getElementById('particles-canvas');
   var ctx = canvas.getContext('2d');
   var particles = [];
   var mouse = { x: null, y: null };
-  var COUNT = 70;
-  var LINK_DIST = 140;
+  var COUNT = 70;          // 粒子数量
+  var LINK_DIST = 140;     // 连线距离
+
+  // 根据当前主题动态取色：暗色=亮蓝 / 亮色=深蓝
+  function palette() {
+    var theme = rootEl.getAttribute('data-theme') || 'dark';
+    if (theme === 'light') {
+      return {
+        dot: [26, 107, 189],        // 深蓝粒子（浅背景上清晰）
+        dotAlpha: 0.85,
+        link: [26, 107, 189],
+        linkAlpha: 0.4,
+        mouseLink: [26, 107, 189],
+        mouseAlpha: 0.5
+      };
+    }
+    return {
+      dot: [140, 210, 255],        // 亮蓝粒子（深背景上清晰）
+      dotAlpha: 0.85,
+      link: [120, 200, 255],
+      linkAlpha: 0.5,
+      mouseLink: [255, 255, 255],
+      mouseAlpha: 0.4
+    };
+  }
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -860,7 +883,10 @@
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var pal = palette();
     var i, j, dx, dy, dist, alpha;
+
+    // 连线（颜色随主题）
     for (i = 0; i < particles.length; i++) {
       for (j = i + 1; j < particles.length; j++) {
         dx = particles[i].x - particles[j].x;
@@ -868,7 +894,7 @@
         dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < LINK_DIST) {
           alpha = 1 - dist / LINK_DIST;
-          ctx.strokeStyle = 'rgba(120, 200, 255, ' + (alpha * 0.5).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(' + pal.link[0] + ',' + pal.link[1] + ',' + pal.link[2] + ',' + (alpha * pal.linkAlpha).toFixed(3) + ')';
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -877,6 +903,8 @@
         }
       }
     }
+
+    // 鼠标连线（颜色随主题）
     if (mouse.x !== null) {
       for (i = 0; i < particles.length; i++) {
         dx = particles[i].x - mouse.x;
@@ -884,7 +912,7 @@
         dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < LINK_DIST * 1.2) {
           alpha = 1 - dist / (LINK_DIST * 1.2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, ' + (alpha * 0.4).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(' + pal.mouseLink[0] + ',' + pal.mouseLink[1] + ',' + pal.mouseLink[2] + ',' + (alpha * pal.mouseAlpha).toFixed(3) + ')';
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -893,6 +921,8 @@
         }
       }
     }
+
+    // 粒子（颜色随主题）
     for (i = 0; i < particles.length; i++) {
       var p = particles[i];
       p.x += p.vx;
@@ -901,7 +931,7 @@
       if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(140, 210, 255, 0.85)';
+      ctx.fillStyle = 'rgba(' + pal.dot[0] + ',' + pal.dot[1] + ',' + pal.dot[2] + ',' + pal.dotAlpha.toFixed(3) + ')';
       ctx.fill();
     }
     requestAnimationFrame(draw);

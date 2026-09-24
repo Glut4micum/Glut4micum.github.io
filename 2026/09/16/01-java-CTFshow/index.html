@@ -42,9 +42,9 @@
 <meta property="article:published_time" content="2026-09-16T14:21:43.000Z">
 <meta property="article:modified_time" content="2026-09-16T14:21:43.000Z">
 <meta property="article:author" content="谷氨酸棒状杆菌">
+<meta property="article:tag" content="CTFshow">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="Writeup">
-<meta property="article:tag" content="CTFshow">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/yuque-notes/03-CTF%20Challenge">
@@ -340,9 +340,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/CTFshow/" rel="tag"># CTFshow</a>
               <a href="/tags/CTF/" rel="tag"># CTF</a>
               <a href="/tags/Writeup/" rel="tag"># Writeup</a>
-              <a href="/tags/CTFshow/" rel="tag"># CTFshow</a>
               <a href="/tags/Java/" rel="tag"># Java</a>
           </div>
 
@@ -686,12 +686,11 @@
   draw();
 
   // ========== 侧边栏音乐播放器 ==========
-  // 歌单：在此添加或修改歌曲（名称 + 在线链接）
+  // 歌单：本地 MP3 文件（存放于 source/music/ 目录）
   var playlist = [
-    { name: '晴天 - 周杰伦', url: 'https://music.163.com/song/media/outer/url?id=186016.mp3' },
-    { name: '起风了 - 买辣椒也用券', url: 'https://music.163.com/song/media/outer/url?id=1330348068.mp3' },
-    { name: '夜曲 - 周杰伦', url: 'https://music.163.com/song/media/outer/url?id=254574.mp3' },
-    { name: '消愁 - 毛不易', url: 'https://music.163.com/song/media/outer/url?id=569213220.mp3' }
+    { name: '晴天', url: '/music/晴天.mp3' },
+    { name: '失控', url: '/music/失控.mp3' },
+    { name: '青花', url: '/music/青花.mp3' }
   ];
 
   var audio = document.getElementById('bgMusic');

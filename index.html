@@ -1240,12 +1240,11 @@
   draw();
 
   // ========== 侧边栏音乐播放器 ==========
-  // 歌单：在此添加或修改歌曲（名称 + 在线链接）
+  // 歌单：本地 MP3 文件（存放于 source/music/ 目录）
   var playlist = [
-    { name: '晴天 - 周杰伦', url: 'https://music.163.com/song/media/outer/url?id=186016.mp3' },
-    { name: '起风了 - 买辣椒也用券', url: 'https://music.163.com/song/media/outer/url?id=1330348068.mp3' },
-    { name: '夜曲 - 周杰伦', url: 'https://music.163.com/song/media/outer/url?id=254574.mp3' },
-    { name: '消愁 - 毛不易', url: 'https://music.163.com/song/media/outer/url?id=569213220.mp3' }
+    { name: '晴天', url: '/music/晴天.mp3' },
+    { name: '失控', url: '/music/失控.mp3' },
+    { name: '青花', url: '/music/青花.mp3' }
   ];
 
   var audio = document.getElementById('bgMusic');
